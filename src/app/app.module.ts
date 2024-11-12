@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,22 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NgCircleProgressModule.forRoot({
+      "radius": 38,
+      "space": -20,
+      "unitsColor": "#09273c",
+      "outerStrokeWidth": 7,
+      "outerStrokeColor": "#00ffae",
+      "innerStrokeWidth": 0,
+      "titleColor": "#09273c",
+      "titleFontSize": "31",
+      "showSubtitle": false,
+      "showUnits": false,
+      "showBackground": false,
+      "showInnerStroke": false,
+      "startFromZero": false}),
+    
   ],
   providers: [
     provideAnimationsAsync(),
