@@ -1,0 +1,34 @@
+<app-nav-bar></app-nav-bar>
+<h1 class="text-center px-1 popular text-white">Populares <i class="bi bi-fire"></i></h1> 
+<div class="">
+    <div class="d-flex  justify-content-center align-items-center vh-100">
+        <div class="borde-filtrado card p-3" style="width: 400px; border-radius: 10px; background-color: #e3f2fd;">
+            <h6 class="text-center mb-3">Filtros</h6>
+
+            <label for="fechaDesde" class="form-label">Muéstrame</label>
+            <input type="date" class="form-control mb-2" id="fechaDesde" placeholder="Desde">
+            <input type="date" class="form-control mb-3" id="fechaHasta" placeholder="Hasta">
+            
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="soloGratuitas" checked>
+                <label class="form-check-label" for="soloGratuitas">Solo gratuitas</label>
+            </div>
+            
+            <label for="puntuacion" class="form-label">Por puntuación</label>
+            <input type="range" class="form-range mb-3" min="0" max="100" id="puntuacion">
+            
+            <input type="text" class="form-control mb-3" placeholder="Buscar por nombre">
+
+            <div class="py-4">
+                <p-dropdown 
+                    [options]="valoresFiltroFecha" 
+                    [(ngModel)]="selectedValue" 
+                    optionLabel="name" 
+                    placeholder="Orden de Salida">
+                </p-dropdown>
+            </div>
+
+            <button class="btn btn-primary w-100">Enviar</button>
+        </div>
+    </div>
+</div>
