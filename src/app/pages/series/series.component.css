@@ -7,3 +7,24 @@ h1{
     border-color: rgb(156, 236, 156);
 }
 
+.btn{
+    background-color: #00FFAE;
+}
+
+.fecha{
+    color: rgb(156, 236, 156);
+}
+
+.carta{
+    border-color: aliceblue;
+}
+
+form input {
+    outline: none;
+    border: none;
+}
+
+form input:focus {
+    outline: none;
+    border: none;
+}
