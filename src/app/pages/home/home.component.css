@@ -1,0 +1,116 @@
+/* From Uiverse.io by Xtenso */ 
+.filter-switch {
+    border: 2px solid #00FFAE;
+    background-color: white;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 400px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.filter-switch input {
+    display: none;
+}
+.filter-switch label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s;
+    font-weight: 500;
+    font-size: 18px;
+}
+.filter-switch .background {
+    position: absolute;
+    width: 33.33%; /* Ajustado para 3 botones */
+    height: 40px;
+    margin: 0px;
+    background-color: #00FFAE;
+    top: 0px;
+    left: 0px;
+    border-radius: 30px;
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#option2:checked ~ .background {
+    left: 33.33%;
+}
+#option3:checked ~ .background {
+    left: 66.9%;
+}
+#option1:checked + label[for="option1"],
+#option2:checked + label[for="option2"],
+#option3:checked + label[for="option3"] {
+    color: #212121;
+    font-weight: bold;
+}
+#option1:not(:checked) + label[for="option1"],
+#option2:not(:checked) + label[for="option2"],
+#option3:not(:checked) + label[for="option3"] {
+    color: #7d7d7d;
+}
+
+/*Segunda botonera*/
+
+/* From Uiverse.io by Xtenso */ 
+.filter-switch-second {
+    border: 2px solid #00FFAE;
+    background-color: white;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 400px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .filter-switch-second input {
+    display: none;
+  }
+  .filter-switch-second label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .filter-switch-second .background-second {
+    position: absolute;
+    width: 50%;
+    height: 40px;
+    margin: 0px;
+    background-color: #00FFAE;
+    top: 0px;
+    left: 0px;
+    border-radius: 30px;
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  #option8:checked ~ .background-second {
+    left: 50%;
+  }
+  #option7:checked + label[for="option7"] {
+    color: #212121;
+    font-weight: bold;
+  }
+  #option8:checked + label[for="option8"] {
+    color: #212121;
+    font-weight: bold;
+  }
+  #option7:not(:checked) + label[for="option7"],
+  #option8:not(:checked) + label[for="option8"] {
+    color: #7d7d7d;
+  }
+  
