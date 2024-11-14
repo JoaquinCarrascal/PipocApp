@@ -1,9 +1,15 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="container-fluid row align-items-center justify-content-around mt-3">
+
+<div class="container-fluid row align-items-center justify-content-around mt-4">
+  <h3 style="margin-bottom: 0px;" style="color:white; font-size: 20pt;" ><span class="colored-aqua">Top 5</span>: Películas <span class="colored-aqua">mejor</span> valoradas 
+    <span class="material-symbols-rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M360-360H223.33q-20 0-29.5-17.83-9.5-17.84 2.5-34.5l325-468.67q8.67-12 22-16.5 13.34-4.5 27 .83 13.67 5.34 21 17.67 7.34 12.33 5.34 26.67L560-560h169q21.33 0 30.17 19 8.83 19-4.84 35.67l-357 428q-9 11-22.66 14.33-13.67 3.33-26-2.33-12.34-5.67-19.5-17.84-7.17-12.16-5.17-26.5L360-360Z"/></svg>
+    </span>
+  </h3>  
   @for(item of topRatedList; track item){
 
-    <div class="movie-card col-2">
+    <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
       <circle-progress
         class="bg-light rounded-circle"
         [percent]=punctFormater(item.vote_average)
@@ -21,11 +27,6 @@
 
   }
 </div>
-
-<circle-progress
-class="bg-light rounded-circle"
-[percent]=70
-></circle-progress>
 
 <div id="firstFilter" class="filter-switch">
   <input checked="" id="option1" name="options" type="radio" />
