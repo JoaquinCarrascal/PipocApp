@@ -30,4 +30,9 @@ export class SeriesComponent implements OnInit {
 
   }
 
+
+  obtenerImagenSerie(tam : number , path : string){
+    return `https://image.tmdb.org/t/p/w${tam}/${path}`;
+  }
+
 }

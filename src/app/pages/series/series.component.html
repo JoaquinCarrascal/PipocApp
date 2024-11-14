@@ -1,31 +1,18 @@
 <app-nav-bar></app-nav-bar>
+<h1 class="text-center px-1 text-white">Populares <i class="bi bi-fire"></i></h1>
 
-<h1 class="text-center p-2 text-white mt-4">
-    Populares <i class="bi bi-fire"></i>
-</h1>
-
-<div class="container mt-3">
-    <div class="row">
-
+<div class="container" style="margin-left: 0;">
+    <div class="row justify-content-start">
         <aside class="col-md-3">
-            <div class="card p-4" style="border-radius: 10px; background-color: #e3f2fd;">
-                <h4 class="text-center mb-4">Ordenar</h4>
-                <div class="mb-4">
-                    <select class="form-select" id="ordenSalida" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 100px;">
-                        <option value disabled selected>Seleccionar</option>
-                        @for (valor of valoresFiltroFecha; track $index) {
-                            <option value="">{{valor.name}}</option>
-                        }
-                    </select>
-                </div>
+            <div class="card p-3" style="border-radius: 10px; background-color: #e3f2fd;">
+                <h4 class="text-center mb-3">Ordenar</h4>
                 
-                <h4 class="text-center mb-4">Filtros</h4>
-                <div class="row mb-3">
+                <div class="row mb-2">
                     <div class="col-auto">
                         <label for="fechaDesde" class="form-label py-2">Desde</label>
                     </div>
                     <div class="col">
-                        <input type="date" class="form-control" id="fechaDesde" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 10px;">
+                        <input type="date" class="form-control" id="fechaDesde" placeholder="Desde" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 100px;">
                     </div>
                 </div>
                 
@@ -34,36 +21,46 @@
                         <label for="fechaHasta" class="form-label py-2">Hasta</label>
                     </div>
                     <div class="col">
-                        <input type="date" class="form-control" id="fechaHasta" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 10px;">
+                        <input type="date" class="form-control" id="fechaHasta" placeholder="Hasta" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 100px;">
                     </div>
                 </div>
-
+                
                 <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="soloGratuitas" checked style="border-radius: 10px;">
+                    <input type="checkbox" class="form-check-input" id="soloGratuitas" checked style="border-radius: 100px;">
                     <label class="form-check-label" for="soloGratuitas">Solo gratuitas</label>
                 </div>
-
+                
                 <label for="puntuacion" class="form-label">Por puntuación</label>
-                <input type="range" class="form-range mb-3" min="0" max="100" id="puntuacion" style="border-radius: 10px;">
-
+                <input type="range" class="form-range mb-3" min="0" max="100" id="puntuacion" style="border-radius: 100px;">
+                
                 <input type="text" class="form-control mb-3" placeholder="Buscar por nombre" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 100px;">
+                
+                <div class="mb-3">
+                    <label for="ordenSalida" class="form-label">Orden de Salida</label>
+                    <select class="form-select" id="ordenSalida" style="border: 2px solid hsl(205, 74%, 14%); border-radius: 100px;">
+                        <option value disabled selected>Seleccionar</option>
+                        @for ( valor of valoresFiltroFecha ; track valor) {
+                            <option [value]="valor.name">{{ valor.name }}</option>
+                        }
+                    </select>
+                </div>
+
                 <button class="btn w-100" style="background-color: hsl(205, 74%, 14%); color: white; border-radius: 100px;">Enviar</button>
             </div>
         </aside>
 
-
         <section class="col-md-9">
-            <div class="row">
-                @for (serie of listaSeries; track serie) {
+            <div class="row justify-content-start">
+                @for ( serie of listaSeries ; track serie) {
                     <div class="col-6 col-md-4 col-lg-2 mb-5">
-                        <div class="carta" style="border-radius: 1px; color: white;">
-                            <div class="position-relative carta">
-                                <img src="assets/arcane.jpg" class="card-img-top" alt="ponerFotoSerie" style="border-radius: 10px 10px 10px 10px; border: 1px solid white;">
+                        <div class="carta" style="border-radius: 10px; color: white; height: 100%; margin-left: 10px;">
+                            <div class="position-relative carta" style="height: 200px;">
+                                <img [src]="serie.poster_path ? obtenerImagenSerie(200, serie.poster_path) : 'assets/placeholder.svg'" class="card-img-top" alt="noPhoto" style="border-radius: 10px 10px 10px 10px; border: 1px solid white; height: 100%; object-fit: cover;">
                                 <!-- AQUI VA CIRCULO PORCIENTO -->
                             </div>
                             <div class="card-body p-2">
-                                <h6 class="card-title text-center">{{serie.name}}</h6>
-                                <p class="text-center fecha mb-0"><small>{{serie.first_air_date}}</small></p>
+                                <h6 class="card-title text-left text-truncated">{{serie.name}}</h6>
+                                <p class="text-left fecha mb-0"><small>{{serie.first_air_date}}</small></p>
                             </div>
                         </div>
                     </div>
