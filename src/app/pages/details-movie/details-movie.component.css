@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.background-image {
+    background: url('https://m.media-amazon.com/images/I/610-izTuHqL._AC_UF894,1000_QL80_.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(8px);
+    height: 50vh;
+}
+
+.solid-color {
+    background-color: #09273C;
+    height: 50vh;
+}
