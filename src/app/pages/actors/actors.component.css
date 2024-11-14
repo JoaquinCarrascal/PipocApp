@@ -36,6 +36,11 @@ h1 {
     width: 100%;
 }
 
+.search-bar input::placeholder {
+    color: #09273C;
+    padding-left: 10px;
+}
+
 .search-icon {
     width: 30px;
     height: 30px;
