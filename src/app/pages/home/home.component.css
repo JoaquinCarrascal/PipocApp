@@ -3,7 +3,7 @@
 *{
   font-family: 'Inter', sans-serif;
 }
-/* From Uiverse.io by Xtenso */
+
 .filter-switch {
   border: 2px solid #00FFAE;
   background-color: white;
@@ -71,18 +71,17 @@
 
 /*Segunda botonera*/
 
-/* From Uiverse.io by Xtenso */
 .filter-switch-second {
   border: 2px solid #00FFAE;
   background-color: white;
   border-radius: 30px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: start;
   height: 40px;
   width: 300px;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 0 20px;
 }
 
 .filter-switch-second input {
@@ -154,6 +153,11 @@
   color: black;
 }
 
+.resizing-img{
+  width: 150px;
+  height: 230px;
+}
+
 .card-img:hover {
   border: 1px solid black;
   transform: scale(1.05);
@@ -165,8 +169,17 @@
 
 .movie-card{
 
-  width: 200px;
+  position: relative;
+  width: 220px;
+  height: 430px;
+  top: -20px;
 
+}
+
+.movie-card-resizing{
+  
+    width: 175px;
+    height: 340px;
 }
 
 .colored-aqua{

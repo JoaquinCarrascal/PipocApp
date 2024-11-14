@@ -11,6 +11,7 @@ import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
 export class HomeComponent implements OnInit {
 
 topRatedList: TopRatedList[] = [];
+popularList: TopRatedList[] = [];
 constructor(private movieServ: MovieServService , private pipeDateForm: DateFormaterPipe) { }
   
 
@@ -19,6 +20,9 @@ ngOnInit(): void {
   this.movieServ.getTopRated().subscribe((data) => {
     this.topRatedList = data.results;
     this.getTop5();
+  });
+  this.movieServ.getPopular().subscribe((data) => {
+    this.popularList = data.results.slice(0, 7);
   });
 
 }
@@ -29,9 +33,9 @@ this.topRatedList = this.topRatedList.sort((a, b) => b.vote_average - a.vote_ave
 
 }
 
-getImageUrl(posterPath: string){
+getImageUrl(posterPath: string , width : number){
 
-  return `https://image.tmdb.org/t/p/w200/${posterPath}`;
+  return `https://image.tmdb.org/t/p/w${width}/${posterPath}`;
 
 }
 

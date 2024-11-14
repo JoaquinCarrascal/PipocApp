@@ -1,12 +1,57 @@
 <app-nav-bar></app-nav-bar>
 
+<div class="d-flex mb-4">
+<h3 style="margin-bottom: 0px;" style="color:white; font-size: 20pt;" 
+    class="mb-0 m-4 align-content-center justify-content-center">Tendencias
+  <span class="material-symbols-rounded">
+    <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M160-400q0-115 70-222.33Q300-729.67 422.33-807q18.67-12.33 38.17-.83t19.5 34.5V-708q0 34 23.5 57t57.5 23q17.67 0 33.17-7.5t27.5-22.17q8-9.33 18.83-12.5 10.83-3.16 20.5 3.5 65 45 102 115.67t37 151q0 92.67-47 167.83Q706-157 629.33-117q21-25.33 32.5-56.17 11.5-30.83 11.5-64.83 0-38.67-14.33-72.83-14.33-34.17-41.67-61.5L480-506.67 343.67-372.33q-28.34 27.66-42.67 61.66-14.33 34-14.33 72.67 0 34 11.5 64.83 11.5 30.84 32.5 56.17Q254-157 207-232.17 160-307.33 160-400Zm320-13.33 89.67 87.66q17.66 17.67 27.33 40 9.67 22.34 9.67 47.67 0 51.67-37 88.17T480-113.33q-52.67 0-89.67-36.5t-37-88.17q0-25 9.34-47.5 9.33-22.5 27.66-40.17L480-413.33Z"/></svg>
+  </span>
+</h3>
+  <div id="secondFilter" class="filter-switch-second my-2 mt-4">
+    <input checked="" id="option7" name="options-second" type="radio" />
+    <label class="option-second mt-1" for="option7">Semana</label>
+    <input id="option8" name="options-second" type="radio" />
+    <label class="option-second mt-1" for="option8">Mes</label>
+    <span class="background-second"></span>
+  </div>
+</div>
+<div class="container-fluid row justify-content-around mt-0 mb-4 movie-container" style="top:-100px; margin:0 auto;">
+    
+  @for(item of popularList; track item){
 
-<div class="container-fluid row align-items-center justify-content-around mt-4">
-  <h3 style="margin-bottom: 0px;" style="color:white; font-size: 20pt;" ><span class="colored-aqua">Top 5</span>: Películas <span class="colored-aqua">mejor</span> valoradas 
-    <span class="material-symbols-rounded">
-      <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M360-360H223.33q-20 0-29.5-17.83-9.5-17.84 2.5-34.5l325-468.67q8.67-12 22-16.5 13.34-4.5 27 .83 13.67 5.34 21 17.67 7.34 12.33 5.34 26.67L560-560h169q21.33 0 30.17 19 8.83 19-4.84 35.67l-357 428q-9 11-22.66 14.33-13.67 3.33-26-2.33-12.34-5.67-19.5-17.84-7.17-12.16-5.17-26.5L360-360Z"/></svg>
-    </span>
-  </h3>  
+     <div class="movie-card col-1 mt-0 movie-card-resizing" style="top: 16px;">
+     <!-- <circle-progress
+        class="bg-light rounded-circle"
+        [percent]=punctFormater(item.vote_average)
+        [radius]="20"
+        [titleFontSize]="'17'"
+        [outerStrokeWidth]="5"
+        style="position: relative; top: 22px;right: -125px;z-index: 1;"
+        ></circle-progress> -->
+
+      <!-- <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path , 200) + ')'"></div> -->
+      <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="" width="150px">
+      
+      <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
+        {{item.title}}
+      </p>
+      <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+        {{dateFormater(item.release_date)}}
+      </p>
+    </div>
+
+  }
+  
+</div>
+
+<h3 style="margin-bottom: 0px;" style="color:white; font-size: 20pt;" class="mb-0 m-4"><span class="colored-aqua">Top 5</span> películas <span class="colored-aqua">mejor</span> valoradas 
+  <span class="material-symbols-rounded">
+    <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M360-360H223.33q-20 0-29.5-17.83-9.5-17.84 2.5-34.5l325-468.67q8.67-12 22-16.5 13.34-4.5 27 .83 13.67 5.34 21 17.67 7.34 12.33 5.34 26.67L560-560h169q21.33 0 30.17 19 8.83 19-4.84 35.67l-357 428q-9 11-22.66 14.33-13.67 3.33-26-2.33-12.34-5.67-19.5-17.84-7.17-12.16-5.17-26.5L360-360Z"/></svg>
+  </span>
+</h3>
+<div class="container-fluid row justify-content-around mt-0 mb-4 movie-container"
+style="top:-200px;">
+    
   @for(item of topRatedList; track item){
 
     <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
@@ -16,7 +61,7 @@
         style="position: relative; top: 30px;right: -160px;z-index: 1;"
         ></circle-progress>
 
-      <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path) + ')'"></div>
+      <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path , 200) + ')'"></div>
       <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
         {{item.title}}
       </p>
@@ -38,10 +83,3 @@
   <span class="background"></span>
 </div>
 
-<div id="secondFilter" class="filter-switch-second my-2">
-    <input checked="" id="option7" name="options-second" type="radio" />
-    <label class="option-second" for="option7">Option 1</label>
-    <input id="option8" name="options-second" type="radio" />
-    <label class="option-second" for="option8">Option 2</label>
-    <span class="background-second"></span>
-</div>
