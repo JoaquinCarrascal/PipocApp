@@ -1,4 +1,13 @@
 <app-nav-bar></app-nav-bar>
+
+<div>
+  @for(item of topRatedList; track item){
+
+    <p class="text-light">{{item.title}} -> {{item.vote_average}} -> <img [src]='getImageUrl(item.poster_path)' alt=""></p>
+
+  }
+</div>
+
 <circle-progress
 class="bg-light rounded-circle"
 [percent]=70
