@@ -1,9 +1,23 @@
 <app-nav-bar></app-nav-bar>
 
-<div>
+<div class="container-fluid row align-items-center justify-content-around mt-3">
   @for(item of topRatedList; track item){
 
-    <p class="text-light">{{item.title}} -> {{item.vote_average}} -> <img [src]='getImageUrl(item.poster_path)' alt=""></p>
+    <div class="movie-card col-2">
+      <circle-progress
+        class="bg-light rounded-circle"
+        [percent]=punctFormater(item.vote_average)
+        style="position: relative; top: 30px;right: -160px;z-index: 1;"
+        ></circle-progress>
+
+      <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path) + ')'"></div>
+      <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
+        {{item.title}}
+      </p>
+      <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+        {{dateFormater(item.release_date)}}
+      </p>
+    </div>
 
   }
 </div>
@@ -11,18 +25,6 @@
 <circle-progress
 class="bg-light rounded-circle"
 [percent]=70
-[radius] = 38
-[space] = -20
-[unitsColor] = "'#09273c'"
-[outerStrokeWidth] = 7
-[outerStrokeColor] = "'#00ffae'"
-[innerStrokeWidth] = 0
-[titleColor] = "'#09273c'"
-[showSubtitle] = "false"
-[showUnits] = "false"
-[showBackground] = "false"
-[showInnerStroke] = "false"
-[startFromZero] = "false"
 ></circle-progress>
 
 <div id="firstFilter" class="filter-switch">

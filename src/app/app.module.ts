@@ -9,26 +9,28 @@ import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { DateFormaterPipe } from './pipes/date-formater.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    DateFormaterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     NgCircleProgressModule.forRoot({
-      "radius": 38,
+      "radius": 25,
       "space": -20,
       "unitsColor": "#09273c",
       "outerStrokeWidth": 7,
       "outerStrokeColor": "#00ffae",
       "innerStrokeWidth": 0,
       "titleColor": "#09273c",
-      "titleFontSize": "31",
+      "titleFontSize": "22",
       "showSubtitle": false,
       "showUnits": false,
       "showBackground": false,
@@ -38,7 +40,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    DateFormaterPipe
   ],
   bootstrap: [AppComponent]
 })

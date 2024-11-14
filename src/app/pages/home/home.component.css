@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'); 
+
+*{
+  font-family: 'Inter', sans-serif;
+}
 /* From Uiverse.io by Xtenso */
 .filter-switch {
   border: 2px solid #00FFAE;
@@ -129,3 +134,43 @@
   color: #7d7d7d;
 }
 
+.card-img {
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-img:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.movie-card{
+
+  width: 200px;
+
+}
+
+.colored-aqua{
+
+  color: #00FFAE;
+
+}
