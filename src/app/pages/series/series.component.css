@@ -28,3 +28,6 @@ form input:focus {
     outline: none;
     border: none;
 }
+.card-img:hover{
+    transform: scale(1.05);
+}
