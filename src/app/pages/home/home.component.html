@@ -1,17 +1,17 @@
 <app-nav-bar></app-nav-bar>
 
 <div id="este" class="container-fluid row mt-4 align-items-center">
-  <div class="col-auto pt-1 d-flex">
+  <div class="col-auto pt-1 d-flex" style="position: relative; left:10px;" >
     <h3 style="color:white; font-size: 20pt;position:relative; top:3px;" class="">Tendencias de <span class="colored-aqua">{{thisYear}}</span></h3>
     <div class="d-flex" style="position: relative; top:-2px; left:6px;">
       <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M160-400q0-115 70-222.33Q300-729.67 422.33-807q18.67-12.33 38.17-.83t19.5 34.5V-708q0 34 23.5 57t57.5 23q17.67 0 33.17-7.5t27.5-22.17q8-9.33 18.83-12.5 10.83-3.16 20.5 3.5 65 45 102 115.67t37 151q0 92.67-47 167.83Q706-157 629.33-117q21-25.33 32.5-56.17 11.5-30.83 11.5-64.83 0-38.67-14.33-72.83-14.33-34.17-41.67-61.5L480-506.67 343.67-372.33q-28.34 27.66-42.67 61.66-14.33 34-14.33 72.67 0 34 11.5 64.83 11.5 30.84 32.5 56.17Q254-157 207-232.17 160-307.33 160-400Zm320-13.33 89.67 87.66q17.66 17.67 27.33 40 9.67 22.34 9.67 47.67 0 51.67-37 88.17T480-113.33q-52.67 0-89.67-36.5t-37-88.17q0-25 9.34-47.5 9.33-22.5 27.66-40.17L480-413.33Z"/></svg>
     </div>
   </div>
-  <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1">
+  <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex" style="position: relative; left:10px;">
     <input checked="" id="option7" name="options-second" type="radio" (click)="swapPopular(0)" />
-    <label class="option-second" for="option7">Películas</label>
+    <label class="option-second" for="option7" class="d-flex" style="left:20px;">Películas</label>
     <input id="option8" name="options-second" type="radio" (click)="swapPopular(1)" />
-    <label class="option-second" for="option8">Series</label>
+    <label class="option-second" for="option8" class="d-flex" style="left:50px;">Series</label>
     <span class="background-second"></span>
   </div>
   <div class="col-auto ms-auto align-content-center pt-1 d-flex" style="position: relative;right:50px;">
