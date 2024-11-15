@@ -3,12 +3,12 @@
     <div class="header">
         <h1>Actores</h1>
         <div class="search-bar">
-            <input type="text" placeholder="Buscar">
+            <input type="text" placeholder="Buscar" (input)="filterPeople($event)">
             <div class="search-icon" style="height: 100%; display: flex; align-items: center; justify-content: center;">🔍</div>
         </div>
     </div>
     <div class="people-grid">
-        <div *ngFor="let person of listaPeople" class="person-card">
+        <div *ngFor="let person of filteredPeople" class="person-card">
             <div class="img">
                 <img [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
             </div>
@@ -21,6 +21,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="load-more" style="display: flex; justify-content: center; margin-top: 20px;">
+        <button (click)="loadNextPage()" style="background-color: #00FFAE; color: #09273C; padding: 10px 20px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer;">Cargar más</button>
     </div>
     <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px; font-size: 36px; font-weight: 600; color: #00FFAE;">
         <a style="margin: 0 10px; background-color: #00FFAE; color: #09273C; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; text-align: center; line-height: 48px;">1</a>

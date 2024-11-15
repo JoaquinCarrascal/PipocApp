@@ -10,13 +10,30 @@ import { ListadoPopularPeople, PopularPeopleResponse } from '../../models/popula
 export class PeopleComponent implements OnInit {
 
   listaPeople: ListadoPopularPeople[] = [];
+  filteredPeople: ListadoPopularPeople[] = [];
+  currentPage: number = 1;
 
   constructor(private peopleService : PeopleService) { }
 
   ngOnInit(): void {
-    this.peopleService.getPopularPeople().subscribe((data : PopularPeopleResponse) => {
+    this.loadPeople();
+  }
+
+  loadPeople(): void {
+    this.peopleService.getPopularPeople(this.currentPage).subscribe((data : PopularPeopleResponse) => {
       this.listaPeople = data.results;
+      this.filteredPeople = this.listaPeople;
     });
+  }
+
+  loadNextPage(): void {
+    this.currentPage++;
+    this.loadPeople();
+  }
+
+  filterPeople(event: Event): void {
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredPeople = this.listaPeople.filter(person => person.name.toLowerCase().includes(query));
   }
 
 }

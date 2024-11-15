@@ -42,7 +42,7 @@ h1 {
 }
 
 .search-icon {
-    width: 30px;
+    width: 30px;    
     height: 30px;
     background-color: #fff;
     border-radius: 50%;
@@ -57,9 +57,11 @@ h1 {
 .people-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 150px 0; /* Cambiar el gap a 150px horizontal y 0px vertical */
+    gap: 150px 20px; /* Mantener el gap horizontal y vertical */
     margin-top: 54px;
-    margin-left: 153px;
+    margin-left: auto; /* Ajustar margen izquierdo */
+    margin-right: auto; /* Ajustar margen derecho */
+    width: calc(100% - 306px); /* Ajustar el ancho total restando los márgenes */
 }
 
 .person-card {
