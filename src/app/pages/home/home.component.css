@@ -10,11 +10,11 @@
   border-radius: 30px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: start;
   height: 40px;
   width: 500px;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 0 20px;
 }
 
 .filter-switch input {
