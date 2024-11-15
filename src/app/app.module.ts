@@ -9,13 +9,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import {PeopleComponent } from './pages/people/people.component';
+import { PersonDetailsComponent } from './pages/person-details/person-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    PeopleComponent
+    PeopleComponent,
+    PersonDetailsComponent
   ],
   imports: [
     BrowserModule,
