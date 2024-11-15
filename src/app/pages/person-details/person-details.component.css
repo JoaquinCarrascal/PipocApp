@@ -1,114 +1,90 @@
-/* Estilos generales para el cuerpo del documento */
-body {
-    margin: 0; /* Eliminar márgenes predeterminados */
-    padding: 0; /* Eliminar padding predeterminado */
-}
-
-/* Fondo de imagen borrosa en la mitad superior */
 .background-image-blur {
-    background-size: cover; /* Ajustar la imagen para cubrir todo el contenedor */
-    opacity: 0.5; /* Opacidad de la imagen */
-    filter: blur(5px); /* Aplicar desenfoque a la imagen */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: 80px; /* Desplazar hacia abajo */
+    background-size: cover;
+    opacity: 0.5;
+    filter: blur(5px);
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: 80px;
 }
 
-/* Fondo de imagen clara en la mitad inferior */
-.background-image-clear {
-    background-size: cover; /* Ajustar la imagen para cubrir todo el contenedor */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: calc(50vh + 80px); /* Desplazar hacia abajo */
-}
-
-/* Fondo de color sólido en la mitad inferior */
 .background-solid-color {
-    background-color: #09273C; /* Color sólido (puedes cambiarlo según tus necesidades) */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: calc(50vh + 80px); /* Desplazar hacia abajo */
+    background-color: #09273C;
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: calc(50vh + 80px);
 }
 
-/* Estilos para la tarjeta que contiene la imagen de la película */
-.card {
-    display: flex; /* Usar flexbox para alinear elementos */
-    align-items: center; /* Alinear elementos verticalmente al centro */
-    background-color: white; /* Fondo blanco para la tarjeta */
-    border-radius: 16px; /* Hacer las esquinas más redondeadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para la tarjeta */
-    margin: 100px; /* Margen alrededor de la tarjeta */
-    position: absolute; /* Posición absoluta */
-    top: 40vh; /* Posicionar en la mitad de la pantalla */
-    left: 0; /* Alinear a la izquierda */
-    transform: translateY(-50%); /* Centrar verticalmente */
+.card1 {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 16px;
+
+    margin: 100px;
+    position: absolute;
+    top: 40vh;
+    left: 0;
+    transform: translateY(-50%);
 }
 
-/* Estilos para la imagen de la película dentro de la tarjeta */
-.movie-image {
-    width: 472px; /* Ancho de la imagen */
-    height: 635px; /* Altura de la imagen */
-    border-radius: 16px; /* Hacer las esquinas de la imagen más redondeadas */
-    margin: 5px; /* Margen alrededor de la imagen */
-}
-
-/* Estilos para los detalles de la película */
-.movie-details {
-    position: absolute; /* Posición absoluta */
-    top: 35vh; /* Posicionar en la mitad de la pantalla */
-    left: calc(550px + 120px); /* Posicionar a la derecha de la tarjeta */
-    transform: translateY(-50%); /* Centrar verticalmente */
-}
-
-/* Estilos para el título de la película */
-.movie-title {
-    font-size: 50px; /* Tamaño de fuente grande */
-    font-weight: bold; /* Texto en negrita */
-    color: white; /* Color del texto blanco */
-}
-
-.movie-details {
-    color: white;
-}
-
-/* Contenedor del ícono del género */
-.genre-icon-container {
-    position: relative;
-    display: inline-block;
+.person-image {
+    width: 472px;
+    height: 635px;
+    border-radius: 16px;
     margin: 5px;
 }
 
-/* Estilos para el ícono del género */
-.genre-icon {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(120deg) brightness(100%) contrast(100%);
-}
-
-/* Bocadillo para mostrar el nombre del género */
-.genre-tooltip {
-    visibility: hidden;
-    background-color: #00FFAE;
-    color: #09273C;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
+.person-details {
     position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Posicionar el bocadillo arriba del ícono */
-    left: 50%;
-    margin-left: -60px;
-    width: 120px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    top: 43vh; 
+    left: calc(550px + 120px);
+    transform: translateY(-50%);
+}
+.person-name {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+
 }
 
-/* Mostrar el bocadillo al pasar el ratón sobre el ícono */
-.genre-icon-container:hover .genre-tooltip {
-    visibility: visible;
-    opacity: 1;
+.person-info {
+    margin-top: 10px; /* Add margin-top to position it below the header */
 }
+
+.cards-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.cards-container .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-container p {
+    text-align: center;
+    width: 158px;
+    margin-top: 8px;
+}
+
+.biography {
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.biography {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6; /* Mejora la legibilidad */
+    margin-top: 110px; /* Espacio entre el texto y el bloque de "Conocido por" */
+    text-align: left;
+    max-width: 600px; /* Ajusta el ancho para evitar que el texto sea muy largo */
+}
+
