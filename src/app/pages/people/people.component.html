@@ -24,17 +24,13 @@
           </a>
         </div>
       </div>
-      
-    <div class="load-more" style="display: flex; justify-content: center; margin-top: 20px;">
-        <button (click)="loadNextPage()" style="background-color: #00FFAE; color: #09273C; padding: 10px 20px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer;">Cargar más</button>
-    </div>
-    <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px; font-size: 36px; font-weight: 600; color: #00FFAE;">
-        <a style="margin: 0 10px; background-color: #00FFAE; color: #09273C; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; text-align: center; line-height: 48px;">1</a>
-        <a style="margin: 0 10px;">2</a>
-        <a style="margin: 0 10px;">3</a>
-        <a style="margin: 0 10px;">4</a>
-        <a style="margin: 0 10px;">5</a>
-        <span style="margin: 0 10px;">...</span>
-        <a style="margin: 0 10px;">185456</a>
+
+
+
+    <div class="pagination">
+        <!-- Páginas a mostrar dinámicamente -->
+        <a *ngFor="let page of pageNumbers" (click)="goToPage(page)" [ngClass]="{'active': currentPage === page}" style="margin: 0 10px;">
+          {{ page }}
+        </a>
     </div>
 </body>

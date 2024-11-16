@@ -109,4 +109,40 @@ h1 {
     color: inherit; /* Mantiene el color del texto */
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: 600;
+    color: #00FFAE;
+}
+
+.pagination a {
+    margin: 0 10px;
+    background-color: transparent;
+    color: #00FFAE;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    text-decoration: none; /* Elimina el subrayado */
+  }
+  
+  .pagination a.active {
+    color: #09273C;
+    background-color: #00FFAE;
+    text-decoration: none; /* Elimina el subrayado también en el enlace activo */
+  }
+  
+  .pagination a:hover {
+    background-color: #00FFAE;
+    color: #09273C;
+    text-decoration: none; /* Asegura que el hover tampoco tenga subrayado */
+  }
   
