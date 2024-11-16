@@ -10,13 +10,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DateFormaterPipe } from './pipes/date-formater.pipe';
+import { MovieListComponent } from './pages/movie-list/movie-list.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    DateFormaterPipe
+    DateFormaterPipe,
+    MovieListComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { DateFormaterPipe } from './pipes/date-formater.pipe';
       "showBackground": false,
       "showInnerStroke": false,
       "startFromZero": false}),
-    
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync(),

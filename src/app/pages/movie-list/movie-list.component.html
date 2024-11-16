@@ -1,0 +1,45 @@
+<app-nav-bar></app-nav-bar>
+<form class="filter-form">
+    <h2>Ordenar</h2> 
+    <div class="d-flex mb-4">
+        
+        <div>
+            <select id="mySelect" name="sort">
+                <option value="valasc">Valoración ascendente</option>
+                <option value="valdesc">Valoración descendente</option>
+                <option value="popasc">Popularidad ascendente</option>
+                <option value="popdesc">Popularidad descendente</option>
+            </select>
+        </div>
+        <div class="d-block rounded-circle myCustomButton">
+        <i class="bi bi-arrow-down-circle rounded-circle" id="openSelectBtn"></i>
+        </div>
+
+    </div>
+
+    <h2>Filtros</h2> 
+    <label style="font-size: 16pt;">Muestra</label> 
+
+    <div style="position: relative; left:20px;">
+        <label class="radio-label">
+            <input class="colored-aqua" type="radio" name="type" value="peliculas" checked>
+            Películas
+        </label>
+
+        <label class="radio-label">
+            <input class="colored-aqua" type="radio" name="type" value="series"> 
+            Series
+        </label>
+    </div>
+
+    <div class="my-3 ms-3" style="position: relative; left:4px;">
+        <input type="checkbox" name="check-free" id="check-free-id" class="me-2">
+        <label for="check-free" style="font-size:14pt;" id="check-label"> Sólo gratuitas </label>      
+    </div>
+    
+    <label for="rating">Por puntuación</label>
+    <input type="range" id="rating" name="rating" min="0" max="100" value="50">
+    <div class="range-labels"> <span>0</span> <span>100</span> </div>
+    <div class="search-bar"> <input type="text" name="search" placeholder="Buscar por nombre"> <button
+            type="submit">🔍</button> </div>
+</form>
