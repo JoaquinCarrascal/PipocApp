@@ -13,4 +13,27 @@ export class PersonDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getPersonDetails(id: number) {
+    this.peopleService.getPersonDetails(id).subscribe((data) => {
+      return data;
+    });
+  }
+
+  getPersonCombinedCredits(id: number) {
+    this.peopleService.getPersonCombinedCredits(id).subscribe((data) => {
+      return data;
+    });
+  }
+
+  getPersonImages(id: number) {
+    this.peopleService.getPersonImages(id).subscribe((data) => {
+      return data;
+    });
+  }
+
+  getPersonExternalIds(id: number) {
+    this.peopleService.getPersonExternalIds(id).subscribe((data) => {
+      return data;
+    });
+  }
 }

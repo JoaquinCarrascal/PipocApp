@@ -18,7 +18,6 @@ export class PeopleService {
     return this.http.get<PopularPeopleResponse>(`${BASE_URL}/popular?api_key=${API_KEY}&page=${page}`);
   }
 
-  
   getPersonDetails(id: number): Observable<PersonDetailsResponse> {
     return this.http.get<PersonDetailsResponse>(`${BASE_URL}/${id}?api_key=${API_KEY}`);
   }
