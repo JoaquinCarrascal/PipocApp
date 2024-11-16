@@ -3,9 +3,11 @@
     <div class="header">
         <h1>Actores</h1>
         <div class="search-bar">
-            <input type="text" placeholder="Buscar" (input)="filterPeople($event)">
+            <input type="text" placeholder="Buscar" (keydown.enter)="searchPeople($event)">
+
             <div class="search-icon" style="height: 100%; display: flex; align-items: center; justify-content: center;">🔍</div>
-        </div>
+          </div>
+          
     </div>
     <div class="people-grid">
         <div *ngFor="let person of filteredPeople" class="person-card">
@@ -28,7 +30,6 @@
 
 
     <div class="pagination">
-        <!-- Páginas a mostrar dinámicamente -->
         <a *ngFor="let page of pageNumbers" (click)="goToPage(page)" [ngClass]="{'active': currentPage === page}" style="margin: 0 10px;">
           {{ page }}
         </a>

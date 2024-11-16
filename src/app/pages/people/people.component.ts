@@ -79,5 +79,33 @@ export class PeopleComponent implements OnInit {
   filterPeople(event: Event): void {
     const query = (event.target as HTMLInputElement).value.toLowerCase();
     this.filteredPeople = this.listaPeople.filter(person => person.name.toLowerCase().includes(query));
+    this.currentPage = 1;  // Al buscar, regresamos a la primera página.
+    this.calculatePageNumbers();  // Recalcular la paginación después de la búsqueda.
   }
+
+  searchPeople(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+    const query = (keyboardEvent.target as HTMLInputElement).value.toLowerCase();
+    
+    // Filtrar la lista completa de actores
+    const filteredResults = this.listaPeople.filter(person =>
+      person.name.toLowerCase().includes(query)
+    );
+  
+    // Actualizar filteredPeople con los resultados de la búsqueda
+    this.filteredPeople = filteredResults;
+  
+    // Restablecer la primera página de los resultados de búsqueda
+    this.currentPage = 1;
+  
+    // Recalcular las páginas disponibles según los resultados filtrados
+    this.totalPages = Math.ceil(filteredResults.length / 20);  // Ajusta el número 20 según el número de actores por página
+    this.calculatePageNumbers();
+  }
+  
+  
+  
+  
+  
+  
 }
