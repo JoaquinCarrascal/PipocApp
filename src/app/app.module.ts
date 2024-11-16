@@ -12,6 +12,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DateFormaterPipe } from './pipes/date-formater.pipe';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatSelectModule} from '@angular/material/select';
       "showBackground": false,
       "showInnerStroke": false,
       "startFromZero": false}),
-    MatSelectModule
+    MatSelectModule,
+    MatSliderModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -1,9 +1,9 @@
 .filter-form {
     background-color: #fff;
-    border: 4px solid #00bfa5;
+    border: 4px solid #00FFAE;
     border-radius: 20px;
     padding: 20px;
-    width: 370px;
+    width: 350px;
     margin: 140px 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -19,7 +19,7 @@
     -moz-appearance: none; 
     appearance: none;
     height: 50px;
-    width: 325px;
+    width: 305px;
     padding:10px;
     border-radius: 25px;
     border: 4px solid #09273C;
@@ -32,7 +32,7 @@
 }
 
 .myCustomButton {
-    background-color: #00bfa5; 
+    background-color: #00FFAE; 
     position:relative; 
     left:-43px;
     height:31px; 
@@ -63,7 +63,7 @@
 }
 
 .colored-aqua{
-    color: #00bfa5;
+    color: #00FFAE;
 }
 
 input[type="radio"] {
@@ -77,13 +77,14 @@ input[type="radio"] {
     position: relative;
     top:13px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 input[type="radio"]:checked::before {
     content: '';
     width: 15px; 
     height: 15px;
-    background-color: #00bfa5;
+    background-color: #00FFAE;
     border-radius: 10px;
     position: absolute;
     top: 7px;
@@ -111,14 +112,37 @@ input[type="radio"]:checked::before {
 #check-free-id:checked::before {
     content: '';
     position: absolute;
-    background-color: #00bfa5;
+    background-color: #00FFAE;
     top: 50%;
     left: 50%;
     width: 15px;
     height: 15px;
     border-radius: 25px !important;
     transform: translate(-50%, -50%);
-    border-radius: 2px; /* Bordes redondeados para el checkmark */
+    border-radius: 2px;
+}
+
+.slider{
+    width: 100%;
+    margin: 0 auto;
+    --mdc-slider-handle-color: #09273C;
+    --mdc-slider-active-track-color: #09273C;
+    --mdc-slider-inactive-track-color: #00FFAE;
+    --mdc-slider-handle-box-shadow: 0 0 0 0 !important;
+    --mdc-slider-handle-height: 20px;
+    --mdc-slider-handle-width: 20px;
+    --mdc-slider-active-track-: 20px;
+    --mdc-slider-inactive-track-shape: 20px;
+}
+
+.filter-form .range-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #09273C;
+    width: 95%;
+    margin-top: -7px;
+    margin-left: 12px;
+    margin-bottom: 20px;
 }
 
 .filter-form input[type="radio"],
@@ -127,38 +151,100 @@ input[type="radio"]:checked::before {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
-.filter-form input[type="radio"] {
-    width: auto;
-    margin-right: 10px;
-}
-
-.filter-form .range-labels {
+/* From Uiverse.io by vnuny */ 
+.container-search {
+    position: relative;
+    box-sizing: border-box;
+    width: fit-content;
+  }
+  
+  .mainbox {
+    box-sizing: border-box;
+    position: relative;
+    width: 290px;
+    padding: 10px;
+    height: 50px;
     display: flex;
-    justify-content: space-between;
-    color: #333;
-}
-
-.filter-form .search-bar {
-    display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-}
-
-.filter-form .search-bar input[type="text"] {
-    flex: 1;
-}
-
-.filter-form .search-bar button {
-    background-color: #00bfa5;
+    justify-content: center;
+    border-radius: 160px;
+    background-color: rgb(255, 255, 255);
+    border: #09273C 4px solid;
+    transition: all 0.3s ease;
+  }
+  
+  .checkbox-search:focus {
     border: none;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    outline: none;
+  }
+  
+  .checkbox-search:checked {
+    right: 10px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox {
+    width: 50px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox .search_input {
+    width: 0;
+    height: 0px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox .iconContainer {
+    padding-right: 8px;
+  }
+  
+  .checkbox-search {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 17px;
+    top: 0px;
+    z-index: 9;
     cursor: pointer;
-}
+    appearance: none;
+  }
+  
+  .search_input {
+    box-sizing: border-box;
+    height: 100%;
+    width: 170px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-bottom: 0px;
+    position: relative;
+    top: 5px;
+    padding-left: 14px;
+    font-size: 1em;
+    color: #09273C;
+    transition: all 0.3s ease;
+    
+  }
+  
+  .search_input::placeholder {
+    color: #09273C;
+  }
+  
+  .iconContainer {
+    box-sizing: border-box;
+    padding-top: 0px;
+    width: fit-content;
+    transition: all 0.3s ease;
+  }
+  
+  .search_icon {
+    box-sizing: border-box;
+    fill: #09273C;
+    font-size: 1.4em;
+    position: relative;
+    bottom: 2px;
+  }
 
 
 

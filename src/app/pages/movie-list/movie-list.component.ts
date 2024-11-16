@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class MovieListComponent {
 
+  formatLabel(value: number): string {
+    
+    return `${value}`;
+    
+  }
+
 }
