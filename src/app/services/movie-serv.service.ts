@@ -51,4 +51,15 @@ export class MovieServService {
 
   }
 
+  getMovieList(pag: number) : Observable<TopRatedResponse>{
+
+    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}` , 
+    {
+      headers: {
+        'Authorization': `Bearer ${ACCESS_TOKEN}`,
+      }
+    });
+
+  }
+
 }
