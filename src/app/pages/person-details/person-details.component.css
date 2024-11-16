@@ -88,3 +88,13 @@
     max-width: 600px; /* Ajusta el ancho para evitar que el texto sea muy largo */
 }
 
+.additional-info {
+    position: absolute;
+    top: 80vh; /* Reduced value to decrease separation from the top */
+    left: 142px; /* Match the margin-left of other elements */
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 300px; /* Adjust the width as needed */
+}
+

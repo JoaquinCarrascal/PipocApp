@@ -1,4 +1,4 @@
-export interface PersonDetails {
+export interface PersonDetailsResponse {
     adult: boolean
     also_known_as: string[]
     biography: string

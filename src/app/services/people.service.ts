@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PopularPeopleResponse } from '../models/popular-people-response';
+import { PersonDetailsResponse } from '../models/person-details-interface';
 
 const BASE_URL = "https://api.themoviedb.org/3/person";
 const API_KEY = "13eb21937668110c8a2635cf3e82ae51";
@@ -17,9 +18,21 @@ export class PeopleService {
     return this.http.get<PopularPeopleResponse>(`${BASE_URL}/popular?api_key=${API_KEY}&page=${page}`);
   }
 
-  /**
-  getPersonDetails(id: number): Observable<any> {
-    return this.http.get(`${BASE_URL}/${id}?api_key=${API_KEY}`);
+  
+  getPersonDetails(id: number): Observable<PersonDetailsResponse> {
+    return this.http.get<PersonDetailsResponse>(`${BASE_URL}/${id}?api_key=${API_KEY}`);
   }
- */
+
+  getPersonCombinedCredits(id: number): Observable<PersonDetailsResponse> {
+    return this.http.get<PersonDetailsResponse>(`${BASE_URL}/${id}/combined_credits?api_key=${API_KEY}`);
+  }
+
+  getPersonImages(id: number): Observable<PersonDetailsResponse> {
+    return this.http.get<PersonDetailsResponse>(`${BASE_URL}/${id}/images?api_key=${API_KEY}`);
+  }
+
+  getPersonExternalIds(id: number): Observable<PersonDetailsResponse> {
+    return this.http.get<PersonDetailsResponse>(`${BASE_URL}/${id}/external_ids?api_key=${API_KEY}`);
+  }
+ 
 }

@@ -11,6 +11,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import {PeopleComponent } from './pages/people/people.component';
 import { PersonDetailsComponent } from './pages/person-details/person-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { PersonDetailsComponent } from './pages/person-details/person-details.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+
   ],
   providers: [
     provideAnimationsAsync(),
