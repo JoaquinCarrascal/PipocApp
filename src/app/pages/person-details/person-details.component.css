@@ -98,3 +98,11 @@
     max-width: 300px; /* Adjust the width as needed */
 }
 
+.social-logos a {
+    text-decoration: none;
+  }
+  .social-logos i:hover {
+    color: #ffffff; /* Cambia de color al pasar el mouse */
+    transition: color 0.3s ease;
+  }
+  

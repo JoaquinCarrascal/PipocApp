@@ -9,19 +9,22 @@
     </div>
     <div class="people-grid">
         <div *ngFor="let person of filteredPeople" class="person-card">
+          <a [routerLink]="['/person', person.id]" class="person-link">
             <div class="img">
-                <img [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
+              <img [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
             </div>
             <div class="actor-info">
-                <div class="actor-name">
-                    <p>{{ person.name }}</p>
-                </div>
-                <div class="known-for">
-                    <p>{{ person.known_for_department }}</p>
-                </div>
+              <div class="actor-name">
+                <p>{{ person.name }}</p>
+              </div>
+              <div class="known-for">
+                <p>{{ person.known_for_department }}</p>
+              </div>
             </div>
+          </a>
         </div>
-    </div>
+      </div>
+      
     <div class="load-more" style="display: flex; justify-content: center; margin-top: 20px;">
         <button (click)="loadNextPage()" style="background-color: #00FFAE; color: #09273C; padding: 10px 20px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer;">Cargar más</button>
     </div>

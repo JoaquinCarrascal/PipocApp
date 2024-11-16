@@ -103,3 +103,10 @@ h1 {
     font-style: italic;
     margin-top: 5px;
 }
+
+.person-link {
+    text-decoration: none;  /* Elimina subrayado */
+    color: inherit; /* Mantiene el color del texto */
+  }
+
+  

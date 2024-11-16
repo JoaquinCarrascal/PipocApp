@@ -1,86 +1,63 @@
 <app-nav-bar></app-nav-bar>
 
 <body>
+
+
+
     <div class="background-image-blur"
         style="background-image: url('https://album.mediaset.es/cimg/1000001/2017/02/14/p1.jpg')"></div>
     <div class="background-solid-color"></div>
     <div class="card1" style="margin-left: 142px; margin-top: 46px; width: 472px; height: 635px;">
-        <img src="https://album.mediaset.es/cimg/1000001/2017/02/14/p1.jpg" alt="Imagen del actor" class="person-image">
-
-    </div>
-
-    <div class="person-details">
-        <h1 class="person-name">Pablo Chiapella</h1>
-
-        <div class="person-info">
-            <div class="conodido-por">
-                <h2>Conocido por:</h2>
-                <div class="cards-container">
-                    <div class="card" style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
-                        <img src="https://comunidadmontepinar.es/wp-content/uploads/2024/10/poster-temporada-15.jpg"
-                            alt="Poster" style="width: 100%; height: 100%; border-radius: 10px;">
-                        <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
-                            La que se avecina</p>
-                        <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">2007</p>
-                    </div>
-                    <div class="card" style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
-                        <img src="https://comunidadmontepinar.es/wp-content/uploads/2024/10/poster-temporada-15.jpg"
-                            alt="Poster" style="width: 100%; height: 100%; border-radius: 10px;">
-                        <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
-                            La que se avecina</p>
-                        <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">2007</p>
-                    </div>
-                    <div class="card" style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
-                        <img src="https://comunidadmontepinar.es/wp-content/uploads/2024/10/poster-temporada-15.jpg"
-                            alt="Poster" style="width: 100%; height: 100%; border-radius: 10px;">
-                        <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
-                            La que se avecina</p>
-                        <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">2007</p>
-                    </div>
-                    <div class="card" style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
-                        <img src="https://comunidadmontepinar.es/wp-content/uploads/2024/10/poster-temporada-15.jpg"
-                            alt="Poster" style="width: 100%; height: 100%; border-radius: 10px;">
-                        <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
-                            La que se avecina</p>
-                        <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">2007</p>
-                    </div>
-                    <div class="card" style="width: 158px; height: 234px;">
-                        <img src="https://comunidadmontepinar.es/wp-content/uploads/2024/10/poster-temporada-15.jpg"
-                            alt="Poster" style="width: 100%; height: 100%;">
-                        <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
-                            La que se avecina</p>
-                        <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">2007</p>
-                    </div>
-                </div>
-            </div>
-
+        <img [src]="personImageUrl" alt="Imagen del actor" class="person-image">
         </div>
 
+    <div class="person-details">
+
+        <h1 class="person-name">{{ person?.name }}</h1>
+
+        <div class="cards-container">
+            <div *ngFor="let item of knownFor" class="card" style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
+              <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'ruta/a/imagen/por_defecto.jpg'" 
+                   alt="Poster" 
+                   style="width: 100%; height: 100%; border-radius: 10px;">
+              <p style="margin-bottom: 0; margin-top: 110; color:white; font-weight: 600; text-align: left;">
+                {{ item.title }}
+              </p>
+              <p style="margin-top: 0; color:#00FFAE; font-weight: 600; text-align: left;">
+                {{ item.release_date }}
+              </p>
+            </div>
+          </div>
+
         <p class="biography">
-            Pablo Chiapella Cámara (1 de diciembre de 1976),​ apodado Chape, es un actor y presentador español.
-            Es conocido principalmente por papeles como el de Amador Rivas en la serie de televisión
-            <em>La que se avecina</em> o el de Moncho Heredia en <em>Aquí no hay quien viva</em>.
+            {{ person?.biography }}
         </p>
     </div>
 
     <div class="additional-info">
-        <div class="twitter-logo" style="margin-bottom: 10px;">
-            <i class="bi bi-twitter" style="color: #00FFAE; font-size: 36px;"></i>
-        </div>
-        
+        <div class="social-logos" *ngIf="socialLinks && socialLinks.length > 0">
+            <a *ngFor="let link of socialLinks" [href]="link.url" target="_blank" rel="noopener noreferrer">
+              <i [class]="link.icon" [style.color]="'#00FFAE'" style="font-size: 36px; margin-right: 10px;"></i>
+            </a>
+          </div>
+          
+
         <h2><span class="material-icons" style="color: #00FFAE;">info</span> Conocido por</h2>
-        <p>Interpretación</p>
+        <p>{{person?.known_for_department}}</p>
 
         <h2><span class="material-icons" style="color: #00FFAE;">wc</span> Sexo</h2>
-        <p>Masculino</p>
+        <p>{{person?.gender | personSex}}</p>
 
         <h2><span class="material-icons" style="color: #00FFAE;">cake</span> Cumpleaños</h2>
-        <p>1 de diciembre de 1976 (47 años)</p>
+        <p>{{person?.birthday | date:'mediumDate'}}</p> <!--poner fecha de nacimiento-->
+
+        <h2 *ngIf="person?.deathday"><span class="material-icons" style="color: #00FFAE;">cake</span> Fecha de muerte</h2>
+        <p *ngIf="person?.deathday">{{person?.deathday | date:'mediumDate'}}</p>
 
         <h2><span class="material-icons" style="color: #00FFAE;">place</span> Lugar de nacimiento</h2>
-        <p>Albacete, Spain</p>
+        <p>{{person?.place_of_birth}}</p>
 
         <h2><span class="material-icons" style="color: #00FFAE;">alternate_email</span> También conocido como</h2>
-        <p>Chape</p>
+        <p>{{person?.also_known_as}}</p>
     </div>
 </body>

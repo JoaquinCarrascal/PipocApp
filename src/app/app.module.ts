@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import {PeopleComponent } from './pages/people/people.component';
 import { PersonDetailsComponent } from './pages/person-details/person-details.component';
+import { PersonSexPipe } from './pipes/person-sex.pipe';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PersonDetailsComponent } from './pages/person-details/person-details.co
     HomeComponent,
     NavBarComponent,
     PeopleComponent,
-    PersonDetailsComponent
+    PersonDetailsComponent,
+    PersonSexPipe
   ],
   imports: [
     BrowserModule,

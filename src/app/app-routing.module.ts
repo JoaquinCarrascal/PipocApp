@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
   {path: 'people', component: PeopleComponent},
-  {path: 'person', component: PersonDetailsComponent}
+  { path: 'person/:id', component: PersonDetailsComponent }
   //{path: '**', component: PageNotFoundComponent}
 
 ];
