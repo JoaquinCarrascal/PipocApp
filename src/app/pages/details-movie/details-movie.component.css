@@ -1,73 +1,113 @@
 /* Estilos generales para el cuerpo del documento */
 body {
-    margin: 0; /* Eliminar márgenes predeterminados */
-    padding: 0; /* Eliminar padding predeterminado */
+    margin: 0;
+    /* Eliminar márgenes predeterminados */
+    padding: 0;
+    /* Eliminar padding predeterminado */
 }
 
 /* Fondo de imagen borrosa en la mitad superior */
 .background-image-blur {
-    background-size: cover; /* Ajustar la imagen para cubrir todo el contenedor */
-    opacity: 0.5; /* Opacidad de la imagen */
-    filter: blur(5px); /* Aplicar desenfoque a la imagen */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: 80px; /* Desplazar hacia abajo */
+    background-size: cover;
+    /* Ajustar la imagen para cubrir todo el contenedor */
+    opacity: 0.5;
+    /* Opacidad de la imagen */
+    filter: blur(5px);
+    /* Aplicar desenfoque a la imagen */
+    height: 50vh;
+    /* Altura de la mitad de la pantalla */
+    width: 100%;
+    /* Ancho completo */
+    position: absolute;
+    /* Posición absoluta */
+    top: 80px;
+    /* Desplazar hacia abajo */
 }
 
 /* Fondo de imagen clara en la mitad inferior */
 .background-image-clear {
-    background-size: cover; /* Ajustar la imagen para cubrir todo el contenedor */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: calc(50vh + 80px); /* Desplazar hacia abajo */
+    background-size: cover;
+    /* Ajustar la imagen para cubrir todo el contenedor */
+    height: 50vh;
+    /* Altura de la mitad de la pantalla */
+    width: 100%;
+    /* Ancho completo */
+    position: absolute;
+    /* Posición absoluta */
+    top: calc(50vh + 80px);
+    /* Desplazar hacia abajo */
 }
 
 /* Fondo de color sólido en la mitad inferior */
 .background-solid-color {
-    background-color: #09273C; /* Color sólido (puedes cambiarlo según tus necesidades) */
-    height: 50vh; /* Altura de la mitad de la pantalla */
-    width: 100%; /* Ancho completo */
-    position: absolute; /* Posición absoluta */
-    top: calc(50vh + 80px); /* Desplazar hacia abajo */
+    background-color: #09273C;
+    /* Color sólido (puedes cambiarlo según tus necesidades) */
+    height: 50vh;
+    /* Altura de la mitad de la pantalla */
+    width: 100%;
+    /* Ancho completo */
+    position: absolute;
+    /* Posición absoluta */
+    top: calc(50vh + 80px);
+    /* Desplazar hacia abajo */
 }
 
 /* Estilos para la tarjeta que contiene la imagen de la película */
 .card {
-    display: flex; /* Usar flexbox para alinear elementos */
-    align-items: center; /* Alinear elementos verticalmente al centro */
-    background-color: white; /* Fondo blanco para la tarjeta */
-    border-radius: 16px; /* Hacer las esquinas más redondeadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para la tarjeta */
-    margin: 100px; /* Margen alrededor de la tarjeta */
-    position: absolute; /* Posición absoluta */
-    top: 40vh; /* Posicionar en la mitad de la pantalla */
-    left: 0; /* Alinear a la izquierda */
-    transform: translateY(-50%); /* Centrar verticalmente */
+    display: flex;
+    /* Usar flexbox para alinear elementos */
+    align-items: center;
+    /* Alinear elementos verticalmente al centro */
+    background-color: white;
+    /* Fondo blanco para la tarjeta */
+    border-radius: 16px;
+    /* Hacer las esquinas más redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra para la tarjeta */
+    margin: 100px;
+    /* Margen alrededor de la tarjeta */
+    position: absolute;
+    /* Posición absoluta */
+    top: 40vh;
+    /* Posicionar en la mitad de la pantalla */
+    left: 0;
+    /* Alinear a la izquierda */
+    transform: translateY(-50%);
+    /* Centrar verticalmente */
 }
 
 /* Estilos para la imagen de la película dentro de la tarjeta */
 .movie-image {
-    width: 472px; /* Ancho de la imagen */
-    height: 635px; /* Altura de la imagen */
-    border-radius: 16px; /* Hacer las esquinas de la imagen más redondeadas */
-    margin: 5px; /* Margen alrededor de la imagen */
+    width: 472px;
+    /* Ancho de la imagen */
+    height: 635px;
+    /* Altura de la imagen */
+    border-radius: 16px;
+    /* Hacer las esquinas de la imagen más redondeadas */
+    margin: 5px;
+    /* Margen alrededor de la imagen */
 }
 
 /* Estilos para los detalles de la película */
 .movie-details {
-    position: absolute; /* Posición absoluta */
-    top: 35vh; /* Posicionar en la mitad de la pantalla */
-    left: calc(550px + 120px); /* Posicionar a la derecha de la tarjeta */
-    transform: translateY(-50%); /* Centrar verticalmente */
+    position: absolute;
+    /* Posición absoluta */
+    top: 62vh;
+    /* Posicionar en la mitad de la pantalla */
+    left: calc(520px + 120px);
+    /* Posicionar a la derecha de la tarjeta */
+    transform: translateY(-50%);
+    /* Centrar verticalmente */
 }
 
 /* Estilos para el título de la película */
 .movie-title {
-    font-size: 50px; /* Tamaño de fuente grande */
-    font-weight: bold; /* Texto en negrita */
-    color: white; /* Color del texto blanco */
+    font-size: 50px;
+    /* Tamaño de fuente grande */
+    font-weight: bold;
+    /* Texto en negrita */
+    color: white;
+    /* Color del texto blanco */
 }
 
 .movie-details {
@@ -99,7 +139,8 @@ body {
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: 125%; /* Posicionar el bocadillo arriba del ícono */
+    bottom: 125%;
+    /* Posicionar el bocadillo arriba del ícono */
     left: 50%;
     margin-left: -60px;
     width: 120px;
@@ -114,28 +155,105 @@ body {
 }
 
 .movie-cast {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.cast-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.cast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.cast-item img {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.cast-item .actor-name,
+.cast-item .actor-character {
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.movie-cast {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .movie-cast div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 20px;
-  margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .movie-cast img {
-  width: 100px;
-  height: 150px;
-  border-radius: 8px;
-  margin-bottom: 5px;
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    margin-bottom: 5px;
 }
 
 .movie-cast p {
-  margin: 0;
-  color: white;
-  text-align: center;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.details-up {
+    margin-bottom: 150px;
+    /* Add a large separation */
+}
+
+.movie-details-left {
+    position: absolute;
+    top: calc(40vh + 500px);
+    /* Position higher */
+    left: 100px;
+    width: 472px;
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Optional: add background color */
+}
+
+.popcorn-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    filter: none;
+    /* Ensure no filter is applied initially */
+}
+
+.rating-box {
+    background-color: rgba(9, 39, 60, 0.5);
+    /* Same background color with more transparency */
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.movie-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.detail-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }

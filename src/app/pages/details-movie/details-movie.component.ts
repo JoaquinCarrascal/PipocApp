@@ -12,6 +12,11 @@ import { CastResponse, Cast } from '../../models/movie-cast-response';
 export class DetailsMovieComponent implements OnInit {
   movies: MovieDetailResponse[] = [];
   cast: Cast[] = [];
+  originalTitle: string | undefined;
+  status: string | undefined;
+  originalLanguage: string | undefined;
+  budget: number | undefined;
+  revenue: number | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +28,11 @@ export class DetailsMovieComponent implements OnInit {
     if (idMovie) {
       this.detailsMovieService.getMovieDetails(+idMovie).subscribe((data: MovieDetailResponse) => {
         this.movies = [data];
+        this.originalTitle = data.original_title;
+        this.status = data.status;
+        this.originalLanguage = data.original_language;
+        this.budget = data.budget;
+        this.revenue = data.revenue;
       });
       this.getMovieCast(+idMovie);
     }
@@ -82,4 +92,18 @@ export class DetailsMovieComponent implements OnInit {
       this.cast = data.cast;
     });
   }
+
+  obtenerColorCalificacion(voteAverage: number, index: number): string {
+    const level = Math.ceil(voteAverage / 2);
+    if (index < level) {
+      return ''; // Green for high ratings
+    } else {
+      return 'brightness(0.2)'; // Darker color for unachieved levels
+    }
+  }
+
+  getPopcornIcons(voteAverage: number): string[] {
+    return Array.from({ length: 5 }, (_, index) => this.obtenerColorCalificacion(voteAverage, index));
+  }
+
 }

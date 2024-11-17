@@ -10,28 +10,83 @@
             alt="Imagen de la película" class="movie-image">
     </div>
     <div class="movie-details">
-        <h1 class="movie-title">{{ movies[0].title }}</h1>
-        @for(genre of movies[0].genres; track movies[0].genres){
-        <div class="genre-icon-container" >
-            <img [src]="obtenerIconoGenero(genre.name)" alt="{{ genre.name }}" class="genre-icon" >
-            <div class="genre-tooltip">{{ genre.name }}</div>
-        </div>
-        }
+        <div class="details-up">
+            <h1 class="movie-title">{{ movies[0].title }}</h1>
 
-        <div class="movie-date">
-            <h3>{{ movies[0].release_date }}</h3>
-        </div>
-            
-        <div class="movie-cast">
-            <h2>Reparto</h2>
-            <div *ngFor="let actor of cast | slice:0:5">
-                <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'assets/placeholder.svg'" alt="{{ actor.name }}">
-                <p>{{ actor.name }} como {{ actor.character }}</p>
+            @for(genre of movies[0].genres; track movies[0].genres){
+            <div class="genre-icon-container">
+                <img [src]="obtenerIconoGenero(genre.name)" alt="{{ genre.name }}" class="genre-icon">
+                <div class="genre-tooltip">{{ genre.name }}</div>
+            </div>
+            }
+
+            <hr style="visibility: hidden;">
+
+            <div class="movie-date">
+                <h3>{{ movies[0].release_date }}</h3>
+            </div>
+
+            <hr style="visibility: hidden;">
+
+            <div class="movie-rating">
+                <div class="rating-box">
+                    <div class="rating-row">
+                        <ng-container *ngFor="let color of getPopcornIcons(movies[0].vote_average); let i = index">
+                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
+                        </ng-container>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="movie-description">
-            <p>{{ movies[0].overview }}</p>
+        <div class="details-down">
+            <div class="movie-description">
+                <p>{{ movies[0].overview }}</p>
+            </div>
+
+            <hr style="visibility: hidden;">
+            <hr style="visibility: hidden;">
+
+            <div class="movie-cast">
+                <h2>Reparto</h2>
+                <div class="cast-row">
+                    <div *ngFor="let actor of cast | slice:0:5" class="cast-item">
+                        <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'assets/placeholder.svg'"
+                            alt="{{ actor.name }}">
+                        <p class="actor-name">{{ actor.name }}</p>
+                        <p class="actor-character">{{ actor.character }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-details-left">
+
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/title/v6/24px.svg" alt="Original Title" class="detail-icon">
+            <h2>Título Original</h2>
+            <p>{{ originalTitle }}</p>
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status" class="detail-icon">
+            <h2>Estado</h2>
+            <p>{{ status }}</p>
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language" class="detail-icon">
+            <h2>Idioma Original</h2>
+            <p>{{ originalLanguage }}</p>
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget" class="detail-icon">
+            <h2>Presupuesto</h2>
+            <p>{{ budget | currency:'USD':'symbol':'1.0-0' }}</p>
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue" class="detail-icon">
+            <h2>Ingresos</h2>
+            <p>{{ revenue | currency:'USD':'symbol':'1.0-0' }}</p>
         </div>
     </div>
     }
