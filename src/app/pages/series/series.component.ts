@@ -16,6 +16,7 @@ export class SeriesComponent implements OnInit {
   formGroup: any;
   id : number = 1;
   listaSeries: Serie[] = [];
+  listaSeriesHeader: Serie[] = [];
   
   constructor(private serieService: SeriesService) {}
 
@@ -30,12 +31,15 @@ export class SeriesComponent implements OnInit {
       
     ];
 
-    this.getSeries()
+    this.getSeries();
+
+    
   }
 
 
   getSeries(){
     this.serieService.getSeries().subscribe((data: SerieResponse) => {
+
       this.listaSeries = data.results;
     });
   }
@@ -81,8 +85,15 @@ orderMethod(){
   
 
 doFilter() {
-  const selectElement = document.getElementById('ordenSalida') as HTMLSelectElement;
+  const selectElement = document.getElementById('mySelect') as HTMLSelectElement;
   this.selectedValue = { name: selectElement.value };
   this.orderMethod();
+  
+}
+
+formatLabel(value: number): string {
+    
+  return `${value}`;
+  
 }
 }

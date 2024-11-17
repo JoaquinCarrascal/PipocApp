@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../evironments/environments';
-import { Observable } from 'rxjs';
-import { SerieResponse } from '../interface/serie.interface';
+import { map, Observable } from 'rxjs';
+import { Serie, SerieResponse } from '../interface/serie.interface';
 import { Network, SerieDetails } from '../interface/serie-details.interface';
 import { Root } from '../interface/serie-by-date.interface';
 import { TopRatedSeries } from '../interface/series-top-rated.interface';
@@ -27,6 +27,8 @@ export class SeriesService {
     const numRandom = Math.floor(Math.random() * 80) + 1;
     return this.http.get<SerieResponse>(`${baseUrl}?api_key=${apiKey}&include_adult=false&language=es&page=${numRandom}&sort_by=popularity.desc`);
   }
+
+ 
   
 
 
@@ -48,5 +50,12 @@ export class SeriesService {
     return this.http.get<TopRatedSeries>(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}`)
   }
 
+  orderSeriesByRatingRandom(p0: string): Observable<TopRatedSeries> {
+    const numRandom = Math.floor(Math.random() * 80) + 1;
 
+    return this.http.get<TopRatedSeries>(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&page=${numRandom}`)
+
+  }
+
+  
 }

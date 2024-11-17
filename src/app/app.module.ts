@@ -12,13 +12,16 @@ import { SeriesComponent } from './pages/series/series.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SeriesHeaderComponent } from './components/series-header/series-header.component';
+import { MatSliderModule } from '@angular/material/slider'; // Add this line
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    SeriesComponent
+    SeriesComponent,
+    SeriesHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       "showBackground": false,
       "showInnerStroke": false,
       "startFromZero": false}),
+      MatSliderModule,
   ],
   providers: [
     provideAnimationsAsync(),
