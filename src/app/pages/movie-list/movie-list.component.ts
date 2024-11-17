@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MovieServService } from '../../services/movie-serv.service';
 import { TopRatedList } from '../../models/top-rated-response';
+import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
 
 @Component({
   selector: 'app-movie-list',
@@ -10,19 +11,37 @@ import { TopRatedList } from '../../models/top-rated-response';
 export class MovieListComponent implements OnInit {
   
   popularList: TopRatedList[] = [];
+  pageCounter: number = 3;
 
-  constructor(private movieServ: MovieServService) { }
+  constructor(private movieServ: MovieServService , private pipeDateForm: DateFormaterPipe) { }
   
   ngOnInit(): void {
 
-    this.movieServ.getMovieList(1).subscribe((data) => {
-      this.popularList = data.results;
-    });
-    this.movieServ.getMovieList(2).subscribe((data) => {
-      this.popularList = this.popularList.concat(...data.results);
-    });
-    this.movieServ.getMovieList(3).subscribe((data) => {
-      this.popularList = this.popularList.concat(...data.results);
+    this.pageCounter = 3;
+    for (let i = 1; i <= this.pageCounter; i++) {
+      this.movieServ.getMovieList(i).subscribe((data) => {
+        this.popularList = this.popularList.concat(data.results);
+      });
+    }
+
+
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ( ( document.documentElement.clientHeight + window.scrollY ) 
+          >= document.documentElement.scrollHeight - 180) {
+  
+      this.concatNextPage();
+
+    }
+  }
+
+  concatNextPage(){
+
+    this.pageCounter++;
+    this.movieServ.getMovieList(this.pageCounter).subscribe((data) => {
+      this.popularList = this.popularList.concat(data.results);
     });
 
   }
@@ -39,6 +58,11 @@ export class MovieListComponent implements OnInit {
   
   }
 
+  dateFormater(date: string): string{
+  
+    return this.pipeDateForm.transform(date);
+    
+  }
 
 
 }

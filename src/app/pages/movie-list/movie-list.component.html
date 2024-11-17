@@ -1,66 +1,72 @@
 <app-nav-bar></app-nav-bar>
 <div class="container-fluid">
     <div class="row">
-        <form class="col-1 filter-form">
-            <h2>Ordenar</h2>
-            <div class="d-flex mb-4">
+        <div class="holder col-1">
+            <form class="col-1 filter-form">
+                <h2>Ordenar</h2>
+                <div class="d-flex mb-4">
 
-                <div>
-                    <select id="mySelect" name="sort">
-                        <option value="valasc">Valoración ascendente</option>
-                        <option value="valdesc">Valoración descendente</option>
-                        <option value="popasc">Popularidad ascendente</option>
-                        <option value="popdesc">Popularidad descendente</option>
-                    </select>
-                </div>
-                <div class="d-block rounded-circle myCustomButton">
-                    <i class="bi bi-arrow-down-circle rounded-circle" id="openSelectBtn"></i>
-                </div>
-
-            </div>
-
-            <h2>Filtros</h2>
-            <label style="font-size: 16pt;">Muestra</label>
-
-            <div style="position: relative; left:20px;">
-                <label class="radio-label">
-                    <input class="colored-aqua" type="radio" name="type" value="peliculas" checked>
-                    Películas
-                </label>
-
-                <label class="radio-label">
-                    <input class="colored-aqua" type="radio" name="type" value="series">
-                    Series
-                </label>
-            </div>
-
-            <div class="my-3 ms-3" style="position: relative; left:4px;">
-                <input type="checkbox" name="check-free" id="check-free-id" class="me-2">
-                <label for="check-free" style="font-size:14pt;" id="check-label"> Sólo gratuitas </label>
-            </div>
-            <div class="container mx-auto">
-                <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
-                    discrete="true">
-                    <input value="0" matSliderStartThumb>
-                    <input value="100" matSliderEndThumb>
-                </mat-slider>
-            </div>
-            <div class="range-labels fw-bold"> <span>0</span> <span>100</span> </div>
-
-            <div class="container-search" style="position: relative; margin: 0 auto;">
-                <input checked="" class="checkbox-search" type="checkbox"> 
-                <div class="mainbox">
-                    <div class="iconContainer">
-                        <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                    <div>
+                        <select id="mySelect" name="sort">
+                            <option value="valasc">Valoración ascendente</option>
+                            <option value="valdesc">Valoración descendente</option>
+                            <option value="popasc">Popularidad ascendente</option>
+                            <option value="popdesc">Popularidad descendente</option>
+                        </select>
                     </div>
-                <input class="search_input" placeholder="Escribe el nombre aquí..." type="text">
-                </div>
-            </div>
+                    <div class="d-block rounded-circle myCustomButton">
+                        <i class="bi bi-arrow-down-circle rounded-circle" id="openSelectBtn"></i>
+                    </div>
 
-        </form>
+                </div>
+
+                <h2>Filtros</h2>
+                <label style="font-size: 16pt;">Muestra</label>
+
+                <div style="position: relative; left:20px;">
+                    <label class="radio-label">
+                        <input class="colored-aqua" type="radio" name="type" value="peliculas" checked>
+                        Películas
+                    </label>
+
+                    <label class="radio-label">
+                        <input class="colored-aqua" type="radio" name="type" value="series">
+                        Series
+                    </label>
+                </div>
+
+                <div class="my-3 ms-3" style="position: relative; left:4px;">
+                    <input type="checkbox" name="check-free" id="check-free-id" class="me-2">
+                    <label for="check-free" style="font-size:14pt;" id="check-label"> Sólo gratuitas </label>
+                </div>
+                <div class="container mx-auto">
+                    <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
+                        discrete="true">
+                        <input value="0" matSliderStartThumb>
+                        <input value="100" matSliderEndThumb>
+                    </mat-slider>
+                </div>
+                <div class="range-labels fw-bold"> <span>0</span> <span>100</span> </div>
+
+                <div class="container-search" style="position: relative; margin: 0 auto;">
+                    <input checked="" class="checkbox-search" type="checkbox"> 
+                    <div class="mainbox">
+                        <div class="iconContainer">
+                            <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                        </div>
+                    <input class="search_input" placeholder="Escribe el nombre aquí..." type="text">
+                    </div>
+                </div>
+
+            </form>
+        </div>
 
         <div class="container-fluid col-3 col-md-4 col-lg-6 col-xl-8 row justify-content-around mt-5 mb-4 movie-container" style="top:-100px; margin:0 auto;">
     
+            <div class="d-flex col-12 align-content-center mx-auto justify-content-center">
+
+            </div>
+
             <div class="d-flex col-12 align-content-center mx-auto justify-content-center">
                 <h3 style="color:white; font-size: 25pt;position:relative; top:3px;" class="">Películas populares</h3>
                 <div class="d-flex" style="position: relative; top:4px; left:6px;">
@@ -78,7 +84,7 @@
                     {{item.title}}
                   </p>
                   <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
-                    {{item.release_date}}
+                    {{dateFormater(item.release_date)}}
                   </p>
                 </div>
           
