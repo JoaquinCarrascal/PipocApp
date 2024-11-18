@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../evironments/environments';
+
 import { map, Observable } from 'rxjs';
 import { Serie, SerieResponse } from '../models/serie.interface';
 import { Network, SerieDetails } from '../models/serie-details.interface';
