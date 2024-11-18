@@ -5,7 +5,7 @@
 
 
     <div class="background-image-blur"
-        style="background-image: url('https://album.mediaset.es/cimg/1000001/2017/02/14/p1.jpg')"></div>
+        style="background-image: url({{personImageUrl}})"></div>
     <div class="background-solid-color"></div>
     <div class="card1" style="margin-left: 142px; margin-top: 46px; width: 472px; height: 635px;">
         <img [src]="personImageUrl" alt="Imagen del actor" class="person-image">
@@ -29,9 +29,13 @@
             </div>
           </div>
 
-        <p class="biography">
-            {{ person?.biography }}
-        </p>
+
+    </div>
+
+    <div class="div-biography" style="max-height: 200px; width: 1000px;">
+      <p class="biography text-truncate" aria-label="Biografía del actor">
+      {{ person?.biography }}
+      </p>
     </div>
 
     <div class="additional-info">
