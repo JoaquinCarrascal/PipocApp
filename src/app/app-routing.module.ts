@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'movie-list', component: MovieListComponent},
   {path: 'people', component: PeopleComponent},
-  { path: 'person/:id', component: PersonDetailsComponent },
+  {path: 'person/:id', component: PersonDetailsComponent},
   {path : 'series', component : SeriesComponent},
   {path: 'series/details/:idSerie', component: SerieDetailsComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
