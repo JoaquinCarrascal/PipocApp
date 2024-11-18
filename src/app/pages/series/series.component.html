@@ -78,8 +78,16 @@
                 <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;">
                 
                   
-                  <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{item.name }}" class="card-img resizing-img">
-                  
+                    <a [routerLink]="['/series/details', item.id]">
+                        @if(item.poster_path){
+                            <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{item.name }}" class="card-img resizing-img">
+
+                        }
+
+                        @else {
+                            <img src="assets/placeholder.svg" class="card-img resizing-img" alt="{{item.name}}">
+                        }
+                    </a>                  
                  <p class="text-white">{{item.name}}</p>
 
                  <span class="fecha">{{item.first_air_date}}</span>

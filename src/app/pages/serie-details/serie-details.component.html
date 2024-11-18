@@ -1,0 +1,103 @@
+<app-nav-bar></app-nav-bar>
+
+<body>
+    <div class="background-image-blur"
+        [ngStyle]="{'background-image': 'url(' + obtenerImagenSerie(500, series[0].backdrop_path) + ')'}"></div>
+    <div class="background-solid-color"></div>
+    @if(series.length > 0){
+    <div class="card">
+        <img [src]="series[0].poster_path ? obtenerImagenSerie(200, series[0].poster_path) : 'assets/placeholder.svg'"
+            alt="Imagen de la serie" class="movie-image">
+    </div>
+    <div class="movie-details">
+        <div class="details-up">
+            <h1 class="movie-title">{{ series[0].name }}</h1>
+
+            @for(genre of series[0].genres; track series[0].genres){
+            <div class="genre-icon-container">
+                <!--                 <img [src]="obtenerIconoGenero(genre.name)" alt="{{ genre.name }}" class="genre-icon">
+ -->
+                <div class="genre-tooltip">{{ genre.name }}</div>
+            </div>
+            }
+            <div class="movie-date genero">
+                <h3>{{ genero }}</h3>
+            </div>
+            <hr style="visibility: hidden;">
+            
+            <div class="movie-date">
+                <h3>{{ series[0].first_air_date }}</h3>
+            </div>
+
+            <hr style="visibility: hidden;">
+
+            <div class="movie-rating">
+                <div class="rating-box">
+                    
+                    
+                    <div class="rating-row">
+                          <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
+                            <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
+                            </ng-container> 
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-down">
+            <div class="movie-description">
+                <p class="text-white">{{ descripcion }}</p>
+            </div>
+
+            <hr style="visibility: hidden;">
+            <hr style="visibility: hidden;">
+            <div>
+
+            </div>
+            <h2>Reparto</h2>
+            <div class="movie-cast">
+                
+                <div class="cast-row">
+                    <div *ngFor="let actor of cast?.cast" class="cast-item d-flex" style="flex-direction: column; text-wrap : balance ">
+                        <img [src]="actor.profile_path ? obtenerImagenSerie(200, actor.profile_path) : 'assets/placeholder.svg'"
+                            alt="{{ actor.name }}">
+                        <p class="actor-name">{{ actor.name }}</p>
+                        <p class="actor-character">{{ actor.character }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-details-left">
+
+        
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status" class="detail-icon">
+            <h2>Estado : &nbsp;</h2>
+            <h4>{{ series[0].status }}</h4>
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language" class="">
+            <h2>Canales : &nbsp; </h2>
+            <img class="emision-icon" *ngIf="series[0].networks[0].logo_path" [src]="'https://image.tmdb.org/t/p/w500' + series[0].networks[0].logo_path" alt=""></div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget" class="detail-icon">
+            <h2>Idioma Original : &nbsp;</h2>
+            <h4>{{ series[0].original_language  }}</h4>
+          
+        </div>
+        <div class="movie-detail-item">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue" class="detail-icon">
+            <h4>Palabras claves : &nbsp;</h4>
+            @for (keyword of keyWords; track $index) {
+            <h4>{{ keyword.results[0].name }}</h4>
+            }
+         
+     
+            
+        </div>
+    </div>
+    }
+</body>

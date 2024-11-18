@@ -13,7 +13,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeriesHeaderComponent } from './components/series-header/series-header.component';
-import { MatSliderModule } from '@angular/material/slider'; // Add this line
+import { MatSliderModule } from '@angular/material/slider';
+import { SerieDetailsComponent } from './pages/serie-details/serie-details.component'; // Add this line
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatSliderModule } from '@angular/material/slider'; // Add this line
     HomeComponent,
     NavBarComponent,
     SeriesComponent,
-    SeriesHeaderComponent
+    SeriesHeaderComponent,
+    SerieDetailsComponent
   ],
   imports: [
     BrowserModule,

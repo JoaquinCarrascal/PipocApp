@@ -20,6 +20,8 @@ export class SeriesComponent implements OnInit {
   
   constructor(private serieService: SeriesService) {}
 
+  
+
   ngOnInit(): void {
     
     this.valoresFiltroFecha = [

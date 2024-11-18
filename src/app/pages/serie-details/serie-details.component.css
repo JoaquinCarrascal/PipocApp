@@ -1,0 +1,212 @@
+/* Estilos generales para el cuerpo del documento */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fondo de imagen borrosa en la mitad superior */
+.background-image-blur {
+    background-size: cover;
+    opacity: 0.5;
+    filter: blur(5px);
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: 80px;
+}
+
+/* Fondo de color sólido en la mitad inferior */
+.background-solid-color {
+    background-color: #09273C;
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: calc(50vh + 80px);
+}
+
+/* Estilos para la tarjeta que contiene la imagen de la serie */
+.card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 100px;
+    position: absolute;
+    top: 40vh;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+/* Estilos para la imagen de la serie dentro de la tarjeta */
+.movie-image {
+    width: 472px;
+    height: 635px;
+    border-radius: 16px;
+    margin: 5px;
+}
+
+/* Estilos para los detalles de la serie */
+.movie-details {
+    position: absolute;
+    top: 62vh;
+    left: calc(520px + 120px);
+    transform: translateY(-50%);
+    color: white;
+}
+
+/* Estilos para el título de la serie */
+.movie-title {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Contenedor del ícono del género */
+.genre-icon-container {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+}
+
+/* Estilos para el ícono del género */
+.genre-icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(120deg) brightness(100%) contrast(100%);
+}
+
+/* Bocadillo para mostrar el nombre del género */
+.genre-tooltip {
+    visibility: hidden;
+    background-color: #00FFAE;
+    color: #09273C;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    width: 120px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Mostrar el bocadillo al pasar el ratón sobre el ícono */
+.genre-icon-container:hover .genre-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.movie-cast {
+    margin-top: 20px;
+}
+
+.cast-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.cast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.cast-item img {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.cast-item .actor-name,
+.cast-item .actor-character {
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.movie-cast {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-cast div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.movie-cast img {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.movie-cast p {
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.details-up {
+    margin-bottom: 150px;
+}
+
+.movie-details-left {
+    position: absolute;
+    top: calc(40vh + 500px);
+    left: 100px;
+    width: 472px;
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+   
+}
+
+.popcorn-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    filter: none;
+}
+
+.rating-box {
+    background-color: rgba(9, 39, 60, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.movie-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.detail-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    
+}
+
+.genero{
+    color: rgba(255, 255, 255, 0.603);
+}
+
+.emision-icon{
+    width: 27%;
+   
+;
+}

@@ -6,6 +6,8 @@ import { Serie, SerieResponse } from '../interface/serie.interface';
 import { Network, SerieDetails } from '../interface/serie-details.interface';
 import { Root } from '../interface/serie-by-date.interface';
 import { TopRatedSeries } from '../interface/series-top-rated.interface';
+import { SerieCast } from '../interface/serie-cast.interface';
+import { Keyword } from '../interface/keyword.interface';
 
 
 const apiKey: string = '7cb3ebb77086a8a379dd38b88a23269a';
@@ -27,10 +29,6 @@ export class SeriesService {
     const numRandom = Math.floor(Math.random() * 80) + 1;
     return this.http.get<SerieResponse>(`${baseUrl}?api_key=${apiKey}&include_adult=false&language=es&page=${numRandom}&sort_by=popularity.desc`);
   }
-
- 
-  
-
 
 
   orderSeriesByDate(p0: string): Observable<SerieResponse> {
@@ -57,5 +55,17 @@ export class SeriesService {
 
   }
 
+
+  obtenerDetallesSerie(id: number): Observable<SerieDetails> {
+    return this.http.get<SerieDetails>(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es`);
+  }
+  
+  obtenerRepartoSerie(id : number): Observable<SerieCast>{
+    return this.http.get<SerieCast>(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`)
+  }
+
+  getKeyWords(id : number) : Observable <Keyword>{
+    return this.http.get<Keyword>(`https://api.themoviedb.org/3/tv/${id}/keywords?api_key=${apiKey}`)
+  }
   
 }
