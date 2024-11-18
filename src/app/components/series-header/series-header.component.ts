@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Serie } from '../../interface/serie.interface';
+import { Serie } from '../../models/serie.interface';
 import { SeriesService } from '../../services/series.service';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Serie, SerieResponse } from '../../interface/serie.interface';
-import { SerieDetails } from '../../interface/serie-details.interface';
+import { Serie, SerieResponse } from '../../models/serie.interface';
+import { SerieDetails } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
 import { SeriesService } from '../../services/series.service';
-import { SerieCast } from '../../interface/serie-cast.interface';
-import { Keyword } from '../../interface/keyword.interface';
-import { TrailerResponse } from '../../interface/trailer.interface';
+import { SerieCast } from '../../models/serie-cast.interface';
+import { Keyword } from '../../models/keyword.interface';
+import { TrailerResponse } from '../../models/trailer.interface';
 
 @Component({
   selector: 'app-serie-details',

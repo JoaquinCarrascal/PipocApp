@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { SeriesService } from '../../services/series.service';
-import { Serie, SerieResponse } from '../../interface/serie.interface';
-import { Root } from '../../interface/serie-by-date.interface';
+import { Serie, SerieResponse } from '../../models/serie.interface';
+import { Root } from '../../models/serie-by-date.interface';
 
 @Component({
   selector: 'app-series',
@@ -14,6 +14,7 @@ export class SeriesComponent implements OnInit {
   @Input() valoresFiltroFecha: any[] = [];
   @Input()selectedValue: any;
   formGroup: any;
+  pageCounter: number = 3;
   id : number = 1;
   listaSeries: Serie[] = [];
   listaSeriesHeader: Serie[] = [];
@@ -23,6 +24,8 @@ export class SeriesComponent implements OnInit {
   
 
   ngOnInit(): void {
+
+    this.pageCounter = 3;
     
     this.valoresFiltroFecha = [
       { name: 'Series Populares' ,code : 'DEF' },
@@ -33,17 +36,36 @@ export class SeriesComponent implements OnInit {
       
     ];
 
-    this.getSeries();
-
+    for(let i = 1; i <= 3; i++){
+      this.getSeries(i);
+    }
     
   }
 
 
-  getSeries(){
-    this.serieService.getSeries().subscribe((data: SerieResponse) => {
+  getSeries(pag: number){
+    this.serieService.getSeries(pag).subscribe((data: SerieResponse) => {
 
-      this.listaSeries = data.results;
+      this.listaSeries = this.listaSeries.concat(...data.results);
+
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ( ( document.documentElement.clientHeight + window.scrollY ) 
+          >= document.documentElement.scrollHeight - 180) {
+  
+      this.concatNextPage();
+
+    }
+  }
+
+  concatNextPage(){
+
+    this.pageCounter++;
+    this.getSeries(this.pageCounter);
+
   }
 
 
@@ -60,28 +82,38 @@ export class SeriesComponent implements OnInit {
 
 orderMethod(){
 
+  this.listaSeries = [];
+
   if(this.selectedValue.name === 'Top Rated'){
-    this.serieService.orderSeriesByRating('top').subscribe((data: SerieResponse) => {
-      this.listaSeries = data.results;
-      console.log(this.listaSeries);
-    });
+
+    for(let i = 1; i <= 3; i++){
+      this.serieService.orderSeriesByRating('top' , i).subscribe((data: SerieResponse) => {
+        this.listaSeries = this.listaSeries.concat(...data.results);
+      });
+    }
   }
 
   if (this.selectedValue.name === 'Series Recientes') {
-    this.serieService.orderSeriesByDate('asc').subscribe((data: SerieResponse) => {
-        this.listaSeries = data.results;
+    for(let i = 1; i <= 3; i++){
+      this.serieService.orderSeriesByDate('asc' , i).subscribe((data: SerieResponse) => {
+
+        this.listaSeries = this.listaSeries.concat(...data.results);
    
     });
+    }
+    
 }
 
     if(this.selectedValue.name === 'Series Populares'){
-      this.getSeries();
+      this.ngOnInit();
     }
 
   if(this.selectedValue.name === 'Series Antiguas'){
-    this.serieService.ordenarPorprimerasSeries('last').subscribe((data: SerieResponse) => {
-      this.listaSeries = data.results;
-    });
+    for(let i = 1; i <= 3; i++){
+      this.serieService.ordenarPorprimerasSeries('last' , i).subscribe((data: SerieResponse) => {
+        this.listaSeries = this.listaSeries.concat(...data.results);
+      });
+    }
   }
 }
   
@@ -98,4 +130,8 @@ formatLabel(value: number): string {
   return `${value}`;
   
 }
+
+//https://www.themoviedb.org/video/play?key=${key}
+
+
 }
