@@ -79,10 +79,10 @@
                 <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;">
                 
                 @if(item.poster_path){
-                  <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="" width="150px">
+                  <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="{{item.title}}" width="150px">
                 }
                 @else{
-                    <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="" width="150px">
+                    <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{item.title}}" width="150px">
                 }
                   <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
                     {{item.title}}
