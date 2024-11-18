@@ -6,7 +6,7 @@
     <div class="background-solid-color"></div>
     @if(series.length > 0){
     <div class="card">
-        <img [src]="series[0].poster_path ? obtenerImagenSerie(200, series[0].poster_path) : 'assets/placeholder.svg'"
+        <img [src]="series[0].poster_path ? obtenerImagenSerie(200, series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
             alt="Imagen de la serie" class="movie-image">
     </div>
     <div class="movie-details">
