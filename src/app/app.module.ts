@@ -15,6 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeriesHeaderComponent } from './components/series-header/series-header.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component'; // Add this line
+import { DateFormaterPipe } from './pipes/date-formater.pipe';
+import { MovieListComponent } from './pages/movie-list/movie-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { SerieDetailsComponent } from './pages/serie-details/serie-details.compo
     NavBarComponent,
     SeriesComponent,
     SeriesHeaderComponent,
-    SerieDetailsComponent
+    SerieDetailsComponent,
+    DateFormaterPipe,
+    MovieListComponent,
+    OrderTriggerPipe
   ],
   imports: [
     BrowserModule,
@@ -47,11 +54,14 @@ import { SerieDetailsComponent } from './pages/serie-details/serie-details.compo
       "showInnerStroke": false,
       "startFromZero": false}),
       MatSliderModule,
+      MatSelectModule,
   ],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
-    { provide: 'circleProgressConfig', useValue: {} }
+    { provide: 'circleProgressConfig', useValue: {} },
+    DateFormaterPipe,
+    OrderTriggerPipe
   ],
   bootstrap: [AppComponent]
 })
