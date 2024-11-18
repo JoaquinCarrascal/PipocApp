@@ -1,0 +1,331 @@
+h1{
+    padding-top: 20px;
+    padding-right: 10%;
+}
+
+.borde-filtrado{
+    border-color: rgb(156, 236, 156);
+}
+
+.btn{
+    background-color: #00FFAE;
+}
+
+.fecha{
+    color: rgb(156, 236, 156);
+}
+
+.carta{
+    border-color: aliceblue;
+}
+
+form input {
+    outline: none;
+    border: none;
+}
+
+form input:focus {
+    outline: none;
+    border: none;
+}
+.card-img:hover{
+    transform: scale(1.05);
+}
+
+.filter-form {
+    background-color: #fff;
+    border: 4px solid #00FFAE;
+    border-radius: 20px;
+    padding: 20px;
+    width: 320px;
+    height: 570px;
+    margin-left: 50px;
+    margin-top: 110px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+#mySelect{
+    background-color: rgba(255, 255, 255, 0);
+    position: relative;
+    z-index: 3;
+    letter-spacing: 1px; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none;
+    height: 50px;
+    width: 270px;
+    padding:10px;
+    border-radius: 25px;
+    border: 4px solid #09273C;
+    cursor: pointer;
+}
+
+.select-selected {
+    background-color: #f0f0f0;
+    color: #09273C;
+}
+
+.myCustomButton {
+    background-color: #00FFAE; 
+    position:relative; 
+    left:-43px;
+    height:31px; 
+    width:40px; 
+    top:10px;
+    z-index: 2;
+}
+
+#openSelectBtn{
+    font-size:24pt; 
+    position: relative;
+    top:-8px;
+}
+
+.filter-form h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #09273C;
+    font-size: 26pt;
+}
+
+.radio-label {
+    display: block;
+    margin: 0px 0 5px;
+    color: #09273C;
+    border-radius: 20px;
+    font-size: 14pt;
+}
+
+.colored-aqua{
+    color: #00FFAE;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px !important;
+    height: 20px;
+    border: 3px solid #09273C !important;
+    border-radius: 20px !important;
+    position: relative;
+    top:13px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+input[type="radio"]:checked::before {
+    content: '';
+    width: 15px; 
+    height: 15px;
+    background-color: #00FFAE;
+    border-radius: 10px;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#check-label{
+    position: relative;
+    left: 5px;
+}
+
+#check-free-id {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #09273C; 
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    top:3px;
+    right:0px;
+    appearance: none;
+}
+
+#check-free-id:checked::before {
+    content: '';
+    position: absolute;
+    background-color: #00FFAE;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 25px !important;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+}
+
+.slider{
+    width: 100%;
+    margin: 0 auto;
+    --mdc-slider-handle-color: #09273C;
+    --mdc-slider-active-track-color: #09273C;
+    --mdc-slider-inactive-track-color: #00FFAE;
+    --mdc-slider-handle-box-shadow: 0 0 0 0 !important;
+    --mdc-slider-handle-height: 20px;
+    --mdc-slider-handle-width: 20px;
+    --mdc-slider-active-track-: 20px;
+    --mdc-slider-inactive-track-shape: 20px;
+}
+
+.filter-form .range-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #09273C;
+    width: 95%;
+    margin-top: -7px;
+    margin-left: 12px;
+    margin-bottom: 20px;
+}
+
+.filter-form input[type="radio"],
+.filter-form input[type="range"],
+.filter-form input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* From Uiverse.io by vnuny */ 
+.container-search {
+    position: relative;
+    box-sizing: border-box;
+    width: fit-content;
+  }
+  
+  .mainbox {
+    box-sizing: border-box;
+    position: relative;
+    width: 260px;
+    padding: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    border-radius: 160px;
+    background-color: rgb(255, 255, 255);
+    border: #09273C 4px solid;
+    transition: all 0.3s ease;
+  }
+  
+  .checkbox-search:focus {
+    border: none;
+    outline: none;
+  }
+  
+  .checkbox-search:checked {
+    right: 10px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox {
+    width: 50px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox .search_input {
+    width: 0;
+    height: 0px;
+  }
+  
+  .checkbox-search:checked ~ .mainbox .iconContainer {
+    padding-right: 8px;
+  }
+  
+  .checkbox-search {
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+    z-index: 9;
+    cursor: pointer;
+    appearance: none;
+  }
+  
+  .search_input {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-bottom: 0px;
+    position: relative;
+    top: 5px;
+    padding-left: 14px;
+    font-size: 1em;
+    color: #09273C;
+    transition: all 0.3s ease;
+    
+  }
+  
+  .search_input::placeholder {
+    color: #09273C;
+  }
+  
+  .iconContainer {
+    box-sizing: border-box;
+    padding-top: 0px;
+    width: fit-content;
+    transition: all 0.3s ease;
+  }
+  
+  .search_icon {
+    box-sizing: border-box;
+    fill: #09273C;
+    font-size: 1.4em;
+    position: relative;
+    bottom: 2px;
+  }
+
+  .card-img {
+    box-sizing: border-box;
+    width: 200px;
+    height: 300px;
+    background: rgba(217, 217, 217, 0.58);
+    border: 1px solid white;
+    box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .resizing-img{
+    width: 150px;
+    height: 230px;
+  }
+  
+  .card-img:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  
+  .card-img:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+  
+  .movie-card{
+  
+    position: relative;
+    width: 220px;
+    height: 430px;
+    top: -20px;
+  
+  }
+  
+  .movie-card-resizing{
+    
+      width: 175px;
+      height: 340px;
+  }

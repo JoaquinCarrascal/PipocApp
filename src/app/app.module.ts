@@ -8,11 +8,16 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SeriesComponent } from './pages/series/series.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SeriesHeaderComponent } from './components/series-header/series-header.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { SerieDetailsComponent } from './pages/serie-details/serie-details.component'; // Add this line
 import { DateFormaterPipe } from './pipes/date-formater.pipe';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import {MatSelectModule} from '@angular/material/select';
-import {MatSliderModule} from '@angular/material/slider';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 
 @NgModule({
@@ -20,6 +25,9 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
     AppComponent,
     HomeComponent,
     NavBarComponent,
+    SeriesComponent,
+    SeriesHeaderComponent,
+    SerieDetailsComponent,
     DateFormaterPipe,
     MovieListComponent,
     OrderTriggerPipe
@@ -28,6 +36,9 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgCircleProgressModule.forRoot({
       "radius": 25,
       "space": -20,
@@ -42,12 +53,13 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
       "showBackground": false,
       "showInnerStroke": false,
       "startFromZero": false}),
-    MatSelectModule,
-    MatSliderModule
+      MatSliderModule,
+      MatSelectModule,
   ],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
+    { provide: 'circleProgressConfig', useValue: {} },
     DateFormaterPipe,
     OrderTriggerPipe
   ],
