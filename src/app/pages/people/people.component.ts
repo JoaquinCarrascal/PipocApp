@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { PeopleService } from '../../services/people.service';
 import { ListadoPopularPeople, PopularPeopleResponse } from '../../models/popular-people-response';
 
@@ -23,11 +23,21 @@ export class PeopleComponent implements OnInit {
 
   loadPeople(): void {
     this.peopleService.getPopularPeople(this.currentPage).subscribe((data: PopularPeopleResponse) => {
-      this.listaPeople = data.results;
+      this.listaPeople = this.listaPeople.concat(...data.results);
       this.filteredPeople = this.listaPeople;
       this.totalPages = data.total_pages;
       this.calculatePageNumbers();
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ( ( document.documentElement.clientHeight + window.scrollY ) 
+          >= document.documentElement.scrollHeight - 180) {
+  
+      this.loadNextPage();
+
+    }
   }
 
   loadNextPage(): void {
