@@ -50,14 +50,14 @@ h1 {
 .actor-name {
     text-align: left;
     color: #fff;
-    font-size: 32px;
+    font-size: 13pt;
     margin-top: 10px;
 }
 
 .known-for {
     text-align: left;
     color: #fff;
-    font-size: 24px;
+    font-size: 13pt;
     font-style: italic;
     margin-top: 5px;
 }
@@ -193,4 +193,53 @@ h1 {
     font-size: 1.4em;
     position: relative;
     bottom: 2px;
+  }
+
+  .card-img {
+    box-sizing: border-box;
+    width: 200px;
+    height: 300px;
+    background: rgba(217, 217, 217, 0.58);
+    border: 1px solid white;
+    box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .resizing-img{
+    width: 150px;
+    height: 230px;
+  }
+  
+  .card-img:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  
+  .card-img:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+  
+  .movie-card{
+  
+    position: relative;
+    width: 220px;
+    height: 430px;
+    top: -20px;
+  
+  }
+  
+  .movie-card-resizing{
+    
+      width: 175px;
+      height: 340px;
   }
