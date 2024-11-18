@@ -1,3 +1,5 @@
+import { Flatrate39 } from './movies-watch-providers';
+
 export interface MovieDetailResponse {
     adult: boolean
     backdrop_path: string
@@ -13,7 +15,7 @@ export interface MovieDetailResponse {
     overview: string
     popularity: number
     poster_path: string
-    production_companies: ProductionCompany[]
+    production_companies: Flatrate39[]
     production_countries: ProductionCountry[]
     release_date: string
     revenue: number
@@ -30,13 +32,6 @@ export interface MovieDetailResponse {
 export interface Genre {
     id: number
     name: string
-}
-
-export interface ProductionCompany {
-    id: number
-    logo_path: string
-    name: string
-    origin_country: string
 }
 
 export interface ProductionCountry {

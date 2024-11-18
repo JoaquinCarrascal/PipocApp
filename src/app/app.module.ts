@@ -9,18 +9,22 @@ import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DetailsMovieComponent } from './pages/details-movie/details-movie.component';
+import { IdiomPipe } from './pipes/idiom.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    DetailsMovieComponent
+    DetailsMovieComponent,
+    IdiomPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -4,7 +4,6 @@ export interface CastResponse {
     crew: Crew[]
 }
 
-
 export interface Cast {
     adult: boolean
     gender: number
@@ -13,13 +12,12 @@ export interface Cast {
     name: string
     original_name: string
     popularity: number
-    profile_path?: string
+    profile_path: string
     cast_id: number
     character: string
     credit_id: string
     order: number
 }
-
 
 export interface Crew {
     adult: boolean

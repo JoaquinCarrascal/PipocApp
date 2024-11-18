@@ -8,6 +8,13 @@
     <div class="card">
         <img [src]="movies[0].poster_path ? obtenerImagenPelicula(200, movies[0].poster_path) : 'assets/placeholder.svg'"
             alt="Imagen de la película" class="movie-image">
+        <div class="watch-now">
+            <h3>Ver ahora:</h3>
+            <div class="production-companies">
+                <img *ngFor="let provider of providers" [src]="obtenerImagenPelicula(200, provider.logo_path)" alt="{{ provider.provider_name }}" class="company-logo">
+                <p *ngIf="providers.length === 0">No disponible en España</p>
+            </div>
+        </div>
     </div>
     <div class="movie-details">
         <div class="details-up">
@@ -32,7 +39,8 @@
                 <div class="rating-box">
                     <div class="rating-row">
                         <ng-container *ngFor="let color of getPopcornIcons(movies[0].vote_average); let i = index">
-                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
+                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas"
+                                class="popcorn-icon">
                         </ng-container>
                     </div>
                 </div>
@@ -44,13 +52,21 @@
                 <p>{{ movies[0].overview }}</p>
             </div>
 
+            <h5>Directores</h5>
+            <div class="movie-directors">
+                <div *ngFor="let director of getDirectors(); let last = last" class="director-item">
+                    <p>{{ director.name }}<span *ngIf="!last"> | </span></p>
+                </div>
+            </div>
+
             <hr style="visibility: hidden;">
             <hr style="visibility: hidden;">
 
+            <h2>Reparto</h2>
             <div class="movie-cast">
-                <h2>Reparto</h2>
                 <div class="cast-row">
-                    <div *ngFor="let actor of cast | slice:0:5" class="cast-item">
+                    <div *ngFor="let actor of cast | slice:0:8" class="cast-item d-flex"
+                        style="flex-direction: column; text-wrap: balance;">
                         <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'assets/placeholder.svg'"
                             alt="{{ actor.name }}">
                         <p class="actor-name">{{ actor.name }}</p>
@@ -58,36 +74,46 @@
                     </div>
                 </div>
             </div>
+
+            <div class="movie-trailer" *ngIf="trailer">
+                <h2>Tráiler</h2>
+                <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + trailer.key" frameborder="0" allowfullscreen></iframe>
+            </div>
+
         </div>
     </div>
 
-    <div class="movie-details-left">
-
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/title/v6/24px.svg" alt="Original Title" class="detail-icon">
+    <div class="movie-details-left d-flex" style="flex-direction: column; text-wrap: balance;">
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/title/v6/24px.svg" alt="Original Title"
+                class="detail-icon">
             <h2>Título Original</h2>
-            <p>{{ originalTitle }}</p>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status" class="detail-icon">
+        <p>{{ movies[0].original_title }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status"
+                class="detail-icon">
             <h2>Estado</h2>
-            <p>{{ status }}</p>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language" class="detail-icon">
+        <p>{{ movies[0].status }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language"
+                class="detail-icon">
             <h2>Idioma Original</h2>
-            <p>{{ originalLanguage }}</p>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget" class="detail-icon">
+        <p>{{ movies[0].original_language | idiom}}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget"
+                class="detail-icon">
             <h2>Presupuesto</h2>
-            <p>{{ budget | currency:'USD':'symbol':'1.0-0' }}</p>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue" class="detail-icon">
+        <p>{{ movies[0].budget | currency:'USD':'symbol':'1.0-0' }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue"
+                class="detail-icon">
             <h2>Ingresos</h2>
-            <p>{{ revenue | currency:'USD':'symbol':'1.0-0' }}</p>
         </div>
+        <p>{{ movies[0].revenue | currency:'USD':'symbol':'1.0-0' }}</p>
     </div>
     }
 </body>
