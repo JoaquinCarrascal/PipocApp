@@ -1,8 +1,8 @@
-<app-nav-bar></app-nav-bar>
-<app-series-header></app-series-header>
-<div class="container-fluid">
+<app-nav-bar style="position:fixed; width:100%; z-index: 100;"></app-nav-bar>
+
+<div class="container-fluid" style="position: relative; top:40px;">
     <div class="row">
-        <form class="col-1 filter-form">
+        <form class="col-1 filter-form me-auto ms-5">
             <h2>Ordenar</h2>
             <div class="d-flex mb-4">
 
@@ -64,15 +64,17 @@
             <button (click)="doFilter()" class="btn w-100" style="background-color: hsl(205, 74%, 14%); color: white; border-radius: 100px; margin-top: 15px;">Enviar</button>
         </form>
 
-        <div class="container-fluid col-3 col-md-4 col-lg-6 col-xl-8 row justify-content-around mt-5 mb-4 movie-container" style="top:-100px; margin:0 auto;">
-    
+        <div class="container-fluid col-3 col-md-4 col-lg-6 col-xl-8 row justify-content-around align-content-center mt-5 mb-4 movie-container ms-auto me-5 me-lg-6" style="top:-100px; margin:0 auto;">
+            
             <div class="d-flex col-12 align-content-center mx-auto justify-content-center">
                 <h3 style="color:white; font-size: 25pt;position:relative; top:3px;" class="">Series Populares</h3>
                 <div class="d-flex" style="position: relative; top:4px; left:6px;">
                   <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M160-400q0-115 70-222.33Q300-729.67 422.33-807q18.67-12.33 38.17-.83t19.5 34.5V-708q0 34 23.5 57t57.5 23q17.67 0 33.17-7.5t27.5-22.17q8-9.33 18.83-12.5 10.83-3.16 20.5 3.5 65 45 102 115.67t37 151q0 92.67-47 167.83Q706-157 629.33-117q21-25.33 32.5-56.17 11.5-30.83 11.5-64.83 0-38.67-14.33-72.83-14.33-34.17-41.67-61.5L480-506.67 343.67-372.33q-28.34 27.66-42.67 61.66-14.33 34-14.33 72.67 0 34 11.5 64.83 11.5 30.84 32.5 56.17Q254-157 207-232.17 160-307.33 160-400Zm320-13.33 89.67 87.66q17.66 17.67 27.33 40 9.67 22.34 9.67 47.67 0 51.67-37 88.17T480-113.33q-52.67 0-89.67-36.5t-37-88.17q0-25 9.34-47.5 9.33-22.5 27.66-40.17L480-413.33Z"/></svg>
                 </div>
-              </div>
-            
+            </div>
+
+            <app-series-header></app-series-header>
+
               @for(item of listaSeries; track item){
           
                 <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;">
