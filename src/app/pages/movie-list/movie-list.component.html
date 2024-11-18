@@ -7,11 +7,11 @@
                 <div class="d-flex mb-4">
 
                     <div>
-                        <select id="mySelect" name="sort">
-                            <option value="valasc">Valoración ascendente</option>
-                            <option value="valdesc">Valoración descendente</option>
-                            <option value="popasc">Popularidad ascendente</option>
-                            <option value="popdesc">Popularidad descendente</option>
+                        <select id="mySelect" name="sort" (change)="onSelectChange($event)">
+                            <option [value]=0>Popularidad descendente</option>
+                            <option [value]=1>Popularidad ascendente</option>
+                            <option [value]=2>Valoración descendente</option>
+                            <option [value]=3>Valoración ascendente</option>
                         </select>
                     </div>
                     <div class="d-block rounded-circle myCustomButton">
@@ -78,14 +78,25 @@
           
                 <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;">
                 
+                @if(item.poster_path){
                   <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="" width="150px">
-                  
+                }
+                @else{
+                    <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="" width="150px">
+                }
                   <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
                     {{item.title}}
                   </p>
+                  @if(item.release_date){
                   <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
                     {{dateFormater(item.release_date)}}
                   </p>
+                }
+                @else{
+                    <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+                        Fecha desconocida
+                    </p>
+                }
                 </div>
           
               }

@@ -12,14 +12,16 @@ export class MovieListComponent implements OnInit {
   
   popularList: TopRatedList[] = [];
   pageCounter: number = 3;
+  value: number = 0;
 
   constructor(private movieServ: MovieServService , private pipeDateForm: DateFormaterPipe) { }
   
   ngOnInit(): void {
 
+    this.popularList = [];
     this.pageCounter = 3;
     for (let i = 1; i <= this.pageCounter; i++) {
-      this.movieServ.getMovieList(i).subscribe((data) => {
+      this.movieServ.getMovieList(i , this.value).subscribe((data) => {
         this.popularList = this.popularList.concat(data.results);
       });
     }
@@ -40,10 +42,16 @@ export class MovieListComponent implements OnInit {
   concatNextPage(){
 
     this.pageCounter++;
-    this.movieServ.getMovieList(this.pageCounter).subscribe((data) => {
+    this.movieServ.getMovieList(this.pageCounter , this.value).subscribe((data) => {
       this.popularList = this.popularList.concat(data.results);
     });
 
+  }
+
+  onSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.value = Number(selectElement.value);
+    this.ngOnInit();
   }
 
   formatLabel(value: number): string {

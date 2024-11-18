@@ -13,6 +13,7 @@ import { DateFormaterPipe } from './pipes/date-formater.pipe';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatSliderModule} from '@angular/material/slider';
     HomeComponent,
     NavBarComponent,
     DateFormaterPipe,
-    MovieListComponent
+    MovieListComponent,
+    OrderTriggerPipe
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import {MatSliderModule} from '@angular/material/slider';
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
-    DateFormaterPipe
+    DateFormaterPipe,
+    OrderTriggerPipe
   ],
   bootstrap: [AppComponent]
 })

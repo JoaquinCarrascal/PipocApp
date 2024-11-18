@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TopRatedResponse } from '../models/top-rated-response';
 import { TvTopRatedResponse } from '../models/top-rated-tv';
+import { OrderTriggerPipe } from '../pipes/order-trigger.pipe';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZTI4YmFiYjBiYWVlZDUzZTEyNTVjZDJiMmJkMmUxNSIsIm5iZiI6MTczMTY1Njg0Ny40NTQyMSwic3ViIjoiNjczMWJkOTU2MTYyNmFjMTA2YmU2N2Q4Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.yNCSOGU0edyqA7PR2On0uHmWbZlDBrBHW1YyLPYnN6o";
@@ -13,7 +14,7 @@ const BASE_URL = "https://api.themoviedb.org/3/movie";
 })
 export class MovieServService { 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ,  private orderTrigger: OrderTriggerPipe) { }
 
   //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&with_watch_monetization_types=free
 
@@ -51,9 +52,9 @@ export class MovieServService {
 
   }
 
-  getMovieList(pag: number) : Observable<TopRatedResponse>{
+  getMovieList(pag: number , order?: number) : Observable<TopRatedResponse>{
 
-    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}` , 
+    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}&sort_by=${this.orderTrigger.transform(order)}`, 
     {
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
