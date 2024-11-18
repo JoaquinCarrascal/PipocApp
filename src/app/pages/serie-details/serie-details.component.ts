@@ -89,7 +89,9 @@ export class SerieDetailsComponent implements OnInit {
 
 
   getTrailers(key : string){
-    return this.serieDetailsService.getTrailers
+    return this.serieDetailsService.getTrailers(key).subscribe((data) => {
+
+    })
   }
 
   
