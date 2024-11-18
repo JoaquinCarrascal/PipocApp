@@ -24,7 +24,7 @@ export class SeriesHeaderComponent implements OnInit {
 
   cargarSeries() {
     this.seriesService.orderSeriesByRatingRandom('asc').subscribe((series) => {
-      this.series = series.results.slice(0, 5);
+      this.series = series.results.slice(0, 4);
     });
   }
 
