@@ -47,22 +47,22 @@
     </div>
 
 
-    <h2><span class="material-icons" style="color: #00FFAE;">info</span> Conocido por</h2>
-    <p>{{person?.known_for_department}}</p>
+    <h2 *ngIf="person?.known_for_department"><span class="material-icons" style="color: #00FFAE;">info</span> Conocido por</h2>
+    <p *ngIf="person?.known_for_department">{{person?.known_for_department}}</p>
 
-    <h2><span class="material-icons" style="color: #00FFAE;">wc</span> Sexo</h2>
-    <p>{{person?.gender | personSex}}</p>
+    <h2 *ngIf="person?.gender"><span class="material-icons" style="color: #00FFAE;">wc</span> Sexo</h2>
+    <p *ngIf="person?.gender">{{person?.gender | personSex}}</p>
 
-    <h2><span class="material-icons" style="color: #00FFAE;">cake</span> Cumpleaños</h2>
-    <p>{{person?.birthday | date:'mediumDate'}}</p> <!--poner fecha de nacimiento-->
+    <h2 *ngIf="person?.birthday"><span class="material-icons" style="color: #00FFAE;">cake</span> Cumpleaños</h2>
+    <p *ngIf="person?.birthday">{{person?.birthday | date:'mediumDate'}}</p>
 
     <h2 *ngIf="person?.deathday"><span class="material-icons" style="color: #00FFAE;">cake</span> Fecha de muerte</h2>
     <p *ngIf="person?.deathday">{{person?.deathday | date:'mediumDate'}}</p>
 
-    <h2><span class="material-icons" style="color: #00FFAE;">place</span> Lugar de nacimiento</h2>
-    <p>{{person?.place_of_birth}}</p>
+    <h2 *ngIf="person?.place_of_birth"><span class="material-icons" style="color: #00FFAE;">place</span> Lugar de nacimiento</h2>
+    <p *ngIf="person?.place_of_birth">{{person?.place_of_birth}}</p>
 
-    <h2><span class="material-icons" style="color: #00FFAE;">alternate_email</span> También conocido como</h2>
-    <p>{{person?.also_known_as}}</p>
+    <h2 *ngIf="person?.also_known_as"><span class="material-icons" style="color: #00FFAE;">alternate_email</span> También conocido como</h2>
+    <p *ngIf="person?.also_known_as">{{person?.also_known_as}}</p>
   </div>
 </body>
