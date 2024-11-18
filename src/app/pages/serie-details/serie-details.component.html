@@ -15,8 +15,6 @@
 
             @for(genre of series[0].genres; track series[0].genres){
             <div class="genre-icon-container">
-                <!--                 <img [src]="obtenerIconoGenero(genre.name)" alt="{{ genre.name }}" class="genre-icon">
- -->
                 <div class="genre-tooltip">{{ genre.name }}</div>
             </div>
             }
@@ -33,13 +31,10 @@
 
             <div class="movie-rating">
                 <div class="rating-box">
-                    
-                    
                     <div class="rating-row">
-                          <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
+                        <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
                             <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
-                            </ng-container> 
-                       
+                        </ng-container> 
                     </div>
                 </div>
             </div>
@@ -52,51 +47,77 @@
 
             <hr style="visibility: hidden;">
             <hr style="visibility: hidden;">
-            <div>
-
-            </div>
+            <div></div>
             <h2 class="text-center mb-4">Reparto</h2>
-            <div class="movie-cast d-flex justify-content-center align-content-center" style="margin: 0 auto;" >
-                
-                <div class="cast-row">
-                    <div *ngFor="let actor of cast?.cast" class="cast-item d-flex" style="flex-direction: column; text-wrap : balance ">
+            <div class="movie-cast d-flex justify-content-center align-content-center" style="margin: 0 auto;">
+                <div class="cast-row text-center">
+                    <div *ngFor="let actor of cast?.cast?.slice(0,8)" class="cast-item d-flex flex-column text-wrap">
                         <img [src]="actor.profile_path ? obtenerImagenSerie(200, actor.profile_path) : 'assets/placeholder.svg'"
-                            alt="{{ actor.name }}">
-                        <p class="actor-name">{{ actor.name }}</p>
-                        <p class="actor-character">{{ actor.character }}</p>
+                            alt="{{ actor.name }}" class="actor-image">
+                        <p class="actor-name text-center">{{ actor.name }}</p>
+                        <span>-</span>
+                        <div>
+                            <p class="actor-character text-truncated text-center">{{ actor.character }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="movie-details-left">
-
-        
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status" class="detail-icon">
-            <h2>Estado : &nbsp;</h2>
-            <h4>{{ series[0].status }}</h4>
+    <div class="movie-details-left container">
+        <!-- Estado -->
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
+                <div>
+                    <h4 class="mb-1 fw-bold">Estado:</h4>
+                    <h5 class="text-light">{{ series[0].status }}</h5>
+                </div>
+            </div>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language" class="">
-            <h2>Canales : &nbsp; </h2>
-            <img class="emision-icon" *ngIf="series[0].networks[0].logo_path" [src]="'https://image.tmdb.org/t/p/w500' + series[0].networks[0].logo_path" alt=""></div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget" class="detail-icon">
-            <h2>Idioma Original : &nbsp;</h2>
-            <h4>{{ series[0].original_language  }}</h4>
-          
+    
+        <!-- Canales -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
+                    <h4 class="mb-0 fw-bold">Canales:</h4>
+                </div>
+                <div class="row mt-2">
+                    @for (canales of series[0].networks; track $index) {
+                        <div class="col-3 text-center">
+                            <img *ngIf="canales.logo_path" [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" alt="Logo del canal" class="img-fluid rounded" style="max-width: 100px;">
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-        <div class="movie-detail-item">
-            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue" class="detail-icon">
-            <h4>Palabras claves : &nbsp;</h4>
-            @for (keyword of keyWords; track $index) {
-            <h4>{{ keyword.results[0].name }}</h4>
-            }
-         
-     
-            
+    
+        <!-- Idioma Original -->
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center">
+                <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
+                <div>
+                    <h4 class="mb-1 fw-bold">Idioma Original:</h4>
+                    <h5 class="text-light">{{ series[0].original_language }}</h5>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Palabras Claves -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
+                    <h4 class="mb-0 fw-bold">Palabras claves:</h4>
+                </div>
+                <div class="mt-2">
+                    @for (keyword of keyWords; track $index) {
+                        <h5 class="badge text-dark">{{ keyword.results[0].name }}</h5>
+                    }
+                </div>
+            </div>
         </div>
     </div>
     }

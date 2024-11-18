@@ -8,6 +8,8 @@ import { Root } from '../interface/serie-by-date.interface';
 import { TopRatedSeries } from '../interface/series-top-rated.interface';
 import { SerieCast } from '../interface/serie-cast.interface';
 import { Keyword } from '../interface/keyword.interface';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { TrailerResponse } from '../interface/trailer.interface';
 
 
 const apiKey: string = '7cb3ebb77086a8a379dd38b88a23269a';
@@ -68,4 +70,7 @@ export class SeriesService {
     return this.http.get<Keyword>(`https://api.themoviedb.org/3/tv/${id}/keywords?api_key=${apiKey}`)
   }
   
+  getTrailers(key: string) : Observable<TrailerResponse>{
+    return this.http.get<TrailerResponse>(`https://www.themoviedb.org/video/play?key=${key}`)
+  }
 }

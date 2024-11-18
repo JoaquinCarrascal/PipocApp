@@ -206,7 +206,35 @@ body {
 }
 
 .emision-icon{
-    width: 27%;
+    width: 50%;
    
 ;
 }
+
+.movie-details-left {
+
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.movie-detail-item {
+    margin-bottom: 20px;
+}
+
+.detail-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.badge {
+    font-size: 1rem;
+    padding: 10px;
+}
+
+
+.badge{
+    background-color: #00FFAE;
+
+}
+

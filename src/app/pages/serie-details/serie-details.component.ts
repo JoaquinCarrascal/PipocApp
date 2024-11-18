@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SeriesService } from '../../services/series.service';
 import { SerieCast } from '../../interface/serie-cast.interface';
 import { Keyword } from '../../interface/keyword.interface';
+import { TrailerResponse } from '../../interface/trailer.interface';
 
 @Component({
   selector: 'app-serie-details',
@@ -28,7 +29,13 @@ export class SerieDetailsComponent implements OnInit {
   
   keyWords : Keyword[] = [];
 
+  trailers : string[] = []
+  listaCanales : string[] = []
+
+  trailer!: TrailerResponse;
   logoPhotos : string[] = []
+
+  video : string | undefined;
   ngOnInit(): void {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
@@ -39,10 +46,13 @@ export class SerieDetailsComponent implements OnInit {
         this.fechaSalida = data.first_air_date
         this.genero = data.genres[0].name
         this.descripcion = data.overview
-        
+        this.listaCanales [0] = data.networks[0].logo_path
+
+
         this.serieDetailsService.getKeyWords(Number(idSerie)).subscribe((data: Keyword) => {
           this.keyWords = [data]
         })
+
 
       });
       this.getSerieCast(Number(idSerie));
@@ -76,4 +86,12 @@ export class SerieDetailsComponent implements OnInit {
   getPopcornIcons(voteAverage: number): string[] {
     return Array.from({ length: 5 }, (_, index) => this.obtenerColorCalificacion(voteAverage, index));
   }
-}
+
+
+  getTrailers(key : string){
+    return this.serieDetailsService.getTrailers
+  }
+
+  
+    
+  }
