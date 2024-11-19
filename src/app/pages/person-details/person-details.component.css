@@ -88,7 +88,7 @@
     margin-top: 110px; /* Espacio entre el texto y el bloque de "Conocido por" */
     text-align: left;
     margin-right: 50px;
-    height: 2000px;
+    height: 1000px; /* Reducir la altura */
     position: relative;
 
     

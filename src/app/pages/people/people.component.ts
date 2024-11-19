@@ -14,6 +14,7 @@ export class PeopleComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 1;
   pageNumbers: number[] = [];
+  //knownFor: { title: string; release_date: string; poster_path: string | null }[] = [];
 
   constructor(private peopleService: PeopleService) { }
 

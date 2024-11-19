@@ -32,6 +32,9 @@
 
 </div>
 <div class="people-grid justify-content-center align-content-center mt-5" style="position: relative; top:100px;">
+
+
+  <!--MIA
   <div *ngFor="let person of filteredPeople" style="position: relative; margin:0 auto;" class="person-card">
     <a [routerLink]="['/person', person.id]" class="person-link">
       <div class="img">
@@ -48,10 +51,72 @@
     </a>
   </div>
 </div>
+-->
+
+
+  <!--MIA  V2
+
+
+@for(person of filteredPeople; track person){
+  <a [routerLink]="['/person', person.id]" class="person-link">
+  <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
+  
+  @if(person.profile_path){
+    <img class="card-img resizing-img" [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name" >
+  }
+  @else{
+      <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{person.name}}" >
+  }
+
+  <div class="actor-info">
+    <div class="actor-name">
+      <p>{{ person.name }}</p>
+    </div>
+    <div class="known-for">
+      <p>{{ person.known_for_department }}</p>
+    </div>
+  </div>
+    
+  </div>
+</a>
+}
+-->
+
+
+  <!--SUYA V2-->
+
+  <div class="people-grid row justify-content-around mt-0 mb-4 movie-container" style="top:-200px;">
+
+    @for(person of filteredPeople; track person){
+    <a [routerLink]="['/person', person.id]" class="person-link">
+      <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
+        <img class="card-img" [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
+        <p class="text-light text-truncate mt-2" style="font-size: 19pt;">
+          {{person.name}}
+        </p>
+
+        <!-- INTENTO DE MOSTRAR PELIS Y SERIES
+        <div *ngFor="let item of knownFor" class="card"
+          style="width: 158px; height: 234px; margin-right: 79px; border-radius: 10px;">
+          <p class="colored-aqua text-truncate mt-2" style="font-size: 14pt; ">
+            {{ item.title }}
+          </p>
+        </div>
+      -->
+
+        <p class="colored-aqua text-truncate mt-2" style="font-size: 14pt;  margin-top: -15px;">
+          {{ person.known_for_department }}
+        </p>
+
+      </div>
+    </a>
+    }
+  </div>
 
 
 
-<!--<div class="pagination">
+
+  <!--<div class="pagination">
         <a *ngFor="let page of pageNumbers" (click)="goToPage(page)" [ngClass]="{'active': currentPage === page}" style="margin: 0 10px;">
           {{ page }}
         </a>
