@@ -7,7 +7,7 @@
     <div class="background-solid-color"></div>
 
     <div *ngIf="series.length > 0">
-        <!-- Card de la imagen principal -->
+
         <div class="card mb-4">
             <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
                 alt="Imagen de la serie" class="movie-image">
@@ -70,9 +70,8 @@
             </div>
         </div>
 
-        <!-- Detalles adicionales -->
         <div class="movie-details-left container mb-4">
-            <!-- Estado -->
+
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
@@ -83,7 +82,6 @@
                 </div>
             </div>
         
-            <!-- Canales -->
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
@@ -107,7 +105,7 @@
                 </div>
             </div>
         
-            <!-- Idioma Original -->
+        
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
@@ -117,8 +115,7 @@
                     </div>
                 </div>
             </div>
-        
-            <!-- Palabras Claves -->
+
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
