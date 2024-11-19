@@ -1,0 +1,105 @@
+<app-nav-bar style="position:fixed; width:100%; z-index: 100;"></app-nav-bar>
+<div class="container-fluid" style="position: relative; top: 50px;">
+    <div class="row">
+        <div class="holder col-1">
+            <form class="col-1 filter-form">
+                <h2>Ordenar</h2>
+                <div class="d-flex mb-4" style="position:relative; left:-6px;">
+
+                    <div>
+                        <select id="mySelect" name="sort" (change)="onSelectChange($event)">
+                            <option [value]=0>Popularidad descendente</option>
+                            <option [value]=1>Popularidad ascendente</option>
+                            <option [value]=2>Valoración descendente</option>
+                            <option [value]=3>Valoración ascendente</option>
+                        </select>
+                    </div>
+                    <div class="d-block rounded-circle myCustomButton">
+                        <i class="bi bi-arrow-down-circle rounded-circle" id="openSelectBtn"></i>
+                    </div>
+
+                </div>
+
+                <h2>Filtros</h2>
+                <label style="font-size: 16pt;">Muestra</label>
+
+                <div style="position: relative; left:20px;">
+                    <label class="radio-label">
+                        <input class="colored-aqua" type="radio" name="type" value="peliculas" checked>
+                        Películas
+                    </label>
+
+                    <label class="radio-label">
+                        <input class="colored-aqua" type="radio" name="type" value="series">
+                        Series
+                    </label>
+                </div>
+
+                <div class="my-3 ms-3" style="position: relative; left:4px;">
+                    <input type="checkbox" name="check-free" id="check-free-id" class="me-2">
+                    <label for="check-free" style="font-size:14pt;" id="check-label"> Sólo gratuitas </label>
+                </div>
+                <div class="container mx-auto">
+                    <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
+                        discrete="true">
+                        <input value="0" matSliderStartThumb>
+                        <input value="100" matSliderEndThumb>
+                    </mat-slider>
+                </div>
+                <div class="range-labels fw-bold"> <span>0</span> <span>100</span> </div>
+
+                <div class="container-search" style="position: relative; margin: 0 auto;">
+                    <input checked="" class="checkbox-search" type="checkbox"> 
+                    <div class="mainbox">
+                        <div class="iconContainer">
+                            <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                        </div>
+                    <input class="search_input" placeholder="Escribe el nombre aquí..." type="text">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="container-fluid col-3 col-md-4 col-lg-6 col-xl-8 row justify-content-around mt-5 mb-4 movie-container" style="top:-100px; margin:0 auto;">
+    
+            <div class="d-flex col-12 align-content-center mx-auto justify-content-center">
+
+            </div>
+
+            <div class="d-flex col-12 align-content-center mx-auto justify-content-center">
+                <h3 style="color:white; font-size: 25pt;position:relative; top:3px;" class="">Películas populares</h3>
+                <div class="d-flex" style="position: relative; top:4px; left:6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M160-400q0-115 70-222.33Q300-729.67 422.33-807q18.67-12.33 38.17-.83t19.5 34.5V-708q0 34 23.5 57t57.5 23q17.67 0 33.17-7.5t27.5-22.17q8-9.33 18.83-12.5 10.83-3.16 20.5 3.5 65 45 102 115.67t37 151q0 92.67-47 167.83Q706-157 629.33-117q21-25.33 32.5-56.17 11.5-30.83 11.5-64.83 0-38.67-14.33-72.83-14.33-34.17-41.67-61.5L480-506.67 343.67-372.33q-28.34 27.66-42.67 61.66-14.33 34-14.33 72.67 0 34 11.5 64.83 11.5 30.84 32.5 56.17Q254-157 207-232.17 160-307.33 160-400Zm320-13.33 89.67 87.66q17.66 17.67 27.33 40 9.67 22.34 9.67 47.67 0 51.67-37 88.17T480-113.33q-52.67 0-89.67-36.5t-37-88.17q0-25 9.34-47.5 9.33-22.5 27.66-40.17L480-413.33Z"/></svg>
+                </div>
+              </div>
+            
+              @for(item of popularList; track item){
+          
+                <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;">
+                
+                @if(item.poster_path){
+                  <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="{{item.title}}" width="150px">
+                }
+                @else{
+                    <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{item.title}}" width="150px">
+                }
+                  <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
+                    {{item.title}}
+                  </p>
+                  @if(item.release_date){
+                  <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+                    {{dateFormater(item.release_date)}}
+                  </p>
+                }
+                @else{
+                    <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+                        Fecha desconocida
+                    </p>
+                }
+                </div>
+          
+              }
+
+    </div>
+</div>

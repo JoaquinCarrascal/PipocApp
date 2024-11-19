@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'); 
+
+*{
+  font-family: 'Inter', sans-serif;
+}
+
+.filter-switch {
+  border: 2px solid #00FFAE;
+  background-color: white;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: start;
+  height: 40px;
+  width: 500px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+.filter-switch input {
+  display: none;
+}
+
+.filter-switch label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.5s;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.filter-switch .background {
+  position: absolute;
+  width: 33.33%;
+  /* Ajustado para 3 botones */
+  height: 36.5px;
+  margin: 0px;
+  background-color: #00FFAE;
+  top: 0px;
+  left: 0px;
+  border-radius: 30px;
+  transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#option2:checked~.background {
+  left: 33.33%;
+}
+
+#option3:checked~.background {
+  left: 66.9%;
+}
+
+#option1:checked+label[for="option1"],
+#option2:checked+label[for="option2"],
+#option3:checked+label[for="option3"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option1:not(:checked)+label[for="option1"],
+#option2:not(:checked)+label[for="option2"],
+#option3:not(:checked)+label[for="option3"] {
+  color: #7d7d7d;
+}
+
+/*Segunda botonera*/
+
+.filter-switch-second {
+  border: 2px solid #00FFAE;
+  background-color: white;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: start;
+  height: 40px;
+  width: 300px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+.filter-switch-second input {
+  display: none;
+}
+
+.filter-switch-second label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.5s;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.filter-switch-second .background-second {
+  position: absolute;
+  width: 50%;
+  height: 38px;
+  margin: 0px;
+  background-color: #00FFAE;
+  top: 0px;
+  left: 0px;
+  border-radius: 30px;
+  transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#option8:checked~.background-second {
+  left: 50%;
+}
+
+#option7:checked+label[for="option7"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option8:checked+label[for="option8"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option7:not(:checked)+label[for="option7"],
+#option8:not(:checked)+label[for="option8"] {
+  color: #7d7d7d;
+}
+
+.card-img {
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.resizing-img{
+  width: 150px;
+  height: 230px;
+}
+
+.card-img:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.movie-card{
+
+  position: relative;
+  width: 220px;
+  height: 430px;
+  top: -20px;
+
+}
+
+.movie-card-resizing{
+  
+    width: 175px;
+    height: 340px;
+}
+
+.colored-aqua{
+
+  color: #00FFAE;
+
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
