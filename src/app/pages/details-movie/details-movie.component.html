@@ -71,8 +71,10 @@
                 <div class="cast-row">
                     <div *ngFor="let actor of cast | slice:0:8" class="cast-item d-flex"
                         style="flex-direction: column; text-wrap: balance;">
-                        <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'assets/placeholder.svg'"
-                            alt="{{ actor.name }}">
+                        <a [routerLink]="['/person', actor.id]">
+                            <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
+                                alt="{{ actor.name }}">
+                        </a>
                         <p class="actor-name">{{ actor.name }}</p>
                         <p class="actor-character">{{ actor.character }}</p>
                     </div>
