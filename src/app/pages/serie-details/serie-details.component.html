@@ -55,11 +55,14 @@
                 </div>
 
                 <h2 class="text-center mb-4">Reparto</h2>
-                <div class="movie-cast d-flex justify-content-center">
+                <div class="movie-cast d-flex align-self-start justify-content-center">
                     <div class="cast-row text-center">
                         <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
-                            <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
+                            <a [routerLink]="['/person', actor.id]" class="person-link">
+                                <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
                                 alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
+                            </a>
+                           
                             <div class="d-flex flex-column">
                                 <p class="actor-name">{{ actor.name }}</p>
                                 <p class="actor-character">{{ actor.character }}</p>
