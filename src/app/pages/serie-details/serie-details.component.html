@@ -1,124 +1,138 @@
 <app-nav-bar></app-nav-bar>
 
 <body>
-    <div class="background-image-blur"
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenSerie(500, series[0].backdrop_path) + ')'}"></div>
+    <div class="background-image-blur" 
+        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
+    </div>
     <div class="background-solid-color"></div>
-    @if(series.length > 0){
-    <div class="card">
-        <img [src]="series[0].poster_path ? obtenerImagenSerie(200, series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
-            alt="Imagen de la serie" class="movie-image">
-    </div>
-    <div class="movie-details">
-        <div class="details-up">
-            <h1 class="movie-title">{{ series[0].name }}</h1>
 
-            @for(genre of series[0].genres; track series[0].genres){
-            <div class="genre-icon-container">
-                <div class="genre-tooltip">{{ genre.name }}</div>
-            </div>
-            }
-            <div class="movie-date genero">
-                <h3>{{ genero }}</h3>
-            </div>
-            <hr style="visibility: hidden;">
-            
-            <div class="movie-date">
-                <h3>{{ series[0].first_air_date }}</h3>
-            </div>
+    <div *ngIf="series.length > 0">
 
-            <hr style="visibility: hidden;">
+        <div class="card mb-4">
+            <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
+                alt="Imagen de la serie" class="movie-image">
+        </div>
+        
+        <!-- Detalles de la película -->
+        <div class="movie-details">
+            <div class="details-up mb-4">
+                <!-- Título destacado -->
+                <div class="movie-title-container text-white">
+                    <h1 class="movie-title">{{ series[0].name }}</h1>
+                </div>
 
-            <div class="movie-rating">
-                <div class="rating-box">
-                    <div class="rating-row">
-                        <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
-                            <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
-                        </ng-container> 
+                <div class="genre-icons-container mb-3">
+                    <div class="genre-tooltip" *ngFor="let genre of series[0].genres">
+                        {{ genre.name }}
+                    </div>
+                </div>
+                
+                <div class="movie-date genero mb-3">
+                    <h3>{{ genero }}</h3>
+                </div>
+
+                <div class="movie-date mb-3">
+                    <h3>{{ series[0].first_air_date }}</h3>
+                </div>
+
+                <div class="movie-rating">
+                    <div class="rating-box mb-3">
+                        <div class="rating-row">
+                            <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
+                                <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="py-3">
+                        <button (click)="getTrailer(series[0].id)" class="btn boton ">Ver Trailer</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="details-down">
-            <div class="movie-description">
-                <p class="text-white">{{ descripcion }}</p>
-            </div>
+            <div class="details-down">
+                <div class="movie-description mb-4">
+                    <p class="text-white">{{ descripcion }}</p>
+                </div>
 
-            <hr style="visibility: hidden;">
-            <hr style="visibility: hidden;">
-            <div></div>
-            <h2 class="text-center mb-4">Reparto</h2>
-            <div class="movie-cast d-flex justify-content-center align-content-center" style="margin: 0 auto;">
-                <div class="cast-row text-center">
-                    <div *ngFor="let actor of cast?.cast?.slice(0,8)" class="cast-item d-flex flex-column text-wrap">
-                        <img [src]="actor.profile_path ? obtenerImagenSerie(200, actor.profile_path) : 'assets/placeholder.svg'"
-                            alt="{{ actor.name }}" class="actor-image">
-                        <p class="actor-name text-center">{{ actor.name }}</p>
-                        <span>-</span>
-                        <div>
-                            <p class="actor-character text-truncated text-center">{{ actor.character }}</p>
+                <h2 class="text-center mb-4">Reparto</h2>
+                <div class="movie-cast d-flex align-self-start justify-content-center">
+                    <div class="cast-row text-center">
+                        <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
+                            <a [routerLink]="['/person', actor.id]" class="person-link">
+                                <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
+                                alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
+                            </a>
+                           
+                            <div class="d-flex flex-column">
+                                <p class="actor-name">{{ actor.name }}</p>
+                                <p class="actor-character">{{ actor.character }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="movie-details-left container mb-4">
+
+            <div class="row mb-4">
+                <div class="col-12 d-flex align-items-center">
+                    <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Estado:</h4>
+                        <h5 class="text-light">{{ series[0].status }}</h5>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
+                        <h4 class="mb-0 fw-bold">Canales:</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div *ngFor="let canales of series[0].networks; track by $index" class="col-3 text-center">
+                            <img *ngIf="canales.logo_path" 
+                                 [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
+                                 alt="Logo del canal" 
+                                 class="img-fluid rounded" 
+                                 style="max-width: 100px; padding-left : 20%">
+                            <img *ngIf="!canales.logo_path" 
+                                 src="https://placehold.co/150x230?text=Imagen+no+disponible" 
+                                 alt="placeholder" 
+                                 class="img-fluid rounded" 
+                                 style="max-width: 100px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+            <div class="row mb-4">
+                <div class="col-12 d-flex align-items-center">
+                    <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Idioma Original:</h4>
+                        <h5 class="text-light">{{ series[0].original_language }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
+                        <h4 class="mb-0 fw-bold">Palabras claves:</h4>
+                    </div>
+                    <div class="mt-2" style="padding-left: 20px;">
+                        <span *ngFor="let keyword of keyWords" class="badge text-dark">
+                            {{ keyword.results[0].name }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="movie-details-left container">
-        <!-- Estado -->
-        <div class="row mb-4">
-            <div class="col-12 d-flex align-items-center">
-                <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
-                <div>
-                    <h4 class="mb-1 fw-bold">Estado:</h4>
-                    <h5 class="text-light">{{ series[0].status }}</h5>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Canales -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
-                    <h4 class="mb-0 fw-bold">Canales:</h4>
-                </div>
-                <div class="row mt-2">
-                    @for (canales of series[0].networks; track $index) {
-                        <div class="col-3 text-center">
-                            <img *ngIf="canales.logo_path" [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" alt="Logo del canal" class="img-fluid rounded" style="max-width: 100px;">
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    
-        <!-- Idioma Original -->
-        <div class="row mb-4">
-            <div class="col-12 d-flex align-items-center">
-                <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
-                <div>
-                    <h4 class="mb-1 fw-bold">Idioma Original:</h4>
-                    <h5 class="text-light">{{ series[0].original_language }}</h5>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Palabras Claves -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
-                    <h4 class="mb-0 fw-bold">Palabras claves:</h4>
-                </div>
-                <div class="mt-2">
-                    @for (keyword of keyWords; track $index) {
-                        <h5 class="badge text-dark">{{ keyword.results[0].name }}</h5>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-    }
 </body>
