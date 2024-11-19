@@ -1,0 +1,116 @@
+<app-nav-bar></app-nav-bar>
+
+@if(movies != undefined){
+    <div class="background-image-blur"
+        [ngStyle]="{'background-image': 'url(' + obtenerImagenPelicula(500, movies.backdrop_path) + ')'}"></div>
+    <div class="background-solid-color"></div>
+   
+    <div class="card">
+        <img [src]="movies.poster_path ? obtenerImagenPelicula(200, movies.poster_path) : 'assets/placeholder.svg'"
+            alt="Imagen de la película" class="movie-image">
+        <div class="watch-now">
+            <h3>Ver ahora:</h3>
+            <div class="production-companies">
+                <img *ngFor="let provider of providers" [src]="obtenerImagenPelicula(200, provider.logo_path)" alt="{{ provider.provider_name }}" class="company-logo">
+                <p *ngIf="providers.length === 0">No disponible en España</p>
+            </div>
+        </div>
+    </div>
+    <div class="movie-details">
+        <div class="details-up">
+            <h1 class="movie-title">{{ movies.title }}</h1>
+
+            @for(genre of movies.genres; track movies.genres){
+            <div class="genre-icon-container">
+                
+                <span class="badge rounded-pill text-bg-light">{{genre.name}}</span>
+            </div>
+            }
+
+            <hr style="visibility: hidden;">
+
+            <div class="movie-date">
+                <h3>{{ movies.release_date }}</h3>
+            </div>
+
+            <hr style="visibility: hidden;">
+
+            <div class="movie-rating">
+                <div class="rating-box">
+                    <div class="rating-row">
+                        <ng-container *ngFor="let color of getPopcornIcons(movies.vote_average); let i = index">
+                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas"
+                                class="popcorn-icon">
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="movie-trailer mt-3" *ngIf="trailer">
+                <button (click)="verTrailer()">Ver Tráiler</button>
+            </div>
+        </div>
+
+        <div class="details-down">
+            <div class="movie-description">
+                <p>{{ movies.overview }}</p>
+            </div>
+
+            <h5>Directores</h5>
+            <div class="movie-directors">
+                <div *ngFor="let director of getDirectors(); let last = last" class="director-item">
+                    <p>{{ director.name }}<span *ngIf="!last"> | </span></p>
+                </div>
+            </div>
+
+            <hr style="visibility: hidden;">
+            <hr style="visibility: hidden;">
+
+            <h2>Reparto</h2>
+            <div class="movie-cast">
+                <div class="cast-row">
+                    <div *ngFor="let actor of cast | slice:0:8" class="cast-item d-flex"
+                        style="flex-direction: column; text-wrap: balance;">
+                        <img [src]="actor.profile_path ? obtenerImagenPelicula(200, actor.profile_path) : 'assets/placeholder.svg'"
+                            alt="{{ actor.name }}">
+                        <p class="actor-name">{{ actor.name }}</p>
+                        <p class="actor-character">{{ actor.character }}</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Cierra el div de details-down -->
+    </div> <!-- Cierra el div de movie-details -->
+
+    <div class="movie-details-left d-flex" style="flex-direction: column; text-wrap: balance;">
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/title/v6/24px.svg" alt="Original Title"
+                class="detail-icon">
+            <h2>Título Original</h2>
+        </div>
+        <p>{{ movies.original_title }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/verified/v6/24px.svg" alt="Status"
+                class="detail-icon">
+            <h2>Estado</h2>
+        </div>
+        <p>{{ movies.status }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/language/v6/24px.svg" alt="Original Language"
+                class="detail-icon">
+            <h2>Idioma Original</h2>
+        </div>
+        <p>{{ movies.original_language | idiom}}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/attach_money/v6/24px.svg" alt="Budget"
+                class="detail-icon">
+            <h2>Presupuesto</h2>
+        </div>
+        <p>{{ movies.budget | currency:'USD':'symbol':'1.0-0' }}</p>
+        <div class="movie-detail-item d-flex align-items-center" style="text-wrap: balance;">
+            <img src="https://fonts.gstatic.com/s/i/materialicons/trending_up/v6/24px.svg" alt="Revenue"
+                class="detail-icon">
+            <h2>Ingresos</h2>
+        </div>
+        <p>{{ movies.revenue | currency:'USD':'symbol':'1.0-0' }}</p>
+    </div>
+    }

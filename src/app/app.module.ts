@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +7,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { DetailsMovieComponent } from './pages/details-movie/details-movie.component';
+import { IdiomPipe } from './pipes/idiom.pipe';
+import { MatIconModule } from '@angular/material/icon';
 import { PeopleComponent } from './pages/people/people.component';
 import { PersonDetailsComponent } from './pages/person-details/person-details.component';
 import { PersonSexPipe } from './pipes/person-sex.pipe';
@@ -28,6 +30,8 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
     AppComponent,
     HomeComponent,
     NavBarComponent,
+    DetailsMovieComponent,
+    IdiomPipe,
     PeopleComponent,
     PersonDetailsComponent,
     PersonSexPipe,
@@ -42,6 +46,7 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    MatIconModule,
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
