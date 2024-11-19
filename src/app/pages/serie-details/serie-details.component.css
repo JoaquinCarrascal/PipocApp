@@ -234,16 +234,108 @@ color: black;
 .badge {
     font-size: 1rem;
     padding: 10px;
-}
-
-
-.badge{
     background-color: #00FFAE;
-
 }
+
+
+
 
 .boton{
     background-color: #00FFAE;
 
 }
 
+.seasons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Espacio entre las tarjetas */
+    justify-content: center;
+    margin: 20px auto; /* Centra el grid */
+    max-width: 90%; /* Ajusta el tamaño total */
+}
+
+.season-card {
+    text-align: center;
+
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.season-card:hover {
+    transform: scale(1.05); /* Pequeño zoom al pasar el mouse */
+}
+
+.season-image {
+    max-width: 10px; /* Ajusta el ancho máximo de las imágenes */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.season-details {
+    color: white;
+}
+
+.season-title {
+    font-size: 14px; /* Tamaño de texto más pequeño */
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.season-overview {
+    font-size: 12px; /* Texto más pequeño */
+    line-height: 1.2;
+    height: 3em; /* Limita la altura del texto */
+    overflow: hidden; /* Oculta texto extra */
+    text-overflow: ellipsis;
+}
+.seasons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    gap: 10px; /* Espacio entre tarjetas */
+    justify-content: center;
+    margin: 50px auto 0 auto; /* Margen superior aumentado */
+
+}
+
+.details-down {
+    margin-top: 100px; /* Baja todo el contenido dentro de este div */
+}
+
+.season-card {
+    text-align: center;
+
+    border-radius: 5px; /* Bordes más pequeños */
+    padding: 5px; /* Reduce el padding dentro de las tarjetas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
+    transition: transform 0.2s;
+}
+
+.season-card:hover {
+    transform: scale(1.03); /* Menor efecto de zoom */
+}
+
+.season-image {
+    max-width: 80px; /* Imágenes más pequeñas */
+    border-radius: 3px; /* Bordes más ajustados en las imágenes */
+    margin-bottom: 5px; /* Reduce el espacio bajo la imagen */
+}
+
+.season-details {
+    color: white;
+}
+
+.season-title {
+    font-size: 12px; /* Texto aún más pequeño */
+    font-weight: bold;
+    margin: 3px 0; /* Reduce el espacio entre el título y el texto */
+}
+
+.season-overview {
+    font-size: 10px; /* Texto más compacto */
+    line-height: 1.1; /* Menor separación entre líneas */
+    height: 2.5em; /* Limita más la altura del texto */
+    overflow: hidden; /* Oculta texto que no cabe */
+    text-overflow: ellipsis; /* Indica que hay texto cortado */
+}

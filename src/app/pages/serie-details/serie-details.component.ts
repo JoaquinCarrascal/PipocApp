@@ -96,5 +96,6 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
   
+ 
     
   }

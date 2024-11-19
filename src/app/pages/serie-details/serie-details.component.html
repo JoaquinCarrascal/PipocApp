@@ -2,21 +2,18 @@
 
 <body>
     <div class="background-image-blur" 
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
+         [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(series[0].backdrop_path) + ')'}">
     </div>
     <div class="background-solid-color"></div>
 
     <div *ngIf="series.length > 0">
-
         <div class="card mb-4">
             <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
-                alt="Imagen de la serie" class="movie-image">
+                 alt="Imagen de la serie" class="movie-image">
         </div>
-        
-        
+
         <div class="movie-details">
             <div class="details-up mb-4">
-                
                 <div class="movie-title-container text-white">
                     <h1 class="movie-title">{{ series[0].name }}</h1>
                 </div>
@@ -26,7 +23,7 @@
                         {{ genre.name }}
                     </div>
                 </div>
-                
+
                 <div class="movie-date genero mb-3">
                     <h3>{{ genero }}</h3>
                 </div>
@@ -44,7 +41,7 @@
                         </div>
                     </div>
                     <div class="py-3">
-                        <button (click)="getTrailer(series[0].id)" class="btn boton ">Ver Trailer</button>
+                        <button (click)="getTrailer(series[0].id)" class="btn boton">Ver Trailer</button>
                     </div>
                 </div>
             </div>
@@ -60,9 +57,8 @@
                         <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
                             <a [routerLink]="['/person', actor.id]" class="person-link">
                                 <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
-                                alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
+                                     alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
                             </a>
-                           
                             <div class="d-flex flex-column">
                                 <p class="actor-name">{{ actor.name }}</p>
                                 <p class="actor-character">{{ actor.character }}</p>
@@ -70,11 +66,24 @@
                         </div>
                     </div>
                 </div>
+
+                            <!-- Nueva sección de temporadas -->
+                            <h2 class="text-center mb-4">Temporadas</h2>
+            <div class="seasons-container">
+                <div class="season-card" *ngFor="let serie of series[0].seasons">
+                    <img [src]="obtenerImagenOriginal(serie.poster_path)" alt="" class="season-image">
+                    <div class="season-details">
+                        <p class="season-title">{{ serie.name }}</p>
+                        <p> <span>Valoracion media : </span> {{serie.vote_average}}</p>
+                    
+                    </div>
+                </div>
+</div>
+
             </div>
         </div>
 
         <div class="movie-details-left container mb-4">
-
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
@@ -84,7 +93,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
@@ -97,7 +106,7 @@
                                  [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
                                  alt="Logo del canal" 
                                  class="img-fluid rounded" 
-                                 style="max-width: 100px; padding-left : 20%">
+                                 style="max-width: 100px; padding-left: 20%">
                             <img *ngIf="!canales.logo_path" 
                                  src="https://placehold.co/150x230?text=Imagen+no+disponible" 
                                  alt="placeholder" 
@@ -107,8 +116,7 @@
                     </div>
                 </div>
             </div>
-        
-        
+
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
@@ -120,10 +128,20 @@
             </div>
 
             <div class="row mb-4">
+                <div class="col-12 d-flex align-items-center">
+                    <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Número de Temporadas:</h4>
+                        <h5 class="text-light">{{ series[0].number_of_seasons }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
-                        <h4 class="mb-0 fw-bold">Palabras claves:</h4>
+                        <h4 class="mb-0 fw-bold">Palabras Claves:</h4>
                     </div>
                     <div class="mt-2" style="padding-left: 20px;">
                         <span *ngFor="let keyword of keyWords" class="badge text-dark">
@@ -134,5 +152,4 @@
             </div>
         </div>
     </div>
-
 </body>
