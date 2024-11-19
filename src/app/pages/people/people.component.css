@@ -20,6 +20,7 @@ h1 {
     margin-left: auto; /* Ajustar margen izquierdo */
     margin-right: auto; /* Ajustar margen derecho */
     width: calc(100% - 306px); /* Ajustar el ancho total restando los márgenes */
+
 }
 
 .person-card {
@@ -195,6 +196,8 @@ h1 {
     bottom: 2px;
   }
 
+/* MIO V2 
+
   .card-img {
     box-sizing: border-box;
     width: 200px;
@@ -243,3 +246,57 @@ h1 {
       width: 175px;
       height: 340px;
   }
+
+*/
+
+/*SUYO V2*/
+
+.movie-card{
+
+  position: relative;
+  width: 220px;
+  height: 430px;
+  top: -20px;
+
+}
+
+.movie-card-resizing{
+  
+    width: 175px;
+    height: 340px;
+}
+
+.card-img {
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-img:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.colored-aqua{
+
+  color: #00FFAE;
+
+}
