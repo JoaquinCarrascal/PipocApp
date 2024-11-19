@@ -54,7 +54,7 @@ export class PersonDetailsComponent implements OnInit {
   getPersonImages(id: number): void {
     this.peopleService.getPersonImages(id).subscribe((data: any) => {
       if (data.profiles && data.profiles.length > 0) {
-        this.personImageUrl = `https://image.tmdb.org/t/p/w500${data.profiles[0].file_path}`;
+        this.personImageUrl = `https://image.tmdb.org/t/p/original${data.profiles[0].file_path}`;
       }
     });
   }
