@@ -43,7 +43,7 @@ export class DetailsMovieComponent implements OnInit {
 
 
   obtenerImagenPelicula(tam: number, path: string | null): string {
-    return path ? `https://image.tmdb.org/t/p/w${tam}${path}` : 'assets/placeholder.svg';
+    return path ? `https://image.tmdb.org/t/p/original${path}` : 'assets/placeholder.svg';
   }
 
   setProductionCompanyLogo(): void {
