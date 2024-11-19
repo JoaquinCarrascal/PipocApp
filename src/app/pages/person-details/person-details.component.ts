@@ -15,7 +15,7 @@ export class PersonDetailsComponent implements OnInit {
   credits: any[] = []; // Almacena los créditos combinados
   personImageUrl: string | undefined;
   socialLinks: { icon: string; url: string }[] = [];
-  knownFor: { title: string; release_date: string; poster_path: string | null }[] = [];
+  knownFor: { id: number; title: string; release_date: string; first_air_date?: string; poster_path: string | null }[] = [];
 
   constructor(private peopleService: PeopleService, private route: ActivatedRoute) { }
 
@@ -43,8 +43,10 @@ export class PersonDetailsComponent implements OnInit {
           .filter(item => item.title || item.name) // Asegúrate de que tengan un título o nombre
           .slice(0, 5) // Limita a 5 resultados
           .map(item => ({
+            id: item.id,
             title: item.title || item.name || 'Sin título', // Usa 'title' para películas y 'name' para series
             release_date: item.release_date || item.first_air_date || 'Desconocido', // Prioriza la fecha disponible
+            first_air_date: item.first_air_date,
             poster_path: item.poster_path, // Imagen de portada
           }));
       }
