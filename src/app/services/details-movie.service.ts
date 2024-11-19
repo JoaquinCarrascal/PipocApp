@@ -31,4 +31,5 @@ export class DetailsMovieService {
   getMovieTrailer(id: number): Observable<VideoResponse> {
     return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=es-ES`);
   }
+
 }

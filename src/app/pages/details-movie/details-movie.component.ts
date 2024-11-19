@@ -12,7 +12,8 @@ import { VideoResponse, Result } from '../../models/movies-video-response';
   styleUrl: './details-movie.component.css'
 })
 export class DetailsMovieComponent implements OnInit {
-  movies: MovieDetailResponse[] = [];
+  movies: MovieDetailResponse | undefined;
+  genres: string[] = [];
   cast: Cast[] = [];
   crew: Crew[] = [];
   productionCompanyLogo: string | null = null;
@@ -28,22 +29,28 @@ export class DetailsMovieComponent implements OnInit {
     const idMovie = this.route.snapshot.paramMap.get('idMovie');
     if (idMovie) {
       this.detailsMovieService.getMovieDetails(+idMovie).subscribe((data: MovieDetailResponse) => {
-        this.movies = [data];
+        this.movies = data;
+        this.genres = data.genres.map(genre => genre.name);
         this.setProductionCompanyLogo();
       });
       this.getMovieCast(+idMovie);
       this.getMovieProviders(+idMovie);
-      this.getMovieTrailer(+idMovie);
+      this.detailsMovieService.getMovieTrailer(+idMovie).subscribe(data => {
+        this.trailer = data.results.find(result => result.type === 'Trailer') || null;
+      });
     }
   }
+
 
   obtenerImagenPelicula(tam: number, path: string | null): string {
     return path ? `https://image.tmdb.org/t/p/w${tam}${path}` : 'assets/placeholder.svg';
   }
 
   setProductionCompanyLogo(): void {
-    const company = this.movies[0].production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
+    if (this.movies){
+    const company = this.movies.production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
     this.productionCompanyLogo = company ? this.obtenerImagenPelicula(200, company.logo_path) : null;
+    }
   }
 
   obtenerIconoGenero(genreName: string): string {
@@ -89,7 +96,7 @@ export class DetailsMovieComponent implements OnInit {
       default:
         return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/help_outline/v27/24px.svg';
     }
-  }  
+  }
 
   getMovieCast(id: number): void {
     this.detailsMovieService.getMovieCast(id).subscribe((data: CastResponse) => {
@@ -101,12 +108,6 @@ export class DetailsMovieComponent implements OnInit {
   getMovieProviders(id: number): void {
     this.detailsMovieService.getMovieProviders(id).subscribe((data: ProvidersResponse) => {
       this.providers = data.results.ES?.flatrate || [];
-    });
-  }
-
-  getMovieTrailer(id: number): void {
-    this.detailsMovieService.getMovieTrailer(id).subscribe((data: VideoResponse) => {
-      this.trailer = data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube') || null;
     });
   }
 
@@ -129,6 +130,12 @@ export class DetailsMovieComponent implements OnInit {
 
   getDirectors(): Crew[] {
     return this.crew.filter(member => member.known_for_department === 'Directing');
+  }
+
+  verTrailer(): void {
+    if (this.trailer) {
+        window.open(`https://www.youtube.com/watch?v=${this.trailer.key}`, '_blank');
+    }
   }
 
 }

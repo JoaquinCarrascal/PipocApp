@@ -283,6 +283,28 @@ body {
     cursor: pointer;
 }
 
+.movie-trailer button {
+    background-color: #00FFAE;
+    color: #09273C;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.movie-trailer button:hover {
+    background-color: #00D994;
+    transform: scale(1.05);
+}
+
+.movie-trailer button:active {
+    background-color: #00B37A;
+    transform: scale(1);
+}
+
 /* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
     .card {
@@ -396,7 +418,7 @@ body {
     }
 
     .movie-image {
-        width: 472px;
+        width: 47s2px;
         height: 635px;
     }
 
