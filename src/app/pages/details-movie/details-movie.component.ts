@@ -53,51 +53,6 @@ export class DetailsMovieComponent implements OnInit {
     }
   }
 
-  obtenerIconoGenero(genreName: string): string {
-    switch (genreName.toLowerCase()) {
-      case 'action':
-        return 'https://fonts.gstatic.com/icon/font?kit=kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsKTAp4vcXjgvg&skey=b8dc2088854b122f&v=v219';
-      case 'adventure':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/explore/v15/24px.svg';
-      case 'animation':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/movie/v20/24px.svg';
-      case 'comedy':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/tag_faces/v21/24px.svg';
-      case 'crime':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/gavel/v25/24px.svg';
-      case 'documentary':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/emoji_objects/v26/24px.svg';
-      case 'drama':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/theater_comedy/v24/24px.svg';
-      case 'family':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/family_restroom/v24/24px.svg';
-      case 'fantasy':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/auto_awesome/v23/24px.svg';
-      case 'history':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/history/v26/24px.svg';
-      case 'horror':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/ghost/v18/24px.svg';
-      case 'music':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/music_note/v25/24px.svg';
-      case 'mystery':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/help_center/v22/24px.svg';
-      case 'romance':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/favorite/v26/24px.svg';
-      case 'science fiction':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/science/v23/24px.svg';
-      case 'tv movie':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/tv/v27/24px.svg';
-      case 'thriller':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/warning/v26/24px.svg';
-      case 'war':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/military_tech/v26/24px.svg';
-      case 'western':
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/local_florist/v24/24px.svg';
-      default:
-        return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/help_outline/v27/24px.svg';
-    }
-  }
-
   getMovieCast(id: number): void {
     this.detailsMovieService.getMovieCast(id).subscribe((data: CastResponse) => {
       this.cast = data.cast;
