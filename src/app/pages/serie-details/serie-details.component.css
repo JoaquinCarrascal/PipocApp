@@ -95,6 +95,10 @@ body {
     transition: opacity 0.3s;
 }
 
+.btn:hover{
+color: black;
+}
+
 /* Mostrar el bocadillo al pasar el ratón sobre el ícono */
 .genre-icon-container:hover .genre-tooltip {
     visibility: visible;
@@ -182,7 +186,7 @@ body {
 }
 
 .rating-box {
-    background-color: rgba(9, 39, 60, 0.5);
+    background-color: #09273c8a;
     padding: 10px;
     border-radius: 8px;
     display: inline-block;
@@ -234,6 +238,11 @@ body {
 
 
 .badge{
+    background-color: #00FFAE;
+
+}
+
+.boton{
     background-color: #00FFAE;
 
 }

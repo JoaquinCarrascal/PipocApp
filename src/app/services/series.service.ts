@@ -69,7 +69,7 @@ export class SeriesService {
     return this.http.get<Keyword>(`https://api.themoviedb.org/3/tv/${id}/keywords?api_key=${apiKey}`)
   }
   
-  getTrailers(key: string) : Observable<TrailerResponse>{
-    return this.http.get<TrailerResponse>(``)
+  getTrailer(id: number): Observable<TrailerResponse>{
+    return this.http.get<TrailerResponse>(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}`);
   }
 }

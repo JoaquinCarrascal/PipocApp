@@ -32,7 +32,7 @@ export class SerieDetailsComponent implements OnInit {
   trailers : string[] = []
   listaCanales : string[] = []
 
-  trailer!: TrailerResponse;
+  trailerUrl : any
   logoPhotos : string[] = []
 
   video : string | undefined;
@@ -63,8 +63,8 @@ export class SerieDetailsComponent implements OnInit {
 
 
 
-  obtenerImagenSerie(tam: number, path: string) {
-    return `https://image.tmdb.org/t/p/w${tam}/${path}`;
+  obtenerImagenOriginal(path: string): string {
+    return `https://image.tmdb.org/t/p/original${path}`;
   }
 
   getSerieCast(id: number){
@@ -88,12 +88,13 @@ export class SerieDetailsComponent implements OnInit {
   }
 
 
-  getTrailers(key : string){
-    return this.serieDetailsService.getTrailers(key).subscribe((data) => {
-
-    })
+  getTrailer(id: number): void {
+    this.serieDetailsService.getTrailer(id).subscribe((data: TrailerResponse) => {
+      if (data.results.length > 0) 
+        this.trailerUrl = `https://www.youtube.com/watch?v=${data.results[0].key}`;
+        window.open(this.trailerUrl, '_blank');
+    });
   }
-
   
     
   }
