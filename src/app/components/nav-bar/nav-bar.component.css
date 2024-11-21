@@ -1,5 +1,12 @@
 .bgapp{
-
     background-color: #00FFAE;
+}
 
+.avatar {
+    width: auto;
+    height: auto;
+    max-height: 40px; /* Ajusta este valor según sea necesario */
+    max-width: 40px;  /* Ajusta este valor según sea necesario */
+    border-radius: 50%;
+    margin-right: 10px;
 }

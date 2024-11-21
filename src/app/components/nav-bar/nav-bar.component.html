@@ -1,43 +1,58 @@
 <div class="container-fluid justify-content-center">
 
-    <div class="row justify-content-start bgapp">
+  <div class="row justify-content-start bgapp">
 
-        <div class="col-sm-3 col-lg-2 col-xxl-1">
-            <div class="align-content-center">
-                <a [routerLink]="['/home']">
+    <div class="col-sm-3 col-lg-2 col-xxl-1">
+      <div class="align-content-center">
+        <a [routerLink]="['/home']">
 
-                    <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa GasApp"
-                        style="width: 140px;">
-                  
-                </a>
-            </div>
-        </div>
+          <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa GasApp" style="width: 140px;">
 
-        <nav class="col-6 navbar navbar-expand ms-3" style="font-size: 15pt; font-weight: 500; color:black;">
-            <div class="container-fluid">
-              <div id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['/movie-list']">Películas populares</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['/people']">Actores</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/series']">Series populares</a>
-                  </li>
-                  
-                </ul>
-                
-              </div>
-            </div>
-        </nav>
-
-        <div class="col-1 ms-auto d-flex align-items-center justify-content-end me-2">
-            <i class="bi bi-person-circle col-12 text-center" style="font-size: 24pt;"></i>
-        </div>
-
+        </a>
+      </div>
     </div>
 
-    
+    <nav class="col-6 navbar navbar-expand ms-3" style="font-size: 15pt; font-weight: 500; color:black;">
+      <div class="container-fluid">
+        <div id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="['/movie-list']">Películas populares</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="['/people']">Actores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/series']">Series populares</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="col-1 ms-auto d-flex align-items-center justify-content-end me-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 d-flex align-items-center">
+            @if(isLoggedIn()) {
+            <img [src]="userPhoto" alt="Avatar" class="avatar me-2" />{{ userName }}
+            <button class="btn btn-danger btn-sm ms-2" (click)="logout()">
+              Cerrar sesión
+            </button>
+            }@else {
+            <button class="btn btn-primary btn-sm" (click)="createRequestToken()">
+              Iniciar sesión en TMDB
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
 </div>
