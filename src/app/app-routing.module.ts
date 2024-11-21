@@ -7,6 +7,7 @@ import { PersonDetailsComponent } from './pages/person-details/person-details.co
 import { SeriesComponent } from './pages/series/series.component';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
+import { ApprovedComponent } from './components/approved/approved.component';
 
 const routes: Routes = [
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'series', component : SeriesComponent},
   {path: 'series/details/:idSerie', component: SerieDetailsComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
-
+  { path: 'approved', component: ApprovedComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   //{path: '**', component: PageNotFoundComponent}
 ];
 
