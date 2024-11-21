@@ -33,8 +33,22 @@
             </div>
         </nav>
 
+
         <div class="col-1 ms-auto d-flex align-items-center justify-content-end me-2">
-            <i class="bi bi-person-circle col-12 text-center" style="font-size: 24pt;"></i>
+             @if(isLoggedIn()) {
+              <img [src]="userPhoto" alt="Avatar" class="avatar" />{{ userName }}
+              <button class="btn btn-danger btn-sm" (click)="logout()">
+                Cerrar sesión
+              </button>
+              }@else {
+                
+                <button class="learn-more">
+                  <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                  </span>
+                  <span class="button-text">Learn More</span>
+                </button>
+              }
         </div>
 
     </div>
