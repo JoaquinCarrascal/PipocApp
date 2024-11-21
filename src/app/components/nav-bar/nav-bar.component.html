@@ -33,8 +33,25 @@
             </div>
         </nav>
 
-        <div class="col-1 ms-auto d-flex align-items-center justify-content-end me-2">
-            <i class="bi bi-person-circle col-12 text-center" style="font-size: 24pt;"></i>
+
+        <div class="col-3 ms-auto d-flex align-items-center justify-content-end me-2">
+             @if(isLoggedIn()) {
+              <img [src]="userPhoto" alt="Avatar" class="avatar img-thumbnail me-5"/>
+              <button class="learn-more" (click)="logout()">
+                <span class="circle" aria-hidden="true" (click)="logout()">
+                <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Cerrar&nbsp;sesión</span>
+              </button>
+              }@else {
+                
+                <button class="learn-more" (click)="createRequestToken()">
+                  <span class="circle" aria-hidden="true" (click)="createRequestToken()">
+                  <span class="icon arrow"></span>
+                  </span>
+                  <span class="button-text">Inicia&nbsp;sesión</span>
+                </button>
+              }
         </div>
 
     </div>
