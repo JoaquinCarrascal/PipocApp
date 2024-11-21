@@ -18,7 +18,7 @@ export class NavBarComponent {
       ? `https://image.tmdb.org/t/p/original${localStorage.getItem(
           'user_photo'
         )}`
-      : '';
+      : 'https://placehold.co/50x50';
   }
 
   createRequestToken() {

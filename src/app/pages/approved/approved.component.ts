@@ -26,7 +26,7 @@ export class ApprovedComponent implements OnInit {
 
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 500);
+        }, 1000);
 
       });
     });

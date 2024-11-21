@@ -31,7 +31,7 @@
   </div>
 
 </div>
-<div class="people-grid justify-content-center align-content-center mt-5" style="position: relative; top:100px;">
+<div class="justify-content-center align-content-center mt-5" style="position: relative; top:100px;">
 
 
   <!--MIA
@@ -85,12 +85,14 @@
 
   <!--SUYA V2-->
 
-  <div class="people-grid row justify-content-around mt-0 mb-4 movie-container" style="top:-200px;">
+  <div class="people-grid row justify-content-around align-content-center mt-0 mb-4 movie-container" style="top:-200px;">
 
     @for(person of filteredPeople; track person){
-    <a [routerLink]="['/person', person.id]" class="person-link">
-      <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
-        <img class="card-img" [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
+    
+      <div class="movie-card col-2 mt-auto mx-auto" style="margin-top: 0px;">
+        <a [routerLink]="['/person', person.id]" class="person-link" >
+          <img class="card-img" [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path" [alt]="person.name">
+        </a>
         <p class="text-light text-truncate mt-2" style="font-size: 19pt;">
           {{person.name}}
         </p>
@@ -109,7 +111,7 @@
         </p>
 
       </div>
-    </a>
+    
     }
   </div>
 
