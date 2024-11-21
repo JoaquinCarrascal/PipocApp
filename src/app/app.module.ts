@@ -24,6 +24,7 @@ import { DateFormaterPipe } from './pipes/date-formater.pipe';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
+import { ApprovedComponent } from './components/approved/approved.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
     SerieDetailsComponent,
     DateFormaterPipe,
     MovieListComponent,
-    OrderTriggerPipe
+    OrderTriggerPipe,
+    ApprovedComponent
   ],
   imports: [
     BrowserModule,
