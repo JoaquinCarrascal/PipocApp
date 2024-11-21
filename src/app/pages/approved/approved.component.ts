@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approved',
@@ -11,7 +12,8 @@ export class ApprovedComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router 
   ) {}
 
   ngOnInit(): void {
@@ -22,9 +24,13 @@ export class ApprovedComponent implements OnInit {
         localStorage.setItem('user_photo', response.avatar.tmdb.avatar_path);
         localStorage.setItem('logged_in', 'true');
 
-        window.location.href = 'http://localhost:4200/home';
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1500);
+
       });
     });
+
   }
 
 }

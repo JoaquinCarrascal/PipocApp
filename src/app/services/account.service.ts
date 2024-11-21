@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AccountDetailsResponse } from '../models/account-details.interface';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
-const API_BASE_URL = "https://api.themoviedb.org/3/movie";
+const API_BASE_URL = "https://api.themoviedb.org/3";
 
 @Injectable({
   providedIn: 'root'

@@ -4,6 +4,17 @@
 
 }
 
+.avatar{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 1px solid #09273C;
+    position: relative;
+}
+
+
 
 button {
     position: relative;
@@ -29,9 +40,10 @@ button {
     position: relative;
     display: block;
     margin: 0;
+    left: -25px;
     width: 3rem;
     height: 3rem;
-    background: #282936;
+    background: #09273C;
     border-radius: 1.625rem;
    }
    
@@ -73,7 +85,7 @@ button {
     bottom: 0;
     padding: 0.75rem 0;
     margin: 0 0 0 1.85rem;
-    color: #282936;
+    color: #09273C;
     font-weight: 700;
     line-height: 1.6;
     text-align: center;
@@ -82,6 +94,7 @@ button {
    
    button:hover .circle {
     width: 100%;
+    width: 14em;
    }
    
    button:hover .circle .icon.arrow {

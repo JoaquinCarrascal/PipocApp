@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavBarComponent {
 
   userName = '';
-  userPhoto = '';
+  userPhoto = 'https://placehold.co/50x50';
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -26,16 +26,17 @@ export class NavBarComponent {
       localStorage.setItem('token', response.request_token);
 
       // STEP 2 de la autenticación en TMDB (firma del token iniciando sesión en TMDB)
-      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/approved`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/home/approved`;
     });
   }
 
   isLoggedIn() {
-    return localStorage.getItem('logged_in') === 'true';
+    return localStorage.getItem('logged_in') === 'true' ? true : false;
   }
 
   logout() {
     localStorage.clear();
+    this.userPhoto = 'https://placehold.co/50x50';
     window.location.href = 'http://localhost:4200';
   }
 

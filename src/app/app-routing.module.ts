@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'person/:id', component: PersonDetailsComponent},
   {path: 'series', component : SeriesComponent},
   {path: 'series/details/:idSerie', component: SerieDetailsComponent},
-  {path: 'approved' , component: ApprovedComponent},
+  {path: 'home/approved' , component: ApprovedComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
 
   //{path: '**', component: PageNotFoundComponent}
