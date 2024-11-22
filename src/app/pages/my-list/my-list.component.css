@@ -1,0 +1,17 @@
+.colored-aqua{
+
+    background-color:#00FFAE !important;
+
+}
+
+.button-add{
+
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+
+}
+
+.img-filter {
+    -webkit-filter: blur(2px) brightness(110%) contrast(110%) grayscale(30%) sepia(30%);
+    filter: blur(2px) brightness(110%) contrast(110%) grayscale(30%) sepia(30%);
+  }

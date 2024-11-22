@@ -1,0 +1,30 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="container-fluid">
+
+    <div class="row justify-content-between mt-3 mx-2">
+
+        <div class="col-2 align-content-center">
+            <h2 class="text-light">Mis listas</h2>
+        </div>
+
+        <div class="col-5 align-content-center">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn colored-aqua fw-bold button-add" type="button">Crear listado</button>
+                </div>
+              </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+
+        @for(item of myList ; track item){
+            <p class="text-white">{{item.name}}</p>
+        }
+
+    </div>
+
+</div>
