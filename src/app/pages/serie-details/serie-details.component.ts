@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Serie, SerieResponse } from '../../models/serie.interface';
 import { SerieDetails } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -12,15 +12,24 @@ import { TrailerResponse } from '../../models/trailer.interface';
   templateUrl: './serie-details.component.html',
   styleUrl: './serie-details.component.css'
 })
+
+
 export class SerieDetailsComponent implements OnInit {
 
+  
+  readonly panelOpenState = signal(false);
+
+  
 
   constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService) { }
 
   
+  
   series : SerieDetails[] = [];
   serieDetails : SerieDetails[] = [];
   cast : SerieCast | undefined;
+
+  
 
   fechaSalida : string | undefined;
   name : string | undefined;
@@ -53,7 +62,7 @@ export class SerieDetailsComponent implements OnInit {
           this.keyWords = [data]
         })
 
-
+        
       });
       this.getSerieCast(Number(idSerie));
 

@@ -70,6 +70,34 @@
                         </div>
                     </div>
                 </div>
+
+                <h2 class="text-center mb-4">Temporadas</h2>
+
+                <div class="test">
+                    <div class="container">
+                        <div class="row justify-content-left">
+                            <div class="col-12 col-md-8" style="border-radius: 40px;">
+                                <mat-accordion style="border-radius: 40px;">
+                                    <div *ngFor="let serie of series[0].seasons">
+                                        <mat-expansion-panel class="no-border-radius" style="border-radius: 0;" hideToggle>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>{{ serie.name }}</mat-panel-title>
+                                                <mat-panel-description>
+                                                    Descripción
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                            <p>{{ serie.overview }}</p>
+                                        </mat-expansion-panel>
+                                    </div>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                
             </div>
         </div>
 
@@ -79,8 +107,17 @@
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Estado:</h4>
+                        <h4 class="mb-1 fw-bold">Estado</h4>
                         <h5 class="text-light">{{ series[0].status }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 d-flex align-items-center">
+                    <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Numero de temporadas</h4>
+                        <h5 class="text-light">{{ series[0].number_of_seasons }}</h5>
                     </div>
                 </div>
             </div>
@@ -89,7 +126,7 @@
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
-                        <h4 class="mb-0 fw-bold">Canales:</h4>
+                        <h4 class="mb-0 fw-bold">Canales</h4>
                     </div>
                     <div class="row mt-2">
                         <div *ngFor="let canales of series[0].networks; track by $index" class="col-3 text-center">
@@ -113,7 +150,7 @@
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Idioma Original:</h4>
+                        <h4 class="mb-1 fw-bold">Idioma Original</h4>
                         <h5 class="text-light">{{ series[0].original_language }}</h5>
                     </div>
                 </div>
@@ -123,7 +160,7 @@
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
-                        <h4 class="mb-0 fw-bold">Palabras claves:</h4>
+                        <h4 class="mb-0 fw-bold">Palabras claves</h4>
                     </div>
                     <div class="mt-2" style="padding-left: 20px;">
                         <span *ngFor="let keyword of keyWords" class="badge text-dark">

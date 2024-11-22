@@ -246,4 +246,10 @@ color: black;
     background-color: #00FFAE;
 
 }
+.no-border-radius .mat-expansion-panel {
+    border-radius: 0 !important;
+}
 
+.no-border-radius .mat-expansion-panel-header {
+    border-radius: 0 !important;
+}

@@ -26,6 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,7 @@ import { ApprovedComponent } from './pages/approved/approved.component';
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     NgCircleProgressModule.forRoot({
       "radius": 25,
       "space": -20,
