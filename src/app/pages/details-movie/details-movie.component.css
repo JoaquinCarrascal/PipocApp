@@ -1,250 +1,85 @@
-/* Estilos generales para el cuerpo del documento */
-body {
-    margin: 0;
-    /* Eliminar márgenes predeterminados */
-    padding: 0;
-    /* Eliminar padding predeterminado */
+.image-blur {
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: blur(5px);
+    height: 50vh; /* Ahora ocupa la mitad del espacio vertical de la imagen */
+    width: 100%;
+    top: 80px;
+    left: 0;
+    z-index: -1; /* Asegura que la imagen difuminada quede detrás del contenido */
+    filter: blur(5px) brightness(0.5); /* Añade brillo para oscurecer la imagen */
 }
 
-/* Fondo de imagen borrosa en la mitad superior */
 .background-image-blur {
     background-size: cover;
-    /* Ajustar la imagen para cubrir todo el contenedor */
-    opacity: 0.5;
-    /* Opacidad de la imagen */
-    filter: blur(5px);
-    /* Aplicar desenfoque a la imagen */
-    height: 50vh;
-    /* Altura de la mitad de la pantalla */
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    /* Ancho completo */
-    position: absolute;
-    /* Posición absoluta */
-    top: 80px;
-    /* Desplazar hacia abajo */
+    height: 50vh;
+    z-index: -1; /* Queda por debajo del contenido */
 }
 
-/* Fondo de imagen clara en la mitad inferior */
-.background-image-clear {
-    background-size: cover;
-    /* Ajustar la imagen para cubrir todo el contenedor */
-    height: 50vh;
-    /* Altura de la mitad de la pantalla */
-    width: 100%;
-    /* Ancho completo */
-    position: absolute;
-    /* Posición absoluta */
-    top: calc(50vh + 80px);
-    /* Desplazar hacia abajo */
-}
-
-/* Fondo de color sólido en la mitad inferior */
-.background-solid-color {
-    background-color: #09273C;
-    /* Color sólido (puedes cambiarlo según tus necesidades) */
-    height: 50vh;
-    /* Altura de la mitad de la pantalla */
-    width: 100%;
-    /* Ancho completo */
-    position: absolute;
-    /* Posición absoluta */
-    top: calc(50vh + 80px);
-    /* Desplazar hacia abajo */
-}
-
-/* Estilos para la tarjeta que contiene la imagen de la película */
-.card {
+.content {
     display: flex;
-    /* Usar flexbox para alinear elementos */
-    align-items: center;
-    /* Alinear elementos verticalmente al centro */
-    border-radius: 16px;
-    /* Hacer las esquinas más redondeadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Sombra para la tarjeta */
-    margin: 100px;
-    /* Margen alrededor de la tarjeta */
-    position: absolute;
-    /* Posición absoluta */
-    top: 45vh;
-    /* Posicionar en la mitad de la pantalla */
-    transform: translateY(-50%);
-    /* Centrar verticalmente */
+    flex-direction: row;  /* Cambia de columna a fila */
+    margin: 20px;
+    z-index: 1;  /* Asegura que el contenido quede por encima del fondo */
 }
 
-/* Estilos para la imagen de la película dentro de la tarjeta */
-.movie-image {
-    width: 472px;
-    /* Ancho de la imagen */
-    height: 635px;
-    /* Altura de la imagen */
-    border-radius: 16px;
-    /* Hacer las esquinas de la imagen más redondeadas */
+.watch-now {
+    text-align: center;
+    margin-top: 20px;
 }
 
-/* Estilos para los detalles de la película */
-.movie-details {
-    position: absolute;
-    /* Posición absoluta */
-    top: 72vh;
-    /* Posicionar en la mitad de la pantalla */
-    left: calc(520px + 120px);
-    /* Posicionar a la derecha de la tarjeta */
-    transform: translateY(-50%);
-    /* Centrar verticalmente */
-}
-
-/* Estilos para el título de la película */
-.movie-title {
-    font-size: 50px;
-    /* Tamaño de fuente grande */
-    font-weight: bold;
-    /* Texto en negrita */
-    color: white;
-    /* Color del texto blanco */
-}
-
-.movie-details {
-    color: white;
-}
-
-/* Contenedor del ícono del género */
-.genre-icon-container {
-    position: relative;
+.card-container {
     display: inline-block;
-    margin: 5px;
-}
-
-/* Estilos para el ícono del género */
-.genre-icon {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(120deg) brightness(100%) contrast(100%);
-}
-
-/* Bocadillo para mostrar el nombre del género */
-.genre-tooltip {
-    visibility: hidden;
-    background-color: #00FFAE;
-    color: #09273C;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    /* Posicionar el bocadillo arriba del ícono */
-    left: 50%;
-    margin-left: -60px;
-    width: 120px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-/* Mostrar el bocadillo al pasar el ratón sobre el ícono */
-.genre-icon-container:hover .genre-tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-.movie-cast {
-    margin-top: 20px;
-}
-
-.cast-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-}
-
-.cast-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.cast-item img {
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
-
-.cast-item .actor-name,
-.cast-item .actor-character {
-    margin: 0;
-    color: white;
-    text-align: center;
-}
-
-.movie-cast {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.movie-cast div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 20px;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
 }
 
-.movie-cast img {
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    margin-bottom: 5px;
+.card {
+    margin: 40px 0px 0px 40px;
+    background-color: white;
+    border-radius: 16px;
+    display: inline-block;
+
 }
 
-.movie-cast p {
-    margin: 0;
-    color: white;
-    text-align: center;
+.movie-image-container {
+
+    display: block;
+    width: 450px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 16px;
+    overflow: hidden;
+  
 }
 
-.details-up {
-    margin-bottom: 150px;
-    /* Add a large separation */
+.movie-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    
 }
 
 .movie-details-left {
-    position: absolute;
-    top: calc(50vh + 500px);
-    /* Position higher */
-    left: 100px;
-    color: white;
-    /* Optional: add background color */
+    margin: 40px 0px 0px 40px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.popcorn-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 10px;
-    filter: none;
-    /* Ensure no filter is applied initially */
+.movie-details-left h4{
+    font-size: 28px;
 }
 
-.rating-box {
-    background-color: rgba(9, 39, 60, 0.5);
-    /* Same background color with more transparency */
-    padding: 10px;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-.movie-detail-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.movie-details-left p {
-    margin-left: 34px; /* Ajusta el margen izquierdo para alinear con el contenido superior */
-    margin-bottom: 20px; /* Espacio entre los párrafos */
+.movie-details-left h5{
+    margin-top: 30px;
+    font-size: 18px;
 }
 
 .detail-icon {
@@ -254,192 +89,73 @@ body {
     filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(120deg) brightness(100%) contrast(100%);
 }
 
-.movie-directors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Espacio entre los directores */
+.movie-details-container {
+    margin-left: 80px; /* Deja espacio a la izquierda de los detalles */
+    justify-content: flex-start; /* Alinea los detalles en la parte superior */
+    flex: 1;
+    margin-top: 70px;
 }
 
-.director-item {
+.movie-title {
+    font-size: 60px;
+    font-weight: bold;
     color: white;
 }
 
-.watch-now {
-    text-align: center;
-    margin-top: 20px;
+.genre-icons-container {
+    margin-bottom: 15px;
 }
 
-.production-companies {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.company-logo {
-    width: 40px;
-    height: auto;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.movie-trailer button {
-    background-color: #00FFAE;
-    color: #09273C;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
+.genre-tooltip {
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    padding: 4px 14px;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-.movie-trailer button:hover {
-    background-color: #00D994;
-    transform: scale(1.05);
+.movie-date {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
-.movie-trailer button:active {
-    background-color: #00B37A;
-    transform: scale(1);
+.rating-row{
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 4px 14px;
+    border-radius: 10px;
+    width: 315px;
 }
 
-/* Estilos para pantallas pequeñas */
-@media (max-width: 768px) {
-    .card {
-        flex-direction: column;
-        align-items: center;
-        margin: 20px;
-        top: auto;
-        transform: none;
-    }
-
-    .movie-image {
-        width: 100%;
-        height: auto;
-        border-radius: 16px;
-    }
-
-    .movie-details {
-        position: static;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin-top: 20px;
-    }
-
-    .movie-title {
-        font-size: 32px;
-    }
-
-    .movie-details-left {
-        position: static;
-        top: auto;
-        left: auto;
-        margin-top: 20px;
-    }
-
-    .production-companies {
-        flex-direction: column;
-    }
-
-    .company-logo {
-        width: 80px;
-    }
-
-    .cast-row {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .cast-item {
-        margin-bottom: 20px;
-    }
+.trailer{
+    background-color: springgreen;
+    padding: 8px 20px;
+    color: rgb(6, 6, 57);
+    font-weight: bold;
 }
 
-/* Estilos para pantallas medianas */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .card {
-        margin: 50px;
-        top: auto;
-        transform: none;
-    }
-
-    .movie-image {
-        width: 300px;
-        height: auto;
-    }
-
-    .movie-details {
-        position: static;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin-top: 20px;
-    }
-
-    .movie-title {
-        font-size: 40px;
-    }
-
-    .movie-details-left {
-        position: static;
-        top: auto;
-        left: auto;
-        margin-top: 20px;
-    }
-
-    .production-companies {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .company-logo {
-        width: 80px;
-    }
-
-    .cast-row {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .cast-item {
-        margin-bottom: 20px;
-    }
+.details-down{
+    margin-top: 15vh;
 }
 
-/* Estilos para pantallas grandes */
-@media (min-width: 1025px) {
-    .card {
-        margin: 100px;
-        top: 45vh;
-        transform: translateY(-50%);
-    }
+.actors{
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
 
-    .movie-image {
-        width: 47s2px;
-        height: 635px;
-    }
-
-    .movie-details {
-        position: absolute;
-        top: 72vh;
-        left: calc(520px + 120px);
-        transform: translateY(-50%);
-    }
-
-    .movie-title {
-        font-size: 50px;
-    }
-
-    .movie-details-left {
-        position: absolute;
-        top: calc(50vh + 500px);
-        left: 100px;
-    }
-
-    .company-logo {
-        width: 60px;
-    }
 }
+
+.card-reparto{
+    background-color: #09273C;
+    color: white;
+    border: none;
+}
+
+.card-reparto img{
+    width: 120px;
+    height: 160px;
+    border-radius: 10px;
+}
+
+

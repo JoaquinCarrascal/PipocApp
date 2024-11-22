@@ -3,12 +3,20 @@
     background-size: cover;
     background-position: center;
     position: absolute;
-    filter: blur(5px);
+    filter: blur(5px) brightness(0.5); /* Añade brillo para oscurecer la imagen */
     height: 50vh; /* Ahora ocupa la mitad del espacio vertical de la imagen */
     width: 100%;
     top: 80px;
     left: 0;
     z-index: -1; /* Asegura que la imagen difuminada quede detrás del contenido */
+}
+
+.background-solid-color {
+    background-color: #09273C;
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: calc(50vh + 80px);
 }
 
 /* Contenedor principal de la tarjeta, ajustado para mostrar contenido al lado de la imagen */
@@ -33,6 +41,7 @@
     background-color: white;
     border-radius: 16px;
     display: inline-block;
+
 }
 
 /* Solo la imagen dentro de la tarjeta */
@@ -43,6 +52,7 @@
     height: auto;
     border-radius: 16px;
     overflow: hidden;
+  
 }
 
 /* Estilo de la imagen */
@@ -51,6 +61,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 16px;
+    
 }
 
 /* Detalles de la película al lado de la imagen */
@@ -144,6 +155,7 @@
     color: white;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+
 }
 
 .card-reparto{
@@ -156,4 +168,19 @@
     width: 120px;
     height: 160px;
     border-radius: 10px;
+}
+
+.temporadas-title {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.temporadas-section {
+    margin-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.channel-logo {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(100%) saturate(500%) hue-rotate(100deg) brightness(100%) contrast(100%);
 }

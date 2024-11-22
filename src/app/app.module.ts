@@ -27,6 +27,7 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ShowStatusPipe } from './pipes/show-status.pipe';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DateFormaterPipe,
     MovieListComponent,
     OrderTriggerPipe,
-    ApprovedComponent
+    ApprovedComponent,
+    ShowStatusPipe
   ],
   imports: [
     BrowserModule,
