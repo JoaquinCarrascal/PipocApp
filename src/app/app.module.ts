@@ -25,6 +25,9 @@ import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
+import { RatingModule } from 'primeng/rating';
+
+
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { ApprovedComponent } from './pages/approved/approved.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    RatingModule,
     MatIconModule,
     DropdownModule,
     FormsModule,

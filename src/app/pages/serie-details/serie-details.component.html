@@ -13,6 +13,8 @@
                 alt="Imagen de la serie" class="movie-image">
         </div>
         
+     
+        
         
         <div class="movie-details">
             <div class="details-up mb-4">
@@ -38,14 +40,20 @@
                 <div class="movie-rating">
                     <div class="rating-box mb-3">
                         <div class="rating-row">
-                            <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
-                                <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
-                            </ng-container>
+                          <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
+                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateSeries(i + 1)">
+                          </ng-container>
+                   
                         </div>
-                    </div>
-                    <div class="py-3">
-                        <button (click)="getTrailer(series[0].id)" class="btn boton ">Ver Trailer</button>
-                    </div>
+                      </div>
+                      <div>
+                        <span class="strong" style="font-size: 20px;">Rating : {{userRating}} </span>
+                      </div>
+                      
+                      <div class="py-3">
+                        <button (click)="getTrailer(series[0].id)" class="btn boton">Ver Trailer</button>
+                      </div>
+                    
                 </div>
             </div>
 
