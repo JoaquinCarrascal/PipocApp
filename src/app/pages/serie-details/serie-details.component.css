@@ -1,255 +1,159 @@
-/* Estilos generales para el cuerpo del documento */
-body {
-    margin: 0;
-    padding: 0;
-}
-
 /* Fondo de imagen borrosa en la mitad superior */
-.background-image-blur {
+.image-blur {
     background-size: cover;
-    opacity: 0.5;
+    background-position: center;
+    position: absolute;
     filter: blur(5px);
-    height: 50vh;
+    height: 50vh; /* Ahora ocupa la mitad del espacio vertical de la imagen */
     width: 100%;
-    position: absolute;
     top: 80px;
+    left: 0;
+    z-index: -1; /* Asegura que la imagen difuminada quede detrás del contenido */
 }
 
-/* Fondo de color sólido en la mitad inferior */
-.background-solid-color {
-    background-color: #09273C;
-    height: 50vh;
-    width: 100%;
-    position: absolute;
-    top: calc(50vh + 80px);
-}
-
-/* Estilos para la tarjeta que contiene la imagen de la serie */
-.card {
+/* Contenedor principal de la tarjeta, ajustado para mostrar contenido al lado de la imagen */
+.content {
     display: flex;
-    align-items: center;
+    flex-direction: row;  /* Cambia de columna a fila */
+    margin: 20px;
+    z-index: 1;  /* Asegura que el contenido quede por encima del fondo */
+}
+
+/* Contenedor de la tarjeta para la imagen */
+.card-container {
+    display: inline-block;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Fondo blanco de la tarjeta cubriendo solo la imagen */
+.card {
+    margin: 40px 0px 0px 40px;
     background-color: white;
     border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 100px;
-    position: absolute;
-    top: 40vh;
-    left: 0;
-    transform: translateY(-50%);
+    display: inline-block;
 }
 
-/* Estilos para la imagen de la serie dentro de la tarjeta */
-.movie-image {
-    width: 472px;
-    height: 635px;
+/* Solo la imagen dentro de la tarjeta */
+.movie-image-container {
+
+    display: block;
+    width: 450px; /* Ajusta el tamaño de la imagen */
+    height: auto;
     border-radius: 16px;
-    margin: 5px;
+    overflow: hidden;
 }
 
-/* Estilos para los detalles de la serie */
-.movie-details {
-    position: absolute;
-    top: 62vh;
-    left: calc(520px + 120px);
-    transform: translateY(-50%);
-    color: white;
+/* Estilo de la imagen */
+.movie-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
 }
 
-/* Estilos para el título de la serie */
+/* Detalles de la película al lado de la imagen */
+.movie-details-container {
+    margin-left: 80px; /* Deja espacio a la izquierda de los detalles */
+    justify-content: flex-start; /* Alinea los detalles en la parte superior */
+    flex: 1;
+    margin-top: 70px;
+}
+
+/* Título de la película */
 .movie-title {
-    font-size: 50px;
+    font-size: 60px;
     font-weight: bold;
     color: white;
 }
 
-/* Contenedor del ícono del género */
-.genre-icon-container {
-    position: relative;
-    display: inline-block;
-    margin: 5px;
+/* Estilos para los géneros */
+.genre-icons-container {
+    margin-bottom: 15px;
 }
 
-/* Estilos para el ícono del género */
-.genre-icon {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(120deg) brightness(100%) contrast(100%);
-}
-
-/* Bocadillo para mostrar el nombre del género */
+/* Géneros */
 .genre-tooltip {
-    visibility: hidden;
-    background-color: #00FFAE;
-    color: #09273C;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    width: 120px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    padding: 4px 14px;
+    font-weight: bold;
 }
 
-.btn:hover{
-color: black;
-}
-
-/* Mostrar el bocadillo al pasar el ratón sobre el ícono */
-.genre-icon-container:hover .genre-tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-.movie-cast {
-    margin-top: 20px;
-}
-
-.cast-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-}
-
-.cast-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.cast-item img {
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
-
-.cast-item .actor-name,
-.cast-item .actor-character {
-    margin: 0;
+/* Detalles de la fecha, valoración, y otros */
+.movie-date {
     color: white;
-    text-align: center;
-}
-
-.movie-cast {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.movie-cast div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-
-.movie-cast img {
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
-
-.movie-cast p {
-    margin: 0;
-    color: white;
-    text-align: center;
-}
-
-.details-up {
-    margin-bottom: 150px;
-}
-
-.movie-details-left {
-    position: absolute;
-    top: calc(40vh + 500px);
-    left: 100px;
-    width: 472px;
-    color: white;
-    padding: 20px;
-    border-radius: 16px;
-   
-}
-
-.popcorn-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 10px;
-    filter: none;
-}
-
-.rating-box {
-    background-color: #09273c8a;
-    padding: 10px;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-.movie-detail-item {
-    display: flex;
-    align-items: center;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
-.detail-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    
-}
-
-.genero{
-    color: rgba(255, 255, 255, 0.603);
-}
-
-.emision-icon{
-    width: 50%;
-   
-;
-}
-
+/* Detalles adicionales como estado de emisión, temporadas, idioma */
 .movie-details-left {
-
+    margin: 40px 0px 0px 40px;
     padding: 20px;
     border-radius: 10px;
+}
+
+.movie-details-left h4{
+    font-size: 28px;
+}
+
+.movie-details-left h5{
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.background-image-blur {
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    z-index: -1; /* Queda por debajo del contenido */
+}
+
+.rating-row{
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 4px 14px;
+    border-radius: 10px;
+    width: 215px;
+}
+
+.trailer{
+    background-color: springgreen;
+    padding: 8px 20px;
+    color: rgb(6, 6, 57);
+    font-weight: bold;
+}
+
+.actor-image{
+    width: 100px;
+    height: 100px;
+}
+
+.details-down{
+    margin-top: 15vh;
+}
+
+.actors{
     color: white;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
 }
 
-.movie-detail-item {
-    margin-bottom: 20px;
+.card-reparto{
+    background-color: #09273C;
+    color: white;
+    border: none;
 }
 
-.detail-icon {
-    width: 48px;
-    height: 48px;
-}
-
-.badge {
-    font-size: 1rem;
-    padding: 10px;
-}
-
-
-.badge{
-    background-color: #00FFAE;
-
-}
-
-.boton{
-    background-color: #00FFAE;
-
-}
-.no-border-radius .mat-expansion-panel {
-    border-radius: 0 !important;
-}
-
-.no-border-radius .mat-expansion-panel-header {
-    border-radius: 0 !important;
+.card-reparto img{
+    width: 120px;
+    height: 160px;
+    border-radius: 10px;
 }

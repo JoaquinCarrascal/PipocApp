@@ -1,108 +1,26 @@
 <app-nav-bar></app-nav-bar>
 
-<body>
-    <div class="background-image-blur" 
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
+<div class="banner">
+    <div class="image-blur" 
+    [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
     </div>
-    <div class="background-solid-color"></div>
+</div>
 
-    <div *ngIf="series.length > 0">
 
-        <div class="card mb-4">
-            <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
-                alt="Imagen de la serie" class="movie-image">
-        </div>
-        
-        
-        <div class="movie-details">
-            <div class="details-up mb-4">
-                
-                <div class="movie-title-container text-white">
-                    <h1 class="movie-title">{{ series[0].name }}</h1>
-                </div>
-
-                <div class="genre-icons-container mb-3">
-                    <div class="genre-tooltip" *ngFor="let genre of series[0].genres">
-                        {{ genre.name }}
-                    </div>
-                </div>
-                
-                <div class="movie-date genero mb-3">
-                    <h3>{{ genero }}</h3>
-                </div>
-
-                <div class="movie-date mb-3">
-                    <h3>{{ series[0].first_air_date }}</h3>
-                </div>
-
-                <div class="movie-rating">
-                    <div class="rating-box mb-3">
-                        <div class="rating-row">
-                            <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
-                                <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon">
-                            </ng-container>
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <button (click)="getTrailer(series[0].id)" class="btn boton ">Ver Trailer</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="details-down">
-                <div class="movie-description mb-4">
-                    <p class="text-white">{{ descripcion }}</p>
-                </div>
-
-                <h2 class="text-center mb-4">Reparto</h2>
-                <div class="movie-cast d-flex align-self-start justify-content-center">
-                    <div class="cast-row text-center">
-                        <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
-                            <a [routerLink]="['/person', actor.id]" class="person-link">
-                                <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
-                                alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
-                            </a>
-                           
-                            <div class="d-flex flex-column">
-                                <p class="actor-name">{{ actor.name }}</p>
-                                <p class="actor-character">{{ actor.character }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="text-center mb-4">Temporadas</h2>
-
-                <div class="test">
-                    <div class="container">
-                        <div class="row justify-content-left">
-                            <div class="col-12 col-md-8" style="border-radius: 40px;">
-                                <mat-accordion style="border-radius: 40px;">
-                                    <div *ngFor="let serie of series[0].seasons">
-                                        <mat-expansion-panel class="no-border-radius" style="border-radius: 0;" hideToggle>
-                                            <mat-expansion-panel-header>
-                                                <mat-panel-title>{{ serie.name }}</mat-panel-title>
-                                                <mat-panel-description>
-                                                    Descripción
-                                                </mat-panel-description>
-                                            </mat-expansion-panel-header>
-                                            <p>{{ serie.overview }}</p>
-                                        </mat-expansion-panel>
-                                    </div>
-                                </mat-accordion>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-
-                
-                
+<div *ngIf="series.length > 0">
+<div class="content row">
+    <!-- Tarjeta de la imagen -->
+    <div class="card-container col-3">
+        <div class="card">
+            <div class="movie-image-container">
+                <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/400x600?text=Imagen+no+disponible'"
+                    alt="Imagen de la serie" class="movie-image">
             </div>
         </div>
 
-        <div class="movie-details-left container mb-4">
+        <!-- Detalles adicionales como estado de emisión, temporadas, idioma -->
 
+        <div class="movie-details-left text-white container mb-4">
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
@@ -121,7 +39,7 @@
                     </div>
                 </div>
             </div>
-        
+            
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
@@ -131,21 +49,20 @@
                     <div class="row mt-2">
                         <div *ngFor="let canales of series[0].networks; track by $index" class="col-3 text-center">
                             <img *ngIf="canales.logo_path" 
-                                 [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
-                                 alt="Logo del canal" 
-                                 class="img-fluid rounded" 
-                                 style="max-width: 100px; padding-left : 20%">
+                                [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
+                                alt="Logo del canal" 
+                                class="img-fluid rounded" 
+                                style="max-width: 100px; padding-left : 20%">
                             <img *ngIf="!canales.logo_path" 
-                                 src="https://placehold.co/150x230?text=Imagen+no+disponible" 
-                                 alt="placeholder" 
-                                 class="img-fluid rounded" 
-                                 style="max-width: 100px;">
+                                src="https://placehold.co/150x230?text=Imagen+no+disponible" 
+                                alt="placeholder" 
+                                class="img-fluid rounded" 
+                                style="max-width: 100px;">
                         </div>
                     </div>
                 </div>
             </div>
-        
-        
+    
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
@@ -155,7 +72,7 @@
                     </div>
                 </div>
             </div>
-
+    
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
@@ -163,7 +80,7 @@
                         <h4 class="mb-0 fw-bold">Palabras claves</h4>
                     </div>
                     <div class="mt-2" style="padding-left: 20px;">
-                        <span *ngFor="let keyword of keyWords" class="badge text-dark">
+                        <span *ngFor="let keyword of keyWords" class="badge text-white">
                             {{ keyword.results[0].name }}
                         </span>
                     </div>
@@ -172,4 +89,91 @@
         </div>
     </div>
 
-</body>
+    <!-- Información principal de la serie -->
+    <div class="movie-details-container col-10">
+        <h1 class="movie-title">{{ series[0].name }}</h1>
+        
+        <!-- Géneros -->
+        <div class="genre-icons-container d-flex mb-3 gap-3">
+            <div class="genre-tooltip" *ngFor="let genre of series[0].genres">
+                {{ genre.name }}
+            </div>
+        </div>
+
+        <!-- Fecha de lanzamiento -->
+
+        <div class="movie-date mb-3">
+            <h3>{{ series[0].first_air_date }}</h3>
+        </div>
+
+        <!-- Valoración -->
+        <div class="movie-rating">
+            <div class="rating-box mb-3">
+                <div class="rating-row">
+                    <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
+                        <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" style="width: 36px;">
+                    </ng-container>
+                </div>
+            </div>
+            <div class="py-3">
+                <button (click)="getTrailer(series[0].id)" class="trailer btn boton ">Ver Trailer</button>
+            </div>
+        </div>
+        <!-- Detalles adicionales de la serie -->
+    <div class="details-down">
+        <!-- Descripción de la serie -->
+        <div class="movie-description mb-4">
+            <p class="text-white">{{ descripcion }}</p>
+        </div>
+
+        <!-- Reparto -->
+        <h2 class="text-start mb-4 text-white">Reparto</h2>
+        <div class="movie-cast d-flex align-self-start justify-content-center">
+            <div class="actors d-flex text-center">
+                <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
+                    <div class="card card-reparto">
+                        <a [routerLink]="['/person', actor.id]" class="person-link">
+                            <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
+                                alt="{{ actor.name }}" class="actor-image">
+                        </a>
+                        <div class="d-flex flex-column">
+                            <p class="actor-name">{{ actor.name }}</p>
+                            <p class="actor-character">{{ actor.character }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Temporadas -->
+        <h2 class="text-center text-white mb-4">Temporadas</h2>
+        <div class="test">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8" style="border-radius: 40px;">
+                        <mat-accordion style="border-radius: 40px;">
+                            <div *ngFor="let serie of series[0].seasons">
+                                <mat-expansion-panel class="no-border-radius" style="border-radius: 0;" hideToggle>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>{{ serie.name }}</mat-panel-title>
+                                        <mat-panel-description>
+                                            Descripción
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <p>{{ serie.overview }}</p>
+                                </mat-expansion-panel>
+                            </div>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    
+
+    
+</div>
+</div>
