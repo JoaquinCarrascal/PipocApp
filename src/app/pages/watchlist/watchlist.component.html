@@ -1,0 +1,19 @@
+<app-nav-bar style="position:fixed; width:100%; z-index: 100;"></app-nav-bar>
+
+<div>
+  <h2>Películas en la lista de seguimiento</h2>
+  <ul>
+    <li *ngFor="let movie of watchlistMovies">
+      {{ movie.results[0].title }}  
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h2>Series en la lista de seguimiento</h2>
+  <ul>
+    <li *ngFor="let series of watchlistSeries">
+      {{ series.page }}
+    </li>
+  </ul>
+</div>
