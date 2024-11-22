@@ -36,8 +36,11 @@
                 </div>
 
                 <div class="my-3 ms-3" style="position: relative; left:4px;">
-                    <input type="checkbox" name="check-free" id="check-free-id" class="me-2">
-                    <label for="check-free" style="font-size:14pt;" id="check-label"> Sólo gratuitas </label>
+                    <label class="cr-wrapper">
+                        <input type="checkbox" checked="checked"/>
+                        <div class="cr-input"></div>
+                        <span>Sólamente gratuitas</span>
+                    </label>
                 </div>
                 <div class="container mx-auto">
                     <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
