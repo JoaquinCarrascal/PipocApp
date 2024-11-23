@@ -1,6 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import {ListResponse , myList } from '../../models/list-response';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { ListResponse, myList } from '../../models/list-response';
 import { MyListsService } from '../../services/my-lists.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  standalone: true,
+  template: `
+		<div class="modal-header">
+			<h4 class="modal-title">Confirmación de borrado</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+
+      <div class="alert alert-warning text-center" role="alert">
+        <p class="mb-0">¿Está seguro de borrar éste listado?</p>
+        <p class="mb-0">Ésta decisión no se podrá revertir</p>
+      </div>
+      
+			<button class="btn btn-danger d-block mx-auto" (click)="deleteList(id)" >Borrar</button>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')">Cerrar</button>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+  activeModal = inject(NgbActiveModal);
+  listServ = inject(MyListsService);
+
+  deleteList(id: number) {
+    this.listServ.deleteList(id).subscribe(() => {
+      this.deleteListId.emit(id);
+      this.activeModal.close('Deleted');
+    });
+  }
+
+  @Input() id !: number;
+  @Output() deleteListId = new EventEmitter<number>();
+}
+
+
+
 
 @Component({
   selector: 'app-my-list',
@@ -9,18 +50,67 @@ import { MyListsService } from '../../services/my-lists.service';
 })
 export class MyListComponent implements OnInit {
 
-myList: myList [] = [];
+  myList: myList[] = [];
+  backPhotosMap: { [key: number]: string } = {};
+  newListName: string = '';
 
-constructor(private listServ: MyListsService) { }
+  private modalService = inject(NgbModal);
 
 
 
-ngOnInit(): void { 
+  constructor(private listServ: MyListsService) { }
 
-  this.listServ.getLists().subscribe((data: ListResponse) => {
-    this.myList = data.results;
-  });
 
-}
+  ngOnInit(): void {
+
+    this.myList = [];
+    this.backPhotosMap = {};
+
+    this.listServ.getLists().subscribe((data: ListResponse) => {
+      this.myList = data.results;
+      this.myList.forEach(list => {
+        this.loadBackPhoto(list.id);
+      });
+    });
+
+  }
+
+  loadBackPhoto(idList: number) {
+    this.listServ.getListItems(idList).subscribe((data) => {
+      for (let item of data.items) {
+        if (item.backdrop_path) {
+          this.backPhotosMap[idList] = 'https://image.tmdb.org/t/p/original/' + item.backdrop_path;
+          return;
+        }
+      }
+      this.backPhotosMap[idList] = 'https://placehold.co/450x250?text=Foto+no+encontrada';
+    });
+  }
+
+  getBackPhoto(idList: number): string {
+    return this.backPhotosMap[idList] || 'https://placehold.co/450x250?text=Foto+no+encontrada';
+  }
+
+  deleteList(idList: number) {
+
+    this.myList = this.myList.filter(list => list.id !== idList);
+
+  }
+
+  createList() {
+    this.listServ.createList(this.newListName).subscribe((data) => {
+      this.ngOnInit();
+    });
+  }
+
+  open(listId: number) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.id = listId;
+    modalRef.componentInstance.deleteListId.subscribe((id: number) => {
+      this.deleteList(id);
+    });
+  }
+
+
 
 }

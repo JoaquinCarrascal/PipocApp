@@ -10,20 +10,58 @@
 
         <div class="col-5 align-content-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2"
+                [(ngModel)]="newListName">
                 <div class="input-group-append">
-                  <button class="btn colored-aqua fw-bold button-add" type="button">Crear listado</button>
+                    @if(newListName != ''){
+                        <button class="btn colored-aqua fw-bold button-add" type="button" (click)="createList()">Crear listado</button>
+                    }
+                    @else{
+                        <button class="btn btn-light fw-bold button-add" type="button" disabled>Crear listado</button>
+                    }
+                  
                 </div>
               </div>
         </div>
         
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center align-content-center">
 
-        @for(item of myList ; track item){
-            <p class="text-white">{{item.name}}</p>
+        
+        
+        @for(item of myList ; track item.id){
+            <div class="col-12 col-lg-6 col-xxl-4 mb-3">
+
+                
+                <div class="list-container rounded-2 mx-auto">
+                    <div class="buttons-list">
+                        <button class="btn btn-light btn-left" (click)="open(item.id)">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#8B1A10"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+
+                        </button>
+                        <button class="btn btn-light btn-right">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+
+                        </button>
+                    </div>
+                    <div class="img-overlay"></div>
+                    <img [src]="getBackPhoto(item.id)" alt="Imagen de {{item.name}}" class="img-fluid img-filter rounded-2">
+                    <div class="text-img">
+                        <p class="mb-0 text-light fw-bold">
+                            {{item.name}}
+                        </p>
+                        <p class="badge text-bg-secondary fs-6 mt-2">
+                           <span class="pe-2">{{item.item_count}}</span> elemento/s
+                        </p>
+                    </div>
+                </div>
+            
+            </div>
         }
+        
 
     </div>
 

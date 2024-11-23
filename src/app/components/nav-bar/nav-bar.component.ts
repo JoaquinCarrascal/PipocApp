@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavBarComponent {
 
   userName = '';
-  userPhoto = 'https://placehold.co/50x50';
+  userPhoto = '';
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
