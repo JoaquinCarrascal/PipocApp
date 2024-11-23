@@ -8,6 +8,7 @@ import { SeriesComponent } from './pages/series/series.component';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { ApprovedComponent } from './pages/approved/approved.component';
+import { RatedSeriesComponent } from './pages/rated-series/rated-series.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'person/:id', component: PersonDetailsComponent},
   {path: 'series', component : SeriesComponent},
   {path: 'series/details/:idSerie', component: SerieDetailsComponent},
+  {path : 'series/rated', component: RatedSeriesComponent},
   {path: 'home/approved' , component: ApprovedComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
 

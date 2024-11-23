@@ -7,6 +7,7 @@ import { SeriesAccountService } from '../../services/series-account.service';
 import { SerieCast } from '../../models/serie-cast.interface';
 import { Keyword } from '../../models/keyword.interface';
 import { TrailerResponse } from '../../models/trailer.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-serie-details',
@@ -15,10 +16,12 @@ import { TrailerResponse } from '../../models/trailer.interface';
 })
 export class SerieDetailsComponent implements OnInit {
 
+
   constructor(
     private route: ActivatedRoute,
     private serieDetailsService: SeriesService,
-    private seriesAccountService: SeriesAccountService
+    private seriesAccountService: SeriesAccountService,
+    private authSerive : AuthService
   ) { }
 
   series: SerieDetails[] = [];
@@ -51,10 +54,10 @@ export class SerieDetailsComponent implements OnInit {
         this.series = [data];
         this.name = data.name;
         this.fechaSalida = data.first_air_date;
-        this.genero = data.genres[0]?.name; // Verificar si genres no está vacío
+        this.genero = data.genres[0]?.name; 
         this.descripcion = data.overview;
-        this.listaCanales[0] = data.networks[0]?.logo_path; // Verificar si networks no está vacío
-        this.voteCount = data.vote_count; // Asignar el número de votos
+        this.listaCanales[0] = data.networks[0]?.logo_path; 
+        this.voteCount = data.vote_count;
 
         this.serieDetailsService.getKeyWords(Number(idSerie)).subscribe((keywords: Keyword) => {
           this.keyWords = [keywords];
@@ -103,14 +106,25 @@ export class SerieDetailsComponent implements OnInit {
   }
 
   rateSeries(rating: number): void {
-    this.userRating = rating;
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
-    if (idSerie) {
-      localStorage.setItem(`userRating_${idSerie}`, rating.toString());
-      this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
-        console.log(`Rating submitted: ${response}`);
-      });
+    if (this.comprobarInicioSesion()) {
+      this.userRating = rating;
+      if (idSerie) {
+        localStorage.setItem(`userRating_${idSerie}`, rating.toString());
+        this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
+          
+        });
+      }
+    } else {
+      this.noLoggedAlert();
     }
-    console.log(`User rated the series with ${rating} stars`);
+  }
+
+  comprobarInicioSesion(): boolean {
+    return this.authSerive.checkUserIsLogged();
+  }
+
+  noLoggedAlert() {
+    alert('Debe iniciar sesión para poder valorar la serie');
   }
 }

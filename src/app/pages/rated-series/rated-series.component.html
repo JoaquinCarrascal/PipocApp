@@ -1,0 +1,13 @@
+<app-nav-bar></app-nav-bar>
+<div *ngIf="ratedSeries.length > 0; else noRatings">
+    <div class="text-white" *ngFor="let series of ratedSeries">
+      <h3>{{ series.name }}</h3>
+      <p>Rating: {{ series.rating }}</p>
+      <p>Overview: {{ series.overview }}</p>
+
+    </div>
+  </div>
+  
+  <ng-template #noRatings>
+    <p>No has valorado ninguna serie aún.</p>
+  </ng-template>

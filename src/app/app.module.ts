@@ -26,6 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { RatingModule } from 'primeng/rating';
+import { RatedSeriesComponent } from './pages/rated-series/rated-series.component';
 
 
 
@@ -45,7 +46,8 @@ import { RatingModule } from 'primeng/rating';
     DateFormaterPipe,
     MovieListComponent,
     OrderTriggerPipe,
-    ApprovedComponent
+    ApprovedComponent,
+    RatedSeriesComponent
   ],
   imports: [
     BrowserModule,
