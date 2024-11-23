@@ -36,7 +36,19 @@
 
         <div class="col-3 ms-auto d-flex align-items-center justify-content-end me-2">
              @if(isLoggedIn()) {
-              <img src="{{userPhoto}}" alt="Avatar" class="avatar img-thumbnail me-5"/>
+
+              <mat-toolbar class="me-5">
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="mat-btn">
+                  <img src="{{userPhoto}}" alt="Avatar" class="avatar img-thumbnail"/>
+                </button>
+              </mat-toolbar>
+              
+              <mat-menu #menu="matMenu" class="mat-menu-container-style mt-3">
+                <button mat-menu-item class="ps-3">Perfil</button>
+                <button mat-menu-item class="ps-3">Mis listados</button>
+              </mat-menu>
+              
+
               <button class="learn-more" (click)="logout()">
                 <span class="circle" aria-hidden="true" (click)="logout()">
                 <span class="icon arrow"></span>

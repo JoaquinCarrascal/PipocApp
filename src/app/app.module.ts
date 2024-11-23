@@ -26,6 +26,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatButtonModule } from '@angular/material/button'; 
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -67,9 +71,14 @@ import { MyListComponent } from './pages/my-list/my-list.component';
       "showUnits": false,
       "showBackground": false,
       "showInnerStroke": false,
-      "startFromZero": false}),
-      MatSliderModule,
-      MatSelectModule,
+      "startFromZero": false
+    }),
+    MatSliderModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [
     provideAnimationsAsync(),
