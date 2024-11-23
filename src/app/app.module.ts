@@ -28,6 +28,7 @@ import { ApprovedComponent } from './pages/approved/approved.component';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowStatusPipe } from './pipes/show-status.pipe';
+import { FavListComponent } from './pages/fav-list/fav-list.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ShowStatusPipe } from './pipes/show-status.pipe';
     MovieListComponent,
     OrderTriggerPipe,
     ApprovedComponent,
-    ShowStatusPipe
+    ShowStatusPipe,
+    FavListComponent
   ],
   imports: [
     BrowserModule,
