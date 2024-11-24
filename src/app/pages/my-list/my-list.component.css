@@ -97,3 +97,11 @@
     transform: translate(348px,0%);
 }
 
+.modal-header{
+
+    height: 60px;
+    background-color: #d3d3d3 !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+
+}

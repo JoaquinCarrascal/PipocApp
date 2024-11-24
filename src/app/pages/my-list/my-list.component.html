@@ -63,20 +63,31 @@
             <ng-template #content let-modal>
                 <div class="modal-header">
                     <h4 class="modal-title">{{item.name}}</h4>
-                    <button type="button" class="btn-close me-2" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                    <button type="button" class="btn-close me-2" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
                 </div>
                 <div class="modal-body">
-                
+
+                    @if(item.item_count<=0){
+                        <p class="text-center text-dark mt-2">Nada por aquí nada por allá... 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#09273c"><path d="M80-140v-320h320v320H80Zm80-80h160v-160H160v160Zm60-340 220-360 220 360H220Zm142-80h156l-78-126-78 126ZM863-42 757-148q-21 14-45.5 21t-51.5 7q-75 0-127.5-52.5T480-300q0-75 52.5-127.5T660-480q75 0 127.5 52.5T840-300q0 26-7 50.5T813-204L919-98l-56 56ZM660-200q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-380Zm120-260Z"/></svg>
+                        </p>
+                    }
+
                     <div class="container-fluid">
                         @for(itemDetail of itemDetailsList; track itemDetail){
                             
                             <div class="row align-content-center mb-2">
                                 <div class="col-1">
                                     <img [src]="getImageUrl(itemDetail.poster_path)" alt="Imagen de {{itemDetail.title}}" 
-                                    class="d-block" style="height:50px; width:30px;">
+                                    class="d-block" style="height:50px; width:35px;">
                                 </div>
                                 <div class="col-5 align-content-center">
-                                    <p class="mb-0 text-truncate">{{itemDetail.title}}</p>
+                                    @if(itemDetail.title){
+                                        <p class="mb-0 text-truncate">{{itemDetail.title}}</p>
+                                    }
+                                    @else{
+                                        <p class="mb-0 text-truncate">{{itemDetail.name}}</p>
+                                    }
                                 </div>
                                 <div class="col-2">
                                     <circle-progress
@@ -91,7 +102,13 @@
                                     <p class="mb-0">{{itemDetail.media_type}}</p>
                                 </div>
                                 <div class="col-2 align-content-center">
-                                    <p class="mb-0">{{dateFormater(itemDetail.release_date)}}</p>
+                                    @if(itemDetail.release_date){
+                                        <p class="mb-0">{{dateFormater(itemDetail.release_date)}}</p>
+                                    }
+                                    @else{
+                                        <p class="mb-0">{{dateFormater(itemDetail.first_air_date)}}</p>
+                                    }
+                                    
                                 </div>
                                 <div class="col-1 align-content-center">
                                     <button class="btn btn-outline-danger align-content-center justify-content-center text-center" (click)="deleteItemFromList(item.id , itemDetail.id)">
@@ -104,9 +121,7 @@
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
-                </div>
+                
             </ng-template>
         }
         
