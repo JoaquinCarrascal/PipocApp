@@ -21,7 +21,7 @@
                     }
                   
                 </div>
-              </div>
+            </div>
         </div>
         
     </div>
@@ -41,7 +41,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#8B1A10"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
 
                         </button>
-                        <button class="btn btn-light btn-right" (click)="openVerticallyCentered(content)">
+                        <button class="btn btn-light btn-right" (click)="openVerticallyCentered(content , item.id)">
 
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
 
@@ -60,6 +60,54 @@
                 </div>
             
             </div>
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title">{{item.name}}</h4>
+                    <button type="button" class="btn-close me-2" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body">
+                
+                    <div class="container-fluid">
+                        @for(itemDetail of itemDetailsList; track itemDetail){
+                            
+                            <div class="row align-content-center mb-2">
+                                <div class="col-1">
+                                    <img [src]="getImageUrl(itemDetail.poster_path)" alt="Imagen de {{itemDetail.title}}" 
+                                    class="d-block" style="height:50px; width:30px;">
+                                </div>
+                                <div class="col-5 align-content-center">
+                                    <p class="mb-0 text-truncate">{{itemDetail.title}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <circle-progress
+                                        class="bg-light rounded-circle"
+                                        [percent]=punctFormater(itemDetail.vote_average)
+                                        [radius]=20
+                                        [outerStrokeWidth]=5
+                                        titleFontSize='15'
+                                    ></circle-progress>
+                                </div>
+                                <div class="col-1 align-content-center">
+                                    <p class="mb-0">{{itemDetail.media_type}}</p>
+                                </div>
+                                <div class="col-2 align-content-center">
+                                    <p class="mb-0">{{dateFormater(itemDetail.release_date)}}</p>
+                                </div>
+                                <div class="col-1 align-content-center">
+                                    <button class="btn btn-outline-danger align-content-center justify-content-center text-center" (click)="deleteItemFromList(item.id , itemDetail.id)">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        }
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+                </div>
+            </ng-template>
         }
         
 
@@ -67,15 +115,3 @@
 
 </div>
 
-<ng-template #content let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title">Modal title</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<p>One fine body&hellip;</p>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
-	</div>
-</ng-template>

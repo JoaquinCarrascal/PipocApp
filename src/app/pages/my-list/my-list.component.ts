@@ -2,6 +2,8 @@ import { Component, EventEmitter, inject, Input, OnInit, Output, TemplateRef } f
 import { ListResponse, myList } from '../../models/list-response';
 import { MyListsService } from '../../services/my-lists.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ItemList } from '../../models/list-items';
+import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
 
 @Component({
   selector: 'ngbd-modal-content',
@@ -53,12 +55,13 @@ export class MyListComponent implements OnInit {
   myList: myList[] = [];
   backPhotosMap: { [key: number]: string } = {};
   newListName: string = '';
+  itemDetailsList: ItemList[] = [];
 
   private modalService = inject(NgbModal);
 
 
 
-  constructor(private listServ: MyListsService) { }
+  constructor(private listServ: MyListsService , private pipeDateForm: DateFormaterPipe) { }
 
 
   ngOnInit(): void {
@@ -104,6 +107,15 @@ export class MyListComponent implements OnInit {
     this.newListName = '';
   }
 
+  deleteItemFromList(idList: number, idItem: number) {
+
+    this.listServ.deleteItemFromList(idList, idItem).subscribe(() => {
+      this.itemDetailsList = this.itemDetailsList.filter(item => item.id !== idItem);
+      this.ngOnInit();
+    });
+
+  }
+
   open(listId: number) {
     const modalRef = this.modalService.open(NgbdModalContent);
     modalRef.componentInstance.id = listId;
@@ -112,8 +124,34 @@ export class MyListComponent implements OnInit {
     });
   }
 
-  openVerticallyCentered(content: TemplateRef<any>) {
-		this.modalService.open(content, { centered: true });
+  openVerticallyCentered(content: TemplateRef<any> , idList: number) {
+
+    this.itemDetailsList = [];
+
+    this.listServ.getListItems(idList).subscribe((data) => {
+      this.itemDetailsList = data.items;
+
+		  this.modalService.open(content, { centered: true , size: 'lg' , scrollable: true});
+    });
+
 	}
+
+  getImageUrl(posterPath: string){
+
+    return `https://image.tmdb.org/t/p/w200/${posterPath}`;
+  
+  }
+
+  punctFormater(num: number): number{
+
+    return num * 10;
+  
+  }
+
+  dateFormater(date: string): string{
+  
+    return this.pipeDateForm.transform(date);
+    
+  }
 
 }

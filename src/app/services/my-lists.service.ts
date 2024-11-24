@@ -51,5 +51,22 @@ export class MyListsService {
 
   }
 
+  deleteItemFromList(idList: number , idItem: number){
+
+    const data = JSON.stringify({
+      media_id: idItem
+    })
+
+    return this.http.post(`https://api.themoviedb.org/3/list/${idList}/remove_item?session_id=${localStorage.getItem('session_id')}`, 
+    data,
+    {
+      headers: {
+        'Authorization': `Bearer ${TOKEN}`,
+        'content-type': 'application/json'
+      }
+    });
+
+  }
+
 
 }
