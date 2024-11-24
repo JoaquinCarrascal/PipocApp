@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +26,11 @@ import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { RatingModule } from 'primeng/rating';
 import { RatedSeriesComponent } from './pages/rated-series/rated-series.component';
-
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatButtonModule } from '@angular/material/button'; 
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -74,6 +77,10 @@ import { RatedSeriesComponent } from './pages/rated-series/rated-series.componen
       "startFromZero": false}),
       MatSliderModule,
       MatSelectModule,
+      BrowserAnimationsModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatMenuModule
   ],
   providers: [
     provideAnimationsAsync(),

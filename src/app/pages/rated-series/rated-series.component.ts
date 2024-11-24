@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SeriesAccountService } from '../../services/series-account.service';
 import { SeriesService } from '../../services/series.service';
 
+import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+
 @Component({
   selector: 'app-rated-series',
   templateUrl: './rated-series.component.html',
@@ -21,4 +23,9 @@ export class RatedSeriesComponent implements OnInit {
       this.ratedSeries = data.results;
     });
   }
+
+  obtenerImagenOriginal(path: string): string {
+    return `https://image.tmdb.org/t/p/original${path}`;
+  }
+  
 }

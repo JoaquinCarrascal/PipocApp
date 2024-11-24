@@ -1,65 +1,73 @@
 <div class="container-fluid justify-content-center">
 
-    <div class="row justify-content-start bgapp">
+  <div class="row justify-content-start bgapp">
 
-        <div class="col-sm-3 col-lg-2 col-xxl-1">
-            <div class="align-content-center">
-                <a [routerLink]="['/home']">
+      <div class="col-sm-3 col-lg-2 col-xxl-1">
+          <div class="align-content-center">
+              <a [routerLink]="['/home']">
 
-                    <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa GasApp"
-                        style="width: 140px;">
-                  
-                </a>
-            </div>
-        </div>
-
-        <nav class="col-6 navbar navbar-expand ms-3" style="font-size: 15pt; font-weight: 500; color:black;">
-            <div class="container-fluid">
-              <div id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['/movie-list']">Películas populares</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['/people']">Actores</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/series']">Series populares</a>
-                  </li>
-
-
-                  <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/series/rated']">Series Rated</a>
-                  </li>
-                  
-                </ul>
+                  <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa GasApp"
+                      style="width: 140px;">
                 
-              </div>
+              </a>
+          </div>
+      </div>
+
+      <nav class="col-6 navbar navbar-expand ms-3" style="font-size: 15pt; font-weight: 500; color:black;">
+          <div class="container-fluid">
+            <div id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" [routerLink]="['/movie-list']">Películas populares</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" [routerLink]="['/people']">Actores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="['/series']">Series populares</a>
+                </li>
+                
+              </ul>
+              
             </div>
-        </nav>
+          </div>
+      </nav>
 
 
-        <div class="col-3 ms-auto d-flex align-items-center justify-content-end me-2">
-             @if(isLoggedIn()) {
-              <img [src]="userPhoto" alt="Avatar" class="avatar img-thumbnail me-5"/>
-              <button class="learn-more" (click)="logout()">
-                <span class="circle" aria-hidden="true" (click)="logout()">
+      <div class="col-3 ms-auto d-flex align-items-center justify-content-end me-2">
+           @if(isLoggedIn()) {
+
+            <mat-toolbar class="me-5">
+              <button mat-icon-button [matMenuTriggerFor]="menu" class="mat-btn">
+                <img src="{{userPhoto}}" alt="Avatar" class="avatar img-thumbnail"/>
+              </button>
+            </mat-toolbar>
+            
+            <mat-menu #menu="matMenu" class="mat-menu-container-style mt-3">
+              <button mat-menu-item class="ps-3">Perfil</button>
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/user-lists')">Mis listados</button>
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/series/rated')">Series Votadas</button>
+            </mat-menu>
+            
+
+            <button class="learn-more" (click)="logout()">
+              <span class="circle" aria-hidden="true" (click)="logout()">
+              <span class="icon arrow"></span>
+              </span>
+              <span class="button-text">Cerrar&nbsp;sesión</span>
+            </button>
+            }@else {
+              
+              <button class="learn-more" (click)="createRequestToken()">
+                <span class="circle" aria-hidden="true" (click)="createRequestToken()">
                 <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">Cerrar&nbsp;sesión</span>
+                <span class="button-text">Inicia&nbsp;sesión</span>
               </button>
-              }@else {
-                
-                <button class="learn-more" (click)="createRequestToken()">
-                  <span class="circle" aria-hidden="true" (click)="createRequestToken()">
-                  <span class="icon arrow"></span>
-                  </span>
-                  <span class="button-text">Inicia&nbsp;sesión</span>
-                </button>
-              }
-        </div>
+            }
+      </div>
 
-    </div>
+  </div>
 
-    
+  
 </div>

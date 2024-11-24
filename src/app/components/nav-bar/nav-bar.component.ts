@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,8 +10,8 @@ import { AuthService } from '../../services/auth.service';
 export class NavBarComponent {
 
   userName = '';
-  userPhoto = 'https://placehold.co/50x50';
-  constructor(private authService: AuthService) {}
+  userPhoto = '';
+  constructor(private authService: AuthService ,private  router: Router) {}
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('user_name') ?? '';
@@ -26,7 +27,7 @@ export class NavBarComponent {
       localStorage.setItem('token', response.request_token);
 
       // STEP 2 de la autenticación en TMDB (firma del token iniciando sesión en TMDB)
-      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/home/approved`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/home/approved`
     });
   }
 
@@ -38,6 +39,12 @@ export class NavBarComponent {
     localStorage.clear();
     this.userPhoto = 'https://placehold.co/50x50';
     window.location.href = 'http://localhost:4200';
+  }
+
+  navigateTo(route: string) {
+
+    this.router.navigate([route]);
+
   }
 
 }

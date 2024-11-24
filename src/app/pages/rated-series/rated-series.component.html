@@ -1,13 +1,23 @@
 <app-nav-bar></app-nav-bar>
-<div *ngIf="ratedSeries.length > 0; else noRatings">
-    <div class="text-white" *ngFor="let series of ratedSeries">
-      <h3>{{ series.name }}</h3>
-      <p>Rating: {{ series.rating }}</p>
-      <p>Overview: {{ series.overview }}</p>
 
+<div *ngIf="ratedSeries.length > 0; else noRatings">
+  <div class="row">
+    <div class="movie-card col-2 mt-0 movie-card-resizing" style="top: 16px;" *ngFor="let series of ratedSeries">
+      <a [routerLink]="['/series/details', series.id]">
+        @if(series.poster_path) {
+          <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}" class="card-img resizing-img">
+        }
+        @else {
+          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ series.name }}" width="150px">
+        }
+      </a>
+      <p class="text-white">{{ series.name }}</p>
+      <span class="fecha">{{ series.first_air_date }}</span>
+      <p class="text-white">Rating: {{ series.rating }}</p>
     </div>
   </div>
-  
-  <ng-template #noRatings>
-    <p>No has valorado ninguna serie aún.</p>
-  </ng-template>
+</div>
+
+<ng-template #noRatings>
+  <p>No has valorado ninguna serie aún.</p>
+</ng-template>
