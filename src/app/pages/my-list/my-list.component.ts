@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ListResponse, myList } from '../../models/list-response';
 import { MyListsService } from '../../services/my-lists.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -101,6 +101,7 @@ export class MyListComponent implements OnInit {
     this.listServ.createList(this.newListName).subscribe((data) => {
       this.ngOnInit();
     });
+    this.newListName = '';
   }
 
   open(listId: number) {
@@ -111,6 +112,8 @@ export class MyListComponent implements OnInit {
     });
   }
 
-
+  openVerticallyCentered(content: TemplateRef<any>) {
+		this.modalService.open(content, { centered: true });
+	}
 
 }

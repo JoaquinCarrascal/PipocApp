@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,7 @@ export class NavBarComponent {
 
   userName = '';
   userPhoto = '';
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService ,private  router: Router) {}
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('user_name') ?? '';
@@ -38,6 +39,12 @@ export class NavBarComponent {
     localStorage.clear();
     this.userPhoto = 'https://placehold.co/50x50';
     window.location.href = 'http://localhost:4200';
+  }
+
+  navigateTo(route: string) {
+
+    this.router.navigate([route]);
+
   }
 
 }
