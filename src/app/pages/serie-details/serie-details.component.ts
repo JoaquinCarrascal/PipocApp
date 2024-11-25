@@ -96,5 +96,12 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
   
+  addSeriesToWatchlist(): void {
+    if (this.series) {
+      this.serieDetailsService.addSeriesToWatchlist(this.series[0]).subscribe(() => {
+        alert('Pelicula añadida a la watchlist');
+      });
+    }
+  }
     
   }

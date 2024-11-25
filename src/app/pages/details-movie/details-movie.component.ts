@@ -93,4 +93,12 @@ export class DetailsMovieComponent implements OnInit {
     }
   }
 
+  addFilmToWatchlist(): void {
+    if (this.movies) {
+      this.detailsMovieService.addFilmToWatchlist(this.movies).subscribe(() => {
+        alert('Pelicula añadida a la watchlist');
+      });
+    }
+  }
+
 }

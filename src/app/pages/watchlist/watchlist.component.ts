@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WatchlistService } from '../../services/watchlist.service';
-import { MovieResult } from '../../models/watchlist-movie.interface';
+import { WatchlistMovies } from '../../models/watchlist-movie.interface'
+import { WatchlistSeries } from '../../models/watchlist-series.interface';
 
 @Component({
   selector: 'app-watchlist',
@@ -9,14 +10,21 @@ import { MovieResult } from '../../models/watchlist-movie.interface';
 })
 export class WatchlistComponent implements OnInit {
 
-  watchlistMovie: MovieResult[] = [];
+  watchlistMovie: WatchlistMovies[] = [];
+  watchlistSeries: WatchlistSeries[] = [];
 
   constructor(private watchlistService: WatchlistService) { }
 
   ngOnInit(): void {
-    this.watchlistService.getWatchlistFilms().subscribe((response) => {
+    this.watchlistService.getWatchlistMovies().subscribe((response) => {
       this.watchlistMovie = response.results;
     });
+
+    
+    this.watchlistService.getWatchlistSeries().subscribe((response) => {
+      this.watchlistSeries = response.results;
+    });
+    
   }
 
   getFullImagePath(posterPath: string): string {
