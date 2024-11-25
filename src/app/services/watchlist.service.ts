@@ -14,21 +14,34 @@ const BASE_URL = "https://api.themoviedb.org/3";
 export class WatchlistService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
-  
+
   getWatchlistMovies(account_id: number): Observable<WatchlistMovieResponse> {
+    const session_id = this.authService.getSessionId();
     return this.http.get<WatchlistMovieResponse>(`${BASE_URL}/account/${account_id}/watchlist/movies`, {
       params: {
         api_key: API_KEY,
+        session_id: session_id
       }
     });
   }
 
   getWatchlistSeries(account_id: number): Observable<WatchlistSeriesResponse> {
+    const session_id = this.authService.getSessionId();
     return this.http.get<WatchlistSeriesResponse>(`${BASE_URL}/account/${account_id}/watchlist/tv`, {
       params: {
         api_key: API_KEY,
+        session_id: session_id
       }
     });
   }
 
+  getAccountDetails(): Observable<{ id: number }> {
+    const session_id = this.authService.getSessionId();
+    return this.http.get<{ id: number }>(`${BASE_URL}/account`, {
+      params: {
+        api_key: API_KEY,
+        session_id: session_id
+      }
+    });
+  }
 }

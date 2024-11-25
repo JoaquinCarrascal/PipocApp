@@ -1,6 +1,9 @@
 <app-nav-bar></app-nav-bar>
 
-<div style="color: white">
+<div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+
+<div *ngIf="loadingMovies" style="color: white;">Cargando películas...</div>
+<div *ngIf="!loadingMovies">
   <h2>Películas en la lista de seguimiento</h2>
   <ul>
     <li *ngFor="let movie of watchlistMovies">
@@ -9,7 +12,8 @@
   </ul>
 </div>
 
-<div style="color: white">
+<div *ngIf="loadingSeries" style="color: white;">Cargando series...</div>
+<div *ngIf="!loadingSeries">
   <h2>Series en la lista de seguimiento</h2>
   <ul>
     <li *ngFor="let series of watchlistSeries">
@@ -17,4 +21,3 @@
     </li>
   </ul>
 </div>
-

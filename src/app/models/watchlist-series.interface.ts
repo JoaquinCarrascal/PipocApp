@@ -1,11 +1,11 @@
 export interface WatchlistSeriesResponse {
   page: number;
-  results: SerieWatch[];
+  results: SerieResult[];
   total_pages: number;
   total_results: number;
 }
 
-export interface SerieWatch {
+export interface SerieResult {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

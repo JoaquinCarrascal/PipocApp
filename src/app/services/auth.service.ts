@@ -11,9 +11,6 @@ const API_BASE_URL = "https://api.themoviedb.org/3";
   providedIn: 'root'
 })
 export class AuthService {
-  getSessionId() {
-    return localStorage.getItem('account_id'); // Obtener el ID de la cuenta desde el almacenamiento local
-  }
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +30,10 @@ export class AuthService {
       }
     );
   }
+
+  getSessionId(): string {
+    return localStorage.getItem('session_id') || '';
+  }  
 
 }
 
