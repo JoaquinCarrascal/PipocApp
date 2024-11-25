@@ -27,22 +27,25 @@ export class SeriesAccountService {
 
   getUserRatings(): Observable<RatedSerieResponse> {
 
-    if (!sessionId) {
-          alert('Session ID is required');
-    }
   
    return this.http.get<RatedSerieResponse>(`${API_BASE_URL}/account/{account_id}/rated/tv?api_key=${API_KEY}&session_id=${sessionId}`);
     
   }
 
   getUserMoviesRatings(): Observable<RatedMoviesResponse> {
-
-    if (!sessionId) {
-          alert('Session ID is required');
-    }
-    
+  
     return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?api_key=${API_KEY}&session_id=${sessionId}`);
     
   }
- 
+
+  
+  deleteSerieRating(serieId: number): Observable<any> {
+    const url = `${API_BASE_URL}/tv/${serieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    return this.http.delete(url);
+  }
+
+  deleteMovieRating(movieId: number): Observable<any> {
+    const url = `${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    return this.http.delete(url);
+  }
 }

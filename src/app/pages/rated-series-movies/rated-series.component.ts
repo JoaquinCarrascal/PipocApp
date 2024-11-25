@@ -40,7 +40,7 @@ export class RatedSeriesComponent implements OnInit {
   }
 
   getMoviesWithRating() {
-    this.seriesAcc.getUserMoviesRatings().subscribe((data : RatedSerieResponse) => {
+    this.seriesAcc.getUserMoviesRatings().subscribe((data : RatedMoviesResponse) => {
       this.ratedMovies = data.results.map(result => ({
         page: data.page,
         results: [result],
@@ -54,6 +54,27 @@ export class RatedSeriesComponent implements OnInit {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
 
+  deleteSeriesRating(serieId: number) {
+    this.seriesAcc.deleteSerieRating(serieId).subscribe(() => {
+      this.refreshSeriesWithRatingList()
+    });
+  }
+
+  deleteMovieRating(movieId: number) {
+    this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
+      this.refreshMoviesWithRatingList()
+    });
+  }
+
+  
+
+refreshMoviesWithRatingList(){
+  this.getMoviesWithRating();
+}
+
+refreshSeriesWithRatingList(){
+  this.getSeriesWithRating();
+}
   
 punctFormater(num: number): number{
 

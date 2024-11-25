@@ -1,7 +1,14 @@
 <app-nav-bar></app-nav-bar>
 
 <div *ngIf="ratedSeries.length > 0; else noRatings">
-<h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Valoradas</h3>
+
+  @if(cambio == 0){
+    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Series Valoradas</h3>
+  }
+  @else{
+    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Peliculas Valoradas</h3>
+  }
+
 <div style="margin-left: 75px; margin-bottom: 30px">
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
@@ -21,6 +28,8 @@
         [percent]="series.results[0].rating * 10"
         style="position: relative; top: 30px;right: -160px;z-index: 1;"
         ></circle-progress>
+        <svg (click)="deleteSeriesRating(series.results[0].id)" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+      
       <a [routerLink]="['/series/details', series.results[0].id]">
         @if(series.results[0].poster_path) {
           <img [src]="'https://image.tmdb.org/t/p/w500' + series.results[0].poster_path" alt="{{ series.results[0].name }}" class="card-img resizing-img">
@@ -32,7 +41,13 @@
       <p class="text-white text-truncate">{{ series.results[0].name }}</p>
       <span class="fecha">{{ series.results[0].first_air_date }}</span>
 
+
+
+
+
     </div>
+
+    
 
   </div>
 }
@@ -44,16 +59,20 @@
         [percent]="movies.results[0].rating * 10"
         style="position: relative; top: 30px;right: -160px;z-index: 1;"
         ></circle-progress>
+
+        <svg (click)="deleteMovieRating(movies.results[0].id)" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+
+
       <a [routerLink]="['/series/details', movies.results[0].id]">
         @if(movies.results[0].poster_path) {
-          <img [src]="'https://image.tmdb.org/t/p/w500' + movies.results[0].poster_path" alt="{{ movies.results[0].name }}" class="card-img resizing-img">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movies.results[0].poster_path" alt="{{ movies.results[0].title }}" class="card-img resizing-img">
         }
         @else {
-          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ movies.results[0].name }}" width="150px">
+          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ movies.results[0].title }}" width="150px">
         }
       </a>
-      <p class="text-white text-truncate">{{ movies.results[0].name }}</p>
-      <span class="fecha">{{ movies.results[0].first_air_date }}</span>
+      <p class="text-white text-truncate">{{ movies.results[0].title }}</p>
+      <span class="fecha">{{ movies.results[0].release_date }}</span>
 
     </div>
 
@@ -64,5 +83,5 @@
 
 
 <ng-template #noRatings>
-  <p>No has valorado ninguna serie aún.</p>
+  <h1 class="text-white text-center">No has valorado ninguna serie aún.</h1>
 </ng-template>
