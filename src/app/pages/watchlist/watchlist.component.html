@@ -1,23 +1,27 @@
 <app-nav-bar></app-nav-bar>
 
-<div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
-
-<div *ngIf="loadingMovies" style="color: white;">Cargando películas...</div>
-<div *ngIf="!loadingMovies">
-  <h2>Películas en la lista de seguimiento</h2>
-  <ul>
-    <li *ngFor="let movie of watchlistMovies">
-      {{ movie.title }}
-    </li>
-  </ul>
+<h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Watchlist</h3>
+<div style="margin-left: 75px; margin-bottom: 30px" style="color: white">
+    <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
+        style="position: relative; left:10px;">
+        <input checked="" id="option7" name="options-second" type="radio" />
+        <label class="option-second" for="option7" class="d-flex" style="left:20px;">Películas</label>
+        <input id="option8" name="options-second" type="radio" />
+        <label class="option-second" for="option8" class="d-flex" style="left:50px;">Series</label>
+        <span class="background-second"></span>
+    </div>
 </div>
+<div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 240px;" style="color: white">
+    @for(movie of watchlistMovie; track movie){
+    <div class="movie-card col-2 mt-0" style="margin-top: 0px;" style="color: white">
+        <a [routerLink]="['/details-movie/' , movie.id]">
+        <div class="card-img"
+            [style.background-image]="'url(' + getFullImagePath(movie.poster_path) + ')'">
+        </div>
+        </a>
+        <p class="text-light text-truncate mt-1" style="font-size: 13pt; max-width: 200px;">
+            {{movie.title}}
+        </p>
+    </div>
 
-<div *ngIf="loadingSeries" style="color: white;">Cargando series...</div>
-<div *ngIf="!loadingSeries">
-  <h2>Series en la lista de seguimiento</h2>
-  <ul>
-    <li *ngFor="let series of watchlistSeries">
-      {{ series.title }}
-    </li>
-  </ul>
-</div>
+}
