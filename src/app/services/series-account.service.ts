@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RatedSerieResponse } from '../models/rated-serie.interface';
+import { RatedMoviesResponse } from '../models/rated-movies.interface';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const API_BASE_URL = "https://api.themoviedb.org/3";
@@ -27,12 +28,21 @@ export class SeriesAccountService {
   getUserRatings(): Observable<RatedSerieResponse> {
 
     if (!sessionId) {
-      throw new Error('Session ID is required');
+          alert('Session ID is required');
     }
   
    return this.http.get<RatedSerieResponse>(`${API_BASE_URL}/account/{account_id}/rated/tv?api_key=${API_KEY}&session_id=${sessionId}`);
     
   }
 
+  getUserMoviesRatings(): Observable<RatedMoviesResponse> {
+
+    if (!sessionId) {
+          alert('Session ID is required');
+    }
+    
+    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?api_key=${API_KEY}&session_id=${sessionId}`);
+    
+  }
  
 }

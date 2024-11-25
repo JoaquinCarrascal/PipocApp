@@ -8,7 +8,7 @@ import { SeriesComponent } from './pages/series/series.component';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { ApprovedComponent } from './pages/approved/approved.component';
-import { RatedSeriesComponent } from './pages/rated-series/rated-series.component';
+import { RatedSeriesComponent } from './pages/rated-series-movies/rated-series.component';
 
 const routes: Routes = [
 

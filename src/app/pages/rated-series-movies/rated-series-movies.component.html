@@ -6,13 +6,15 @@
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
         <input checked="" id="option7" name="options-second" type="radio" />
-        <label class="option-second" for="option7" class="d-flex" style="left:30px;">Películas</label>
+        <label class="option-second" for="option7" class="d-flex" style="left:30px;" (click)="changeRating(0)">Series</label>
         <input id="option8" name="options-second" type="radio" />
-        <label class="option-second" for="option8" class="d-flex" style="left:50px;">Series</label>
+        <label class="option-second" for="option8" class="d-flex" style="left:50px;" (click)="changeRating(1)">Peliculas</label>
         <span class="background-second"></span>
     </div>
 </div>
-<div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 220px;">
+
+@if(cambio == 0){
+  <div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 220px;">
     <div class="movie-card col-2 mt-0" style="margin-top: 0px;"  *ngFor="let series of ratedSeries">
       <circle-progress
         class="bg-light rounded-circle"
@@ -29,13 +31,38 @@
       </a>
       <p class="text-white text-truncate">{{ series.results[0].name }}</p>
       <span class="fecha">{{ series.results[0].first_air_date }}</span>
-      <p class="text-white">Rating: {{ series.results[0].rating }}</p>
+
     </div>
 
   </div>
+}
+@else{
+  <div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 220px;">
+    <div class="movie-card col-2 mt-0" style="margin-top: 0px;"  *ngFor="let movies of ratedMovies">
+      <circle-progress
+        class="bg-light rounded-circle"
+        [percent]="movies.results[0].rating * 10"
+        style="position: relative; top: 30px;right: -160px;z-index: 1;"
+        ></circle-progress>
+      <a [routerLink]="['/series/details', movies.results[0].id]">
+        @if(movies.results[0].poster_path) {
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movies.results[0].poster_path" alt="{{ movies.results[0].name }}" class="card-img resizing-img">
+        }
+        @else {
+          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ movies.results[0].name }}" width="150px">
+        }
+      </a>
+      <p class="text-white text-truncate">{{ movies.results[0].name }}</p>
+      <span class="fecha">{{ movies.results[0].first_air_date }}</span>
+
+    </div>
+
+  </div>
+}
 
 </div>
 
-    <ng-template #noRatings>
-      <p>No has valorado ninguna serie aún.</p>
-    </ng-template>
+
+<ng-template #noRatings>
+  <p>No has valorado ninguna serie aún.</p>
+</ng-template>
