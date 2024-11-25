@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from '../../services/favorites.service';
-import { FavMovieResponse } from '../../models/fav-movie-response';
+import { FavMovieResponse, FavoriteMovies } from '../../models/fav-movie-response';
 
 @Component({
   selector: 'app-fav-list',
@@ -9,21 +9,22 @@ import { FavMovieResponse } from '../../models/fav-movie-response';
 })
 export class FavListComponent implements OnInit {
 
-  favoriteMovies : FavMovieResponse[] = [];
+  favoriteMovies : FavoriteMovies[] = [];
+  
+
 
   constructor(private favService : FavoritesService) {}
   
-  ngOnInit() {
+  ngOnInit(): void {
+    this.favService.getFavoriteFilms().subscribe((response) => {
+      this.favoriteMovies = response.results;
+    });
   }
 
-  getFavoriteMovies() {
-    this.favService.getFavoriteMovies().subscribe(
-      (data) => {
-        console.log(data);
-      }
-    );
-  }
-
+  getFullImagePath(posterPath: string): string {
+    const baseUrl = 'https://image.tmdb.org/t/p/w500';
+    return `${baseUrl}${posterPath}`;
+    }
 
 
 }
