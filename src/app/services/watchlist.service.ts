@@ -6,7 +6,7 @@ import { MovieDetailResponse } from '../models/movies-details-response';
 import { WatchlistSeriesResponse } from '../models/watchlist-series.interface';
 import { SerieDetails } from '../models/serie-details.interface';
 
-const API_KEY = "ffb374c01e49cc85b8dcc4041e282dad";
+const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 @Injectable({
@@ -18,7 +18,7 @@ export class WatchlistService {
 
   addMoviesToWatchlist(movie: MovieDetailResponse): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: movie.id,
       media_type: 'movie',
@@ -32,7 +32,7 @@ export class WatchlistService {
 
   addSeriesToWatchlist(series: SerieDetails): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: series.id,
       media_type: 'tv',

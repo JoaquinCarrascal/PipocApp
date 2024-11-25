@@ -19,8 +19,7 @@ export class WatchlistComponent implements OnInit {
     this.watchlistService.getWatchlistMovies().subscribe((response) => {
       this.watchlistMovie = response.results;
     });
-
-    
+ 
     this.watchlistService.getWatchlistSeries().subscribe((response) => {
       this.watchlistSeries = response.results;
     });
