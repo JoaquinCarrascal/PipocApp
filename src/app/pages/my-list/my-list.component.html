@@ -65,32 +65,59 @@
                     <h4 class="modal-title">{{item.name}}</h4>
                     <button type="button" class="btn-close me-2" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="height: 600px !important;">
 
-                    @if(item.item_count<=0){
-                        <p class="text-center text-dark mt-2">Nada por aquí nada por allá... 
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#09273c"><path d="M80-140v-320h320v320H80Zm80-80h160v-160H160v160Zm60-340 220-360 220 360H220Zm142-80h156l-78-126-78 126ZM863-42 757-148q-21 14-45.5 21t-51.5 7q-75 0-127.5-52.5T480-300q0-75 52.5-127.5T660-480q75 0 127.5 52.5T840-300q0 26-7 50.5T813-204L919-98l-56 56ZM660-200q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-380Zm120-260Z"/></svg>
-                        </p>
-                    }
+                    <div class="input-group mb-5 container-fluid">
+                        <ng-template #rt let-r="result" let-t="term" class="row col-12 dynamic-search">
+                            <div class="my-2 dynamic-results align-content-center d-flex">
+                                @if(r['poster_path']){
+                                    <img [src]="'https://image.tmdb.org/t/p/w200/' + r['poster_path']" class="me-1" style="width: 40px" />
+                                }@else {
+                                    <img src="https://placehold.co/400x600?text=Img+no+encontrada" class="me-1" style="width: 40px" >
+                                }
+                                @if(r['title'] != ''){
+                                    <div class="d-flex flex-column">
+                                        <ngb-highlight [result]="r.title" [term]="t" class="ms-3"></ngb-highlight>
+                                        <p class="mb-0 ms-3 text-color-dark">{{r.release_date}}</p>
+                                    </div>
+                                    <span class="badge text-bg-warning ms-2" style="height: 20px !important;">Película</span>
+                                    <button class="btn btn-success ms-auto me-1 mt-2" (click)="addItemToList(item.id , r.id)" style="height: 35px !important;"><i class="bi bi-arrow-return-left"></i></button>
+                                }
+                                @else{
+                                    <div class="d-flex flex-column">
+                                        <ngb-highlight [result]="r.name" [term]="t" class="ms-3"></ngb-highlight>
+                                        <p class="mb-0 ms-3 text-color-dark">{{r.first_air_date}}</p>
+                                    </div>
+                                    <span class="badge text-bg-secondary ms-2" style="height: 20px !important;">Serie</span>
+                                    <button class="btn btn-success ms-auto me-1 mt-2" (click)="addItemToList(item.id , r.id)" style="height: 35px !important;"><i class="bi bi-arrow-return-left"></i></button>
+                                }
+                            </div>
+                        </ng-template>
 
-                    <div class="input-group mb-5">
-                        <input type="text" placeholder="Buscar película o serie..." aria-label="Agregar listado" aria-describedby="basic-addon3"
-                        [(ngModel)]="query" class="form-control py-2" tabindex="-1">
-                        <div class="input-group-append">
-                            @if(query != ''){
-                                <button class="btn colored-aqua fw-bold button-add btn-a-remake py-2" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M380-320q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-                                </button>
-                            }
-                            @else{
-                                <button class="btn btn-secondary fw-bold button-add btn-a-remake py-2" type="button" disabled>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M380-320q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-                                </button>
-                            }
-                          
+                        @if(item.item_count<=0){
+                            <p class="text-center text-dark mt-2">Nada por aquí nada por allá... 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#09273c"><path d="M80-140v-320h320v320H80Zm80-80h160v-160H160v160Zm60-340 220-360 220 360H220Zm142-80h156l-78-126-78 126ZM863-42 757-148q-21 14-45.5 21t-51.5 7q-75 0-127.5-52.5T480-300q0-75 52.5-127.5T660-480q75 0 127.5 52.5T840-300q0 26-7 50.5T813-204L919-98l-56 56ZM660-200q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-380Zm120-260Z"/></svg>
+                            </p>
+                        }    
+                        
+                        <div class="mb-3 row col-12">
+                            <div class="col-12">
+                                <input
+                                    placeholder="Introduzca el nombre de una serie o película"
+                                    id="typeahead-template"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="model"
+                                    [ngbTypeahead]="search"
+                                    [resultTemplate]="rt"
+                                    [inputFormatter]="formatter"
+                                />
+                            </div>
                         </div>
                     </div>
 
+
+                    
                     <div class="container-fluid">
                         @for(itemDetail of itemDetailsList; track itemDetail){
                             

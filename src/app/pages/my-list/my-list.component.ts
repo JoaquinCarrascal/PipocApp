@@ -4,6 +4,7 @@ import { MyListsService } from '../../services/my-lists.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemList } from '../../models/list-items';
 import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
+import { debounceTime, forkJoin, map, Observable, of, OperatorFunction, switchMap } from 'rxjs';
 
 @Component({
   selector: 'ngbd-modal-content',
@@ -43,8 +44,6 @@ export class NgbdModalContent {
 }
 
 
-
-
 @Component({
   selector: 'app-my-list',
   templateUrl: './my-list.component.html',
@@ -57,6 +56,7 @@ export class MyListComponent implements OnInit {
   newListName: string = '';
   itemDetailsList: ItemList[] = [];
   query: string = '';
+  model: any;
 
   private modalService = inject(NgbModal);
 
@@ -137,6 +137,44 @@ export class MyListComponent implements OnInit {
 
 	}
 
+  search: OperatorFunction<string, readonly { title: string; poster_path: string ; release_date:string ; name: string ; first_air_date:string ; id: number}[]> 
+    = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      switchMap((term) =>
+        term === ''
+          ? of([])
+          : forkJoin([this.listServ.searchMovieItem(term) , this.listServ.searchTvItem(term)]).pipe(
+              map((data) => data[0].results.map(result => ({
+                title: result.title,
+                poster_path: result.poster_path || '',
+                release_date: result.release_date || '',
+                name: '',
+                first_air_date:'',
+                id: result.id
+              })).concat(data[1].results.map(result => ({
+                name: result.name,
+                poster_path: result.poster_path || '',
+                first_air_date: result.first_air_date || '',
+                release_date: '',
+                title: '',
+                id: result.id
+              })))
+              )
+          )
+      )
+    );
+
+	formatter = (x: { name: string }) => x.name;
+
+  addItemToList(idList: number , idItem: number){
+
+    this.listServ.checkIfItemExistsInList(idList, idItem).subscribe((data) => { 
+      data.item_present ? null : this.listServ.addItemToList(idList, idItem).subscribe(() => {});
+    });
+
+  }
+
   getImageUrl(posterPath: string){
 
     return `https://image.tmdb.org/t/p/w200/${posterPath}`;
@@ -156,3 +194,64 @@ export class MyListComponent implements OnInit {
   }
 
 }
+
+
+/* Sin mezclar 
+search: OperatorFunction<string, readonly { title: string; poster_path: string ; release_date:string ; name: string ; first_air_date:string}[]> 
+    = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      switchMap((term) =>
+        term === ''
+          ? of([])
+          : forkJoin([this.listServ.searchMovieItem(term) , this.listServ.searchTvItem(term)]).pipe(
+              map((data) => data[0].results.map(result => ({
+                title: result.title,
+                poster_path: result.poster_path || '',
+                release_date: result.release_date || '',
+                name: '',
+                first_air_date:'',
+              })).concat(data[1].results.map(result => ({
+                name: result.name,
+                poster_path: result.poster_path || '',
+                first_air_date: result.first_air_date || '',
+                release_date: '',
+                title: ''
+              })))
+              )
+          )
+      )
+    );
+*/
+
+/*
+search: OperatorFunction<string, readonly { title: string; poster_path: string ; release_date:string ; name: string ; first_air_date: string ; id: number}[]> 
+    = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      switchMap((term) =>
+        term === ''
+          ? of([])
+          : forkJoin([this.listServ.searchMovieItem(term) , this.listServ.searchTvItem(term)]).pipe(
+              map((data) => {
+                const combinedResults = data[0].results.map(result => ({
+                  title: result.title,
+                  poster_path: result.poster_path || '',
+                  release_date: result.release_date || '',
+                  name: '',
+                  first_air_date: '',
+                  id: result.id
+                })).concat(data[1].results.map(result => ({
+                  name: result.name,
+                  poster_path: result.poster_path || '',
+                  first_air_date: result.first_air_date || '',
+                  release_date: '',
+                  title: '',
+                  id: result.id
+                })));
+                return combinedResults.sort(() => Math.random() - 0.5);
+              })
+          )
+      )
+    );
+*/
