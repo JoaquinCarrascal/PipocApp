@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AccountDetailsResponse } from '../models/account-details.interface';
 import { Observable } from 'rxjs';
 import { FavMovieResponse } from '../models/fav-movie-response';
+import { MovieDetailResponse } from '../models/movies-details-response';
 
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
@@ -15,6 +16,21 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
+  addFilmToFavourites(movie: MovieDetailResponse): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id') || '';
+    const body = {
+      media_id: movie.id,
+      media_type: 'movie',
+      favorite: true
+    };
+
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+
+  }
 
 
 
@@ -27,10 +43,7 @@ export class FavoritesService {
     );
   }
 
-getFullImagePath(posterPath: string): string {
-  const baseUrl = 'https://image.tmdb.org/t/p/w500';
-  return `${baseUrl}${posterPath}`;
-  }
+
 
 
 

@@ -97,4 +97,12 @@ export class DetailsMovieComponent implements OnInit {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
 
+  addFilmToFavourites(): void {
+    if (this.movies) {
+      this.detailsMovieService.addFilmToFavourites(this.movies).subscribe(() => {
+        alert('Pelicula añadida a favoritos');
+      });
+    }
+  }
+
 }
