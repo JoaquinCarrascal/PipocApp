@@ -170,7 +170,13 @@ export class MyListComponent implements OnInit {
   addItemToList(idList: number , idItem: number){
 
     this.listServ.checkIfItemExistsInList(idList, idItem).subscribe((data) => { 
-      data.item_present ? null : this.listServ.addItemToList(idList, idItem).subscribe(() => { this.ngOnInit(); });
+      data.item_present ? null : 
+      this.listServ.addItemToList(idList, idItem).subscribe(() => { this.ngOnInit(); 
+                                            this.itemDetailsList = [];
+                                            this.listServ.getListItems(idList).subscribe((data) => {
+                                            this.itemDetailsList = data.items;
+                                          });
+      });
     });
 
   }
