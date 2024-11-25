@@ -56,6 +56,7 @@ export class MyListComponent implements OnInit {
   backPhotosMap: { [key: number]: string } = {};
   newListName: string = '';
   itemDetailsList: ItemList[] = [];
+  query: string = '';
 
   private modalService = inject(NgbModal);
 
