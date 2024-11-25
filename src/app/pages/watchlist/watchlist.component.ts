@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WatchlistService } from '../../services/watchlist.service';
-import { WatchlistMovieResponse } from '../../models/watchlist-movie.interface';
-import { WatchlistSeriesResponse } from '../../models/watchlist-series.interface';
-import { AuthService } from '../../services/auth.service'; // Importa el servicio de autenticación
+import { WatchlistMovieResponse, MovieWatch } from '../../models/watchlist-movie.interface';
+import { WatchlistSeriesResponse, SerieWatch } from '../../models/watchlist-series.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-watchlist',
@@ -10,20 +10,23 @@ import { AuthService } from '../../services/auth.service'; // Importa el servici
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-  watchlistMovies: WatchlistMovieResponse[] = [];
-  watchlistSeries: WatchlistSeriesResponse[] = [];
+  watchlistMovies: MovieWatch[] = [];
+  watchlistSeries: SerieWatch[] = [];
 
-  constructor(private watchlistService: WatchlistService, private authService: AuthService) {} // Inyecta el servicio de autenticación
+  constructor(private watchlistService: WatchlistService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    //COGER EL SESSION ACCOUNT ID EN VEZ DE COGER EL ID
 
-    this.watchlistService.getWatchlistMovies(accountId).subscribe((response: WatchlistMovieResponse) => {
-      this.watchlistMovies = response.results;
+    const account_id = Number(this.authService.getSessionId());
+
+
+    this.watchlistService.getWatchlistMovies(account_id).subscribe((data: WatchlistMovieResponse) => {
+      this.watchlistMovies = data.results;
     });
 
-    this.watchlistService.getWatchlistSeries(accountId).subscribe((response: WatchlistSeriesResponse) => {
-      this.watchlistSeries = response.results;
+    this.watchlistService.getWatchlistSeries(account_id).subscribe((data: WatchlistSeriesResponse) => {
+      this.watchlistSeries = data.results;
     });
+
   }
 }

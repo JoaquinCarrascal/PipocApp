@@ -26,6 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
     provideHttpClient(),
     { provide: 'circleProgressConfig', useValue: {} },
     DateFormaterPipe,
-    OrderTriggerPipe
+    OrderTriggerPipe,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
