@@ -170,7 +170,7 @@ export class MyListComponent implements OnInit {
   addItemToList(idList: number , idItem: number){
 
     this.listServ.checkIfItemExistsInList(idList, idItem).subscribe((data) => { 
-      data.item_present ? null : this.listServ.addItemToList(idList, idItem).subscribe(() => {});
+      data.item_present ? null : this.listServ.addItemToList(idList, idItem).subscribe(() => { this.ngOnInit(); });
     });
 
   }
@@ -188,9 +188,13 @@ export class MyListComponent implements OnInit {
   }
 
   dateFormater(date: string): string{
-  
-    return this.pipeDateForm.transform(date);
-    
+
+    if(date != '' && date != undefined){
+      return this.pipeDateForm.transform(date);
+    }else{
+      return '';
+    }
+
   }
 
 }
