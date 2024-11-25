@@ -3,6 +3,8 @@ import { SeriesAccountService } from '../../services/series-account.service';
 import { SeriesService } from '../../services/series.service';
 
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
+import { RatedSerieResponse } from '../../models/rated-serie.interface';
 
 @Component({
   selector: 'app-rated-series',
@@ -10,22 +12,40 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
   styleUrls: ['./rated-series.component.css']
 })
 export class RatedSeriesComponent implements OnInit {
-  ratedSeries: any[] = [];
+  ratedSeries: RatedSerieResponse[] = [];
 
-  constructor(private seriesAcc: SeriesAccountService, private serieService: SeriesService) { }
+  constructor(private seriesAcc: SeriesAccountService, private serieService: SeriesService,private pipeDateForm: DateFormaterPipe) { }
 
   ngOnInit(): void {
     this.getSeriesWithRating();
   }
 
   getSeriesWithRating() {
-    this.seriesAcc.getUserRatings().subscribe((data) => {
-      this.ratedSeries = data.results;
+    this.seriesAcc.getUserRatings().subscribe((data : RatedSerieResponse) => {
+      this.ratedSeries = data.results.map(result => ({
+        page: data.page,
+        results: [result],
+        total_pages: data.total_pages,
+        total_results: data.total_results
+      }));
     });
   }
 
   obtenerImagenOriginal(path: string): string {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
+
+  
+punctFormater(num: number): number{
+
+  return num * 10;
+
+}
+dateFormater(date: string): string{
+  
+  return this.pipeDateForm.transform(date);
+  
+}
+  
   
 }
