@@ -29,7 +29,9 @@ export class RatedSeriesComponent implements OnInit {
   }
 
   getSeriesWithRating() {
+    this.ratedSeries = [];
     this.seriesAcc.getUserRatings().subscribe((data : RatedSerieResponse) => {
+    
       this.ratedSeries = data.results.map(result => ({
         page: data.page,
         results: [result],
@@ -40,6 +42,7 @@ export class RatedSeriesComponent implements OnInit {
   }
 
   getMoviesWithRating() {
+    this.ratedMovies = [];
     this.seriesAcc.getUserMoviesRatings().subscribe((data : RatedMoviesResponse) => {
       this.ratedMovies = data.results.map(result => ({
         page: data.page,
@@ -56,13 +59,13 @@ export class RatedSeriesComponent implements OnInit {
 
   deleteSeriesRating(serieId: number) {
     this.seriesAcc.deleteSerieRating(serieId).subscribe(() => {
-      this.refreshSeriesWithRatingList()
+      this.ngOnInit()
     });
   }
 
   deleteMovieRating(movieId: number) {
     this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
-      this.refreshMoviesWithRatingList()
+      this.ngOnInit()
     });
   }
 
