@@ -4,15 +4,16 @@
 <div style="margin-left: 75px; margin-bottom: 30px">
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
-        <input checked="" id="option7" name="options-second" type="radio" />
+        <input checked="" id="option7" name="options-second" type="radio" (click)="clickMovieSerie(true)" />
         <label class="option-second" for="option7" class="d-flex" style="left:20px;">Películas</label>
-        <input id="option8" name="options-second" type="radio" />
+        <input id="option8" name="options-second" type="radio" (click)="clickMovieSerie(false)" />
         <label class="option-second" for="option8" class="d-flex" style="left:50px;">Series</label>
         <span class="background-second"></span>
     </div>
 </div>
 
 <div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 240px;">
+    @if(watchlistMovie.length > 0){
     @for(movie of watchlistMovie; track movie){
     <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
         <a [routerLink]="['/details-movie/' , movie.id]">
@@ -24,9 +25,8 @@
         </p>
     </div>
     }
-</div>
-
-<div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 240px;">
+    }
+    @if(watchlistSeries.length > 0){
     @for(serie of watchlistSeries; track serie){
     <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
         <a [routerLink]="['/series/details/' , serie.id]">
@@ -34,8 +34,9 @@
             </div>
         </a>
         <p class="text-light text-truncate mt-1" style="font-size: 13pt; max-width: 200px;">
-            {{serie.title}}
+            {{serie.name}}
         </p>
     </div>
+    }
     }
 </div>

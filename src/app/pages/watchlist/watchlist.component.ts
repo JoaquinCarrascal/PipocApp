@@ -19,16 +19,25 @@ export class WatchlistComponent implements OnInit {
     this.watchlistService.getWatchlistMovies().subscribe((response) => {
       this.watchlistMovie = response.results;
     });
- 
-    this.watchlistService.getWatchlistSeries().subscribe((response) => {
-      this.watchlistSeries = response.results;
-    });
-    
   }
 
   getFullImagePath(posterPath: string): string {
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     return `${baseUrl}${posterPath}`;
+  }
+
+  clickMovieSerie(isMovie: boolean): void {
+    if (isMovie) {
+      this.watchlistService.getWatchlistMovies().subscribe((response) => {
+        this.watchlistMovie = response.results;
+      });
+      this.watchlistSeries = [];
+    } else {
+      this.watchlistService.getWatchlistSeries().subscribe((response) => {
+        this.watchlistSeries = response.results;
+      });
+      this.watchlistMovie = [];
+    }
   }
 
 }
