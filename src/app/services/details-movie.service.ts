@@ -7,7 +7,7 @@ import { VideoResponse } from '../models/movies-video-response';
 import { Observable } from 'rxjs';
 import { FavoriteMovies } from '../models/fav-movie-response';
 
-const API_KEY = "13eb21937668110c8a2635cf3e82ae51";
+const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const BASE_URL = "https://api.themoviedb.org/3/movie";
 
 @Injectable({
@@ -33,16 +33,16 @@ export class DetailsMovieService {
     return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=es-ES`);
   }
 
-  addFilmToFavourites(movie: MovieDetailResponse): Observable<FavoriteMovies> {
+  addFilmToFavourites(movie: MovieDetailResponse): Observable<MovieDetailResponse> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: movie.id,
       media_type: 'movie',
       favorite: true
     };
 
-    return this.http.post<FavoriteMovies>(
+    return this.http.post<MovieDetailResponse>(
       `https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
       body
     );
