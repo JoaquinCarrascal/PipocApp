@@ -20,10 +20,10 @@
                 [style.background-image]="'url(' + getFullImagePath(movie.poster_path) + ')'">
             </div>
         </a>
-        <button class="btn btn-danger btn-fav" (click)="removeFromFavorites(movie.id)">
+        <button class="btn btn-danger btn-fav" (click)="removeFromFavorites(movie.id) "  style="position: absolute; bottom: 115px; right: 80px;">
             <span class="material-symbols-rounded">delete</span>
         </button>
-        <p class="text-light text-truncate mt-1" style="font-size: 13pt; max-width: 200px;">
+        <p class="text-light text-truncate mt-1" style="font-size: 15pt; max-width: 200px;">
             {{movie.title}}
         </p>
     </div>
