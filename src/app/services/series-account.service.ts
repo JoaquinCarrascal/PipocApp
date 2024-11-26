@@ -26,6 +26,16 @@ export class SeriesAccountService {
     return this.http.post(url, { value: rating });
   }
 
+  addMovieRating(serieId: number, rating: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    if (!sessionId) {
+      throw new Error('Session ID is required');
+    }
+
+    const url = `${API_BASE_URL}/movie/${serieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    return this.http.post(url, { value: rating });
+  }
+
   getUserRatings(): Observable<RatedSerieResponse> {
 
   

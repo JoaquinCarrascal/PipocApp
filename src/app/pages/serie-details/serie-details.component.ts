@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Serie, SerieResponse } from '../../models/serie.interface';
 import { SerieDetails } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,8 @@ import { SerieCast } from '../../models/serie-cast.interface';
 import { Keyword } from '../../models/keyword.interface';
 import { TrailerResponse } from '../../models/trailer.interface';
 import { AuthService } from '../../services/auth.service';
+import { Toast } from 'primeng/toast';
+import { ToastServiceService } from '../../services/toast-service.service';
 
 @Component({
   selector: 'app-serie-details',
@@ -21,12 +23,16 @@ export class SerieDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private serieDetailsService: SeriesService,
     private seriesAccountService: SeriesAccountService,
-    private authSerive : AuthService
+    private authSerive : AuthService,
+    private toastService: ToastServiceService
   ) { }
 
   series: SerieDetails[] = [];
   serieDetails: SerieDetails[] = [];
   cast: SerieCast | undefined;
+
+
+
 
   userRating: number = 0;
   voteCount: number | undefined;
@@ -46,6 +52,11 @@ export class SerieDetailsComponent implements OnInit {
 
   video: string | undefined;
 
+
+
+
+
+
   ngOnInit(): void {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
@@ -63,11 +74,10 @@ export class SerieDetailsComponent implements OnInit {
           this.keyWords = [keywords];
         });
 
-        // Recuperar el rating almacenado en localStorage
-        const storedRating = localStorage.getItem(`userRating_${idSerie}`);
-        if (storedRating) {
-          this.userRating = parseInt(storedRating, 10);
-        }
+        
+        this.valoracionUsuario()
+
+         
       });
 
       this.getSerieCast(Number(idSerie));
@@ -105,14 +115,14 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
 
-  rateSeries(rating: number): void {
+  rateSeries(rating: number ) {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
     if (this.comprobarInicioSesion()) {
       this.userRating = rating;
       if (idSerie) {
         localStorage.setItem(`userRating_${idSerie}`, rating.toString());
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
-          
+          alert('Valoración añadida correctamente');
         });
       }
     } else {
@@ -126,5 +136,21 @@ export class SerieDetailsComponent implements OnInit {
 
   noLoggedAlert() {
     alert('Debe iniciar sesión para poder valorar la serie');
+  }
+
+  showSuccess(template: TemplateRef<any>) {
+		this.toastService.show({ template, classname: 'bg-success text-light', delay: 10000 });
+	}
+
+  valoracionUsuario(){
+
+    const idSerie = this.route.snapshot.paramMap.get('idSerie');
+
+    this.seriesAccountService.getUserRatings().subscribe((data) => {
+      const serieRating = data.results.find(result => result.id === Number(idSerie));
+      if (serieRating) {
+        this.userRating = serieRating.rating;
+      }
+    });
   }
 }

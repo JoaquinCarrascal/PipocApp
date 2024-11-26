@@ -37,8 +37,10 @@
                     <div class="rating-box mb-3">
                         <div class="rating-row">
                             <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
+                               
                                 <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateSeries(i + 1)">
                                 <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
+                                
                               </ng-container>
                           
                    

@@ -5,6 +5,8 @@ import { MovieDetailResponse } from '../../models/movies-details-response';
 import { CastResponse, Cast, Crew } from '../../models/movie-cast-response';
 import { ProvidersResponse, Flatrate } from '../../models/movies-watch-providers';
 import { VideoResponse, Result } from '../../models/movies-video-response';
+import { AuthService } from '../../services/auth.service';
+import { SeriesAccountService } from '../../services/series-account.service';
 
 @Component({
   selector: 'app-details-movie',
@@ -20,9 +22,13 @@ export class DetailsMovieComponent implements OnInit {
   providers: Flatrate[] = [];
   trailer: Result | null = null;
 
+  userRating: number = 0;
+
   constructor(
     private route: ActivatedRoute,
-    private detailsMovieService: DetailsMovieService
+    private detailsMovieService: DetailsMovieService,
+    private authSerive : AuthService,
+    private seriesAccountService: SeriesAccountService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +44,8 @@ export class DetailsMovieComponent implements OnInit {
       this.detailsMovieService.getMovieTrailer(+idMovie).subscribe(data => {
         this.trailer = data.results.find(result => result.type === 'Trailer') || null;
       });
+
+      this.valoracionUsuarioMovie();
     }
   }
 
@@ -70,19 +78,17 @@ export class DetailsMovieComponent implements OnInit {
     window.open(link, '_blank');
   }
 
-  obtenerColorCalificacion(voteAverage: number, index: number): string {
-    const level = Math.ceil(voteAverage / 2);
-    if (index < level) {
-      return ''; // Green for high ratings
+  obtenerColorCalificacion(userRating: number, index: number): string {
+    if (index < userRating) {
+      return '';
     } else {
-      return 'brightness(0.2)'; // Darker color for unachieved levels
+      return 'brightness(0.2)';
     }
   }
 
-  getPopcornIcons(voteAverage: number): string[] {
-    return Array.from({ length: 5 }, (_, index) => this.obtenerColorCalificacion(voteAverage, index));
+  getPopcornIcons(userRating: number): string[] {
+    return Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index));
   }
-
   getDirectors(): Crew[] {
     return this.crew.filter(member => member.known_for_department === 'Directing');
   }
@@ -93,4 +99,37 @@ export class DetailsMovieComponent implements OnInit {
     }
   }
 
+  comprobarInicioSesion(): boolean {
+    return this.authSerive.checkUserIsLogged();
+  }
+
+  rateMovie(rating: number): void {
+    const idMovie = this.route.snapshot.paramMap.get('idMovie');
+    if (this.comprobarInicioSesion()) {
+      this.userRating = rating;
+      if (idMovie) {
+        this.seriesAccountService.addMovieRating(Number(idMovie), rating).subscribe(response => {
+          alert('Valoración añadida correctamente');
+        });
+      }
+    } else {
+      this.noLoggedAlert();
+    }
+  }
+
+  noLoggedAlert() {
+    alert('Debe iniciar sesión para poder valorar la serie');
+  }
+
+  valoracionUsuarioMovie(){
+
+    const idSerie = this.route.snapshot.paramMap.get('idMovie');
+
+    this.seriesAccountService.getUserMoviesRatings().subscribe((data) => {
+      const serieRating = data.results.find(result => result.id === Number(idSerie));
+      if (serieRating) {
+        this.userRating = serieRating.rating;
+      }
+    });
+  }
 }

@@ -33,6 +33,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 
 
+
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +58,9 @@ import { MatMenuModule } from '@angular/material/menu';
     RatedSeriesComponent
   ],
   imports: [
+    ToastModule,
+    ButtonModule,
+    RippleModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

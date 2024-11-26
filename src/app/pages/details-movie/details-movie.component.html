@@ -38,12 +38,15 @@
             <div class="movie-rating">
                 <div class="rating-box">
                     <div class="rating-row">
-                        <ng-container *ngFor="let color of getPopcornIcons(movies.vote_average); let i = index">
-                            <img src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas"
-                                class="popcorn-icon">
+                        <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
+                            <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateMovie(i + 1)">
+                            <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
                         </ng-container>
                     </div>
                 </div>
+                <div>
+                    <span class="strong" style="font-size: 20px;">Rating : {{userRating*10}} </span>
+                  </div>
             </div>
 
             <div class="movie-trailer mt-3" *ngIf="trailer">
