@@ -14,20 +14,18 @@
 </div>
 <div class="container-fluid row  mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 240px;">
     @for(movie of favoriteMovies; track movie){
-    <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
+    <div class="movie-card col-2 mt-0" style="margin-top: 0px; position: relative;">
         <a [routerLink]="['/details-movie/' , movie.id]">
-        <div class="card-img"
-            [style.background-image]="'url(' + getFullImagePath(movie.poster_path) + ')'">
-            <button class="btn btn-danger btn-fav" (click)="removeFromFavorites(movie.id)">
-                <span class="material-symbols-rounded">
-                    delete
-                    </span>
-            </button>
-        </div>
+            <div class="card-img"
+                [style.background-image]="'url(' + getFullImagePath(movie.poster_path) + ')'">
+            </div>
         </a>
+        <button class="btn btn-danger btn-fav" (click)="removeFromFavorites(movie.id)">
+            <span class="material-symbols-rounded">delete</span>
+        </button>
         <p class="text-light text-truncate mt-1" style="font-size: 13pt; max-width: 200px;">
             {{movie.title}}
         </p>
     </div>
-
 }
+</div>
