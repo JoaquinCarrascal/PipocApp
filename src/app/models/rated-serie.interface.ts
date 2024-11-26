@@ -1,11 +1,11 @@
 export interface RatedSerieResponse {
     page: number
-    results: Result[]
+    results: SerieResults[]
     total_pages: number
     total_results: number
   }
   
-  export interface Result {
+  export interface SerieResults {
     adult: boolean
     backdrop_path: string
     genre_ids: number[]

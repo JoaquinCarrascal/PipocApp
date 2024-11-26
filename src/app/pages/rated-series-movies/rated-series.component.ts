@@ -4,8 +4,8 @@ import { SeriesService } from '../../services/series.service';
 
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
 import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
-import { RatedSerieResponse } from '../../models/rated-serie.interface';
-import { RatedMoviesResponse } from '../../models/rated-movies.interface';
+import { RatedSerieResponse, SerieResults } from '../../models/rated-serie.interface';
+import { MovieResults, RatedMoviesResponse } from '../../models/rated-movies.interface';
 
 @Component({
   selector: 'app-rated-series',
@@ -13,9 +13,9 @@ import { RatedMoviesResponse } from '../../models/rated-movies.interface';
   styleUrls: ['./rated-series.component.css']
 })
 export class RatedSeriesComponent implements OnInit {
-  ratedSeries: RatedSerieResponse[] = [];
+  ratedSeries: SerieResults[] = [];
 
-  ratedMovies : RatedMoviesResponse [] = [];
+  ratedMovies : MovieResults [] = [];
 
 
 
@@ -28,28 +28,16 @@ export class RatedSeriesComponent implements OnInit {
     this.getMoviesWithRating();
   }
 
-  getSeriesWithRating() {
-    this.ratedSeries = [];
-    this.seriesAcc.getUserRatings().subscribe((data : RatedSerieResponse) => {
-    
-      this.ratedSeries = data.results.map(result => ({
-        page: data.page,
-        results: [result],
-        total_pages: data.total_pages,
-        total_results: data.total_results
-      }));
+  getSeriesWithRating(): void {
+    this.seriesAcc.getUserRatings().subscribe((data: RatedSerieResponse ) => {
+      this.ratedSeries = data.results;
     });
   }
 
   getMoviesWithRating() {
     this.ratedMovies = [];
     this.seriesAcc.getUserMoviesRatings().subscribe((data : RatedMoviesResponse) => {
-      this.ratedMovies = data.results.map(result => ({
-        page: data.page,
-        results: [result],
-        total_pages: data.total_pages,
-        total_results: data.total_results
-      }));
+      this.ratedMovies = data.results;
     });
   }
 
@@ -59,7 +47,7 @@ export class RatedSeriesComponent implements OnInit {
 
   deleteSeriesRating(serieId: number) {
     this.seriesAcc.deleteSerieRating(serieId).subscribe(() => {
-      this.ngOnInit()
+      this.getSeriesWithRating();
     });
   }
 
@@ -71,14 +59,6 @@ export class RatedSeriesComponent implements OnInit {
 
   
 
-refreshMoviesWithRatingList(){
-  this.getMoviesWithRating();
-}
-
-refreshSeriesWithRatingList(){
-  this.getSeriesWithRating();
-}
-  
 punctFormater(num: number): number{
 
   return num * 10;
