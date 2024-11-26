@@ -13,7 +13,7 @@ import { TrailerResponse } from '../models/trailer.interface';
 import { WatchlistSeries } from '../models/watchlist-series.interface';
 
 
-const apiKey: string = '7cb3ebb77086a8a379dd38b88a23269a';
+const apiKey: string = 'de28babb0baeed53e1255cd2b2bd2e15';
 const baseUrl = 'https://api.themoviedb.org/3/discover/tv';
 
 @Injectable({
@@ -76,11 +76,11 @@ export class SeriesService {
 
   addSeriesToWatchlist(serie: SerieDetails): Observable<WatchlistSeries> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: serie.id,
       media_type: 'serie',
-      favorite: true
+      watchlist: true
     };
 
     return this.http.post<WatchlistSeries>(

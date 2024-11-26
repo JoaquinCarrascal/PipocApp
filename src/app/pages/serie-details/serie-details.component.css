@@ -247,3 +247,9 @@ color: black;
 
 }
 
+.trailer{
+    background-color: springgreen;
+    padding: 8px 20px;
+    color: rgb(6, 6, 57);
+    font-weight: bold;
+}

@@ -7,7 +7,7 @@ import { WatchlistSeriesResponse } from '../models/watchlist-series.interface';
 import { SerieDetails } from '../models/serie-details.interface';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
-const BASE_URL = "https://api.themoviedb.org/3";
+const API_BASE_URL = "https://api.themoviedb.org/3";
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,14 @@ export class WatchlistService {
 
   addMoviesToWatchlist(movie: MovieDetailResponse): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id');
+    const accountId = localStorage.getItem('account_id') || '';
     const body = {
       media_id: movie.id,
       media_type: 'movie',
       watchlist: true
     };
     return this.http.post<any>(
-      `${BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -39,7 +39,7 @@ export class WatchlistService {
       watchlist: true
     };
     return this.http.post<any>(
-      `${BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -49,7 +49,7 @@ export class WatchlistService {
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<WatchlistMovieResponse>(
-      `${BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`
     );
   }
 
@@ -58,7 +58,7 @@ export class WatchlistService {
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<WatchlistSeriesResponse>(
-      `${BASE_URL}/account/${accountId}/watchlist/tv?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/account/${accountId}/watchlist/tv?api_key=${API_KEY}&session_id=${sessionId}`
     );
   }
 
