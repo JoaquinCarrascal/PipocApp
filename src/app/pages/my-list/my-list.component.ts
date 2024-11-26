@@ -67,6 +67,11 @@ export class MyListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.loadList();
+
+  }
+
+  loadList(): void{
     this.myList = [];
     this.backPhotosMap = {};
 
@@ -76,7 +81,6 @@ export class MyListComponent implements OnInit {
         this.loadBackPhoto(list.id);
       });
     });
-
   }
 
   loadBackPhoto(idList: number) {
@@ -171,7 +175,7 @@ export class MyListComponent implements OnInit {
 
     this.listServ.checkIfItemExistsInList(idList, idItem).subscribe((data) => { 
       data.item_present ? null : 
-      this.listServ.addItemToList(idList, idItem).subscribe(() => { this.ngOnInit(); 
+      this.listServ.addItemToList(idList, idItem).subscribe(() => { this.loadList(); 
                                             this.itemDetailsList = [];
                                             this.listServ.getListItems(idList).subscribe((data) => {
                                             this.itemDetailsList = data.items;
