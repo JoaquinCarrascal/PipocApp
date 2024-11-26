@@ -62,4 +62,34 @@ export class WatchlistService {
     );
   }
 
+  removeMoviesFromWatchlist(movieId: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: movieId,
+      media_type: 'movie',
+      watchlist: false
+    };
+
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+  }
+
+  removeSeriesFromWatchlist(movieId: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: movieId,
+      media_type: 'movie',
+      watchlist: false
+    };
+
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+  }
+
 }

@@ -40,4 +40,16 @@ export class WatchlistComponent implements OnInit {
     }
   }
 
+  removeMoviesFromWatchlist(movieId: number): void {
+    this.watchlistService.removeMoviesFromWatchlist(movieId).subscribe(() => {
+      this.watchlistMovie = this.watchlistMovie.filter((watchlistMovie) => watchlistMovie.id !== movieId);
+    });
+  }
+
+  removeSeriesFromWatchlist(seriesId: number): void {
+    this.watchlistService.removeSeriesFromWatchlist(seriesId).subscribe(() => {
+      this.watchlistSeries = this.watchlistSeries.filter((watchlistSeries) => watchlistSeries.id !== seriesId);
+    });
+  }
+
 }
