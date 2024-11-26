@@ -6,6 +6,7 @@ import { ListItemsResponse } from '../models/list-items';
 import { MovieSearchResponse } from '../models/movie-search';
 import { TvSearchResponse } from '../models/tv-search';
 import { AvailabilityStatusResponse } from '../models/availability-status';
+import { CreatedListResponse } from '../models/created-list-response';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZTI4YmFiYjBiYWVlZDUzZTEyNTVjZDJiMmJkMmUxNSIsIm5iZiI6MTczMjMyNTU1MS45NDIwMTksInN1YiI6IjY3MzFiZDk1NjE2MjZhYzEwNmJlNjdkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nK6kybVnUfa1HZLz3UngXPtNACqyFqVKFvzPNwEmmBo";
@@ -41,7 +42,7 @@ export class MyListsService {
       language: 'en'
       });
 
-  return this.http.post(`https://api.themoviedb.org/3/list?session_id=${localStorage.getItem('session_id')}`,
+  return this.http.post<CreatedListResponse>(`https://api.themoviedb.org/3/list?session_id=${localStorage.getItem('session_id')}`,
   body,
   {
 

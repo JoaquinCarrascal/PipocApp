@@ -107,7 +107,18 @@ export class MyListComponent implements OnInit {
 
   createList() {
     this.listServ.createList(this.newListName).subscribe((data) => {
-      this.ngOnInit();
+      
+      this.listServ.getLists().subscribe((lres: ListResponse) => {
+        
+        const newList = lres.results.find(list => list.id === data.list_id);
+        if (!newList) return;
+        this.myList.push(newList);
+        this.myList.forEach(list => {
+          this.loadBackPhoto(list.id);
+        });
+        
+      });
+
     });
     this.newListName = '';
   }
@@ -116,7 +127,9 @@ export class MyListComponent implements OnInit {
 
     this.listServ.deleteItemFromList(idList, idItem).subscribe(() => {
       this.itemDetailsList = this.itemDetailsList.filter(item => item.id !== idItem);
-      this.ngOnInit();
+      const modifiedListPosition = this.myList.findIndex(list => list.id === idList);
+      this.myList[modifiedListPosition].item_count-=1;
+      if(this.myList[modifiedListPosition].item_count == 0){ this.loadBackPhoto(idList); }
     });
 
   }
@@ -175,11 +188,15 @@ export class MyListComponent implements OnInit {
 
     this.listServ.checkIfItemExistsInList(idList, idItem).subscribe((data) => { 
       data.item_present ? null : 
-      this.listServ.addItemToList(idList, idItem).subscribe(() => { this.loadList(); 
-                                            this.itemDetailsList = [];
-                                            this.listServ.getListItems(idList).subscribe((data) => {
-                                            this.itemDetailsList = data.items;
-                                          });
+      this.listServ.addItemToList(idList, idItem).subscribe(() => {
+        const modifiedListPosition = this.myList.findIndex(list => list.id === idList);
+        if(this.myList[modifiedListPosition].item_count == 0){ this.loadBackPhoto(idList); }
+        this.myList[modifiedListPosition].item_count+=1;
+        this.itemDetailsList = [];
+        this.listServ.getListItems(idList).subscribe((data) => {
+        this.itemDetailsList = data.items;
+
+        });
       });
     });
 
@@ -208,64 +225,3 @@ export class MyListComponent implements OnInit {
   }
 
 }
-
-
-/* Sin mezclar 
-search: OperatorFunction<string, readonly { title: string; poster_path: string ; release_date:string ; name: string ; first_air_date:string}[]> 
-    = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(300),
-      switchMap((term) =>
-        term === ''
-          ? of([])
-          : forkJoin([this.listServ.searchMovieItem(term) , this.listServ.searchTvItem(term)]).pipe(
-              map((data) => data[0].results.map(result => ({
-                title: result.title,
-                poster_path: result.poster_path || '',
-                release_date: result.release_date || '',
-                name: '',
-                first_air_date:'',
-              })).concat(data[1].results.map(result => ({
-                name: result.name,
-                poster_path: result.poster_path || '',
-                first_air_date: result.first_air_date || '',
-                release_date: '',
-                title: ''
-              })))
-              )
-          )
-      )
-    );
-*/
-
-/*
-search: OperatorFunction<string, readonly { title: string; poster_path: string ; release_date:string ; name: string ; first_air_date: string ; id: number}[]> 
-    = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(300),
-      switchMap((term) =>
-        term === ''
-          ? of([])
-          : forkJoin([this.listServ.searchMovieItem(term) , this.listServ.searchTvItem(term)]).pipe(
-              map((data) => {
-                const combinedResults = data[0].results.map(result => ({
-                  title: result.title,
-                  poster_path: result.poster_path || '',
-                  release_date: result.release_date || '',
-                  name: '',
-                  first_air_date: '',
-                  id: result.id
-                })).concat(data[1].results.map(result => ({
-                  name: result.name,
-                  poster_path: result.poster_path || '',
-                  first_air_date: result.first_air_date || '',
-                  release_date: '',
-                  title: '',
-                  id: result.id
-                })));
-                return combinedResults.sort(() => Math.random() - 0.5);
-              })
-          )
-      )
-    );
-*/
