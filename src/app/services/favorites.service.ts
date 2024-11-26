@@ -18,7 +18,7 @@ export class FavoritesService {
 
   addFilmToFavourites(movie: MovieDetailResponse): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: movie.id,
       media_type: 'movie',
@@ -30,6 +30,21 @@ export class FavoritesService {
       body
     );
 
+  }
+
+  removeFilmFromFavourites(movieId: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: movieId,
+      media_type: 'movie',
+      favorite: false
+    };
+
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
   }
 
 
