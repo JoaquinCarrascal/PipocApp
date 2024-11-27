@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsMovieService } from '../../services/details-movie.service';
 import { MovieDetailResponse } from '../../models/movies-details-response';
@@ -7,6 +7,7 @@ import { ProvidersResponse, Flatrate } from '../../models/movies-watch-providers
 import { VideoResponse, Result } from '../../models/movies-video-response';
 import { AuthService } from '../../services/auth.service';
 import { SeriesAccountService } from '../../services/series-account.service';
+import { Toast, ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-details-movie',
@@ -23,6 +24,12 @@ export class DetailsMovieComponent implements OnInit {
   trailer: Result | null = null;
 
   userRating: number = 0;
+
+
+  toast : Toast | undefined;
+  toastService = inject(ToastService);
+  @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -68,6 +75,7 @@ export class DetailsMovieComponent implements OnInit {
     });
   }
 
+
   getMovieProviders(id: number): void {
     this.detailsMovieService.getMovieProviders(id).subscribe((data: ProvidersResponse) => {
       this.providers = data.results.ES?.flatrate || [];
@@ -109,7 +117,7 @@ export class DetailsMovieComponent implements OnInit {
       this.userRating = rating;
       if (idMovie) {
         this.seriesAccountService.addMovieRating(Number(idMovie), rating).subscribe(response => {
-          alert('Valoración añadida correctamente');
+          this.showSuccess(this.successTemplate); 
         });
       }
     } else {
@@ -132,4 +140,18 @@ export class DetailsMovieComponent implements OnInit {
       }
     });
   }
+
+    
+  showSuccess(template: TemplateRef<any>) {
+    this.toastService.show({ 
+      template : template, 
+      classname: 'bg-success text-light', 
+      delay: 7000 
+    });
+  }
+
+  
+  ngOnDestroy(): void {
+		this.toastService.clear();
+	}
 }

@@ -1,5 +1,21 @@
 <app-nav-bar></app-nav-bar>
+<ng-template #successTpl>
+    Valoración cambiada
+  </ng-template>
 
+  <div class="toast-container">
+    <ngb-toast *ngFor="let toast of toastService.toasts"
+                [class]="toast.classname"
+                [autohide]="true"
+                [delay]="toast.delay || 5000"
+                (hidden)="toastService.remove(toast)">
+      <div class="toast-content">
+        <span>Valoracion cambiada con éxito</span>
+        <button class="close-btn" (click)="toastService.remove(toast)">X</button>
+      </div>
+      <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+    </ngb-toast>
+  </div>
 @if(movies != undefined){
     <div class="background-image-blur"
         [ngStyle]="{'background-image': 'url(' + obtenerImagenPelicula(500, movies.backdrop_path) + ')'}"></div>

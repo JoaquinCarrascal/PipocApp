@@ -137,7 +137,7 @@ export class SerieDetailsComponent implements OnInit {
     this.toastService.show({ 
       template : template, 
       classname: 'bg-success text-light', 
-      delay: 10000 
+      delay: 7000 
     });
   }
 
