@@ -1,7 +1,23 @@
 <app-nav-bar></app-nav-bar>
-
+<ng-template #successTpl>
+    Valoración cambiada
+  </ng-template>
 <body>
-    <ng-template #successTpl> I'm a success toast </ng-template>
+    
+                
+    <div class="toast-container">
+        <ngb-toast *ngFor="let toast of toastService.toasts"
+                    [class]="toast.classname"
+                    [autohide]="true"
+                    [delay]="toast.delay || 5000"
+                    (hidden)="toastService.remove(toast)">
+          <div class="toast-content">
+            <span>Valoracion cambiada con exito</span>
+            <button class="close-btn" (click)="toastService.remove(toast)">X</button>
+          </div>
+          <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+        </ngb-toast>
+      </div>
         
     <div class="background-image-blur" 
         [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(series[0].backdrop_path) + ')'}">
@@ -49,7 +65,8 @@
                       <div>
                         <span class="strong" style="font-size: 20px;">Rating : {{userRating*10}} </span>
                       </div>
-                      <button class="btn btn-success" (click)="showSuccess(successTpl)" ngbTooltip="Will disappear in 10s">Success toast</button>&nbsp;
+                    
+
                       <div class="py-3">
                         <button (click)="getTrailer(series[0].id)" class="btn boton">Ver Trailer</button>
                       </div>

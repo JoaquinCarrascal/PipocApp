@@ -12,6 +12,8 @@ import { Toast } from 'primeng/toast';
 import { ToastService } from '../../services/toast.service';
 
 
+
+
 @Component({
   selector: 'app-serie-details',
   templateUrl: './serie-details.component.html',
@@ -32,7 +34,7 @@ export class SerieDetailsComponent implements OnInit {
   serieDetails: SerieDetails[] = [];
   cast: SerieCast | undefined;
 
-
+  toast : Toast | undefined;
 
 
   userRating: number = 0;
@@ -117,23 +119,27 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
 
-  rateSeries(rating: number ) {
+  rateSeries(rating: number) {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
     if (this.comprobarInicioSesion()) {
       this.userRating = rating;
       if (idSerie) {
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
-          this.showSuccess(this.successTemplate);
+          this.showSuccess(this.successTemplate);  // Aquí mostramos el toast
         });
       }
     } else {
       this.noLoggedAlert();
     }
   }
-
+  
   showSuccess(template: TemplateRef<any>) {
-		this.toastService.show({ template, classname: 'bg-success text-light', delay: 10000 });
-	}
+    this.toastService.show({ 
+      template : template, 
+      classname: 'bg-success text-light', 
+      delay: 10000 
+    });
+  }
 
   
   ngOnDestroy(): void {

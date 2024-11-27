@@ -250,3 +250,21 @@ color: black;
 .strong {
     font-weight: bold;
   }
+  .toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1050; 
+  }
+  .toast-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
