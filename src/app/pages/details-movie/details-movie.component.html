@@ -11,7 +11,7 @@
                 (hidden)="toastService.remove(toast)">
       <div class="toast-content">
         <span>Valoracion cambiada con éxito</span>
-        <button class="close-btn" (click)="toastService.remove(toast)">X</button>
+        <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
       </div>
       <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
     </ngb-toast>
