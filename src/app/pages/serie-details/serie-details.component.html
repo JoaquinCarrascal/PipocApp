@@ -2,9 +2,11 @@
 
 <body>
     <ng-template #successTpl> I'm a success toast </ng-template>
+        
     <div class="background-image-blur" 
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
+        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(series[0].backdrop_path) + ')'}">
     </div>
+    
     <div class="background-solid-color"></div>
 
     <div *ngIf="series.length > 0">
@@ -38,24 +40,19 @@
                     <div class="rating-box mb-3">
                         <div class="rating-row">
                             <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
-                                <ng-template #successTpl> I'm a success toast </ng-template>
                                 <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateSeries(i + 1)">
                                 <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
-                                
                               </ng-container>
-                          
-                   
-                              <button (click)="showSuccess(successTpl)">Test</button>
+
                         </div>
                       </div>
                       <div>
                         <span class="strong" style="font-size: 20px;">Rating : {{userRating*10}} </span>
                       </div>
-                      
+                      <button class="btn btn-success" (click)="showSuccess(successTpl)" ngbTooltip="Will disappear in 10s">Success toast</button>&nbsp;
                       <div class="py-3">
                         <button (click)="getTrailer(series[0].id)" class="btn boton">Ver Trailer</button>
                       </div>
-                    
                 </div>
             </div>
 
@@ -72,7 +69,6 @@
                                 <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
                                 alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
                             </a>
-                           
                             <div class="d-flex flex-column">
                                 <p class="actor-name">{{ actor.name }}</p>
                                 <p class="actor-character">{{ actor.character }}</p>
@@ -118,7 +114,6 @@
                 </div>
             </div>
         
-        
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
@@ -144,5 +139,4 @@
             </div>
         </div>
     </div>
-
 </body>
