@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MovieServService } from '../../services/movie-serv.service';
 import { TopRatedList } from '../../models/top-rated-response';
 import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,19 +14,28 @@ export class MovieListComponent implements OnInit {
   popularList: TopRatedList[] = [];
   pageCounter: number = 3;
   value: number = 0;
+  free: boolean = false;
 
-  constructor(private movieServ: MovieServService , private pipeDateForm: DateFormaterPipe) { }
+  constructor(private movieServ: MovieServService,
+              private pipeDateForm: DateFormaterPipe,
+              private router: Router) { }
   
   ngOnInit(): void {
 
+    this.loadData();
+
+  }
+
+  loadData(): void {
+
     this.popularList = [];
     this.pageCounter = 3;
+    
     for (let i = 1; i <= this.pageCounter; i++) {
-      this.movieServ.getMovieList(i , this.value).subscribe((data) => {
+      this.movieServ.getMovieList(i , this.free ,this.value).subscribe((data) => {
         this.popularList = this.popularList.concat(data.results);
       });
     }
-
 
   }
 
@@ -42,16 +52,26 @@ export class MovieListComponent implements OnInit {
   concatNextPage(){
 
     this.pageCounter++;
-    this.movieServ.getMovieList(this.pageCounter , this.value).subscribe((data) => {
-      this.popularList = this.popularList.concat(data.results);
-    });
-
+    
+      this.movieServ.getMovieList(this.pageCounter , this.free ,this.value).subscribe((data) => {
+        this.popularList = this.popularList.concat(data.results);
+      });
+      
   }
 
   onSelectChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.value = Number(selectElement.value);
-    this.ngOnInit();
+    this.loadData();
+  }
+
+  swapFree() {
+    this.free = !this.free;
+    this.loadData();
+  }
+
+  navigateToTvShow() {
+    this.router.navigate(['/series']);
   }
 
   formatLabel(value: number): string {

@@ -4,7 +4,7 @@
     border-radius: 20px;
     padding: 20px;
     width: 320px;
-    height: 530px;
+    height: 560px;
     margin-left: 30px;
     margin-top: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -170,8 +170,14 @@ input[type="radio"]:checked::before {
     position: relative;
     box-sizing: border-box;
     width: fit-content;
+    margin:0 auto;
   }
-  
+
+  .search-flex {
+    width: 20%;
+    position: absolute;
+    right: 20px;
+  }
   .mainbox {
     box-sizing: border-box;
     position: relative;
@@ -183,8 +189,8 @@ input[type="radio"]:checked::before {
     align-items: center;
     justify-content: center;
     border-radius: 160px;
-    background-color: rgb(255, 255, 255);
-    border: #09273C 4px solid;
+    background-color: rgba(255, 255, 255, 0);
+    border: #ffffff 4px solid;
     transition: all 0.3s ease;
   }
   
@@ -230,16 +236,16 @@ input[type="radio"]:checked::before {
     outline: none;
     padding-bottom: 0px;
     position: relative;
-    top: 5px;
-    padding-left: 14px;
+    top: 0px;
+    padding-left: 7px;
     font-size: 1em;
-    color: #09273C;
+    color: #ffffff;
     transition: all 0.3s ease;
     
   }
   
   .search_input::placeholder {
-    color: #09273C;
+    color: #ffffff;
   }
   
   .iconContainer {
@@ -251,7 +257,7 @@ input[type="radio"]:checked::before {
   
   .search_icon {
     box-sizing: border-box;
-    fill: #09273C;
+    fill: #ffffff;
     font-size: 1.4em;
     position: relative;
     bottom: 2px;
@@ -441,3 +447,17 @@ input[type="radio"]:checked::before {
     border-color: #051521;
   }
   
+.btn-busq{
+
+  background-color: #09273C;
+  color: white; 
+  border-radius: 100px; 
+  margin-top: 0px;
+}
+
+.title-flex{
+
+  width: 50%;
+  position: absolute;
+
+}
