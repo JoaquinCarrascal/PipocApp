@@ -25,13 +25,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { RatingModule } from 'primeng/rating';
-import { RatedSeriesComponent } from './pages/rated-series-movies/rated-series.component';
+import { RatedSeriesComponent } from './pages/rated-series-movies/rated-series-movies.component';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatMenuModule } from '@angular/material/menu';
-
 
 
 import { ToastModule } from 'primeng/toast';

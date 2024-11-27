@@ -6,11 +6,12 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
 import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
 import { RatedSerieResponse, SerieResults } from '../../models/rated-serie.interface';
 import { MovieResults, RatedMoviesResponse } from '../../models/rated-movies.interface';
+import { Cast, Crew } from '../../models/movie-cast-response';
 
 @Component({
   selector: 'app-rated-series',
   templateUrl: './rated-series-movies.component.html',
-  styleUrls: ['./rated-series.component.css']
+  styleUrls: ['./rated-series-movies.component.css']
 })
 export class RatedSeriesComponent implements OnInit {
   ratedSeries: SerieResults[] = [];
@@ -18,7 +19,8 @@ export class RatedSeriesComponent implements OnInit {
   ratedMovies : MovieResults [] = [];
 
 
-
+  cast: Cast[] = [];
+  crew: Crew[] = [];
   cambio : number = 0
 
   constructor(private seriesAcc: SeriesAccountService, private serieService: SeriesService,private pipeDateForm: DateFormaterPipe) { }
@@ -82,6 +84,21 @@ dateFormater(date: string): string{
       this.getMoviesWithRating();
     }
 
+  }
+
+  obtenerColorCalificacion(userRating: number, index: number): string {
+    if (index < userRating) {
+      return '';
+    } else {
+      return 'brightness(0.2)';
+    }
+  }
+
+  getPopcornIcons(userRating: number): string[] {
+    return Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index));
+  }
+  getDirectors(): Crew[] {
+    return this.crew.filter(member => member.known_for_department === 'Directing');
   }
   
   

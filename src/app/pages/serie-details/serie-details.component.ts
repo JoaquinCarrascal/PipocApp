@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Serie, SerieResponse } from '../../models/serie.interface';
 import { SerieDetails } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,8 @@ import { Keyword } from '../../models/keyword.interface';
 import { TrailerResponse } from '../../models/trailer.interface';
 import { AuthService } from '../../services/auth.service';
 import { Toast } from 'primeng/toast';
-import { ToastServiceService } from '../../services/toast-service.service';
+import { ToastService } from '../../services/toast.service';
+
 
 @Component({
   selector: 'app-serie-details',
@@ -24,7 +25,7 @@ export class SerieDetailsComponent implements OnInit {
     private serieDetailsService: SeriesService,
     private seriesAccountService: SeriesAccountService,
     private authSerive : AuthService,
-    private toastService: ToastServiceService
+
   ) { }
 
   series: SerieDetails[] = [];
@@ -55,7 +56,8 @@ export class SerieDetailsComponent implements OnInit {
 
 
 
-
+  toastService = inject(ToastService);
+  @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
 
   ngOnInit(): void {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
@@ -120,15 +122,23 @@ export class SerieDetailsComponent implements OnInit {
     if (this.comprobarInicioSesion()) {
       this.userRating = rating;
       if (idSerie) {
-        localStorage.setItem(`userRating_${idSerie}`, rating.toString());
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
-          alert('Valoración añadida correctamente');
+          this.showSuccess(this.successTemplate);
         });
       }
     } else {
       this.noLoggedAlert();
     }
   }
+
+  showSuccess(template: TemplateRef<any>) {
+		this.toastService.show({ template, classname: 'bg-success text-light', delay: 10000 });
+	}
+
+  
+  ngOnDestroy(): void {
+		this.toastService.clear();
+	}
 
   comprobarInicioSesion(): boolean {
     return this.authSerive.checkUserIsLogged();
@@ -138,9 +148,6 @@ export class SerieDetailsComponent implements OnInit {
     alert('Debe iniciar sesión para poder valorar la serie');
   }
 
-  showSuccess(template: TemplateRef<any>) {
-		this.toastService.show({ template, classname: 'bg-success text-light', delay: 10000 });
-	}
 
   valoracionUsuario(){
 
@@ -153,4 +160,7 @@ export class SerieDetailsComponent implements OnInit {
       }
     });
   }
+
+ 
+
 }

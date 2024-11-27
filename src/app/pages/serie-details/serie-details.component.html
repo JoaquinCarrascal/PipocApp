@@ -1,6 +1,7 @@
 <app-nav-bar></app-nav-bar>
 
 <body>
+    <ng-template #successTpl> I'm a success toast </ng-template>
     <div class="background-image-blur" 
         [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
     </div>
@@ -37,13 +38,14 @@
                     <div class="rating-box mb-3">
                         <div class="rating-row">
                             <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
-                               
+                                <ng-template #successTpl> I'm a success toast </ng-template>
                                 <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateSeries(i + 1)">
                                 <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
                                 
                               </ng-container>
                           
                    
+                              <button (click)="showSuccess(successTpl)">Test</button>
                         </div>
                       </div>
                       <div>

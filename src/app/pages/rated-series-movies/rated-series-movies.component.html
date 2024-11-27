@@ -3,19 +3,19 @@
 <div *ngIf="ratedSeries.length > 0; else noRatings">
 
   @if(cambio == 0){
-    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Series Valoradas</h3>
+    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Series Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;"></h3>
   }
   @else{
-    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Peliculas Valoradas</h3>
+    <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Peliculas Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;"></h3>
   }
 
 <div style="margin-left: 75px; margin-bottom: 30px">
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
         <input checked="" id="option7" name="options-second" type="radio" />
-        <label class="option-second" for="option7" class="d-flex" style="left:30px;" (click)="changeRating(0)">Series</label>
+        <label class="option-second" for="option7" class="d-flex" style="left:45px;" (click)="changeRating(0)">Series</label>
         <input id="option8" name="options-second" type="radio" />
-        <label class="option-second" for="option8" class="d-flex" style="left:50px;" (click)="changeRating(1)">Peliculas</label>
+        <label class="option-second" for="option8" class="d-flex" style="left:45px;" (click)="changeRating(1)">Películas</label>
         <span class="background-second"></span>
     </div>
 </div>
