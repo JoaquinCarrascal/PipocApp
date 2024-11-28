@@ -4,6 +4,12 @@ body {
     padding: 0;
 }
 
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
 /* Fondo de imagen borrosa en la mitad superior */
 .background-image-blur {
     background-size: cover;
@@ -113,13 +119,15 @@ color: black;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    width: 900px;
 }
 
 .cast-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
+    margin:0 auto;
+    width: 190px !important;
 }
 
 .cast-item img {
@@ -247,3 +255,54 @@ color: black;
 
 }
 
+.strong {
+    font-weight: bold;
+  }
+  .toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1050; 
+  }
+  .toast-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .movie-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rating-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .popcorn-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+  }
+  
+  .btn-secondary {
+    margin-right: 10px;
+  }
+  .badge-separation {
+    margin-right: 5px; 
+    margin-top: 5px;
+    border-color: aliceblue;
+  }

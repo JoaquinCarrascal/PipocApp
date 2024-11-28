@@ -1,0 +1,69 @@
+<app-nav-bar></app-nav-bar>
+
+<h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">
+  <ng-container *ngIf="cambio === 0; else peliculasValoradas">
+    Series Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
+  </ng-container>
+  <ng-template #peliculasValoradas>
+    Películas Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
+  </ng-template>
+</h3>
+
+<div style="margin-left: 75px; margin-bottom: 30px">
+  <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
+      style="position: relative; left:10px;">
+      <input checked="" id="option7" name="options-second" type="radio" (click)="changeRating(0)" />
+      <label class="option-second" for="option7" class="d-flex" style="left:45px;">Series</label>
+      <input id="option8" name="options-second" type="radio" (click)="changeRating(1)" />
+      <label class="option-second" for="option8" class="d-flex" style="left:45px;">Películas</label>
+      <span class="background-second"></span>
+  </div>
+</div>
+
+<div *ngIf="cambio === 0">
+  <div *ngIf="ratedSeries.length > 0; else noSeries" class="container-fluid row mt-0 mb-4 movie-container justify-content-center" style="position:relative; top:40px; max-width:100%;">
+    <div class="movie-card col-2 mt-0 justify-content-center align-content-center mx-auto" style="margin-top: 0px; width:270px;" *ngFor="let series of ratedSeries">
+      <circle-progress
+        class="bg-light rounded-circle"
+        [percent]="series.rating * 10"
+        style="position: relative; top: 30px; right: -160px; z-index: 1;">
+      </circle-progress>
+      <a [routerLink]="['/series/details', series.id]">
+        <img *ngIf="series.poster_path; else noImage" [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}" class="card-img resizing-img">
+        <ng-template #noImage>
+          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ series.name }}" width="150px">
+        </ng-template>
+      </a>
+      <p class="text-white text-truncate">{{ series.name }}</p>
+      <span class="fecha">{{ series.first_air_date }}</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="cambio === 1">
+  <div *ngIf="ratedMovies.length > 0; else noMovies" class="container-fluid row mt-0 mb-4 movie-container justify-content-center" style="position:relative; top:40px; max-width:100%;">
+    <div class="movie-card col-2 mt-0 justify-content-center align-content-center mx-auto" style="margin-top: 0px; width:270px;" *ngFor="let movies of ratedMovies">
+      <circle-progress
+        class="bg-light rounded-circle"
+        [percent]="movies.rating * 10"
+        style="position: relative; top: 30px; right: -160px; z-index: 1;">
+      </circle-progress>
+      <a [routerLink]="['/details-movie', movies.id]">
+        <img *ngIf="movies.poster_path; else noImageMovie" [src]="'https://image.tmdb.org/t/p/w500' + movies.poster_path" alt="{{ movies.title }}" class="card-img resizing-img">
+        <ng-template #noImageMovie>
+          <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ movies.title }}" width="150px">
+        </ng-template>
+      </a>
+      <p class="text-white text-truncate">{{ movies.title }}</p>
+      <span class="fecha">{{ movies.release_date }}</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #noSeries>
+  <h1 class="text-white text-center">No hay ninguna serie añadida</h1>
+</ng-template>
+
+<ng-template #noMovies>
+  <h1 class="text-white text-center">No hay ninguna película añadida</h1>
+</ng-template>

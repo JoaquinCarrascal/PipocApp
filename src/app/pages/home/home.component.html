@@ -52,10 +52,11 @@
           ></circle-progress> -->
 
         <!-- <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path , 200) + ')'"></div> -->
+        @if(item.poster_path){
         <a [routerLink]="['/details-movie/' , item.id]">
           <img class="card-img resizing-img" [src]="getImageUrl(item.poster_path , 200)" alt="" width="150px">
         </a>
-
+        }
         <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
           {{item.title}}
         </p>
@@ -104,9 +105,11 @@ style="top:-200px;">
         style="position: relative; top: 30px;right: -160px;z-index: 1;"
         ></circle-progress>
 
-      <a [routerLink]="['/details-movie/' , item.id]">
-        <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path , 200) + ')'"></div>
-      </a>
+      @if(item.poster_path){
+        <a [routerLink]="['/details-movie/' , item.id]">
+          <div class="card-img" [style.background-image]="'url(' + getImageUrl(item.poster_path , 200) + ')'"></div>
+        </a>
+      }
 
       <p class="text-light text-truncate mt-2" style="font-size: 13pt;">
         {{item.title}}

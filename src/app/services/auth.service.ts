@@ -14,14 +14,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // STEP 1
+
   createRequestToken(): Observable<CreateRequestTokenResponse> {
     return this.http.get<CreateRequestTokenResponse>(
       `https://api.themoviedb.org/3/authentication/token/new?api_key=${API_KEY}`
     );
   }
 
-  // STEP 3
+
   createSession(): Observable<CreateSessionResponse> {
     return this.http.post<CreateSessionResponse>(
       `https://api.themoviedb.org/3/authentication/session/new?api_key=${API_KEY}`,
@@ -29,6 +29,10 @@ export class AuthService {
         request_token: localStorage.getItem('token'),
       }
     );
+  }
+
+  checkUserIsLogged(): boolean {
+    return localStorage.getItem('session_id') ? true : false
   }
 }
 
