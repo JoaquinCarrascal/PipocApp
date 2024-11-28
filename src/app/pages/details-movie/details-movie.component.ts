@@ -8,6 +8,7 @@ import { VideoResponse, Result } from '../../models/movies-video-response';
 import { AuthService } from '../../services/auth.service';
 import { SeriesAccountService } from '../../services/series-account.service';
 import { Toast, ToastService } from '../../services/toast.service';
+import { Network } from '../../models/serie-details.interface';
 
 @Component({
   selector: 'app-details-movie',
@@ -22,7 +23,7 @@ export class DetailsMovieComponent implements OnInit {
   productionCompanyLogo: string | null = null;
   providers: Flatrate[] = [];
   trailer: Result | null = null;
-
+  networkList: Network[] = [];
   userRating: number = 0;
 
   listadoValoraciones: string[] = []; 
@@ -51,6 +52,17 @@ export class DetailsMovieComponent implements OnInit {
         this.genres = data.genres.map(genre => genre.name);
         this.setProductionCompanyLogo();
         this.getPopcornIcons(this.userRating);
+        this.networkList = data.production_companies
+          .filter(company => company.logo_path)
+          .map(company => ({
+            display_priority: company.display_priority,
+            logo_path: company.logo_path,
+            id: company.provider_id,
+            name: company.provider_name,
+            origin_country: company.provider_name
+          }));
+    
+
       });
       this.getMovieCast(+idMovie);
       this.getMovieProviders(+idMovie);
