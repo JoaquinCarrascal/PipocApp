@@ -21,8 +21,8 @@
 </div>
 
 <div *ngIf="cambio === 0">
-  <div *ngIf="ratedSeries.length > 0; else noSeries" class="container-fluid row mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 220px;">
-    <div class="movie-card col-2 mt-0" style="margin-top: 0px;" *ngFor="let series of ratedSeries">
+  <div *ngIf="ratedSeries.length > 0; else noSeries" class="container-fluid row mt-0 mb-4 movie-container justify-content-center" style="position:relative; top:40px; max-width:100%;">
+    <div class="movie-card col-2 mt-0 justify-content-center align-content-center mx-auto" style="margin-top: 0px; width:270px;" *ngFor="let series of ratedSeries">
       <circle-progress
         class="bg-light rounded-circle"
         [percent]="series.rating * 10"
@@ -41,8 +41,8 @@
 </div>
 
 <div *ngIf="cambio === 1">
-  <div *ngIf="ratedMovies.length > 0; else noMovies" class="container-fluid row mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 220px;">
-    <div class="movie-card col-2 mt-0" style="margin-top: 0px;" *ngFor="let movies of ratedMovies">
+  <div *ngIf="ratedMovies.length > 0; else noMovies" class="container-fluid row mt-0 mb-4 movie-container justify-content-center" style="position:relative; top:40px; max-width:100%;">
+    <div class="movie-card col-2 mt-0 justify-content-center align-content-center mx-auto" style="margin-top: 0px; width:270px;" *ngFor="let movies of ratedMovies">
       <circle-progress
         class="bg-light rounded-circle"
         [percent]="movies.rating * 10"
