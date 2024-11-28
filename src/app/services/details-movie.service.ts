@@ -42,7 +42,7 @@ export class DetailsMovieService {
       watchlist: true
     };
 
-    return this.http.post<MovieDetailResponse>(
+    return this.http.post<FavoriteMovies>(
       `https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
       body
     );
