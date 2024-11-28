@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Serie, SerieResponse } from '../../models/serie.interface';
-import { SerieDetails } from '../../models/serie-details.interface';
+import { SerieDetailsResponse } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
 import { SeriesService } from '../../services/series.service';
 import { SerieCast } from '../../models/serie-cast.interface';
 import { Keyword } from '../../models/keyword.interface';
 import { TrailerResponse } from '../../models/trailer.interface';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-serie-details',
@@ -21,11 +22,11 @@ export class SerieDetailsComponent implements OnInit {
 
   
 
-  constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService) { }
+  constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService, private favoriteService : FavoritesService) { }
 
   
-  series : SerieDetails[] = [];
-  serieDetails : SerieDetails[] = [];
+  series : SerieDetailsResponse | undefined;
+  
   cast : SerieCast | undefined;
 
   
@@ -48,8 +49,8 @@ export class SerieDetailsComponent implements OnInit {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
     if(idSerie){
-      this.serieDetailsService.obtenerDetallesSerie(Number(idSerie)).subscribe((data: SerieDetails) => {
-        this.series = [data]
+      this.serieDetailsService.obtenerDetallesSerie(Number(idSerie)).subscribe((data: SerieDetailsResponse) => {
+        this.series = data
         this.name = data.name
         this.fechaSalida = data.first_air_date
         this.genero = data.genres[0].name
@@ -106,7 +107,7 @@ export class SerieDetailsComponent implements OnInit {
   
   addSerieToFavourite(): void {
     if (this.series) {
-      this.serieDetailsService.addSeriesToFavourite(this.series[0]).subscribe(() => {
+      this.favoriteService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
         alert('Series añadida a favoritos');
       });
     }

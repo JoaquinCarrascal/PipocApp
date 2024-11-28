@@ -4,8 +4,9 @@ import { AccountDetailsResponse } from '../models/account-details.interface';
 import { Observable } from 'rxjs';
 import { FavMovieResponse } from '../models/fav-movie-response';
 import { MovieDetailResponse } from '../models/movies-details-response';
-import { SerieDetails } from '../models/serie-details.interface';
+import { SerieDetailsResponse } from '../models/serie-details.interface';
 import { FavSeriesResponse } from '../models/fav-tv-response';
+import { Serie } from '../models/serie.interface';
 
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
@@ -18,11 +19,11 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
-  addFilmToFavourites(movie: MovieDetailResponse): Observable<any> {
+  addFilmToFavourites(id : string): Observable<Serie> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     const body = {
-      media_id: movie.id,
+      media_id: id,
       media_type: 'movie',
       favorite: true
     };
@@ -34,12 +35,12 @@ export class FavoritesService {
 
   }
 
-  addSeriesToFavourites(serie: SerieDetails): Observable<any> {
+  addSeriesToFavourites(id : string): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id') ;
     const body = {
-      media_id: serie.id,
-      media_type: 'serie',
+      media_id: id,
+      media_type: 'tv',
       favorite: true
     };
 

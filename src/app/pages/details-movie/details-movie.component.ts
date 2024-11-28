@@ -5,6 +5,7 @@ import { MovieDetailResponse } from '../../models/movies-details-response';
 import { CastResponse, Cast, Crew } from '../../models/movie-cast-response';
 import { ProvidersResponse, Flatrate } from '../../models/movies-watch-providers';
 import { VideoResponse, Result } from '../../models/movies-video-response';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-details-movie',
@@ -22,7 +23,8 @@ export class DetailsMovieComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private detailsMovieService: DetailsMovieService
+    private detailsMovieService: DetailsMovieService,
+    private favoritesService: FavoritesService
   ) { }
 
   ngOnInit(): void {
@@ -99,8 +101,8 @@ export class DetailsMovieComponent implements OnInit {
 
   addFilmToFavourites(): void {
     if (this.movies) {
-      this.detailsMovieService.addFilmToFavourite(this.movies).subscribe(() => {
-        alert('Pelicula añadida a favoritos');
+      this.favoritesService.addFilmToFavourites(this.movies.id.toString()).subscribe(() => {
+        alert('Película añadida a favoritos');
       });
     }
   }

@@ -1,4 +1,4 @@
-export interface SerieDetails{
+export interface SerieDetailsResponse{
     adult: boolean
     backdrop_path: string
     created_by: any[]

@@ -2,19 +2,19 @@
 
 <div class="banner">
     <div class="image-blur"
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series[0].backdrop_path) + ')'}">
+        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal( series!.backdrop_path) + ')'}">
     </div>
 </div>
 <!--<div class="background-solid-color"></div>-->
 
 
-<div *ngIf="series.length > 0">
+<div *ngIf="series!">
     <div class="content row">
         <!-- Tarjeta de la imagen -->
         <div class="card-container col-3">
             <div class="card">
                 <div class="movie-image-container">
-                    <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/400x600?text=Imagen+no+disponible'"
+                    <img [src]="series.poster_path ? obtenerImagenOriginal(series!.poster_path) : 'https://placehold.co/400x600?text=Imagen+no+disponible'"
                         alt="Imagen de la serie" class="movie-image">
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                         <div>
                             <h4 class="mb-1 fw-bold">Estado</h4>
-                            <h5 class="text-light">{{ series[0].status | showStatus}}</h5>
+                            <h5 class="text-light">{{ series!.status | showStatus}}</h5>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                         <div>
                             <h4 class="mb-1 fw-bold">Numero de temporadas</h4>
-                            <h5 class="text-light">{{ series[0].number_of_seasons }}</h5>
+                            <h5 class="text-light">{{ series.number_of_seasons }}</h5>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                             <h4 class="mb-0 fw-bold">Canales</h4>
                         </div>
                         <div class="row mt-2">
-                            <div *ngFor="let canales of series[0].networks; track by $index" class="col-3 text-center">
+                            <div *ngFor="let canales of series.networks; track by $index" class="col-3 text-center">
                                 <img *ngIf="canales.logo_path"
                                     [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" alt="Logo del canal"
                                     class="img-fluid rounded channel-logo" style="max-width: 100px; padding-left : 20%">
@@ -65,7 +65,7 @@
                         <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
                         <div>
                             <h4 class="mb-1 fw-bold">Idioma Original</h4>
-                            <h5 class="text-light">{{ series[0].original_language | idiom }}</h5>
+                            <h5 class="text-light">{{ series.original_language | idiom }}</h5>
                         </div>
                     </div>
                 </div>
@@ -89,11 +89,11 @@
 
         <!-- Información principal de la serie -->
         <div class="movie-details-container col-10">
-            <h1 class="movie-title">{{ series[0].name }}</h1>
+            <h1 class="movie-title">{{ series.name }}</h1>
 
             <!-- Géneros -->
             <div class="genre-icons-container d-flex mb-3 gap-3">
-                <div class="genre-tooltip" *ngFor="let genre of series[0].genres">
+                <div class="genre-tooltip" *ngFor="let genre of series?.genres">
                     {{ genre.name }}
                 </div>
             </div>
@@ -101,21 +101,21 @@
             <!-- Fecha de lanzamiento -->
 
             <div class="movie-date mb-3">
-                <h3>{{ series[0].first_air_date }}</h3>
+                <h3 *ngIf="series?.first_air_date">{{ series.first_air_date }}</h3>
             </div>
 
             <!-- Valoración -->
             <div class="movie-rating">
                 <div class="rating-box mb-3">
                     <div class="rating-row">
-                        <ng-container *ngFor="let color of getPopcornIcons(series[0].vote_average); let i = index">
+                        <ng-container *ngFor="let color of getPopcornIcons(series?.vote_average || 0); let i = index">
                             <img src="assets/popcorn.tmp" [ngStyle]="{'filter': color}" alt="Palomitas"
                                 class="popcorn-icon" style="width: 36px;">
                         </ng-container>
                     </div>
                 </div>
                 <div class="py-3">
-                    <button (click)="getTrailer(series[0].id)" class="trailer btn boton ">Ver Trailer</button>
+                    <button (click)="getTrailer(series.id)" class="trailer btn boton ">Ver Trailer</button>
                 </div>
 
                 <div class="py-3">
@@ -156,7 +156,7 @@
                         <div class="row">
                             <div class="col-12 col-md-8" style="border-radius: 40px;">
                                 <mat-accordion style="border-radius: 40px;">
-                                    <div *ngFor="let serie of series[0].seasons">
+                                    <div *ngFor="let serie of series.seasons">
                                         <mat-expansion-panel class="no-border-radius" style="border-radius: 0;"
                                             hideToggle>
                                             <mat-expansion-panel-header>

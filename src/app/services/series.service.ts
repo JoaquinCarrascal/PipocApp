@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 import { Serie, SerieResponse } from '../models/serie.interface';
-import { Network, SerieDetails } from '../models/serie-details.interface';
+import { Network, SerieDetailsResponse } from '../models/serie-details.interface';
 import { Root } from '../models/serie-by-date.interface';
 import { TopRatedSeries } from '../models/series-top-rated.interface';
 import { SerieCast } from '../models/serie-cast.interface';
@@ -58,8 +58,8 @@ export class SeriesService {
   }
 
 
-  obtenerDetallesSerie(id: number): Observable<SerieDetails> {
-    return this.http.get<SerieDetails>(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es`);
+  obtenerDetallesSerie(id: number): Observable<SerieDetailsResponse> {
+    return this.http.get<SerieDetailsResponse>(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es`);
   }
   
   obtenerRepartoSerie(id : number): Observable<SerieCast>{
@@ -74,7 +74,7 @@ export class SeriesService {
     return this.http.get<TrailerResponse>(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}`);
   }
 
-  addSeriesToFavourite(serie: SerieDetails): Observable<FavSeriesResponse> {
+  addSeriesToFavourite(serie: SerieDetailsResponse): Observable<FavSeriesResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     const body = {
