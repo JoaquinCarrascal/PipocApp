@@ -38,11 +38,11 @@
     @if(watchlistSeries.length > 0){
     @for(serie of watchlistSeries; track serie){
     <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
-        <a [routerLink]="['/details-movie/' , serie.id]">
+        <a [routerLink]="['/series/details/' , serie.id]">
             <div class="card-img" [style.background-image]="'url(' + getFullImagePath(serie.poster_path) + ')'">
             </div>
         </a>
-        <button class="btn btn-danger btn-fav" (click)="removeMoviesFromWatchlist(serie.id)"
+        <button class="btn btn-danger btn-fav" (click)="removeSeriesFromWatchlist(serie.id)"
             style="position: absolute; bottom: 115px; right: 80px;">
             <span class="material-symbols-rounded">delete</span>
         </button>
