@@ -33,13 +33,13 @@ export class DetailsMovieService {
     return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=es-ES`);
   }
 
-  addFilmToFavourites(movie: MovieDetailResponse): Observable<FavoriteMovies> {
+  addFilmToFavourite(movie: MovieDetailResponse): Observable<FavoriteMovies> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id') || '';
+    const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: movie.id,
       media_type: 'movie',
-      favorite: true
+      watchlist: true
     };
 
     return this.http.post<FavoriteMovies>(

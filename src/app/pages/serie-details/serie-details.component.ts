@@ -23,7 +23,7 @@ export class SerieDetailsComponent implements OnInit {
 
   constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService) { }
 
-  
+  serie: SerieDetails | undefined;
   
   series : SerieDetails[] = [];
   serieDetails : SerieDetails[] = [];
@@ -105,5 +105,12 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
   
+  addSerieToFavourite(): void {
+    if (this.serie) {
+      this.serieDetailsService.addSeriesToFavourite(this.serie).subscribe(() => {
+        alert('Series añadida a favoritos');
+      });
+    }
+  }
     
   }

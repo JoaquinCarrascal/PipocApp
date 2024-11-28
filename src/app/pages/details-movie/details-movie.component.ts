@@ -99,7 +99,7 @@ export class DetailsMovieComponent implements OnInit {
 
   addFilmToFavourites(): void {
     if (this.movies) {
-      this.detailsMovieService.addFilmToFavourites(this.movies).subscribe(() => {
+      this.detailsMovieService.addFilmToFavourite(this.movies).subscribe(() => {
         alert('Pelicula añadida a favoritos');
       });
     }

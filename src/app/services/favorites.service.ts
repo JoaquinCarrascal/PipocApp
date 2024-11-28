@@ -4,6 +4,8 @@ import { AccountDetailsResponse } from '../models/account-details.interface';
 import { Observable } from 'rxjs';
 import { FavMovieResponse } from '../models/fav-movie-response';
 import { MovieDetailResponse } from '../models/movies-details-response';
+import { SerieDetails } from '../models/serie-details.interface';
+import { FavSeriesResponse } from '../models/fav-tv-response';
 
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
@@ -32,7 +34,21 @@ export class FavoritesService {
 
   }
 
+  addSeriesToFavourites(serie: SerieDetails): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id') || '';
+    const body = {
+      media_id: serie.id,
+      media_type: 'serie',
+      favorite: true
+    };
 
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+
+  }
 
   getFavoriteFilms(): Observable<FavMovieResponse> {
     const sessionId = localStorage.getItem('session_id');
@@ -40,12 +56,46 @@ export class FavoritesService {
 
     return this.http.get<FavMovieResponse>(
       `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`
-    );
-  }
+    );
+  }
 
+  getFavoriteSeries(): Observable<FavSeriesResponse> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
 
+    return this.http.get<FavSeriesResponse>(
+      `${API_BASE_URL}/account/${accountId}/favorite/tv?api_key=${API_KEY}&session_id=${sessionId}`
+    );
+  }
 
+  removeMoviesFromFavorite(movieId: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: movieId,
+      media_type: 'movie',
+      favourite: false
+    };
 
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+  }
 
-  
+  removeSeriesFromFavorite(serieId: number): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: serieId,
+      media_type: 'serie',
+      favourite: false
+    };
+
+    return this.http.post<any>(
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+  }
+
 }
