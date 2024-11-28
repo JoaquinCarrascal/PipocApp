@@ -1,8 +1,7 @@
 <app-nav-bar></app-nav-bar>
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
 
-<h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Favorites</h3>
+<h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">Favoritos</h3>
 <div style="margin-left: 75px; margin-bottom: 30px">
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
@@ -17,7 +16,7 @@
 <div class="container-fluid row mt-0 mb-4 movie-container" style="margin-left: 75px; padding-top: 240px;">
     @if(favoriteMovies.length > 0){
     @for(movie of favoriteMovies; track movie){
-    <div class="movie-card col-2 mt-0" style="margin-top: 0px;">
+    <div class="movie-card col-2 mt-0" style="margin-top: 0px; position: relative;">
         <a [routerLink]="['/details-movie/' , movie.id]">
             <div class="card-img" [style.background-image]="'url(' + getFullImagePath(movie.poster_path) + ')'">
             </div>

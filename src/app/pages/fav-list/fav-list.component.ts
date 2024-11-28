@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from '../../services/favorites.service';
 import { FavMovieResponse, FavoriteMovies } from '../../models/fav-movie-response';
+<<<<<<< HEAD
 import { FavoriteTv } from '../../models/fav-tv-response';
+=======
+import { MovieDetailResponse } from '../../models/movies-details-response';
+>>>>>>> 251443de1c3427fdc559b8d17af8616da428d7ab
 
 @Component({
   selector: 'app-fav-list',
@@ -27,6 +31,7 @@ export class FavListComponent implements OnInit {
     return `${baseUrl}${posterPath}`;
   }
 
+<<<<<<< HEAD
   clickMovieSerie(isMovie: boolean): void {
     if (isMovie) {
       this.favService.getFavoriteFilms().subscribe((response) => {
@@ -52,5 +57,13 @@ export class FavListComponent implements OnInit {
       this.favoriteSeries = this.favoriteSeries.filter((favoriteSeries) => favoriteSeries.id !== seriesId);
     });
   }
+=======
+  removeFromFavorites(movieId: number): void {
+    this.favService.removeFilmFromFavourites(movieId).subscribe(() => {
+      this.favoriteMovies = this.favoriteMovies.filter((favMovie) => favMovie.id !== movieId);
+    });
+  }
+
+>>>>>>> 251443de1c3427fdc559b8d17af8616da428d7ab
 
 }
