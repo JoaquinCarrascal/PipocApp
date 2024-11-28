@@ -48,11 +48,13 @@ export class MovieServService {
 
   }
 
-  getMovieList(pag: number , free: boolean , order?: number) : Observable<TopRatedResponse>{
+  getMovieList(pag: number , free: boolean , order?: number , min?:number , max?:number) : Observable<TopRatedResponse>{
 
     let freeQuery = free ? "&watch_region=ES&with_watch_monetization_types=free" : "";
+    if(min && max){ min = min / 10; max = max / 10; }
+    let minmaxQuery = min || max ? `&vote_average.gte=${min}&vote_average.lte=${max}&vote_count.gte=400` : "";
 
-    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}`, 
+    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}${minmaxQuery}`, 
     {
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
@@ -60,5 +62,6 @@ export class MovieServService {
     });
 
   }
+
 
 }

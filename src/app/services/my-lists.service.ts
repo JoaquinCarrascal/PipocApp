@@ -72,11 +72,11 @@ export class MyListsService {
 
   }
 
-  searchMovieItem(query: string): Observable<MovieSearchResponse> {
+  searchMovieItem(query: string , page?:number): Observable<MovieSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
 
-    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=en-US&page=1`,{
+    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=en-US&page=${page ? `${page}` : '1'}`,{
 
       headers: {
         'Authorization': `Bearer ${TOKEN}`,

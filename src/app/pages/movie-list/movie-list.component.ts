@@ -3,6 +3,9 @@ import { MovieServService } from '../../services/movie-serv.service';
 import { TopRatedList } from '../../models/top-rated-response';
 import { DateFormaterPipe } from '../../pipes/date-formater.pipe';
 import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
+import { MyListsService } from '../../services/my-lists.service';
+import { MovieSearchList, MovieSearchResponse } from '../../models/movie-search';
 
 @Component({
   selector: 'app-movie-list',
@@ -11,14 +14,20 @@ import { Router } from '@angular/router';
 })
 export class MovieListComponent implements OnInit {
   
-  popularList: TopRatedList[] = [];
+  popularList: TopRatedList[] | MovieSearchList[] = [];
   pageCounter: number = 3;
+  pageCounterSearch: number = 3;
   value: number = 0;
   free: boolean = false;
+  searchValue: string = '';
+  searchDone: boolean = false;
+  max: number = 100;
+  min: number = 0;
 
   constructor(private movieServ: MovieServService,
               private pipeDateForm: DateFormaterPipe,
-              private router: Router) { }
+              private router: Router,
+              private myListServ : MyListsService) { }
   
   ngOnInit(): void {
 
@@ -32,7 +41,7 @@ export class MovieListComponent implements OnInit {
     this.pageCounter = 3;
     
     for (let i = 1; i <= this.pageCounter; i++) {
-      this.movieServ.getMovieList(i , this.free ,this.value).subscribe((data) => {
+      this.movieServ.getMovieList(i , this.free ,this.value , this.min , this.max).subscribe((data) => {
         this.popularList = this.popularList.concat(data.results);
       });
     }
@@ -50,12 +59,19 @@ export class MovieListComponent implements OnInit {
   }
 
   concatNextPage(){
-
-    this.pageCounter++;
     
-      this.movieServ.getMovieList(this.pageCounter , this.free ,this.value).subscribe((data) => {
+    if(!this.searchDone){
+      this.pageCounter++;
+      this.movieServ.getMovieList(this.pageCounter , this.free , this.value , this.min , this.max).subscribe((data) => {
         this.popularList = this.popularList.concat(data.results);
       });
+    }else{
+      this.pageCounterSearch++;
+      this.myListServ.searchMovieItem(this.searchValue , this.pageCounterSearch).subscribe((data : MovieSearchResponse) => {
+        this.popularList = this.popularList.concat(data.results);
+      });
+
+    }
       
   }
 
@@ -70,8 +86,23 @@ export class MovieListComponent implements OnInit {
     this.loadData();
   }
 
-  navigateToTvShow() {
-    this.router.navigate(['/series']);
+  querySearch() {
+    
+    if(this.searchValue != ''){
+      this.popularList = [];
+      this.searchDone = true;
+      this.min = 0;
+      this.max = 100;
+      for (let i = 1; i <= this.pageCounterSearch; i++) {
+        this.myListServ.searchMovieItem(this.searchValue , i).subscribe((data) => {
+        this.popularList = this.popularList.concat(data.results);
+        });
+      }
+    } else {
+      this.searchDone = false;
+      this.loadData();
+    }
+  
   }
 
   formatLabel(value: number): string {

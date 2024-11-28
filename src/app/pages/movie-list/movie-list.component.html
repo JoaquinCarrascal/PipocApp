@@ -23,18 +23,6 @@
                 <h2>Filtros</h2>
                 <label style="font-size: 16pt;">Muestra</label>
 
-                <div style="position: relative; left:20px;">
-                    <label class="radio-label w-50">
-                        <input class="colored-aqua" type="radio" name="type" value="peliculas" checked>
-                        Películas
-                    </label>
-
-                    <label class="radio-label w-50" (click)="navigateToTvShow()">
-                        <input class="colored-aqua" type="radio" name="type" value="series">
-                        Series
-                    </label>
-                </div>
-
                 <div class="my-3 ms-3" style="position: relative; left:4px;">
                     <label class="cr-wrapper">
                         <input type="checkbox" (click)="swapFree()"/>
@@ -47,14 +35,14 @@
 
                 <div class="container mx-auto">
                     <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
-                        discrete="true">
-                        <input value="0" matSliderStartThumb>
-                        <input value="100" matSliderEndThumb>
+                        discrete="true" >
+                        <input [(ngModel)]="min" matSliderStartThumb [ngModelOptions]="{standalone: true}">
+                        <input [(ngModel)]="max" matSliderEndThumb [ngModelOptions]="{standalone: true}">
                     </mat-slider>
                 </div>
                 <div class="range-labels fw-bold"> <span>0</span> <span>100</span> </div>
 
-                <button class="btn w-100 py-2 btn-busq">Filtrar por valoración</button>
+                <button class="btn w-100 py-2 btn-busq" (click)="loadData()">Filtrar por valoración</button>
 
             </form>
         </div>
@@ -75,11 +63,23 @@
                             <div class="iconContainer">
                                 <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
                             </div>
-                        <input class="search_input" placeholder="Escribe el nombre aquí..." type="text">
+                        <input class="search_input" placeholder="Escribe el nombre aquí..." type="text" (change)="querySearch()"
+                        [(ngModel)]="searchValue">
                         </div>
                     </div>
                 </div>
             </div>
+            
+            @if(popularList.length == 0){
+
+                <div class="d-flex justify-content-center align-items-center p-0 mt-3">
+                    <div class="text-light d-flex" style="flex-direction: column;">
+                        <img src="assets/lost_travolta.gif" class="d-block mx-auto rounded-2" alt="Lost Travolta" width="250px">
+                        <span style="font-size: 15pt;">No encontramos películas que cumplan dichos criterios... <i class="bi bi-emoji-frown"></i></span>
+                    </div>
+                </div>
+                
+            }
             
 
               @for(item of popularList; track item){
