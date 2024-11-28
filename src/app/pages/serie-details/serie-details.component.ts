@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Serie, SerieResponse } from '../../models/serie.interface';
-import { SerieDetails } from '../../models/serie-details.interface';
+import { Network, SerieDetails } from '../../models/serie-details.interface';
 import { ActivatedRoute } from '@angular/router';
 import { SeriesService } from '../../services/series.service';
 import { SeriesAccountService } from '../../services/series-account.service';
@@ -30,7 +30,7 @@ export class SerieDetailsComponent implements OnInit {
     private seriesAcc : SeriesAccountService
   ) { }
 
-  series: SerieDetails[] = [];
+  series: SerieDetails | undefined;
   serieDetails: SerieDetails[] = [];
   cast: SerieCast | undefined;
 
@@ -39,11 +39,15 @@ export class SerieDetailsComponent implements OnInit {
 
   userRating: number = 0;
   voteCount: number | undefined;
+  backdropPath: string = "";
+  status: string = "";
+  networkList: Network[] = [];
 
   fechaSalida: string | undefined;
   name: string | undefined;
   genero: string | undefined;
   descripcion: string | undefined;
+  lenguage: string = "";
 
   keyWords: string[] = [];
 
@@ -57,6 +61,7 @@ export class SerieDetailsComponent implements OnInit {
   listadoValoraciones: string[] = [];
 
   seBorra : boolean = false;
+  hasBackDrop : boolean = false;
 
 
   toastService = inject(ToastService);
@@ -67,10 +72,17 @@ export class SerieDetailsComponent implements OnInit {
 
     if (idSerie) {
       this.serieDetailsService.obtenerDetallesSerie(Number(idSerie)).subscribe((data: SerieDetails) => {
-        this.series = [data];
+        this.series = data;
+
+        this.backdropPath = data.backdrop_path;
+        this.hasBackDrop = data.backdrop_path != null ? true : false;
         this.name = data.name;
         this.fechaSalida = data.first_air_date;
-        this.genero = data.genres[0]?.name; 
+        this.genero = data.genres[0]?.name || "No se ha encontrado el género"; 
+        this.status = data.status || "No se ha encontrado el estado";
+        this.networkList = data.networks || ["No se han encontrado canales"];
+        this.lenguage = data.original_language || "No se ha encontrado el idioma";
+
         this.descripcion = data.overview;
         this.listaCanales[0] = data.networks[0]?.logo_path; 
         this.voteCount = data.vote_count;
@@ -102,6 +114,7 @@ export class SerieDetailsComponent implements OnInit {
   getSerieCast(id: number): void {
     this.serieDetailsService.obtenerRepartoSerie(id).subscribe((data: SerieCast) => {
       this.cast = data;
+      console.log(data);
     });
   }
 

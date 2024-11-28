@@ -4,6 +4,12 @@ body {
     padding: 0;
 }
 
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
 /* Fondo de imagen borrosa en la mitad superior */
 .background-image-blur {
     background-size: cover;
@@ -113,13 +119,15 @@ color: black;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    width: 900px;
 }
 
 .cast-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
+    margin:0 auto;
+    width: 190px !important;
 }
 
 .cast-item img {

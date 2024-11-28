@@ -2,7 +2,7 @@
 <ng-template #successTpl>
     Valoración cambiada
   </ng-template>
-<body>
+
     
     @if(seBorra == false){         
     <div class="toast-container">
@@ -34,43 +34,44 @@
             </ngb-toast>
           </div>
       }
-    <div class="background-image-blur" 
-        [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(series[0].backdrop_path) + ')'}">
-    </div>
-    
+    @if(series?.backdrop_path!=null){
+        <div class="background-image-blur" 
+            [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(backdropPath) + ')'}">
+        </div>
+    }@else{
+
+        <div class="background-image-blur" 
+            [ngStyle]="{'background-image': 'url(https://placehold.co/1920x1080?text=Imagen+no+disponible)'}">
+        </div>
+    }
+
     <div class="background-solid-color"></div>
 
-    <div *ngIf="series.length > 0">
+    <div *ngIf="series != undefined">
 
         <div class="card mb-4">
-            <img [src]="series[0].poster_path ? obtenerImagenOriginal(series[0].poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
+            <img [src]="series.poster_path ? obtenerImagenOriginal(series.poster_path) : 'https://placehold.co/200x270?text=Imagen+no+disponible'"
                 alt="Imagen de la serie" class="movie-image">
         </div>        
         <div class="movie-details">
-            <div class="details-up mb-4">
+            <div class="details-up mb-4 w-100" style="position: absolute; top:-300px;">
                 
-                <div class="movie-title-container text-white">
-                    <h1 class="movie-title">{{ series[0].name }}</h1>
-                </div>
-
-                <div class="genre-icons-container mb-3">
-                    <div class="genre-tooltip" *ngFor="let genre of series[0].genres">
-                        {{ genre.name }}
-                    </div>
+                <div class="movie-title-container text-white" style="width:800px">
+                    <h1 class="movie-title">{{ series.name }}</h1>
                 </div>
                 
-                <div class="movie-date genero mb-3">
-                    <h3>{{ genero }}</h3>
+                <div class="movie-date genero mb-3" style="width:800px">
+                    <h5>{{ genero }}</h5>
                 </div>
 
-                <div class="movie-date mb-3">
-                    <h3>{{ series[0].first_air_date | dateFormater }}</h3>
+                <div class="movie-date mb-3" style="width:800px">
+                    <h3>{{ series.first_air_date | dateFormater }}</h3>
                 </div>
 
-                <div class="movie-rating">
+                <div class="movie-rating" style="width:800px">
                     <div class="rating-box mb-3">
                       <div class="rating-row">
-                        <button (click)="deleteSeriesRating(series[0].id)" class="btn ">
+                        <button (click)="deleteSeriesRating(series.id)" class="btn ">
                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
                           </svg>
@@ -94,33 +95,41 @@
                     
 
                       <div class="py-3">
-                        <button (click)="getTrailer(series[0].id)" class="btn boton">Ver Trailer</button>
+                        <button (click)="getTrailer(series.id)" class="btn boton">Ver Trailer</button>
                       </div>
                 </div>
             </div>
 
-            <div class="details-down">
-                <div class="movie-description mb-4">
+            <div class="details-down" style="position: relative; top:250px; width:1000px;" >
+                <div class="movie-description mb-4 w-100">
                     <p class="text-white">{{ descripcion }}</p>
                 </div>
 
-                <h2 class="text-center mb-4">Reparto</h2>
-                <div class="movie-cast d-flex align-self-start justify-content-center">
-                    <div class="cast-row text-center">
-                        <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
-                            <a [routerLink]="['/person', actor.id]" class="person-link">
+                
+                @if(cast?.cast!.length > 0){
+                    <h2 class="mb-4">Reparto</h2>
+                    <div class="d-flex justify-content-center" style="position:relative; left:0px;">
+                        
+                        <div *ngFor="let actor of cast?.cast?.slice(0, 7)" class=" d-flex flex-column text-wrap mx-2" style="width:130px;">
+                            <a [routerLink]="['/person', actor.id]" class="">
                                 <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
-                                alt="nombre de actor" class="actor-image" style="border: 3px white solid">
+                                alt="nombre de actor" class="" style="border: 3px white solid" style="width:130px;">
                             </a>
                             <div class="d-flex flex-column">
-                                <p class="actor-name">{{ actor.name ? actor.name : nombre }}</p>
-                                <p class="actor-character">{{ actor.character }}</p>
+                                <p class="text-truncate">{{ actor.name ? actor.name : nombre }}</p>
+                                <p class="text-truncate">{{ actor.character }}</p>
                             </div>
                         </div>
+                        
                     </div>
-                </div>
+                }@else{
+                    <div style="position: relative; height:360px;">
+                        <p style="font-size: 20pt;">No se ha aportado información adicional</p>
+                    </div>
+                }
+                
 
-                <h2 class="text-start mb-4 text-white text-center temporadas-title">Temporadas</h2>
+                <!-- <h2 class="text-start mb-4 text-white text-center temporadas-title">Temporadas</h2>
                 <div class="test temporadas-section">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -142,10 +151,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> -->
+            </div> 
 
+        </div>
+    </div>
+    
         <div class="movie-details-left container mb-4">
 
             <div class="row mb-4">
@@ -153,7 +164,7 @@
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
                         <h4 class="mb-1 fw-bold">Estado:</h4>
-                        <h5 class="text-light">{{ series[0].status }}</h5>
+                        <h5 class="text-light">{{ status }}</h5>
                     </div>
                 </div>
             </div>
@@ -165,18 +176,22 @@
                         <h4 class="mb-0 fw-bold">Canales:</h4>
                     </div>
                     <div class="row mt-2">
-                        <div *ngFor="let canales of series[0].networks; track by $index" class="col-3 text-center">
-                            <img *ngIf="canales.logo_path" 
-                                 [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
-                                 alt="Logo del canal" 
-                                 class="img-fluid rounded" 
-                                 style="max-width: 100px; padding-left : 20%">
-                            <img *ngIf="!canales.logo_path" 
-                                 src="https://placehold.co/150x230?text=Imagen+no+disponible" 
-                                 alt="placeholder" 
-                                 class="img-fluid rounded" 
-                                 style="max-width: 100px;">
-                        </div>
+                        @if(networkList != undefined && networkList.length > 0 && networkList[0].logo_path != null){
+                            @for(canales of networkList; track canales){
+                                <div class="col-3 text-center">
+                                    <img *ngIf="canales.logo_path" 
+                                        [src]="'https://image.tmdb.org/t/p/w500/' + canales.logo_path" 
+                                        alt="Logo del canal" 
+                                        class="img-fluid rounded" 
+                                        style="max-width: 100px; padding-left : 20%">
+                                    <img *ngIf="!canales.logo_path" 
+                                        src="https://placehold.co/150x230?text=Imagen+no+disponible" 
+                                        alt="placeholder" 
+                                        class="img-fluid rounded" 
+                                        style="max-width: 100px;">
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -186,7 +201,7 @@
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
                         <h4 class="mb-1 fw-bold">Idioma Original:</h4>
-                        <h5 class="text-light">{{ series[0].original_language }}</h5>
+                        <h5 class="text-light">{{ lenguage }}</h5>
                     </div>
                 </div>
             </div>
@@ -205,5 +220,5 @@
                 </div>
               </div>
         </div>
-    </div>
-</body>
+    
+    
