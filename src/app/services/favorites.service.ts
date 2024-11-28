@@ -88,7 +88,7 @@ export class FavoritesService {
     const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: serieId,
-      media_type: 'serie',
+      media_type: 'tv',
       favourite: false
     };
 
