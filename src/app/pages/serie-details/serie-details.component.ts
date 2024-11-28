@@ -16,8 +16,6 @@ export class SerieDetailsComponent implements OnInit {
 
 
   constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService) { }
-
-  serie: SerieDetails | undefined;
   
   series : SerieDetails[] = [];
   serieDetails : SerieDetails[] = [];
@@ -98,8 +96,8 @@ export class SerieDetailsComponent implements OnInit {
   }
   
   addSeriesToWatchlist(): void {
-    if (this.serie) {
-      this.serieDetailsService.addSeriesToWatchlist(this.serie).subscribe(() => {
+    if (this.series) {
+      this.serieDetailsService.addSeriesToWatchlist(this.series[0]).subscribe(() => {
         alert('Series añadida a la watchlist');
       });
     }
