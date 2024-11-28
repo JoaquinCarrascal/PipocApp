@@ -37,6 +37,8 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +89,8 @@ import { RippleModule } from 'primeng/ripple';
       BrowserAnimationsModule,
       MatToolbarModule,
       MatButtonModule,
-      MatMenuModule
+      MatMenuModule,
+      MatExpansionModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -293,3 +293,8 @@ color: black;
   .btn-secondary {
     margin-right: 10px;
   }
+  .badge-separation {
+    margin-right: 5px; 
+    margin-top: 5px;
+    border-color: aliceblue;
+  }
