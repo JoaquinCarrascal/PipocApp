@@ -128,17 +128,17 @@
                 <!-- Reparto -->
                 <h2 class="text-start mb-4 text-white">Reparto</h2>
                 <div class="movie-cast d-flex align-self-start justify-content-center">
-                    <div class="actors d-flex text-center">
-                        <div *ngFor="let actor of cast?.cast?.slice(0, 8)"
-                            class="cast-item d-flex flex-column text-wrap">
-                            <div class="card card-reparto">
+                    <div class="actors d-flex text-center justify-content-center">
+                        <div *ngFor="let actor of cast?.cast?.slice(0, 7)"
+                            class="cast-item d-flex flex-column text-wrap justify-content-center">
+                            <div class="card card-reparto d-block mx-auto" style="width: 170px;">
                                 <a [routerLink]="['/person', actor.id]" class="person-link">
                                     <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
                                         alt="{{ actor.name }}" class="actor-image">
                                 </a>
                                 <div class="d-flex flex-column">
-                                    <p class="actor-name">{{ actor.name }}</p>
-                                    <p class="actor-character">{{ actor.character }}</p>
+                                    <p class="actor-name"><span class="text-truncate">{{ actor.name }}</span></p>
+                                    <p class="actor-character"><span class="text-truncate">{{ actor.character }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                 <h2 class="text-start mb-4 text-white temporadas-title">Temporadas</h2>
                 <div class="test temporadas-section">
                     <div class="container">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-12 col-md-8" style="border-radius: 40px;">
                                 <mat-accordion style="border-radius: 40px;">
                                     <div *ngFor="let serie of series[0].seasons">
