@@ -53,11 +53,7 @@ export class RatedSeriesComponent implements OnInit {
     });
   }
 
-  deleteMovieRating(movieId: number) {
-    this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
-      this.ngOnInit()
-    });
-  }
+
 
   
 

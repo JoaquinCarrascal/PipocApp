@@ -4,7 +4,7 @@
   </ng-template>
 <body>
     
-                
+    @if(seBorra == false){         
     <div class="toast-container">
         <ngb-toast *ngFor="let toast of toastService.toasts"
                     [class]="toast.classname"
@@ -18,7 +18,22 @@
           <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
         </ngb-toast>
       </div>
-        
+    }
+      @if (seBorra) {
+        <div class="toast-container">
+            <ngb-toast *ngFor="let toast of toastService.toasts"
+                        [class]="toast.classname"
+                        [autohide]="true"
+                        [delay]="toast.delay || 5000"
+                        (hidden)="toastService.remove(toast)">
+              <div class="toast-content">
+                <span>Valoración borrada con éxito</span>
+                <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+              </div>
+              <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+            </ngb-toast>
+          </div>
+      }
     <div class="background-image-blur" 
         [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(series[0].backdrop_path) + ')'}">
     </div>
@@ -49,22 +64,33 @@
                 </div>
 
                 <div class="movie-date mb-3">
-                    <h3>{{ series[0].first_air_date }}</h3>
+                    <h3>{{ series[0].first_air_date | dateFormater }}</h3>
                 </div>
 
                 <div class="movie-rating">
                     <div class="rating-box mb-3">
-                        <div class="rating-row">
-                            <ng-container *ngFor="let color of getPopcornIcons(userRating); let i = index">
-                                <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" (click)="rateSeries(i + 1)">
-                                <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
-                              </ng-container>
+                      <div class="rating-row">
+                        <button (click)="deleteSeriesRating(series[0].id)" class="btn ">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                            <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                          </svg>
+                        </button>
+                        <ng-container *ngFor="let color of listadoValoraciones; let i = index">
+                          <img *ngIf="comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon" 
+                          (click)="rateSeries(i + 1)">
+                          <img *ngIf="!comprobarInicioSesion()" src="assets/popcorn.png" [ngStyle]="{'filter': color}" alt="Palomitas" class="popcorn-icon disabled" (click)="noLoggedAlert()">
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div>
+                        @if(userRating == 0){
+                            <span class="strong" style="font-size: 20px;">Rating : Sin valorar</span>
+                        }
 
-                        </div>
-                      </div>
-                      <div>
-                        <span class="strong" style="font-size: 20px;">Rating : {{userRating*10}} </span>
-                      </div>
+                        @else {
+                            <span class="strong" style="font-size: 20px;">Rating : {{userRating * 10}}</span>
+                        }
+                    </div>
                     
 
                       <div class="py-3">
@@ -84,10 +110,10 @@
                         <div *ngFor="let actor of cast?.cast?.slice(0, 8)" class="cast-item d-flex flex-column text-wrap">
                             <a [routerLink]="['/person', actor.id]" class="person-link">
                                 <img [src]="actor.profile_path ? obtenerImagenOriginal(actor.profile_path) : 'https://placehold.co/150x230?text=Imagen+no+disponible'"
-                                alt="{{ actor.name }}" class="actor-image" style="border: 3px white solid">
+                                alt="nombre de actor" class="actor-image" style="border: 3px white solid">
                             </a>
                             <div class="d-flex flex-column">
-                                <p class="actor-name">{{ actor.name }}</p>
+                                <p class="actor-name">{{ actor.name ? actor.name : nombre }}</p>
                                 <p class="actor-character">{{ actor.character }}</p>
                             </div>
                         </div>
@@ -148,9 +174,13 @@
                         <h4 class="mb-0 fw-bold">Palabras claves:</h4>
                     </div>
                     <div class="mt-2" style="padding-left: 20px;">
-                        <span *ngFor="let keyword of keyWords" class="badge text-dark">
-                            {{ keyword.results[0].name }}
-                        </span>
+                        
+                            <span *ngFor="let keyword of keyWords" class="badge text-dark">
+                                
+                                {{ keyword }}
+                                
+                            </span>
+                        
                     </div>
                 </div>
             </div>

@@ -25,17 +25,22 @@ export class DetailsMovieComponent implements OnInit {
 
   userRating: number = 0;
 
-
+  listadoValoraciones: string[] = []; 
   toast : Toast | undefined;
   toastService = inject(ToastService);
+
+  seBorra: boolean = false;
+
   @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
+
 
 
   constructor(
     private route: ActivatedRoute,
     private detailsMovieService: DetailsMovieService,
     private authSerive : AuthService,
-    private seriesAccountService: SeriesAccountService
+    private seriesAccountService: SeriesAccountService,
+    private seriesAcc : SeriesAccountService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +50,7 @@ export class DetailsMovieComponent implements OnInit {
         this.movies = data;
         this.genres = data.genres.map(genre => genre.name);
         this.setProductionCompanyLogo();
+        this.getPopcornIcons(this.userRating);
       });
       this.getMovieCast(+idMovie);
       this.getMovieProviders(+idMovie);
@@ -86,16 +92,16 @@ export class DetailsMovieComponent implements OnInit {
     window.open(link, '_blank');
   }
 
-  obtenerColorCalificacion(userRating: number, index: number): string {
+  obtenerColorCalificacion(userRating: number, index: number , brightness: number): string {
     if (index < userRating) {
       return '';
     } else {
-      return 'brightness(0.2)';
+      return `brightness(${brightness})`;
     }
   }
 
-  getPopcornIcons(userRating: number): string[] {
-    return Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index));
+  getPopcornIcons(userRating: number) {
+    this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index , 0.2));
   }
   getDirectors(): Crew[] {
     return this.crew.filter(member => member.known_for_department === 'Directing');
@@ -115,9 +121,11 @@ export class DetailsMovieComponent implements OnInit {
     const idMovie = this.route.snapshot.paramMap.get('idMovie');
     if (this.comprobarInicioSesion()) {
       this.userRating = rating;
+      this.getPopcornIcons(this.userRating);
       if (idMovie) {
         this.seriesAccountService.addMovieRating(Number(idMovie), rating).subscribe(response => {
-          this.showSuccess(this.successTemplate); 
+          this.showSuccess(this.successTemplate);
+          this.seBorra = false;
         });
       }
     } else {
@@ -137,16 +145,24 @@ export class DetailsMovieComponent implements OnInit {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
       if (serieRating) {
         this.userRating = serieRating.rating;
+        this.getPopcornIcons(this.userRating);
+
       }
     });
   }
-
+  deleteMovieRating(movieId: number) {
+    this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
+      this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
+      this.userRating = 0;
+      this.seBorra = true;
+    });
+  }
     
   showSuccess(template: TemplateRef<any>) {
     this.toastService.show({ 
       template : template, 
       classname: 'bg-success text-light', 
-      delay: 7000 
+      delay: 3000 
     });
   }
 

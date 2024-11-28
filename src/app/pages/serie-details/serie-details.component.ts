@@ -27,7 +27,7 @@ export class SerieDetailsComponent implements OnInit {
     private serieDetailsService: SeriesService,
     private seriesAccountService: SeriesAccountService,
     private authSerive : AuthService,
-
+    private seriesAcc : SeriesAccountService
   ) { }
 
   series: SerieDetails[] = [];
@@ -35,7 +35,7 @@ export class SerieDetailsComponent implements OnInit {
   cast: SerieCast | undefined;
 
   toast : Toast | undefined;
-
+  nombre = "Nombre no encontrado"
 
   userRating: number = 0;
   voteCount: number | undefined;
@@ -45,7 +45,7 @@ export class SerieDetailsComponent implements OnInit {
   genero: string | undefined;
   descripcion: string | undefined;
 
-  keyWords: Keyword[] = [];
+  keyWords: string[] = [];
 
   trailers: string[] = [];
   listaCanales: string[] = [];
@@ -54,8 +54,9 @@ export class SerieDetailsComponent implements OnInit {
   logoPhotos: string[] = [];
 
   video: string | undefined;
+  listadoValoraciones: string[] = [];
 
-
+  seBorra : boolean = false;
 
 
   toastService = inject(ToastService);
@@ -73,9 +74,15 @@ export class SerieDetailsComponent implements OnInit {
         this.descripcion = data.overview;
         this.listaCanales[0] = data.networks[0]?.logo_path; 
         this.voteCount = data.vote_count;
+        this.getPopcornIcons(this.userRating);
 
         this.serieDetailsService.getKeyWords(Number(idSerie)).subscribe((keywords: Keyword) => {
-          this.keyWords = [keywords];
+          if(keywords.results.length > 0)
+          this.keyWords = keywords.results.map(keyword => keyword.name);
+
+          else
+          this.keyWords = ["No se han encontrado palabras clave"];
+
         });
 
         
@@ -98,16 +105,16 @@ export class SerieDetailsComponent implements OnInit {
     });
   }
 
-  obtenerColorCalificacion(userRating: number, index: number): string {
+  obtenerColorCalificacion(userRating: number, index: number , brightness: number): string {
     if (index < userRating) {
       return '';
     } else {
-      return 'brightness(0.2)';
+      return `brightness(${brightness})`;
     }
   }
 
-  getPopcornIcons(userRating: number): string[] {
-    return Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index));
+  getPopcornIcons(userRating: number) {
+    this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(userRating, index , 0.2));
   }
 
   getTrailer(id: number): void {
@@ -123,9 +130,11 @@ export class SerieDetailsComponent implements OnInit {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
     if (this.comprobarInicioSesion()) {
       this.userRating = rating;
+      this.getPopcornIcons(this.userRating);
       if (idSerie) {
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
-          this.showSuccess(this.successTemplate);  // Aquí mostramos el toast
+          this.showSuccess(this.successTemplate);  
+          this.seBorra = false
         });
       }
     } else {
@@ -137,7 +146,7 @@ export class SerieDetailsComponent implements OnInit {
     this.toastService.show({ 
       template : template, 
       classname: 'bg-success text-light', 
-      delay: 7000 
+      delay: 3000 
     });
   }
 
@@ -163,10 +172,19 @@ export class SerieDetailsComponent implements OnInit {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
       if (serieRating) {
         this.userRating = serieRating.rating;
+        this.getPopcornIcons(this.userRating);
       }
     });
   }
 
- 
+  deleteSeriesRating(serieId: number) {
+    this.seriesAcc.deleteSerieRating(serieId).subscribe(() => {
+
+    this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
+    this.userRating = 0;
+    this.showSuccess(this.successTemplate);
+    this.seBorra = true
+    });
+  }
 
 }

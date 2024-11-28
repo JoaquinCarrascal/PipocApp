@@ -765,3 +765,14 @@ input[type="radio"]:checked::before {
 .colored-aqua {
   color: #00FFAE;
 }
+
+.delete{
+  position: absolute;
+  right: 25%;
+  bottom: 12%;
+  border-radius: 40%;
+  border-left: 40%;
+  border-right: 40%;
+  border-top: 40%;
+  border-bottom: 40%;
+}
