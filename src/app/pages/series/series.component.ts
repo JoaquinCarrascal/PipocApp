@@ -9,7 +9,6 @@ import { Root } from '../../models/serie-by-date.interface';
   styleUrls: ['./series.component.css']
 })
 export class SeriesComponent implements OnInit {
-
   
   @Input() valoresFiltroFecha: any[] = [];
   @Input()selectedValue: any;
@@ -18,6 +17,9 @@ export class SeriesComponent implements OnInit {
   id : number = 1;
   listaSeries: Serie[] = [];
   listaSeriesHeader: Serie[] = [];
+  min: number = 0;
+  max: number = 100;
+  searchValue: string = '';
   
   constructor(private serieService: SeriesService) {}
 
@@ -26,29 +28,20 @@ export class SeriesComponent implements OnInit {
   ngOnInit(): void {
 
     this.pageCounter = 3;
-    
-    this.valoresFiltroFecha = [
-      { name: 'Series Populares' ,code : 'DEF' },
-      { name: 'Series Recientes', code: 'ASC' },
-      {name : 'Series Antiguas' , code : 'LAST'},
-      { name: 'Top Rated', code: 'TOP' },
-     
-      
-    ];
-
-    for(let i = 1; i <= 3; i++){
-      this.getSeries(i);
-    }
+    this.loadData();
     
   }
 
 
-  getSeries(pag: number){
-    this.serieService.getSeries(pag).subscribe((data: SerieResponse) => {
+  loadData(){
+    this.listaSeries = [];
+    for(let i = 1; i <= this.pageCounter; i++){
+      this.serieService.getSeries(i).subscribe((data: SerieResponse) => {
 
-      this.listaSeries = this.listaSeries.concat(...data.results);
+        this.listaSeries = this.listaSeries.concat(...data.results);
 
-    });
+      });
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -60,16 +53,27 @@ export class SeriesComponent implements OnInit {
 
     }
   }
+  
+  querySearch() {
+  throw new Error('Method not implemented.');
+  }
+  
+  swapFree() {
+  throw new Error('Method not implemented.');
+  }
 
   concatNextPage(){
 
     this.pageCounter++;
-    this.getSeries(this.pageCounter);
+    this.serieService.getSeries(this.pageCounter).subscribe((data: SerieResponse) => {
+
+      this.listaSeries = this.listaSeries.concat(...data.results);
+
+    });
 
   }
 
-
-  obtenerImagenSerie(tam: number, path: string) {
+  getImageUrl(path: string,tam: number) {
     return `https://image.tmdb.org/t/p/w${tam}/${path}`;
   }
 
@@ -78,52 +82,11 @@ export class SeriesComponent implements OnInit {
     return num * 10;
   
   }
-
-
-orderMethod(){
-
-  this.listaSeries = [];
-
-  if(this.selectedValue.name === 'Top Rated'){
-
-    for(let i = 1; i <= 3; i++){
-      this.serieService.orderSeriesByRating('top' , i).subscribe((data: SerieResponse) => {
-        this.listaSeries = this.listaSeries.concat(...data.results);
-      });
-    }
+  
+  onSelectChange($event: Event) {
+    throw new Error('Method not implemented.');
   }
 
-  if (this.selectedValue.name === 'Series Recientes') {
-    for(let i = 1; i <= 3; i++){
-      this.serieService.orderSeriesByDate('asc' , i).subscribe((data: SerieResponse) => {
-
-        this.listaSeries = this.listaSeries.concat(...data.results);
-   
-    });
-    }
-    
-}
-
-    if(this.selectedValue.name === 'Series Populares'){
-      this.ngOnInit();
-    }
-
-  if(this.selectedValue.name === 'Series Antiguas'){
-    for(let i = 1; i <= 3; i++){
-      this.serieService.ordenarPorprimerasSeries('last' , i).subscribe((data: SerieResponse) => {
-        this.listaSeries = this.listaSeries.concat(...data.results);
-      });
-    }
-  }
-}
-  
-
-doFilter() {
-  const selectElement = document.getElementById('mySelect') as HTMLSelectElement;
-  this.selectedValue = { name: selectElement.value };
-  this.orderMethod();
-  
-}
 
 formatLabel(value: number): string {
     
