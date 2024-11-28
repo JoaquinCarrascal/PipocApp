@@ -1,11 +1,11 @@
 export interface MovieSearchResponse {
     page: number
-    results: Result[]
+    results: MovieSearchList[]
     total_pages: number
     total_results: number
   }
   
-  export interface Result {
+  export interface MovieSearchList {
     adult: boolean
     backdrop_path?: string
     genre_ids: number[]

@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,10 +25,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderTriggerPipe } from './pipes/order-trigger.pipe';
 import { ApprovedComponent } from './pages/approved/approved.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
+import { RatingModule } from 'primeng/rating';
+import { RatedSeriesComponent } from './pages/rated-series-movies/rated-series-movies.component';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatMenuModule } from '@angular/material/menu';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -48,12 +54,17 @@ import { MatMenuModule } from '@angular/material/menu';
     MovieListComponent,
     OrderTriggerPipe,
     ApprovedComponent,
-    MyListComponent
+    MyListComponent,
+    RatedSeriesComponent
   ],
   imports: [
+    ToastModule,
+    ButtonModule,
+    RippleModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    RatingModule,
     MatIconModule,
     DropdownModule,
     FormsModule,
@@ -78,7 +89,8 @@ import { MatMenuModule } from '@angular/material/menu';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [
     provideAnimationsAsync(),

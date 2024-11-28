@@ -16,8 +16,6 @@ export class MovieServService {
 
   constructor(private http: HttpClient ,  private orderTrigger: OrderTriggerPipe) { }
 
-  //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&with_watch_monetization_types=free
-
   getTopRated(): Observable<TopRatedResponse>{
 
     return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&with_watch_monetization_types=free`, {
@@ -28,8 +26,6 @@ export class MovieServService {
 
   }
 
-  //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2024&sort_by=popularity.desc&vote_average.gte=8&vote_count.gte=100
-  //https://api.themoviedb.org/3/discover/tv?air_date.gte=2024-11-18&vote_count.gte=100&vote_average.gte=8.7
   getPopular(): Observable<TopRatedResponse>{
 
     let thisYear = new Date().getFullYear();
@@ -52,9 +48,13 @@ export class MovieServService {
 
   }
 
-  getMovieList(pag: number , order?: number) : Observable<TopRatedResponse>{
+  getMovieList(pag: number , free: boolean , order?: number , min?:number , max?:number) : Observable<TopRatedResponse>{
 
-    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}&sort_by=${this.orderTrigger.transform(order)}`, 
+    let freeQuery = free ? "&watch_region=ES&with_watch_monetization_types=free" : "";
+    if(min && max){ min = min / 10; max = max / 10; }
+    let minmaxQuery = min || max ? `&vote_average.gte=${min}&vote_average.lte=${max}&vote_count.gte=400` : "";
+
+    return this.http.get<TopRatedResponse>(`https://api.themoviedb.org/3/discover/movie?page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}${minmaxQuery}`, 
     {
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
@@ -62,5 +62,6 @@ export class MovieServService {
     });
 
   }
+
 
 }

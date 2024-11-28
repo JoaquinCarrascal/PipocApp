@@ -1,25 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'); 
+
+h1{
+    padding-top: 20px;
+    padding-right: 10%;
+}
+
+.borde-filtrado{
+    border-color: #00FFAE;
+}
+
+.btn{
+    background-color: #00FFAE;
+}
+
+.fecha{
+    color: #00FFAE;
+}
+
+.carta{
+    border-color: aliceblue;
+}
+
+form input {
+    outline: none;
+    border: none;
+}
+
+form input:focus {
+    outline: none;
+    border: none;
+}
+.card-img:hover{
+    transform: scale(1.05);
+}
+
 .filter-form {
     background-color: #fff;
     border: 4px solid #00FFAE;
     border-radius: 20px;
     padding: 20px;
     width: 320px;
-    height: 480px;
+    height: 570px;
     margin-left: 30px;
-    margin-top: 50px;
+    margin-top: 90px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: fixed;
     z-index: 1;
-}
-
-.holder{
-  border-radius: 20px;
-    padding: 20px;
-    width: 320px;
-    height: 530px;
-    margin-left: 30px;
-    margin-top: 40px;
-    position: relative;
 }
 
 #mySelect{
@@ -31,7 +57,7 @@
     -moz-appearance: none; 
     appearance: none;
     height: 50px;
-    width: 280px;
+    width: 270px;
     padding:10px;
     border-radius: 25px;
     border: 4px solid #09273C;
@@ -170,14 +196,8 @@ input[type="radio"]:checked::before {
     position: relative;
     box-sizing: border-box;
     width: fit-content;
-    margin:0 auto;
   }
-
-  .search-flex {
-    width: 20%;
-    position: absolute;
-    right: 20px;
-  }
+  
   .mainbox {
     box-sizing: border-box;
     position: relative;
@@ -189,8 +209,8 @@ input[type="radio"]:checked::before {
     align-items: center;
     justify-content: center;
     border-radius: 160px;
-    background-color: rgba(255, 255, 255, 0);
-    border: #ffffff 4px solid;
+    background-color: rgb(255, 255, 255);
+    border: #09273C 4px solid;
     transition: all 0.3s ease;
   }
   
@@ -236,16 +256,16 @@ input[type="radio"]:checked::before {
     outline: none;
     padding-bottom: 0px;
     position: relative;
-    top: 0px;
-    padding-left: 7px;
+    top: 5px;
+    padding-left: 14px;
     font-size: 1em;
-    color: #ffffff;
+    color: #09273C;
     transition: all 0.3s ease;
     
   }
   
   .search_input::placeholder {
-    color: #ffffff;
+    color: #09273C;
   }
   
   .iconContainer {
@@ -257,7 +277,7 @@ input[type="radio"]:checked::before {
   
   .search_icon {
     box-sizing: border-box;
-    fill: #ffffff;
+    fill: #09273C;
     font-size: 1.4em;
     position: relative;
     bottom: 2px;
@@ -311,7 +331,6 @@ input[type="radio"]:checked::before {
       width: 175px;
       height: 340px;
   }
-
 
   .cr-wrapper *,
   .cr-wrapper *::before,
@@ -447,17 +466,313 @@ input[type="radio"]:checked::before {
     border-color: #051521;
   }
   
-.btn-busq{
 
-  background-color: #09273C;
-  color: white; 
-  border-radius: 100px; 
-  margin-top: 0px;
+
+*{
+  font-family: 'Inter', sans-serif;
 }
 
-.title-flex{
+.filter-switch {
+  border: 2px solid #00FFAE;
+  background-color: white;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: start;
+  height: 40px;
+  width: 500px;
+  overflow: hidden;
+  margin: 0 20px;
+}
 
-  width: 50%;
+.filter-switch input {
+  display: none;
+}
+
+.filter-switch label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.5s;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.filter-switch .background {
   position: absolute;
+  width: 33.33%;
+  /* Ajustado para 3 botones */
+  height: 36.5px;
+  margin: 0px;
+  background-color: #00FFAE;
+  top: 0px;
+  left: 0px;
+  border-radius: 30px;
+  transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
+#option2:checked~.background {
+  left: 33.33%;
+}
+
+#option3:checked~.background {
+  left: 66.9%;
+}
+
+#option1:checked+label[for="option1"],
+#option2:checked+label[for="option2"],
+#option3:checked+label[for="option3"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option1:not(:checked)+label[for="option1"],
+#option2:not(:checked)+label[for="option2"],
+#option3:not(:checked)+label[for="option3"] {
+  color: #7d7d7d;
+}
+
+/*Segunda botonera*/
+
+.filter-switch-second {
+  border: 2px solid #00FFAE;
+  background-color: white;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: start;
+  height: 40px;
+  width: 300px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+.filter-switch-second input {
+  display: none;
+}
+
+.filter-switch-second label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.5s;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.filter-switch-second .background-second {
+  position: absolute;
+  width: 50%;
+  height: 38px;
+  margin: 0px;
+  background-color: #00FFAE;
+  top: 0px;
+  left: 0px;
+  border-radius: 30px;
+  transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#option8:checked~.background-second {
+  left: 50%;
+}
+
+#option7:checked+label[for="option7"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option8:checked+label[for="option8"] {
+  color: #09273C;
+  font-weight: bold;
+}
+
+#option7:not(:checked)+label[for="option7"],
+#option8:not(:checked)+label[for="option8"] {
+  color: #7d7d7d;
+}
+
+.card-img {
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.resizing-img{
+  width: 150px;
+  height: 230px;
+}
+
+.card-img:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.movie-card{
+
+  position: relative;
+  width: 220px;
+  height: 430px;
+  top: -20px;
+
+}
+
+.movie-card-resizing{
+  
+    width: 175px;
+    height: 340px;
+}
+
+.colored-aqua{
+
+  color: #00FFAE;
+
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--bs-gutter-x, 0.75rem) / -2);
+  margin-left: calc(var(--bs-gutter-x, 0.75rem) / -2);
+}
+
+.justify-content-around {
+  justify-content: space-around !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.movie-container {
+  position: relative;
+  top: -200px;
+}
+
+.movie-card {
+  position: relative;
+  width: 220px;
+  height: 430px;
+  top: -20px;
+}
+
+.col-2 {
+  flex: 0 0 auto;
+  width: 16.666667%;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.card-img {
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 2px 4px 15px rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card-img:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.text-light {
+  color: #f8f9fa !important;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+.colored-aqua {
+  color: #00FFAE;
+}
+
+.delete{
+  position: absolute;
+  right: 25%;
+  bottom: 12%;
+  border-radius: 40%;
+  border-left: 40%;
+  border-right: 40%;
+  border-top: 40%;
+  border-bottom: 40%;
 }

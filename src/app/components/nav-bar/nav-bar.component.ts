@@ -27,7 +27,7 @@ export class NavBarComponent {
       localStorage.setItem('token', response.request_token);
 
       // STEP 2 de la autenticación en TMDB (firma del token iniciando sesión en TMDB)
-      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/home/approved`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${response.request_token}?redirect_to=http://localhost:4200/home/approved`
     });
   }
 
