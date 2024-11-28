@@ -48,9 +48,9 @@ export class FavListComponent implements OnInit {
     });
   }
 
-  removeSeriesFromFavorite(seriesId: number): void {
-    this.favService.removeSeriesFromFavorite(seriesId).subscribe(() => {
-      this.favoriteSeries = this.favoriteSeries.filter((favoriteSeries) => favoriteSeries.id !== seriesId);
+  removeSeriesFromFavorite(): void {
+    this.favService.removeSeriesFromFavorite(this.favoriteSeries[0].id).subscribe(() => {
+      this.favoriteSeries = this.favoriteSeries.filter((favoriteSeries) => favoriteSeries.id !== this.favoriteSeries[0].id);
     });
   }
 

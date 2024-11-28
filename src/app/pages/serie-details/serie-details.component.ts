@@ -108,9 +108,17 @@ export class SerieDetailsComponent implements OnInit {
   addSerieToFavourite(): void {
     if (this.series) {
       this.favoriteService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
-        alert('Series añadida a favoritos');
+       
       });
     }
   }
+
+  removeSerieFromFavourite(): void {
+    if (this.series) {
+      this.favoriteService.removeSeriesFromFavorite(this.series.id).subscribe(() => {
+      
+      });
+    }
+    }
     
   }
