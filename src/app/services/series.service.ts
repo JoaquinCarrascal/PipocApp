@@ -79,7 +79,7 @@ export class SeriesService {
     const accountId = localStorage.getItem('account_id');
     const body = {
       media_id: serie.id,
-      media_type: 'serie',
+      media_type: 'tv',
       watchlist: true
     };
 

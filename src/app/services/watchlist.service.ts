@@ -32,7 +32,7 @@ export class WatchlistService {
 
   addSeriesToWatchlist(series: SerieDetails): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
-    const accountId = localStorage.getItem('account_id');
+    const accountId = localStorage.getItem('account_id') || '';
     const body = {
       media_id: series.id,
       media_type: 'tv',
@@ -77,12 +77,12 @@ export class WatchlistService {
     );
   }
 
-  removeSeriesFromWatchlist(movieId: number): Observable<any> {
+  removeSeriesFromWatchlist(serieId: number): Observable<any> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     const body = {
-      media_id: movieId,
-      media_type: 'movie',
+      media_id: serieId,
+      media_type: 'tv',
       watchlist: false
     };
 
