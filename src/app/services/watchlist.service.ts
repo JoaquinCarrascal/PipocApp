@@ -44,21 +44,21 @@ export class WatchlistService {
     );
   }
 
-  getWatchlistMovies(): Observable<WatchlistMovieResponse> {
+  getWatchlistMovies(page : string): Observable<WatchlistMovieResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<WatchlistMovieResponse>(
-      `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
-  getWatchlistSeries(): Observable<WatchlistSeriesResponse> {
+  getWatchlistSeries(page : string): Observable<WatchlistSeriesResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<WatchlistSeriesResponse>(
-      `${API_BASE_URL}/account/${accountId}/watchlist/tv?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/account/${accountId}/watchlist/tv?api_key=${API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 

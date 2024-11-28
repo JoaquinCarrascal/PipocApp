@@ -12,12 +12,26 @@ export class WatchlistComponent implements OnInit {
 
   watchlistMovie: WatchlistMovies[] = [];
   watchlistSeries: WatchlistSeries[] = [];
+  currentPage: number = 1;
+  totalPages: number | undefined;
 
   constructor(private watchlistService: WatchlistService) { }
 
   ngOnInit(): void {
-    this.watchlistService.getWatchlistMovies().subscribe((response) => {
+    this.loadMovies();
+  }
+
+  loadMovies(): void {
+    this.watchlistService.getWatchlistMovies(this.currentPage.toString()).subscribe((response) => {
       this.watchlistMovie = response.results;
+      this.totalPages = response.total_pages;
+    });
+  }
+
+  loadSeries(): void {
+    this.watchlistService.getWatchlistSeries(this.currentPage.toString()).subscribe((response) => {
+      this.watchlistSeries = response.results;
+      this.totalPages = response.total_pages;
     });
   }
 
@@ -27,16 +41,22 @@ export class WatchlistComponent implements OnInit {
   }
 
   clickMovieSerie(isMovie: boolean): void {
+    this.currentPage = 1;
     if (isMovie) {
-      this.watchlistService.getWatchlistMovies().subscribe((response) => {
-        this.watchlistMovie = response.results;
-      });
+      this.loadMovies();
       this.watchlistSeries = [];
     } else {
-      this.watchlistService.getWatchlistSeries().subscribe((response) => {
-        this.watchlistSeries = response.results;
-      });
+      this.loadSeries();
       this.watchlistMovie = [];
+    }
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    if (this.watchlistMovie.length > 0) {
+      this.loadMovies();
+    } else {
+      this.loadSeries();
     }
   }
 
