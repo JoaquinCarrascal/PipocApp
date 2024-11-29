@@ -17,56 +17,56 @@ import { FavoritesService } from '../../services/favorites.service';
 
 export class SerieDetailsComponent implements OnInit {
 
-  
+
   readonly panelOpenState = signal(false);
 
-  
 
-  constructor( private route: ActivatedRoute,private serieDetailsService : SeriesService, private favoriteService : FavoritesService) { }
 
-  
-  series : SerieDetailsResponse | undefined;
-  
-  cast : SerieCast | undefined;
+  constructor(private route: ActivatedRoute, private serieDetailsService: SeriesService, private favoriteService: FavoritesService) { }
 
-  
 
-  fechaSalida : string | undefined;
-  name : string | undefined;
-  genero :  string | undefined;
-  descripcion : string | undefined;
-  
-  keyWords : Keyword[] = [];
+  series: SerieDetailsResponse | undefined;
 
-  trailers : string[] = []
-  listaCanales : string[] = []
+  cast: SerieCast | undefined;
 
-  trailerUrl : any
-  logoPhotos : string[] = []
 
-  video : string | undefined;
+
+  fechaSalida: string | undefined;
+  name: string | undefined;
+  genero: string | undefined;
+  descripcion: string | undefined;
+
+  keyWords: Keyword[] = [];
+
+  trailers: string[] = []
+  listaCanales: string[] = []
+
+  trailerUrl: any
+  logoPhotos: string[] = []
+
+  video: string | undefined;
   ngOnInit(): void {
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
-    if(idSerie){
+    if (idSerie) {
       this.serieDetailsService.obtenerDetallesSerie(Number(idSerie)).subscribe((data: SerieDetailsResponse) => {
         this.series = data
         this.name = data.name
         this.fechaSalida = data.first_air_date
         this.genero = data.genres[0].name
         this.descripcion = data.overview
-        this.listaCanales [0] = data.networks[0].logo_path
+        this.listaCanales[0] = data.networks[0].logo_path
 
 
         this.serieDetailsService.getKeyWords(Number(idSerie)).subscribe((data: Keyword) => {
           this.keyWords = [data]
         })
 
-        
+
       });
       this.getSerieCast(Number(idSerie));
 
-      
+
     }
   }
 
@@ -76,7 +76,7 @@ export class SerieDetailsComponent implements OnInit {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
 
-  getSerieCast(id: number){
+  getSerieCast(id: number) {
     this.serieDetailsService.obtenerRepartoSerie(id).subscribe((data: SerieCast) => {
       this.cast = data
     })
@@ -85,9 +85,9 @@ export class SerieDetailsComponent implements OnInit {
   obtenerColorCalificacion(voteAverage: number, index: number): string {
     const level = Math.ceil(voteAverage / 2);
     if (index < level) {
-      return ''; 
+      return '';
     } else {
-      return 'brightness(0.2)'; 
+      return 'brightness(0.2)';
     }
   }
 
@@ -99,26 +99,20 @@ export class SerieDetailsComponent implements OnInit {
 
   getTrailer(id: number): void {
     this.serieDetailsService.getTrailer(id).subscribe((data: TrailerResponse) => {
-      if (data.results.length > 0) 
+      if (data.results.length > 0)
         this.trailerUrl = `https://www.youtube.com/watch?v=${data.results[0].key}`;
-        window.open(this.trailerUrl, '_blank');
+      window.open(this.trailerUrl, '_blank');
     });
   }
-  
+
   addSerieToFavourite(): void {
     if (this.series) {
       this.favoriteService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
-       
+
       });
     }
   }
 
-  removeSerieFromFavourite(): void {
-    if (this.series) {
-      this.favoriteService.removeSeriesFromFavorite(this.series.id).subscribe(() => {
-      
-      });
-    }
-    }
-    
-  }
+  
+
+}

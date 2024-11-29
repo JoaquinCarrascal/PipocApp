@@ -75,7 +75,7 @@ export class FavoritesService {
     const body = {
       media_id: movieId,
       media_type: 'movie',
-      favourite: false
+      favorite: false
     };
 
     return this.http.post<any>(
@@ -90,7 +90,7 @@ export class FavoritesService {
     const body = {
       media_id: serieId,
       media_type: 'tv',
-      favourite: false
+      favorite: false
     };
 
     return this.http.post<any>(
