@@ -57,7 +57,7 @@
     }
 </div>
 
-<div class="pagination-controls" *ngIf="totalPages! > 1 " style="text-align: center; margin-top: 20px;">
+<div class="pagination-controls" *ngIf="totalPages! > 1 " style="text-align: center">
     <button class="btn" style="background-color: #00FFAE; margin-right: 10px;" (click)="changePage(currentPage - 1)"
         [disabled]="currentPage === 1">Anterior</button>
     <span class="text-white" style="margin: 0 10px;">Página {{currentPage}} de {{totalPages}}</span>
