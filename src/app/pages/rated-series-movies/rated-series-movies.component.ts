@@ -22,26 +22,59 @@ export class RatedSeriesComponent implements OnInit {
   cast: Cast[] = [];
   crew: Crew[] = [];
   cambio : number = 0
+  totalPages: number = 0;
+  pagesCounter: number = 1;
+
+  totalPagesMovies: number = 0;
+  pagesCounterMovies: number = 1;
 
   constructor(private seriesAcc: SeriesAccountService, private serieService: SeriesService,private pipeDateForm: DateFormaterPipe) { }
 
   ngOnInit(): void {
+    this.ratedMovies = [];
+    this.ratedSeries = [];
+    this.totalPages = 0;
+    this.pagesCounter = 1;
+    this.totalPagesMovies = 0;
+    this.pagesCounterMovies = 1;
     this.getSeriesWithRating();
     this.getMoviesWithRating();
   }
 
   getSeriesWithRating(): void {
-    this.ratedSeries = [];
-    this.seriesAcc.getUserRatings().subscribe((data: RatedSerieResponse ) => {
-      this.ratedSeries = data.results;
+    
+    this.seriesAcc.getUserRatings(this.pagesCounter).subscribe((data: RatedSerieResponse ) => {
+
+      this.ratedSeries = this.ratedSeries.concat(data.results);
+      this.totalPages = data.total_pages;
+
+      if(this.pagesCounter <= this.totalPages){
+
+        this.pagesCounter++;
+        this.getSeriesWithRating();
+        
+      }
+
     });
+
   }
 
   getMoviesWithRating() {
-    this.ratedMovies = [];
-    this.seriesAcc.getUserMoviesRatings().subscribe((data : RatedMoviesResponse) => {
-      this.ratedMovies = data.results;
+    
+    this.seriesAcc.getUserMoviesRatings(this.pagesCounterMovies).subscribe((data : RatedMoviesResponse) => {
+
+      this.ratedMovies = this.ratedMovies.concat(data.results);
+      this.totalPagesMovies = data.total_pages;
+
+      if(this.pagesCounterMovies <= this.totalPagesMovies){
+
+        this.pagesCounterMovies++;
+        this.getMoviesWithRating();
+        
+      }
+
     });
+
   }
 
   obtenerImagenOriginal(path: string): string {
@@ -73,11 +106,17 @@ dateFormater(date: string): string{
 
     if(data === 0){
       this.cambio = 0;
+      this.totalPages = 0;
+      this.pagesCounter = 1;
+      this.ratedSeries = [];
       this.getSeriesWithRating();
     }
 
     else{
       this.cambio = 1;
+      this.totalPagesMovies = 0;
+      this.pagesCounterMovies = 1;
+      this.ratedMovies = [];
       this.getMoviesWithRating();
     }
 

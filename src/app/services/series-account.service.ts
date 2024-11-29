@@ -36,10 +36,10 @@ export class SeriesAccountService {
     return this.http.post(url, { value: rating });
   }
 
-  getUserRatings(): Observable<RatedSerieResponse> {
+  getUserRatings(pag?:number): Observable<RatedSerieResponse> {
 
   
-   return this.http.get<RatedSerieResponse>(`https://api.themoviedb.org/3/account/account_id/rated/tv?language=en-US&page=1&session_id=${sessionId}&sort_by=created_at.asc`, 
+   return this.http.get<RatedSerieResponse>(`https://api.themoviedb.org/3/account/account_id/rated/tv?language=en-US&page=${pag ? pag : 1}&session_id=${sessionId}&sort_by=created_at.asc`, 
     {
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
@@ -48,9 +48,9 @@ export class SeriesAccountService {
     
   }
 
-  getUserMoviesRatings(): Observable<RatedMoviesResponse> {
+  getUserMoviesRatings(pag?:number): Observable<RatedMoviesResponse> {
   
-    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?api_key=${API_KEY}&session_id=${sessionId}`);
+    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?language=en-US&page=${pag ? pag : 1}&api_key=${API_KEY}&session_id=${sessionId}`);
     
   }
 
