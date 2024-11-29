@@ -114,7 +114,6 @@ export class SerieDetailsComponent implements OnInit {
   getSerieCast(id: number): void {
     this.serieDetailsService.obtenerRepartoSerie(id).subscribe((data: SerieCast) => {
       this.cast = data;
-      console.log(data);
     });
   }
 
