@@ -13,13 +13,27 @@ export class FavListComponent implements OnInit {
 
   favoriteMovies: FavoriteMovies[] = [];
   favoriteSeries: FavoriteTv[] = [];
+  currentPage: number = 1;
+  totalPages: number | undefined;
 
 
   constructor(private favService: FavoritesService) { }
 
   ngOnInit(): void {
-    this.favService.getFavoriteFilms().subscribe((response) => {
+    this.loadMovies();
+  }
+
+  loadMovies(): void {
+    this.favService.getFavoriteFilms(this.currentPage.toString()).subscribe((response) => {
       this.favoriteMovies = response.results;
+      this.totalPages = response.total_pages;
+    });
+  }
+
+  loadSeries(): void {
+    this.favService.getFavoriteSeries(this.currentPage.toString()).subscribe((response) => {
+      this.favoriteSeries = response.results;
+      this.totalPages = response.total_pages;
     });
   }
 
@@ -29,15 +43,12 @@ export class FavListComponent implements OnInit {
   }
 
   clickMovieSerie(isMovie: boolean): void {
+    this.currentPage = 1;
     if (isMovie) {
-      this.favService.getFavoriteFilms().subscribe((response) => {
-        this.favoriteMovies = response.results;
-      });
+      this.loadMovies();
       this.favoriteSeries = [];
     } else {
-      this.favService.getFavoriteSeries().subscribe((response) => {
-        this.favoriteSeries = response.results;
-      });
+      this.loadSeries();
       this.favoriteMovies = [];
     }
   }
@@ -52,6 +63,15 @@ export class FavListComponent implements OnInit {
     this.favService.removeSeriesFromFavorite(this.favoriteSeries[0].id).subscribe(() => {
       this.favoriteSeries = this.favoriteSeries.filter((favoriteSeries) => favoriteSeries.id !== this.favoriteSeries[0].id);
     });
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    if (this.favoriteMovies.length > 0) {
+      this.loadMovies();
+    } else {
+      this.loadSeries();
+    }
   }
 
 }
