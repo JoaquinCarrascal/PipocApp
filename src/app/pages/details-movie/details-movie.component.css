@@ -177,7 +177,7 @@ color: black;
 
 .movie-details-left {
     position: absolute;
-    top: calc(40vh + 500px);
+    top: calc(40vh + 450px);
     left: 100px;
     width: 472px;
     color: white;
