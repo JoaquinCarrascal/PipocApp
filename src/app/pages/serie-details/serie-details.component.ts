@@ -10,6 +10,7 @@ import { TrailerResponse } from '../../models/trailer.interface';
 import { AuthService } from '../../services/auth.service';
 import { Toast } from 'primeng/toast';
 import { ToastService } from '../../services/toast.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 
 
@@ -27,7 +28,8 @@ export class SerieDetailsComponent implements OnInit {
     private serieDetailsService: SeriesService,
     private seriesAccountService: SeriesAccountService,
     private authSerive : AuthService,
-    private seriesAcc : SeriesAccountService
+    private seriesAcc : SeriesAccountService,
+    private favoritesService: FavoritesService
   ) { }
 
   series: SerieDetails | undefined;
@@ -197,6 +199,16 @@ export class SerieDetailsComponent implements OnInit {
     this.showSuccess(this.successTemplate);
     this.seBorra = true
     });
+  }
+
+  addSerieToFavorite() {
+
+    if (this.series) {
+      this.favoritesService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
+        //TODO  toastdeMandarAListaFavoritos
+      });
+    }
+
   }
 
 }

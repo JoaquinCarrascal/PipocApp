@@ -4,7 +4,7 @@ import { AccountDetailsResponse } from '../models/account-details.interface';
 import { Observable } from 'rxjs';
 import { FavMovieResponse } from '../models/fav-movie-response';
 import { MovieDetailResponse } from '../models/movies-details-response';
-import { SerieDetailsResponse } from '../models/serie-details.interface';
+import { SerieDetails } from '../models/serie-details.interface';
 import { FavSeriesResponse } from '../models/fav-tv-response';
 import { Serie } from '../models/serie.interface';
 
