@@ -19,4 +19,11 @@ export class AccountService {
       `${API_BASE_URL}/account?api_key=${API_KEY}&session_id=${sessionId}`
     );
   }
+
+  getAccountId(): Observable<AccountDetailsResponse> {
+  let sessionId = localStorage.getItem('session_id');
+  return this.http.get<AccountDetailsResponse>(
+    `${API_BASE_URL}/account?api_key=${API_KEY}&session_id=${sessionId}`
+  );
+  }
 }

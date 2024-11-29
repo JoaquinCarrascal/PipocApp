@@ -10,6 +10,7 @@ import { SerieCast } from '../models/serie-cast.interface';
 import { Keyword } from '../models/keyword.interface';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { TrailerResponse } from '../models/trailer.interface';
+import { FavSeriesResponse } from '../models/fav-tv-response';
 
 
 const apiKey: string = '7cb3ebb77086a8a379dd38b88a23269a';
@@ -72,4 +73,21 @@ export class SeriesService {
   getTrailer(id: number): Observable<TrailerResponse>{
     return this.http.get<TrailerResponse>(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}`);
   }
+
+  addSeriesToFavourite(serie: SerieDetails): Observable<FavSeriesResponse> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: serie.id,
+      media_type: 'tv',
+      favorite: true
+    };
+
+    return this.http.post<FavSeriesResponse>(
+      `https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=${apiKey}&session_id=${sessionId}`,
+      body
+    );
+
+  }
+
 }

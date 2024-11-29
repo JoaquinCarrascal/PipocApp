@@ -36,6 +36,9 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ShowStatusPipe } from './pipes/show-status.pipe';
+import { FavListComponent } from './pages/fav-list/fav-list.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     OrderTriggerPipe,
     ApprovedComponent,
     MyListComponent,
-    RatedSeriesComponent
+    RatedSeriesComponent,
+    ShowStatusPipe,
+    FavListComponent
   ],
   imports: [
     ToastModule,
@@ -69,6 +74,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     NgCircleProgressModule.forRoot({
       "radius": 25,
       "space": -20,

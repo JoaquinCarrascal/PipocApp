@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { SeriesAccountService } from '../../services/series-account.service';
 import { Toast, ToastService } from '../../services/toast.service';
 import { Network } from '../../models/serie-details.interface';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-details-movie',
@@ -41,7 +42,8 @@ export class DetailsMovieComponent implements OnInit {
     private detailsMovieService: DetailsMovieService,
     private authSerive : AuthService,
     private seriesAccountService: SeriesAccountService,
-    private seriesAcc : SeriesAccountService
+    private seriesAcc : SeriesAccountService,
+    private favoritesService: FavoritesService
   ) { }
 
   ngOnInit(): void {
@@ -81,8 +83,8 @@ export class DetailsMovieComponent implements OnInit {
 
   setProductionCompanyLogo(): void {
     if (this.movies){
-    const company = this.movies.production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
-    this.productionCompanyLogo = company ? this.obtenerImagenPelicula(200, company.logo_path) : null;
+      const company = this.movies.production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
+      this.productionCompanyLogo = company ? this.obtenerImagenPelicula(200, company.logo_path) : null;
     }
   }
 
@@ -121,7 +123,15 @@ export class DetailsMovieComponent implements OnInit {
 
   verTrailer(): void {
     if (this.trailer) {
-        window.open(`https://www.youtube.com/watch?v=${this.trailer.key}`, '_blank');
+      window.open(`https://www.youtube.com/watch?v=${this.trailer.key}`, '_blank');
+    }
+  }
+
+  addFilmToFavourites(): void {
+    if (this.movies) {
+      this.favoritesService.addFilmToFavourites(this.movies.id.toString()).subscribe(() => {
+        //TODO  toastdeMandarAListaFavoritos
+      });
     }
   }
 
