@@ -29,10 +29,11 @@
         style="position: relative; top: 30px; right: -160px; z-index: 1;">
       </circle-progress>
       <a [routerLink]="['/series/details', series.id]">
-        <img *ngIf="series.poster_path; else noImage" [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}" class="card-img resizing-img">
-        <ng-template #noImage>
+        @if(series.poster_path != undefined && series.poster_path != null && series.poster_path){
+          <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}" class="card-img resizing-img">
+        }@else{
           <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ series.name }}" width="150px">
-        </ng-template>
+        }
       </a>
       <p class="text-white text-truncate">{{ series.name }}</p>
       <span class="fecha">{{ series.first_air_date }}</span>
@@ -49,10 +50,11 @@
         style="position: relative; top: 30px; right: -160px; z-index: 1;">
       </circle-progress>
       <a [routerLink]="['/details-movie', movies.id]">
-        <img *ngIf="movies.poster_path; else noImageMovie" [src]="'https://image.tmdb.org/t/p/w500' + movies.poster_path" alt="{{ movies.title }}" class="card-img resizing-img">
-        <ng-template #noImageMovie>
+        @if(movies.poster_path != undefined && movies.poster_path != null && movies.poster_path){
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movies.poster_path" alt="{{ movies.title }}" class="card-img resizing-img">
+        }@else{
           <img class="card-img resizing-img" src="https://placehold.co/150x230?text=Imagen+no+disponible" alt="{{ movies.title }}" width="150px">
-        </ng-template>
+        }
       </a>
       <p class="text-white text-truncate">{{ movies.title }}</p>
       <span class="fecha">{{ movies.release_date }}</span>

@@ -31,6 +31,7 @@ export class RatedSeriesComponent implements OnInit {
   }
 
   getSeriesWithRating(): void {
+    this.ratedSeries = [];
     this.seriesAcc.getUserRatings().subscribe((data: RatedSerieResponse ) => {
       this.ratedSeries = data.results;
     });
