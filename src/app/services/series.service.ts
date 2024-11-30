@@ -13,6 +13,7 @@ import { TrailerResponse } from '../models/trailer.interface';
 import { FavSeriesResponse } from '../models/fav-tv-response';
 import { WatchlistSeries } from '../models/watchlist-series.interface';
 import { environment } from '../../environments/environment';
+import { OrderTriggerPipe } from '../pipes/order-trigger.pipe';
 
 const baseUrl = 'https://api.themoviedb.org/3/discover/tv';
 
@@ -23,15 +24,34 @@ export class SeriesService {
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private orderTrigger: OrderTriggerPipe
+            ) { }
 
 
   numRandom = Math.floor(Math.random() * 80) + 1;
 
-  getSeries(pag: number): Observable<SerieResponse> {
+  getSeries2(pag: number): Observable<SerieResponse> {
     let lang = localStorage.getItem('lang') || 'es-ES';
 
     return this.http.get<SerieResponse>(`${baseUrl}?api_key=${environment.API_KEY}&include_adult=false&language=${lang}&page=${pag}&sort_by=popularity.desc`);
+  }
+
+  getSeries(pag: number , free: boolean , order?: number , min?:number , max?:number) : Observable<SerieResponse>{
+
+    let freeQuery = free ? "&watch_region=ES&with_watch_monetization_types=free" : "";
+    if(min){ min = min / 10; }
+    if(max){ max = max / 10; }
+    let minmaxQuery = min || max ? `&vote_average.gte=${min}&vote_average.lte=${max}&vote_count.gte=400` : "";
+    let lang = localStorage.getItem('lang') || 'es-ES';
+
+    return this.http.get<SerieResponse>(`${baseUrl}?language=${lang}&page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}${minmaxQuery}`, 
+    {
+      headers: {
+        'Authorization': `Bearer ${environment.TOKEN}`,
+      }
+    });
+
   }
 
   obtenerDetallesSerie(id: number): Observable<SerieDetails> {

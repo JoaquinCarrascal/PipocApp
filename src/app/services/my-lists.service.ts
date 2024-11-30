@@ -86,12 +86,12 @@ export class MyListsService {
 
   }
 
-  searchTvItem(query: string): Observable<TvSearchResponse> {
+  searchTvItem(query: string , page?:number): Observable<TvSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
     let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=${lang}&page=1`,{
+    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=${lang}&page=${page ? `${page}` : '1'}`,{
 
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,
