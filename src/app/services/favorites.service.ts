@@ -7,9 +7,8 @@ import { MovieDetailResponse } from '../models/movies-details-response';
 import { SerieDetails } from '../models/serie-details.interface';
 import { FavSeriesResponse } from '../models/fav-tv-response';
 import { Serie } from '../models/serie.interface';
+import { environment } from '../../environments/environment';
 
-
-const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
 @Injectable({
@@ -29,7 +28,7 @@ export class FavoritesService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
 
@@ -45,7 +44,7 @@ export class FavoritesService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
 
@@ -56,7 +55,7 @@ export class FavoritesService {
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<FavMovieResponse>(
-      `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
@@ -65,7 +64,7 @@ export class FavoritesService {
     const accountId = localStorage.getItem('account_id');
 
     return this.http.get<FavSeriesResponse>(
-      `${API_BASE_URL}/account/${accountId}/favorite/tv?api_key=${API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/${accountId}/favorite/tv?api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
@@ -79,7 +78,7 @@ export class FavoritesService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -94,7 +93,7 @@ export class FavoritesService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }

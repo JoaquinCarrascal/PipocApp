@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RatedSerieResponse } from '../models/rated-serie.interface';
 import { RatedMoviesResponse } from '../models/rated-movies.interface';
+import { environment } from '../../environments/environment';
 
-const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const sessionId = localStorage.getItem('session_id');
-const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZTI4YmFiYjBiYWVlZDUzZTEyNTVjZDJiMmJkMmUxNSIsIm5iZiI6MTczMTY1Njg0Ny40NTQyMSwic3ViIjoiNjczMWJkOTU2MTYyNmFjMTA2YmU2N2Q4Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.yNCSOGU0edyqA7PR2On0uHmWbZlDBrBHW1YyLPYnN6o";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class SeriesAccountService {
       throw new Error('Session ID is required');
     }
 
-    const url = `${API_BASE_URL}/tv/${serieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/tv/${serieId}/rating?api_key=${environment.API_KEY}&session_id=${sessionId}`;
     return this.http.post(url, { value: rating });
   }
 
@@ -32,7 +31,7 @@ export class SeriesAccountService {
       throw new Error('Session ID is required');
     }
 
-    const url = `${API_BASE_URL}/movie/${serieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/movie/${serieId}/rating?api_key=${environment.API_KEY}&session_id=${sessionId}`;
     return this.http.post(url, { value: rating });
   }
 
@@ -42,7 +41,7 @@ export class SeriesAccountService {
    return this.http.get<RatedSerieResponse>(`https://api.themoviedb.org/3/account/account_id/rated/tv?language=en-US&page=${pag ? pag : 1}&session_id=${sessionId}&sort_by=created_at.asc`, 
     {
       headers: {
-        'Authorization': `Bearer ${ACCESS_TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
       }
     });
     
@@ -50,18 +49,18 @@ export class SeriesAccountService {
 
   getUserMoviesRatings(pag?:number): Observable<RatedMoviesResponse> {
   
-    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?language=en-US&page=${pag ? pag : 1}&api_key=${API_KEY}&session_id=${sessionId}`);
+    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?language=en-US&page=${pag ? pag : 1}&api_key=${environment.API_KEY}&session_id=${sessionId}`);
     
   }
 
   
   deleteSerieRating(serieId: number): Observable<any> {
-    const url = `${API_BASE_URL}/tv/${serieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/tv/${serieId}/rating?api_key=${environment.API_KEY}&session_id=${sessionId}`;
     return this.http.delete(url);
   }
 
   deleteMovieRating(movieId: number): Observable<any> {
-    const url = `${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/movie/${movieId}/rating?api_key=${environment.API_KEY}&session_id=${sessionId}`;
     return this.http.delete(url);
   }
 }
