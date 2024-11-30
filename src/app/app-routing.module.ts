@@ -20,8 +20,9 @@ const routes: Routes = [
   {path: 'series', component : SeriesComponent},
   {path: 'series/details/:idSerie', component: SerieDetailsComponent},
   {path: 'home/approved' , component: ApprovedComponent},
+  {path: 'watchlist', component: WatchlistComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
-  {path: 'watchlist', component: WatchlistComponent}
+  
 
   //{path: '**', component: PageNotFoundComponent}
 ];
