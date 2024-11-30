@@ -3,37 +3,114 @@
     Valoración cambiada
   </ng-template>
 
-    
-    @if(seBorra == false){         
-    <div class="toast-container">
-        <ngb-toast *ngFor="let toast of toastService.toasts"
-                    [class]="toast.classname"
-                    [autohide]="true"
-                    [delay]="toast.delay || 5000"
-                    (hidden)="toastService.remove(toast)">
-          <div class="toast-content">
-            <span>Valoracion cambiada con éxito</span>
-            <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
-          </div>
-          <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
-        </ngb-toast>
-      </div>
+    @switch (swapToast) {
+        @case (0){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                  <div class="toast-content">
+                    <span>
+                        @if(lang == 'es-ES'){
+                            Valoración cambiada con éxito
+                        }@else{
+                            Rating changed successfully
+                        }
+                        </span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                  </div>
+                  <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @case (1){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>
+                        @if(lang == 'es-ES'){
+                            Valoración borrada con éxito
+                        }@else{
+                            Rating deleted successfully
+                        }
+                        </span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @case (2){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>
+                        @if(lang == 'es-ES'){
+                            Serie añadida a me gusta
+                        }@else{
+                            Series added to like
+                        }
+                        </span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @case (3){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>
+                        @if(lang == 'es-ES'){
+                            Serie añadida a tu watchlist
+                        }@else{
+                            Series added to your watchlist
+                        }
+                        </span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @default {
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>
+                        @if(lang == 'es-ES'){
+                            Operación realizada con éxito
+                        }@else{
+                            Operation performed successfully
+                        }
+                        </span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
     }
-      @if (seBorra) {
-        <div class="toast-container">
-            <ngb-toast *ngFor="let toast of toastService.toasts"
-                        [class]="toast.classname"
-                        [autohide]="true"
-                        [delay]="toast.delay || 5000"
-                        (hidden)="toastService.remove(toast)">
-              <div class="toast-content">
-                <span>Valoración borrada con éxito</span>
-                <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
-              </div>
-              <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
-            </ngb-toast>
-          </div>
-      }
+    
     @if(series?.backdrop_path!=null){
         <div class="background-image-blur" 
             [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(backdropPath) + ')'}">
@@ -85,7 +162,13 @@
                     </div>
                     <div>
                         @if(userRating == 0){
-                            <span class="strong" style="font-size: 20px;">Rating : Sin valorar</span>
+                            <span class="strong" style="font-size: 20px;">
+                                @if(lang == 'es-ES'){
+                                    Rating : Sin valorar
+                                }@else{
+                                    Rating : Not rated
+                                }
+                            </span>
                         }
 
                         @else {
@@ -95,7 +178,13 @@
                     
 
                       <div class="py-3">
-                        <button (click)="getTrailer(series.id)" class="btn boton">Ver Trailer</button>
+                        <button (click)="getTrailer(series.id)" class="btn boton">
+                            @if(lang == 'es-ES'){
+                                Ver Trailer
+                            }@else{
+                                Watch Trailer
+                            }
+                        </button>
                       </div>
                 </div>
             </div>
@@ -107,7 +196,13 @@
 
                 
                 @if(cast?.cast!.length > 0){
-                    <h2 class="mb-4">Reparto</h2>
+                    <h2 class="mb-4">
+                        @if(lang == 'es-ES'){
+                            Reparto
+                        }@else{
+                            Cast
+                        }
+                        </h2>
                     <div class="d-flex justify-content-center" style="position:relative; left:0px;">
                         
                         <div *ngFor="let actor of cast?.cast?.slice(0, 7)" class=" d-flex flex-column text-wrap mx-2" style="width:130px;">
@@ -124,7 +219,13 @@
                     </div>
                 }@else{
                     <div style="position: relative; height:360px;">
-                        <p style="font-size: 20pt;">No se ha aportado información adicional</p>
+                        <p style="font-size: 20pt;">
+                            @if(lang == 'es-ES'){
+                                No se ha aportado información adicional
+                            }@else{
+                                No additional information has been provided
+                            }
+                        </p>
                     </div>
                 }
                 
@@ -159,11 +260,35 @@
     
         <div class="movie-details-left container mb-4">
 
+            <div class="row mb-5 col-10 mx-auto justify-content-between">
+                <div class="d-flex align-content-center justify-content-center" style="flex-direction: column; width:100px;">
+                    <button class="btn" (click)="addSeriesToWatchlist()"><i class="fs-1 text-center text-light bi bi-list-check"></i></button>
+                    <p class="mb-0 text-light text-center">Watchlist</p>
+                </div>
+                <div class="d-flex align-content-center justify-content-center" style="flex-direction: column; width:100px;">
+                    <button class="btn" (click)="addSerieToFavorite()"><i class="fs-1 text-center text-light bi bi-suit-heart-fill"></i></button>
+                    <p class="mb-0 text-light text-center">
+                        @if(lang == 'es-ES'){
+                            Favoritos
+                        }@else{
+                            Favorites
+                        }
+                    </p>
+                </div>
+                
+            </div>
+
             <div class="row mb-4">
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Estado:</h4>
+                        <h4 class="mb-1 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Estado:
+                            }@else{
+                                Status:
+                            }
+                        </h4>
                         <h5 class="text-light">{{ status }}</h5>
                     </div>
                 </div>
@@ -173,7 +298,13 @@
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
-                        <h4 class="mb-0 fw-bold">Canales:</h4>
+                        <h4 class="mb-0 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Canales:
+                            }@else{
+                                Networks:
+                            }
+                        </h4>
                     </div>
                     <div class="row mt-2">
                         @if(networkList != undefined && networkList.length > 0 && networkList[0].logo_path != null){
@@ -200,7 +331,13 @@
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Idioma Original:</h4>
+                        <h4 class="mb-1 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Idioma Original:
+                            }@else{
+                                Original Language:
+                            }
+                        </h4>
                         <h5 class="text-light">{{ lenguage }}</h5>
                     </div>
                 </div>
@@ -210,7 +347,13 @@
                 <div class="col-12">
                   <div class="d-flex align-items-center mb-3">
                     <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
-                    <h4 class="mb-0 fw-bold">Palabras claves:</h4>
+                    <h4 class="mb-0 fw-bold">
+                        @if(lang == 'es-ES'){
+                            Palabras claves:
+                        }@else{
+                            Keywords:
+                        }
+                        </h4>
                   </div>
                   <div class="mt-2" style="padding-left: 20px;">
                     <span *ngFor="let keyword of keyWords" class="badge text-dark badge-separation">

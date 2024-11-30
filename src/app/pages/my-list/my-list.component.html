@@ -5,19 +5,43 @@
     <div class="row justify-content-between mt-3 mx-2">
 
         <div class="col-2 align-content-center">
-            <h2 class="text-light">Mis listas</h2>
+            <h2 class="text-light">
+                @if(lang == 'es-ES'){
+                    Mis listas
+                }@else{
+                    My lists
+                }
+                </h2>
         </div>
 
         <div class="col-5 align-content-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2"
-                [(ngModel)]="newListName">
+                @if(lang == 'es-ES'){
+                    <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2"
+                    [(ngModel)]="newListName">
+                }@else{
+                    <input type="text" class="form-control" placeholder="New list name ..." aria-label="Agregar listado" aria-describedby="basic-addon2"
+                    [(ngModel)]="newListName">
+                }
+                
                 <div class="input-group-append">
                     @if(newListName != ''){
-                        <button class="btn colored-aqua fw-bold button-add" type="button" (click)="createList()">Crear listado</button>
+                        <button class="btn colored-aqua fw-bold button-add" type="button" (click)="createList()">
+                            @if(lang == 'es-ES'){
+                                Crear listado
+                            }@else{
+                                Create list
+                            }
+                        </button>
                     }
                     @else{
-                        <button class="btn btn-light fw-bold button-add" type="button" disabled>Crear listado</button>
+                        <button class="btn btn-light fw-bold button-add" type="button" disabled>
+                            @if(lang == 'es-ES'){
+                                Crear listado
+                            }@else{
+                                Create list
+                            }
+                        </button>
                     }
                   
                 </div>
@@ -54,7 +78,12 @@
                             {{item.name}}
                         </p>
                         <p class="badge text-bg-secondary fs-6 mt-2">
-                           <span class="pe-2">{{item.item_count}}</span> elemento/s
+                           <span class="pe-2">{{item.item_count}}</span> 
+                           @if(lang == 'es-ES'){
+                                elementos
+                            }@else{
+                                items
+                            }
                         </p>
                     </div>
                 </div>
@@ -80,7 +109,13 @@
                                         <ngb-highlight [result]="r.title" [term]="t" class="ms-3"></ngb-highlight>
                                         <p class="mb-0 ms-3 text-color-dark">{{r.release_date}}</p>
                                     </div>
-                                    <span class="badge text-bg-warning ms-2" style="height: 20px !important;">Película</span>
+                                    <span class="badge text-bg-warning ms-2" style="height: 20px !important;">
+                                        @if(lang == 'es-ES'){
+                                            Película
+                                        }@else{
+                                            Movie
+                                        }
+                                    </span>
                                     <button class="btn btn-success ms-auto me-1 mt-2" (click)="addItemToList(item.id , r.id)" style="height: 35px !important;"><i class="bi bi-arrow-return-left"></i></button>
                                 }
                                 @else{
@@ -88,7 +123,13 @@
                                         <ngb-highlight [result]="r.name" [term]="t" class="ms-3"></ngb-highlight>
                                         <p class="mb-0 ms-3 text-color-dark">{{r.first_air_date}}</p>
                                     </div>
-                                    <span class="badge text-bg-secondary ms-2" style="height: 20px !important;">Serie</span>
+                                    <span class="badge text-bg-secondary ms-2" style="height: 20px !important;">
+                                        @if(lang == 'es-ES'){
+                                            Serie
+                                        }@else{
+                                            Tv show
+                                        }
+                                        </span>
                                    <!-- <button class="btn btn-success ms-auto me-1 mt-2" (click)="addItemToList(item.id , r.id)" style="height: 35px !important;"><i class="bi bi-arrow-return-left"></i></button>  --> 
                                 }
                             </div>
@@ -96,7 +137,8 @@
                         
                         <div class="mb-3 row col-12">
                             <div class="col-12">
-                                <input
+                                @if(lang == 'es-ES'){
+                                    <input
                                     placeholder="Introduzca el nombre de una serie o película"
                                     id="typeahead-template"
                                     type="text"
@@ -105,13 +147,31 @@
                                     [ngbTypeahead]="search"
                                     [resultTemplate]="rt"
                                     [inputFormatter]="formatter"
-                                />
+                                    />
+                                }@else{
+                                    <input
+                                    placeholder="Enter the name of a series or movie"
+                                    id="typeahead-template"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="model"
+                                    [ngbTypeahead]="search"
+                                    [resultTemplate]="rt"
+                                    [inputFormatter]="formatter"
+                                    />
+                                }
+                                
                             </div>
                         </div>
                     </div>
 
                     @if(item.item_count<=0){
-                        <p class="text-center text-dark mt-2">Nada por aquí nada por allá... 
+                        <p class="text-center text-dark mt-2">
+                            @if(lang == 'es-ES'){
+                                Nada por aquí nada por allá... 
+                            }@else{
+                                Nothing here, nothing there...
+                            }
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#09273c"><path d="M80-140v-320h320v320H80Zm80-80h160v-160H160v160Zm60-340 220-360 220 360H220Zm142-80h156l-78-126-78 126ZM863-42 757-148q-21 14-45.5 21t-51.5 7q-75 0-127.5-52.5T480-300q0-75 52.5-127.5T660-480q75 0 127.5 52.5T840-300q0 26-7 50.5T813-204L919-98l-56 56ZM660-200q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-380Zm120-260Z"/></svg>
                         </p>
                     }  

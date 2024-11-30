@@ -16,7 +16,6 @@ import { SeriesComponent } from './pages/series/series.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SeriesHeaderComponent } from './components/series-header/series-header.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component'; // Add this line
 import { DateFormaterPipe } from './pipes/date-formater.pipe';
@@ -36,6 +35,11 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ShowStatusPipe } from './pipes/show-status.pipe';
+import { FavListComponent } from './pages/fav-list/fav-list.component';
+
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -48,14 +52,16 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PersonDetailsComponent,
     PersonSexPipe,
     SeriesComponent,
-    SeriesHeaderComponent,
     SerieDetailsComponent,
     DateFormaterPipe,
     MovieListComponent,
     OrderTriggerPipe,
     ApprovedComponent,
     MyListComponent,
-    RatedSeriesComponent
+    RatedSeriesComponent,
+    ShowStatusPipe,
+    FavListComponent,
+    WatchlistComponent
   ],
   imports: [
     ToastModule,
@@ -69,6 +75,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     NgCircleProgressModule.forRoot({
       "radius": 25,
       "space": -20,
@@ -97,7 +104,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     provideHttpClient(),
     { provide: 'circleProgressConfig', useValue: {} },
     DateFormaterPipe,
-    OrderTriggerPipe
+    OrderTriggerPipe,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

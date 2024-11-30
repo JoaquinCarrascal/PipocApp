@@ -10,6 +10,7 @@ import { TrailerResponse } from '../../models/trailer.interface';
 import { AuthService } from '../../services/auth.service';
 import { Toast } from 'primeng/toast';
 import { ToastService } from '../../services/toast.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 
 
@@ -27,7 +28,9 @@ export class SerieDetailsComponent implements OnInit {
     private serieDetailsService: SeriesService,
     private seriesAccountService: SeriesAccountService,
     private authSerive : AuthService,
-    private seriesAcc : SeriesAccountService
+    private seriesAcc : SeriesAccountService,
+    private favoritesService: FavoritesService,
+    
   ) { }
 
   series: SerieDetails | undefined;
@@ -59,9 +62,11 @@ export class SerieDetailsComponent implements OnInit {
 
   video: string | undefined;
   listadoValoraciones: string[] = [];
+  pag: number = 1;
 
-  seBorra : boolean = false;
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
   hasBackDrop : boolean = false;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
 
   toastService = inject(ToastService);
@@ -92,8 +97,12 @@ export class SerieDetailsComponent implements OnInit {
           if(keywords.results.length > 0)
           this.keyWords = keywords.results.map(keyword => keyword.name);
 
-          else
+          else{
+          if(this.lang == 'es-ES')
           this.keyWords = ["No se han encontrado palabras clave"];
+          else
+          this.keyWords = ["Keywords not found"];
+          }
 
         });
 
@@ -114,7 +123,6 @@ export class SerieDetailsComponent implements OnInit {
   getSerieCast(id: number): void {
     this.serieDetailsService.obtenerRepartoSerie(id).subscribe((data: SerieCast) => {
       this.cast = data;
-      console.log(data);
     });
   }
 
@@ -147,7 +155,7 @@ export class SerieDetailsComponent implements OnInit {
       if (idSerie) {
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
           this.showSuccess(this.successTemplate);  
-          this.seBorra = false
+          this.swapToast = 0;
         });
       }
     } else {
@@ -177,15 +185,18 @@ export class SerieDetailsComponent implements OnInit {
   }
 
 
-  valoracionUsuario(){
+  valoracionUsuario(page?:number){
 
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
-    this.seriesAccountService.getUserRatings().subscribe((data) => {
+    this.seriesAccountService.getUserRatings(page).subscribe((data) => {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
       if (serieRating) {
         this.userRating = serieRating.rating;
         this.getPopcornIcons(this.userRating);
+        this.pag = 1;
+      }else{
+        this.valoracionUsuario(this.pag += 1);
       }
     });
   }
@@ -196,8 +207,31 @@ export class SerieDetailsComponent implements OnInit {
     this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
     this.userRating = 0;
     this.showSuccess(this.successTemplate);
-    this.seBorra = true
+    this.swapToast = 1;
     });
   }
 
+  addSerieToFavorite() {
+
+    if (this.series) {
+      this.favoritesService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 2;
+      });
+    }
+
+  }
+
+  addSeriesToWatchlist(): void {
+    if (this.series) {
+      this.serieDetailsService.addSeriesToWatchlist(this.series.id).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 3;
+      });
+    }
+  }
+
 }
+  
+    
+  

@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { SeriesAccountService } from '../../services/series-account.service';
 import { Toast, ToastService } from '../../services/toast.service';
 import { Network } from '../../models/serie-details.interface';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-details-movie',
@@ -29,8 +30,10 @@ export class DetailsMovieComponent implements OnInit {
   listadoValoraciones: string[] = []; 
   toast : Toast | undefined;
   toastService = inject(ToastService);
+  pag: number = 1;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
-  seBorra: boolean = false;
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
 
   @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
 
@@ -41,7 +44,8 @@ export class DetailsMovieComponent implements OnInit {
     private detailsMovieService: DetailsMovieService,
     private authSerive : AuthService,
     private seriesAccountService: SeriesAccountService,
-    private seriesAcc : SeriesAccountService
+    private seriesAcc : SeriesAccountService,
+    private favoritesService: FavoritesService
   ) { }
 
   ngOnInit(): void {
@@ -81,8 +85,8 @@ export class DetailsMovieComponent implements OnInit {
 
   setProductionCompanyLogo(): void {
     if (this.movies){
-    const company = this.movies.production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
-    this.productionCompanyLogo = company ? this.obtenerImagenPelicula(200, company.logo_path) : null;
+      const company = this.movies.production_companies.find(c => c.provider_name === 'Netflix' || c.provider_name === 'HBO' || c.provider_name === 'Amazon Prime Video');
+      this.productionCompanyLogo = company ? this.obtenerImagenPelicula(200, company.logo_path) : null;
     }
   }
 
@@ -121,7 +125,25 @@ export class DetailsMovieComponent implements OnInit {
 
   verTrailer(): void {
     if (this.trailer) {
-        window.open(`https://www.youtube.com/watch?v=${this.trailer.key}`, '_blank');
+      window.open(`https://www.youtube.com/watch?v=${this.trailer.key}`, '_blank');
+    }
+  }
+
+  addFilmToFavourites(): void {
+    if (this.movies) {
+      this.favoritesService.addFilmToFavourites(this.movies.id.toString()).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 2;
+      });
+    }
+  }
+
+  addFilmToWatchlist(): void {
+    if (this.movies) {
+      this.detailsMovieService.addFilmToWatchlist(this.movies).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 3;
+      });
     }
   }
 
@@ -137,7 +159,7 @@ export class DetailsMovieComponent implements OnInit {
       if (idMovie) {
         this.seriesAccountService.addMovieRating(Number(idMovie), rating).subscribe(response => {
           this.showSuccess(this.successTemplate);
-          this.seBorra = false;
+          this.swapToast = 0;
         });
       }
     } else {
@@ -149,24 +171,28 @@ export class DetailsMovieComponent implements OnInit {
     alert('Debe iniciar sesión para poder valorar la serie');
   }
 
-  valoracionUsuarioMovie(){
+  valoracionUsuarioMovie(page?:number){
 
     const idSerie = this.route.snapshot.paramMap.get('idMovie');
 
-    this.seriesAccountService.getUserMoviesRatings().subscribe((data) => {
+    this.seriesAccountService.getUserMoviesRatings(page).subscribe((data) => {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
       if (serieRating) {
         this.userRating = serieRating.rating;
         this.getPopcornIcons(this.userRating);
-
+        this.pag = 1;
+      }else{
+        this.valoracionUsuarioMovie(this.pag += 1);
       }
+
     });
   }
   deleteMovieRating(movieId: number) {
     this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
       this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
       this.userRating = 0;
-      this.seBorra = true;
+      this.showSuccess(this.successTemplate);
+      this.swapToast = 1;
     });
   }
     

@@ -1,6 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div style="position: relative; margin: 200px auto; flex-direction:column;" class="d-flex">
-  <h3 class="mb-2 text-light" style="text-align: center;">Cargando la información de tu cuenta...</h3>
+  <h3 class="mb-2 text-light" style="text-align: center;">
+    @if(lang == 'es-ES'){
+      Cargando la información de tu cuenta...
+    }@else{
+      Loading your account information...
+    }
+  </h3>
   <div class="wrapper">
     <svg class="logo-svg">
       <text x="50%" y="50%" dy=".35em" text-anchor="middle">

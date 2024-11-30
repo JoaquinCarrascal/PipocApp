@@ -7,9 +7,7 @@ import { MovieSearchResponse } from '../models/movie-search';
 import { TvSearchResponse } from '../models/tv-search';
 import { AvailabilityStatusResponse } from '../models/availability-status';
 import { CreatedListResponse } from '../models/created-list-response';
-
-const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
-const TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZTI4YmFiYjBiYWVlZDUzZTEyNTVjZDJiMmJkMmUxNSIsIm5iZiI6MTczMjMyNTU1MS45NDIwMTksInN1YiI6IjY3MzFiZDk1NjE2MjZhYzEwNmJlNjdkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nK6kybVnUfa1HZLz3UngXPtNACqyFqVKFvzPNwEmmBo";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +17,18 @@ export class MyListsService {
   constructor(private http: HttpClient) { }
 
   getLists(): Observable<ListResponse> {
-    return this.http.get<ListResponse>(`https://api.themoviedb.org/3/account/account_id/lists?page=1&session_id=${localStorage.getItem('session_id')}&api_key=${API_KEY}`);
+    return this.http.get<ListResponse>(`https://api.themoviedb.org/3/account/account_id/lists?page=1&session_id=${localStorage.getItem('session_id')}&api_key=${environment.API_KEY}`);
   }
 
   getListItems(idList: number): Observable<ListItemsResponse> {
-    return this.http.get<ListItemsResponse>(`https://api.themoviedb.org/3/list/${idList}?language=en-US&page=1&api_key=${API_KEY}`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+    return this.http.get<ListItemsResponse>(`https://api.themoviedb.org/3/list/${idList}?language=${lang}&page=1&api_key=${environment.API_KEY}`);
   }
 
   deleteList(idList: number){
     return this.http.delete(`https://api.themoviedb.org/3/list/${idList}?session_id=${localStorage.getItem('session_id')}`, {
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
       }
     });
   }
@@ -47,7 +46,7 @@ export class MyListsService {
   {
 
     headers: {
-      'Authorization': `Bearer ${TOKEN}`,
+      'Authorization': `Bearer ${environment.TOKEN}`,
       'content-type': 'application/json'
     },
     
@@ -65,7 +64,7 @@ export class MyListsService {
     data,
     {
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
         'content-type': 'application/json'
       }
     });
@@ -75,11 +74,12 @@ export class MyListsService {
   searchMovieItem(query: string , page?:number): Observable<MovieSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=en-US&page=${page ? `${page}` : '1'}`,{
+    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=${lang}&page=${page ? `${page}` : '1'}`,{
 
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
       }
 
     });
@@ -89,11 +89,12 @@ export class MyListsService {
   searchTvItem(query: string): Observable<TvSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=en-US&page=1`,{
+    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=${lang}&page=1`,{
 
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
       }
 
     });
@@ -101,11 +102,12 @@ export class MyListsService {
   }
 
   checkIfItemExistsInList(idList: number , idItem: number): Observable<AvailabilityStatusResponse>{
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<AvailabilityStatusResponse>(`https://api.themoviedb.org/3/list/${idList}/item_status?language=en-US&movie_id=${idItem}`,{
+    return this.http.get<AvailabilityStatusResponse>(`https://api.themoviedb.org/3/list/${idList}/item_status?language=${lang}&movie_id=${idItem}`,{
 
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
       }
 
     });
@@ -122,7 +124,7 @@ export class MyListsService {
     data,
     {
       headers: {
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${environment.TOKEN}`,
         'content-type': 'application/json'
       }
     });    
