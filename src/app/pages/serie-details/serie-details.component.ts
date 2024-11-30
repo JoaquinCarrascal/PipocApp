@@ -62,6 +62,7 @@ export class SerieDetailsComponent implements OnInit {
 
   video: string | undefined;
   listadoValoraciones: string[] = [];
+  pag: number = 1;
 
   swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
   hasBackDrop : boolean = false;
@@ -179,15 +180,20 @@ export class SerieDetailsComponent implements OnInit {
   }
 
 
-  valoracionUsuario(){
+  valoracionUsuario(page?:number){
 
     const idSerie = this.route.snapshot.paramMap.get('idSerie');
 
-    this.seriesAccountService.getUserRatings().subscribe((data) => {
+    this.seriesAccountService.getUserRatings(page).subscribe((data) => {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
+      console.log(serieRating);
+      console.log(data.results);
       if (serieRating) {
         this.userRating = serieRating.rating;
         this.getPopcornIcons(this.userRating);
+        this.pag = 1;
+      }else{
+        this.valoracionUsuario(this.pag += 1);
       }
     });
   }

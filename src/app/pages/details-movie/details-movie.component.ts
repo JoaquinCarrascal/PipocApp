@@ -30,6 +30,7 @@ export class DetailsMovieComponent implements OnInit {
   listadoValoraciones: string[] = []; 
   toast : Toast | undefined;
   toastService = inject(ToastService);
+  pag: number = 1;
 
   swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
 
@@ -169,17 +170,20 @@ export class DetailsMovieComponent implements OnInit {
     alert('Debe iniciar sesión para poder valorar la serie');
   }
 
-  valoracionUsuarioMovie(){
+  valoracionUsuarioMovie(page?:number){
 
     const idSerie = this.route.snapshot.paramMap.get('idMovie');
 
-    this.seriesAccountService.getUserMoviesRatings().subscribe((data) => {
+    this.seriesAccountService.getUserMoviesRatings(page).subscribe((data) => {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
       if (serieRating) {
         this.userRating = serieRating.rating;
         this.getPopcornIcons(this.userRating);
-
+        this.pag = 1;
+      }else{
+        this.valoracionUsuarioMovie(this.pag += 1);
       }
+
     });
   }
   deleteMovieRating(movieId: number) {
