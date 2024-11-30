@@ -97,8 +97,12 @@ export class SerieDetailsComponent implements OnInit {
           if(keywords.results.length > 0)
           this.keyWords = keywords.results.map(keyword => keyword.name);
 
-          else
+          else{
+          if(this.lang == 'es-ES')
           this.keyWords = ["No se han encontrado palabras clave"];
+          else
+          this.keyWords = ["Keywords not found"];
+          }
 
         });
 
