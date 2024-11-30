@@ -50,6 +50,21 @@
             </ngb-toast>
         </div>
     }
+    @case (3){
+        <div class="toast-container">
+            <ngb-toast *ngFor="let toast of toastService.toasts"
+                        [class]="toast.classname"
+                        [autohide]="true"
+                        [delay]="toast.delay || 5000"
+                        (hidden)="toastService.remove(toast)">
+                <div class="toast-content">
+                <span>Película añadida a tu watchlist</span>
+                <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                </div>
+                <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+            </ngb-toast>
+        </div>
+    }
     @default {
         <div class="toast-container">
             <ngb-toast *ngFor="let toast of toastService.toasts"
@@ -203,7 +218,7 @@
 
             <div class="row mb-5 col-10 mx-auto justify-content-between">
                 <div class="d-flex align-content-center justify-content-center" style="flex-direction: column; width:100px;">
-                    <button class="btn"><i class="fs-1 text-center text-light bi bi-list-check"></i></button>
+                    <button class="btn" (click)="addFilmToWatchlist()"><i class="fs-1 text-center text-light bi bi-list-check"></i></button>
                     <p class="mb-0 text-light text-center">Watchlist</p>
                 </div>
                 <div class="d-flex align-content-center justify-content-center" style="flex-direction: column; width:100px;">

@@ -29,7 +29,8 @@ export class SerieDetailsComponent implements OnInit {
     private seriesAccountService: SeriesAccountService,
     private authSerive : AuthService,
     private seriesAcc : SeriesAccountService,
-    private favoritesService: FavoritesService
+    private favoritesService: FavoritesService,
+    
   ) { }
 
   series: SerieDetails | undefined;
@@ -62,7 +63,7 @@ export class SerieDetailsComponent implements OnInit {
   video: string | undefined;
   listadoValoraciones: string[] = [];
 
-  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
   hasBackDrop : boolean = false;
 
 
@@ -212,4 +213,16 @@ export class SerieDetailsComponent implements OnInit {
 
   }
 
+  addSeriesToWatchlist(): void {
+    if (this.series) {
+      this.serieDetailsService.addSeriesToWatchlist(this.series.id).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 3;
+      });
+    }
+  }
+
 }
+  
+    
+  

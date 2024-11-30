@@ -6,6 +6,7 @@ import { ProvidersResponse } from '../models/movies-watch-providers';
 import { VideoResponse } from '../models/movies-video-response';
 import { Observable } from 'rxjs';
 import { FavoriteMovies } from '../models/fav-movie-response';
+import { WatchlistMovies } from '../models/watchlist-movie.interface';
 
 const API_KEY = "de28babb0baeed53e1255cd2b2bd2e15";
 const BASE_URL = "https://api.themoviedb.org/3/movie";
@@ -31,6 +32,22 @@ export class DetailsMovieService {
 
   getMovieTrailer(id: number): Observable<VideoResponse> {
     return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=es-ES`);
+  }
+
+  addFilmToWatchlist(movie: MovieDetailResponse): Observable<WatchlistMovies> {
+    const sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    const body = {
+      media_id: movie.id,
+      media_type: 'movie',
+      watchlist: true
+    };
+
+    return this.http.post<WatchlistMovies>(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      body
+    );
+
   }
 
   addFilmToFavourite(movie: MovieDetailResponse): Observable<FavoriteMovies> {

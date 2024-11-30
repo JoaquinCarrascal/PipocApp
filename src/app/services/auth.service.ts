@@ -34,5 +34,9 @@ export class AuthService {
   checkUserIsLogged(): boolean {
     return localStorage.getItem('session_id') ? true : false
   }
+  getSessionId(): string {
+    return localStorage.getItem('session_id') || '';
+  }  
+
 }
 

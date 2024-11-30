@@ -31,7 +31,7 @@ export class DetailsMovieComponent implements OnInit {
   toast : Toast | undefined;
   toastService = inject(ToastService);
 
-  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
 
   @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
 
@@ -132,6 +132,15 @@ export class DetailsMovieComponent implements OnInit {
       this.favoritesService.addFilmToFavourites(this.movies.id.toString()).subscribe(() => {
         this.showSuccess(this.successTemplate);
         this.swapToast = 2;
+      });
+    }
+  }
+
+  addFilmToWatchlist(): void {
+    if (this.movies) {
+      this.detailsMovieService.addFilmToWatchlist(this.movies).subscribe(() => {
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 3;
       });
     }
   }

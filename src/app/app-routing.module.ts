@@ -11,6 +11,7 @@ import { ApprovedComponent } from './pages/approved/approved.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { RatedSeriesComponent } from './pages/rated-series-movies/rated-series-movies.component';
 import { FavListComponent } from './pages/fav-list/fav-list.component';
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 
 const routes: Routes = [
 
@@ -25,7 +26,9 @@ const routes: Routes = [
   {path: 'home/approved' , component: ApprovedComponent},
   {path: 'user-lists' , component: MyListComponent},
   {path: 'fav-list', component: FavListComponent},
+  {path: 'watchlist', component: WatchlistComponent},
   {path: '' , redirectTo: '/home', pathMatch: 'full'},
+  
 
   //{path: '**', component: PageNotFoundComponent}
 ];

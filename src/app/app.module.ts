@@ -16,7 +16,6 @@ import { SeriesComponent } from './pages/series/series.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SeriesHeaderComponent } from './components/series-header/series-header.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { SerieDetailsComponent } from './pages/serie-details/serie-details.component'; // Add this line
 import { DateFormaterPipe } from './pipes/date-formater.pipe';
@@ -39,6 +38,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowStatusPipe } from './pipes/show-status.pipe';
 import { FavListComponent } from './pages/fav-list/fav-list.component';
 
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,6 @@ import { FavListComponent } from './pages/fav-list/fav-list.component';
     PersonDetailsComponent,
     PersonSexPipe,
     SeriesComponent,
-    SeriesHeaderComponent,
     SerieDetailsComponent,
     DateFormaterPipe,
     MovieListComponent,
@@ -60,7 +60,8 @@ import { FavListComponent } from './pages/fav-list/fav-list.component';
     MyListComponent,
     RatedSeriesComponent,
     ShowStatusPipe,
-    FavListComponent
+    FavListComponent,
+    WatchlistComponent
   ],
   imports: [
     ToastModule,
@@ -103,7 +104,8 @@ import { FavListComponent } from './pages/fav-list/fav-list.component';
     provideHttpClient(),
     { provide: 'circleProgressConfig', useValue: {} },
     DateFormaterPipe,
-    OrderTriggerPipe
+    OrderTriggerPipe,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
