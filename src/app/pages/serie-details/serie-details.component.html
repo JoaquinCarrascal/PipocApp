@@ -3,37 +3,69 @@
     Valoración cambiada
   </ng-template>
 
-    
-    @if(seBorra == false){         
-    <div class="toast-container">
-        <ngb-toast *ngFor="let toast of toastService.toasts"
-                    [class]="toast.classname"
-                    [autohide]="true"
-                    [delay]="toast.delay || 5000"
-                    (hidden)="toastService.remove(toast)">
-          <div class="toast-content">
-            <span>Valoracion cambiada con éxito</span>
-            <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
-          </div>
-          <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
-        </ngb-toast>
-      </div>
+    @switch (swapToast) {
+        @case (0){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                  <div class="toast-content">
+                    <span>Valoracion cambiada con éxito</span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                  </div>
+                  <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @case (1){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>Valoración borrada con éxito</span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @case (2){
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>Serie añadida a me gusta</span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
+        @default {
+            <div class="toast-container">
+                <ngb-toast *ngFor="let toast of toastService.toasts"
+                            [class]="toast.classname"
+                            [autohide]="true"
+                            [delay]="toast.delay || 5000"
+                            (hidden)="toastService.remove(toast)">
+                    <div class="toast-content">
+                    <span>Operación realizada con éxito</span>
+                    <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
+                    </div>
+                    <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
+                </ngb-toast>
+            </div>
+        }
     }
-      @if (seBorra) {
-        <div class="toast-container">
-            <ngb-toast *ngFor="let toast of toastService.toasts"
-                        [class]="toast.classname"
-                        [autohide]="true"
-                        [delay]="toast.delay || 5000"
-                        (hidden)="toastService.remove(toast)">
-              <div class="toast-content">
-                <span>Valoración borrada con éxito</span>
-                <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
-              </div>
-              <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
-            </ngb-toast>
-          </div>
-      }
+    
     @if(series?.backdrop_path!=null){
         <div class="background-image-blur" 
             [ngStyle]="{'background-image': 'url(' + obtenerImagenOriginal(backdropPath) + ')'}">

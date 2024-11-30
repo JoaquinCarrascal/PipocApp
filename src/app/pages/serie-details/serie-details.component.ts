@@ -62,7 +62,7 @@ export class SerieDetailsComponent implements OnInit {
   video: string | undefined;
   listadoValoraciones: string[] = [];
 
-  seBorra : boolean = false;
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav
   hasBackDrop : boolean = false;
 
 
@@ -148,7 +148,7 @@ export class SerieDetailsComponent implements OnInit {
       if (idSerie) {
         this.seriesAccountService.addRating(Number(idSerie), rating).subscribe(response => {
           this.showSuccess(this.successTemplate);  
-          this.seBorra = false
+          this.swapToast = 0;
         });
       }
     } else {
@@ -197,7 +197,7 @@ export class SerieDetailsComponent implements OnInit {
     this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
     this.userRating = 0;
     this.showSuccess(this.successTemplate);
-    this.seBorra = true
+    this.swapToast = 1;
     });
   }
 
@@ -205,7 +205,8 @@ export class SerieDetailsComponent implements OnInit {
 
     if (this.series) {
       this.favoritesService.addSeriesToFavourites(this.series.id.toString()).subscribe(() => {
-        //TODO  toastdeMandarAListaFavoritos
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 2;
       });
     }
 

@@ -31,7 +31,7 @@ export class DetailsMovieComponent implements OnInit {
   toast : Toast | undefined;
   toastService = inject(ToastService);
 
-  seBorra: boolean = false;
+  swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav
 
   @ViewChild('successTemplate') successTemplate!: TemplateRef<any>;
 
@@ -130,7 +130,8 @@ export class DetailsMovieComponent implements OnInit {
   addFilmToFavourites(): void {
     if (this.movies) {
       this.favoritesService.addFilmToFavourites(this.movies.id.toString()).subscribe(() => {
-        //TODO  toastdeMandarAListaFavoritos
+        this.showSuccess(this.successTemplate);
+        this.swapToast = 2;
       });
     }
   }
@@ -147,7 +148,7 @@ export class DetailsMovieComponent implements OnInit {
       if (idMovie) {
         this.seriesAccountService.addMovieRating(Number(idMovie), rating).subscribe(response => {
           this.showSuccess(this.successTemplate);
-          this.seBorra = false;
+          this.swapToast = 0;
         });
       }
     } else {
@@ -176,7 +177,8 @@ export class DetailsMovieComponent implements OnInit {
     this.seriesAcc.deleteMovieRating(movieId).subscribe(() => {
       this.listadoValoraciones = Array.from({ length: 10 }, (_, index) => this.obtenerColorCalificacion(0, index , 0.2));
       this.userRating = 0;
-      this.seBorra = true;
+      this.showSuccess(this.successTemplate);
+      this.swapToast = 1;
     });
   }
     
