@@ -187,8 +187,6 @@ export class SerieDetailsComponent implements OnInit {
 
     this.seriesAccountService.getUserRatings(page).subscribe((data) => {
       const serieRating = data.results.find(result => result.id === Number(idSerie));
-      console.log(serieRating);
-      console.log(data.results);
       if (serieRating) {
         this.userRating = serieRating.rating;
         this.getPopcornIcons(this.userRating);

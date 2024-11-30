@@ -15,7 +15,6 @@ export class NavBarComponent {
   constructor(private authService: AuthService ,private  router: Router) {}
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('user_photo'));
     this.userName = localStorage.getItem('user_name') ?? '';
     this.loadUserPhoto();
   }

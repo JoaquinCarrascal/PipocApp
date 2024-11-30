@@ -5,13 +5,25 @@
     <div class="row justify-content-between mt-3 mx-2">
 
         <div class="col-2 align-content-center">
-            <h2 class="text-light">Mis listas</h2>
+            <h2 class="text-light">
+                @if(lang == 'es-ES'){
+                    Mis listas
+                }@else{
+                    My lists
+                }
+                </h2>
         </div>
 
         <div class="col-5 align-content-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2"
-                [(ngModel)]="newListName">
+                @if(lang == 'es-ES'){
+                    <input type="text" class="form-control" placeholder="Nombre listado nuevo..." aria-label="Agregar listado" aria-describedby="basic-addon2"
+                    [(ngModel)]="newListName">
+                }@else{
+                    <input type="text" class="form-control" placeholder="New list name ..." aria-label="Agregar listado" aria-describedby="basic-addon2"
+                    [(ngModel)]="newListName">
+                }
+                
                 <div class="input-group-append">
                     @if(newListName != ''){
                         <button class="btn colored-aqua fw-bold button-add" type="button" (click)="createList()">
