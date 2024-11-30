@@ -25,7 +25,7 @@ export class WatchlistService {
       watchlist: true
     };
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/account_id/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -39,7 +39,7 @@ export class WatchlistService {
       watchlist: true
     };
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/account_id/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -50,7 +50,7 @@ export class WatchlistService {
     let lang = localStorage.getItem('lang') || 'es-ES';
 
     return this.http.get<WatchlistMovieResponse>(
-      `${API_BASE_URL}/account/${accountId}/watchlist/movies?language=${lang}api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/account_id/watchlist/movies?language=${lang}&api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
@@ -60,7 +60,7 @@ export class WatchlistService {
     let lang = localStorage.getItem('lang') || 'es-ES';
 
     return this.http.get<WatchlistSeriesResponse>(
-      `${API_BASE_URL}/account/${accountId}/watchlist/tv?language=${lang}api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/account_id/watchlist/tv?language=${lang}&api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
@@ -74,7 +74,7 @@ export class WatchlistService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/account_id/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }
@@ -89,7 +89,7 @@ export class WatchlistService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
+      `${API_BASE_URL}/account/account_id/watchlist?api_key=${environment.API_KEY}&session_id=${sessionId}`,
       body
     );
   }
