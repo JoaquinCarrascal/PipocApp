@@ -14,12 +14,18 @@ export class NavBarComponent {
   constructor(private authService: AuthService ,private  router: Router) {}
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('user_photo'));
     this.userName = localStorage.getItem('user_name') ?? '';
-    this.userPhoto = localStorage.getItem('user_photo')
+    this.loadUserPhoto();
+  }
+
+  loadUserPhoto() {
+    this.userPhoto = 
+    localStorage.getItem('user_photo') != null && localStorage.getItem('user_photo') != 'null' && localStorage.getItem('user_photo') != 'undefined' && localStorage.getItem('user_photo') != ''
       ? `https://image.tmdb.org/t/p/original${localStorage.getItem(
           'user_photo'
         )}`
-      : 'https://placehold.co/50x50';
+      : 'https://placehold.co/50x50/green/white?text=PipocApp';
   }
 
   createRequestToken() {

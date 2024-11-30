@@ -56,7 +56,7 @@ export class MovieServService {
     if(max){ max = max / 10; }
     let minmaxQuery = min || max ? `&vote_average.gte=${min}&vote_average.lte=${max}&vote_count.gte=400` : "";
 
-    return this.http.get<TopRatedResponse>(`${BASE_URL}?page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}${minmaxQuery}`, 
+    return this.http.get<TopRatedResponse>(`${BASE_URL}?language=es-ES&page=${pag}&sort_by=${this.orderTrigger.transform(order)}${freeQuery}${minmaxQuery}`, 
     {
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,
