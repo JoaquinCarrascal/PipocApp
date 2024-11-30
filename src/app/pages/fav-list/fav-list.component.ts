@@ -15,7 +15,7 @@ export class FavListComponent implements OnInit {
   favoriteSeries: FavoriteTv[] = [];
   currentPage: number = 1;
   totalPages: number | undefined;
-
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   constructor(private favService: FavoritesService) { }
 

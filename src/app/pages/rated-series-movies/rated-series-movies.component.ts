@@ -27,6 +27,7 @@ export class RatedSeriesComponent implements OnInit {
 
   totalPagesMovies: number = 0;
   pagesCounterMovies: number = 1;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   constructor(private seriesAcc: SeriesAccountService, private serieService: SeriesService,private pipeDateForm: DateFormaterPipe) { }
 

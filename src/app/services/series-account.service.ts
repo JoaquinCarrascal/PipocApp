@@ -36,9 +36,9 @@ export class SeriesAccountService {
   }
 
   getUserRatings(pag?:number): Observable<RatedSerieResponse> {
-
+   let lang = localStorage.getItem('lang') || 'es-ES';
   
-   return this.http.get<RatedSerieResponse>(`https://api.themoviedb.org/3/account/account_id/rated/tv?language=en-US&page=${pag ? pag : 1}&session_id=${sessionId}&sort_by=created_at.asc`, 
+   return this.http.get<RatedSerieResponse>(`https://api.themoviedb.org/3/account/account_id/rated/tv?language=${lang}&page=${pag ? pag : 1}&session_id=${sessionId}&sort_by=created_at.asc`, 
     {
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,
@@ -47,9 +47,10 @@ export class SeriesAccountService {
     
   }
 
-  getUserMoviesRatings(pag?:number): Observable<RatedMoviesResponse> {
-  
-    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?language=en-US&page=${pag ? pag : 1}&api_key=${environment.API_KEY}&session_id=${sessionId}`);
+  getUserMoviesRatings(pag?:number): Observable<RatedMoviesResponse> {  
+    let lang = localStorage.getItem('lang') || 'es-ES';
+
+    return this.http.get<RatedMoviesResponse>(`${API_BASE_URL}/account/{account_id}/rated/movies?language=${lang}&page=${pag ? pag : 1}&api_key=${environment.API_KEY}&session_id=${sessionId}`);
     
   }
 

@@ -66,6 +66,7 @@ export class SerieDetailsComponent implements OnInit {
 
   swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
   hasBackDrop : boolean = false;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
 
   toastService = inject(ToastService);

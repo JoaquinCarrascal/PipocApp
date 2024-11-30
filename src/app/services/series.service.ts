@@ -29,11 +29,15 @@ export class SeriesService {
   numRandom = Math.floor(Math.random() * 80) + 1;
 
   getSeries(pag: number): Observable<SerieResponse> {
-    return this.http.get<SerieResponse>(`${baseUrl}?api_key=${environment.API_KEY}&include_adult=false&language=es&page=${pag}&sort_by=popularity.desc`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+
+    return this.http.get<SerieResponse>(`${baseUrl}?api_key=${environment.API_KEY}&include_adult=false&language=${lang}&page=${pag}&sort_by=popularity.desc`);
   }
 
   obtenerDetallesSerie(id: number): Observable<SerieDetails> {
-    return this.http.get<SerieDetails>(`https://api.themoviedb.org/3/tv/${id}?api_key=${environment.API_KEY}&language=es`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+
+    return this.http.get<SerieDetails>(`https://api.themoviedb.org/3/tv/${id}?api_key=${environment.API_KEY}&language=${lang}`);
   }
   
   obtenerRepartoSerie(id : number): Observable<SerieCast>{

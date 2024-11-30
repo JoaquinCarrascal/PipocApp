@@ -2,10 +2,20 @@
 
 <h3 style="color: white; margin-top: 60px; margin-bottom: 30px; margin-left: 105px;">
   <ng-container *ngIf="cambio === 0; else peliculasValoradas">
-    Series Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
+    @if(lang == 'es-ES'){
+      Series Valoradas
+    }@else{
+      Rated Series
+    }
+     <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
   </ng-container>
   <ng-template #peliculasValoradas>
-    Películas Valoradas <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
+    @if(lang == 'es-ES'){
+      Películas Valoradas
+    }@else{
+      Rated Movies
+    }
+     <img src="assets/popcorn.png" alt="popcorn" style="width: 33px;">
   </ng-template>
 </h3>
 
@@ -13,9 +23,21 @@
   <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
       style="position: relative; left:10px;">
       <input checked="" id="option7" name="options-second" type="radio" (click)="changeRating(0)" />
-      <label class="option-second" for="option7" class="d-flex" style="left:45px;">Series</label>
+      <label class="option-second" for="option7" class="d-flex" style="left:45px;">
+        @if(lang == 'es-ES'){
+          Series
+        }@else{
+          Tv shows
+        }
+        </label>
       <input id="option8" name="options-second" type="radio" (click)="changeRating(1)" />
-      <label class="option-second" for="option8" class="d-flex" style="left:45px;">Películas</label>
+      <label class="option-second" for="option8" class="d-flex" style="left:45px;">
+        @if(lang == 'es-ES'){
+          Películas
+        }@else{
+          Movies
+        }
+        </label>
       <span class="background-second"></span>
   </div>
 </div>
@@ -63,9 +85,21 @@
 </div>
 
 <ng-template #noSeries>
-  <h1 class="text-white text-center">No hay ninguna serie añadida</h1>
+  <h1 class="text-white text-center">
+    @if(lang == 'es-ES'){
+      No hay ninguna serie añadida
+    }@else{
+      No series added
+    }
+    </h1>
 </ng-template>
 
 <ng-template #noMovies>
-  <h1 class="text-white text-center">No hay ninguna película añadida</h1>
+  <h1 class="text-white text-center">
+    @if(lang == 'es-ES'){
+      No hay ninguna película añadida
+    }@else{
+      No movies added
+    }
+    </h1>
 </ng-template>

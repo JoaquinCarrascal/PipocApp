@@ -53,18 +53,20 @@ export class FavoritesService {
   getFavoriteFilms(page: string): Observable<FavMovieResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
     return this.http.get<FavMovieResponse>(
-      `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/${accountId}/favorite/movies?language=${lang}&api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 
   getFavoriteSeries(page: string): Observable<FavSeriesResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
     return this.http.get<FavSeriesResponse>(
-      `${API_BASE_URL}/account/${accountId}/favorite/tv?api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
+      `${API_BASE_URL}/account/${accountId}/favorite/tv?language=${lang}&api_key=${environment.API_KEY}&session_id=${sessionId}&page=${page}`
     );
   }
 

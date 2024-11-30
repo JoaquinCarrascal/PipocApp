@@ -11,6 +11,7 @@ export class NavBarComponent {
 
   userName = '';
   userPhoto = '';
+  lang = localStorage.getItem('lang') ?? 'es-ES';
   constructor(private authService: AuthService ,private  router: Router) {}
 
   ngOnInit(): void {
@@ -37,12 +38,23 @@ export class NavBarComponent {
     });
   }
 
+  swapLang(lang: string) {
+    
+    localStorage.setItem('lang', lang);
+    window.location.reload();
+
+  }
+
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true' ? true : false;
   }
 
   logout() {
+    let language = localStorage.getItem('lang');
     localStorage.clear();
+    if(language)
+      localStorage.setItem('lang', language);
+    
     this.userPhoto = 'https://placehold.co/50x50';
     window.location.href = 'http://localhost:4200';
   }

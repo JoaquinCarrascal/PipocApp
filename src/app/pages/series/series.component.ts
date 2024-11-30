@@ -20,10 +20,9 @@ export class SeriesComponent implements OnInit {
   min: number = 0;
   max: number = 100;
   searchValue: string = '';
-  
-  constructor(private serieService: SeriesService) {}
+  lang = localStorage.getItem('lang') || 'es-ES';
 
-  
+  constructor(private serieService: SeriesService) {}
 
   ngOnInit(): void {
 

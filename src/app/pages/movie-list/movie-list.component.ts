@@ -23,6 +23,7 @@ export class MovieListComponent implements OnInit {
   searchDone: boolean = false;
   max: number = 100;
   min: number = 0;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   constructor(private movieServ: MovieServService,
               private pipeDateForm: DateFormaterPipe,

@@ -6,7 +6,7 @@
           <div class="align-content-center">
               <a [routerLink]="['/home']">
 
-                  <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa GasApp"
+                  <img src="assets/pipocapp-logo.jpg" alt="Logo de la empresa PipocApp"
                       style="width: 140px;">
                 
               </a>
@@ -18,13 +18,31 @@
             <div id="navbarSupportedContent">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="['/movie-list']">Películas populares</a>
+                  <a class="nav-link" [routerLink]="['/movie-list']">
+                    @if(lang == 'es-ES'){
+                      <span>Películas populares</span>
+                    }@else{
+                      <span>Popular movies</span>
+                    }
+                    </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="['/people']">Actores</a>
+                  <a class="nav-link" [routerLink]="['/people']">
+                    @if(lang == 'es-ES'){
+                      <span>Actores</span>
+                    }@else{
+                      <span>Actors</span>
+                    }
+                    </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="['/series']">Series populares</a>
+                  <a class="nav-link" [routerLink]="['/series']">
+                    @if(lang == 'es-ES'){
+                      <span>Series populares</span>
+                    }@else{
+                      <span>Popular tv shows</span>
+                    }
+                    </a>
                 </li>
                 
               </ul>
@@ -43,11 +61,52 @@
               </button>
             </mat-toolbar>
             
-            <mat-menu #menu="matMenu" class="mat-menu-container-style mt-3">
-              <button mat-menu-item class="ps-3" (click)="navigateTo('/user-lists')">Mis listados</button>
-              <button mat-menu-item class="ps-3" (click)="navigateTo('/series/rated')">Series & Peliculas votadas</button>
-              <button mat-menu-item class="ps-3" (click)="navigateTo('/fav-list')">Favoritos</button>
-              <button mat-menu-item class="ps-3" (click)="navigateTo('/watchlist')">Watchlist</button>
+            <mat-menu #menu="matMenu" class="mat-menu-container-style mt-3 w-75">
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/user-lists')">
+                @if(lang == 'es-ES'){
+                  <span>Mis listados</span>
+                }@else{
+                  <span>My lists</span>
+                }
+              </button>
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/series/rated')">
+                @if(lang == 'es-ES'){
+                  <span>Series & Peliculas votadas</span>
+                }@else{
+                  <span>Rated shows or movies</span>
+                }
+              </button>
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/fav-list')">
+                @if(lang == 'es-ES'){
+                  <span>Favoritos</span>
+                }@else{
+                  <span>Favorites</span>
+                }
+              </button>
+              <button mat-menu-item class="ps-3" (click)="navigateTo('/watchlist')">
+                @if(lang == 'es-ES'){
+                  <span>Tu watchlist</span>
+                }@else{
+                  <span>Your watchlist</span>
+                }
+              </button>
+              <button mat-menu-item class="ps-3">
+                <p class="mb-0 mt-2">
+                  @if(lang == 'es-ES'){
+                  <span>Cambiar lenguaje</span>
+                }@else{
+                  <span>Swap language</span>
+                }
+                </p>
+                <div class="d-flex mx-auto justify-content-evenly ps-0 my-2" style="flex: row;">
+                  <button class="btn btn-success p-2" (click)="swapLang('en-US')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Flag_of_the_United_States_%281837%E2%80%931845%29.svg" class="" style="width: 40px; height:25px;" />
+                  </button>
+                  <button class="btn btn-success p-2 me-3" (click)="swapLang('es-ES')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Bandera_de_Espa%C3%B1a.svg" class="" style="width: 40px; height:25px;" />
+                  </button>
+                </div>
+              </button>
             </mat-menu>
             
 
@@ -55,7 +114,12 @@
               <span class="circle" aria-hidden="true" (click)="logout()">
               <span class="icon arrow"></span>
               </span>
-              <span class="button-text">Cerrar&nbsp;sesión</span>
+              @if(lang == 'es-ES'){
+                <span class="button-text">Cerrar&nbsp;sesión</span>
+              }@else{
+                <span class="button-text">Logout</span>
+              }
+              
             </button>
             }@else {
               
@@ -63,7 +127,11 @@
                 <span class="circle" aria-hidden="true" (click)="createRequestToken()">
                 <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">Inicia&nbsp;sesión</span>
+                @if(lang == 'es-ES'){
+                  <span class="button-text">Inicia&nbsp;sesión</span>
+                }@else{
+                  <span class="button-text">Login</span>
+                }
               </button>
             }
       </div>

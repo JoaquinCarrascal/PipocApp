@@ -16,6 +16,8 @@ export class ApprovedComponent implements OnInit {
     private router: Router 
   ) {}
 
+  lang = localStorage.getItem('lang') || 'es-ES';
+
   ngOnInit(): void {
     this.authService.createSession().subscribe((response) => {
       localStorage.setItem('session_id', response.session_id);

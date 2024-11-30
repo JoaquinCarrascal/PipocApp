@@ -11,9 +11,21 @@
     <div id="secondFilter" class="col-auto filter-switch-second align-content-center pt-1 d-flex"
         style="position: relative; left:10px;">
         <input checked="" id="option7" name="options-second" type="radio" (click)="clickMovieSerie(true)" />
-        <label class="option-second" for="option7" class="d-flex" style="left:20px;">Películas</label>
+        <label class="option-second" for="option7" class="d-flex" style="left:20px;">
+            @if(lang == 'es-ES'){
+            Películas
+            }@else{
+            Movies
+            }
+        </label>
         <input id="option8" name="options-second" type="radio" (click)="clickMovieSerie(false)" />
-        <label class="option-second" for="option8" class="d-flex" style="left:50px;">Series</label>
+        <label class="option-second" for="option8" class="d-flex" style="left:50px;">
+            @if(lang == 'es-ES'){
+            Series
+            }@else{
+            Tv Shows
+            }
+        </label>
         <span class="background-second"></span>
     </div>
 </div>
@@ -63,8 +75,26 @@
 
 <div class="pagination-controls" *ngIf="totalPages! > 1 " style="text-align: center">
     <button class="btn" style="background-color: #00FFAE; margin-right: 10px;" (click)="changePage(currentPage - 1)"
-        [disabled]="currentPage === 1">Anterior</button>
-    <span class="text-white" style="margin: 0 10px;">Página {{currentPage}} de {{totalPages}}</span>
+        [disabled]="currentPage === 1">
+        @if(lang == 'es-ES'){
+        Anterior
+        }@else{
+        Previous
+        }
+    </button>
+    <span class="text-white" style="margin: 0 10px;">
+        @if(lang == 'es-ES'){
+        Página {{currentPage}} de {{totalPages}}
+        }@else{
+        Page {{currentPage}} of {{totalPages}}
+        }
+    </span>
     <button class="btn" style="background-color: #00FFAE; margin-left: 10px;" (click)="changePage(currentPage + 1)"
-        [disabled]="currentPage === totalPages">Siguiente</button>
+        [disabled]="currentPage === totalPages">
+        @if (lang == 'es-ES') {
+        Siguiente
+        }@else{
+        Next
+        }
+    </button>
 </div>

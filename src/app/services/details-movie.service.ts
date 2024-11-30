@@ -19,11 +19,13 @@ export class DetailsMovieService {
   constructor(private http: HttpClient) { }
 
   getMovieDetails(id: number): Observable<MovieDetailResponse> {
-    return this.http.get<MovieDetailResponse>(`${BASE_URL}/${id}?api_key=${environment.API_KEY}&language=es-ES`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+    return this.http.get<MovieDetailResponse>(`${BASE_URL}/${id}?language=${lang}&api_key=${environment.API_KEY}`);
   }
 
   getMovieCast(id: number): Observable<CastResponse> {
-    return this.http.get<CastResponse>(`${BASE_URL}/${id}/credits?api_key=${environment.API_KEY}&language=es-ES`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+    return this.http.get<CastResponse>(`${BASE_URL}/${id}/credits?api_key=${environment.API_KEY}&language=${lang}`);
   }
 
   getMovieProviders(id: number): Observable<ProvidersResponse> {
@@ -31,7 +33,8 @@ export class DetailsMovieService {
   }
 
   getMovieTrailer(id: number): Observable<VideoResponse> {
-    return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${environment.API_KEY}&language=es-ES`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+    return this.http.get<VideoResponse>(`${BASE_URL}/${id}/videos?api_key=${environment.API_KEY}&language=${lang}`);
   }
 
   addFilmToWatchlist(movie: MovieDetailResponse): Observable<WatchlistMovies> {

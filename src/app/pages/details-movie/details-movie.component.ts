@@ -31,6 +31,7 @@ export class DetailsMovieComponent implements OnInit {
   toast : Toast | undefined;
   toastService = inject(ToastService);
   pag: number = 1;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   swapToast: number = 0; //toast = 0 no se borra , toast = 1 se borra , toast = 2 se agrega a fav , 3 se agrega a watchlist
 

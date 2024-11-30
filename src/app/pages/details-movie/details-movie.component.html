@@ -13,7 +13,11 @@
                         [delay]="toast.delay || 5000"
                         (hidden)="toastService.remove(toast)">
               <div class="toast-content">
-                <span>Valoracion cambiada con éxito</span>
+                @if(lang == 'es-ES'){
+                    <span>Valoracion cambiada con éxito</span>
+                }@else{
+                    <span>Rating changed successfully</span>
+                }
                 <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
               </div>
               <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
@@ -28,7 +32,11 @@
                         [delay]="toast.delay || 5000"
                         (hidden)="toastService.remove(toast)">
                 <div class="toast-content">
-                <span>Valoración borrada con éxito</span>
+                @if(lang == 'es-ES'){
+                    <span>Valoración borrada con éxito</span>
+                }@else{
+                    <span>Rating deleted successfully</span>
+                }
                 <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
                 </div>
                 <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
@@ -43,7 +51,11 @@
                         [delay]="toast.delay || 5000"
                         (hidden)="toastService.remove(toast)">
                 <div class="toast-content">
-                <span>Película añadida a me gusta</span>
+                @if(lang == 'es-ES'){
+                    <span>Película añadida a me gusta</span>
+                }@else{
+                    <span>Movie added to favorites</span>
+                }
                 <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
                 </div>
                 <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
@@ -58,7 +70,11 @@
                         [delay]="toast.delay || 5000"
                         (hidden)="toastService.remove(toast)">
                 <div class="toast-content">
-                <span>Película añadida a tu watchlist</span>
+                @if(lang == 'es-ES'){
+                    <span>Película añadida a tu watchlist</span>
+                }@else{
+                    <span>Movie added to your watchlist</span>
+                }
                 <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
                 </div>
                 <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
@@ -73,7 +89,11 @@
                         [delay]="toast.delay || 5000"
                         (hidden)="toastService.remove(toast)">
                 <div class="toast-content">
-                <span>Operación realizada con éxito</span>
+                @if(lang == 'es-ES'){
+                    <span>Operación realizada con éxito</span>
+                }@else{
+                    <span>Operation completed successfully</span>
+                }
                 <button class="close-btn" (click)="toastService.remove(toast)"><i class="bi bi-x-lg text-white"></i></button>
                 </div>
                 <ng-template [ngTemplateOutlet]="toast.template"></ng-template> 
@@ -111,7 +131,11 @@
                     @if(movies.genres.length > 0){
                         <h5>{{ movies.genres[0].name }}</h5>
                     }@else{
-                        <h5>No se ha aportado información adicional</h5>
+                        @if (lang == 'es-ES') {
+                            <h5>No se ha aportado información adicional</h5>
+                        }@else{
+                            <h5>No additional information has been provided</h5>
+                        }
                     }
 
                 </div>
@@ -120,7 +144,11 @@
                     @if (movies.release_date != undefined && movies.release_date != null && movies.release_date != "") {
                         <h3>{{ movies.release_date | dateFormater }}</h3>
                     }@else{
-                        <h3>No se ha aportado fecha</h3>
+                        @if(lang == 'es-ES'){
+                            <h3>No se ha aportado fecha</h3>
+                        }@else{
+                            <h3>No date has been provided</h3>
+                        }
                     }
                     
                 </div>
@@ -142,7 +170,11 @@
                     </div>
                     <div>
                         @if(userRating == 0){
-                            <span class="strong" style="font-size: 20px;">Rating : Sin valorar</span>
+                            @if (lang=='es-ES') {
+                                <span class="strong" style="font-size: 20px;">Rating : Sin valorar</span>
+                            }@else{
+                                <span class="strong" style="font-size: 20px;">Rating : Not rated</span>
+                            }
                         }
 
                         @else {
@@ -152,7 +184,13 @@
                     
 
                       <div class="py-3">
-                        <button (click)="verTrailer()" class="btn boton">Ver Trailer</button>
+                        <button (click)="verTrailer()" class="btn boton">
+                            @if(lang == 'es-ES'){
+                                Ver Trailer
+                            }@else{
+                                Watch Trailer
+                            }
+                        </button>
                       </div>
                 </div>
             </div>
@@ -164,7 +202,13 @@
 
                 
                 @if(cast && cast.length > 0){
-                    <h2 class="mb-4">Reparto</h2>
+                    <h2 class="mb-4">
+                        @if(lang == 'es-ES'){
+                            Reparto
+                        }@else{
+                            Cast
+                        }
+                    </h2>
                     <div class="d-flex justify-content-center" style="position:relative; left:0px;">
                         
                         <div *ngFor="let actor of cast?.slice(0, 7)" class=" d-flex flex-column text-wrap mx-2" style="width:130px;">
@@ -181,7 +225,13 @@
                     </div>
                 }@else{
                     <div style="position: relative; height:360px;">
-                        <p style="font-size: 20pt;">No se ha aportado información adicional</p>
+                        <p style="font-size: 20pt;">
+                            @if(lang == 'es-ES'){
+                                No se ha aportado información adicional
+                            }@else{
+                                No additional information has been provided
+                            }
+                        </p>
                     </div>
                 }
                 
@@ -223,7 +273,13 @@
                 </div>
                 <div class="d-flex align-content-center justify-content-center" style="flex-direction: column; width:100px;">
                     <button class="btn" (click)="addFilmToFavourites()"><i class="fs-1 text-center text-light bi bi-suit-heart-fill"></i></button>
-                    <p class="mb-0 text-light text-center">Favoritos</p>
+                    <p class="mb-0 text-light text-center">
+                        @if(lang == 'es-ES'){
+                            Favoritos
+                        }@else{
+                            Favorites
+                        }
+                    </p>
                 </div>
                 
             </div>
@@ -232,7 +288,13 @@
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-check-circle me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Estado:</h4>
+                        <h4 class="mb-1 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Estado:
+                            }@else{
+                                Status:
+                            }
+                        </h4>
                         <h5 class="text-light">{{ movies?.status }}</h5>
                     </div>
                 </div>
@@ -242,7 +304,13 @@
                 <div class="col-12">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-tv me-3" style="font-size: 2rem; color: white;"></i>
-                        <h4 class="mb-0 fw-bold">Canales:</h4>
+                        <h4 class="mb-0 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Canales:
+                            }@else{
+                                Networks:
+                            }
+                        </h4>
                     </div>
                     <div class="row mt-2">
                         @if(networkList != undefined && networkList.length > 0 && networkList[0].logo_path != null){
@@ -269,7 +337,13 @@
                 <div class="col-12 d-flex align-items-center">
                     <i class="fas fa-globe me-3" style="font-size: 2rem; color: white;"></i>
                     <div>
-                        <h4 class="mb-1 fw-bold">Idioma Original:</h4>
+                        <h4 class="mb-1 fw-bold">
+                            @if(lang == 'es-ES'){
+                                Idioma Original:
+                            }@else{
+                                Original Language:
+                            }
+                        </h4>
                         <h5 class="text-light">{{ movies?.original_language }}</h5>
                     </div>
                 </div>
@@ -279,7 +353,13 @@
                 <div class="col-12">
                   <div class="d-flex align-items-center mb-3">
                     <i class="fas fa-tags me-3" style="font-size: 2rem; color: white;"></i>
-                    <h4 class="mb-0 fw-bold">Ingresos:</h4>
+                    <h4 class="mb-0 fw-bold">
+                        @if(lang == 'es-ES'){
+                            Ingresos:
+                        }@else{
+                            Revenue:
+                        }
+                    </h4>
                   </div>
                   <div class="mt-2" style="padding-left: 20px;">
                     <span>

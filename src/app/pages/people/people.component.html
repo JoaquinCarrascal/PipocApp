@@ -4,7 +4,13 @@
 <div class="header container-fluid row align-content-even" style="position: relative; top:100px;">
 
   <div class="col-3 justify-content-center d-flex" style="margin: 0 auto;">
-    <h1 class="text-center">Personas</h1>
+    <h1 class="text-center">
+      @if(lang=='es-ES'){
+      Personas
+      }@else{
+      People
+      }
+    </h1>
     <div style="position: relative; left:20px;">
       <svg xmlns="http://www.w3.org/2000/svg" height="65px" viewBox="0 -960 960 960" width="65px" fill="#00ffae">
         <path
@@ -24,7 +30,11 @@
             </path>
           </svg>
         </div>
+        @if(lang=='es-ES'){
         <input class="search_input" placeholder="Escribe el nombre aquí..." type="text">
+        }@else{
+        <input class="search_input" placeholder="Type the name here..." type="text">
+        }
       </div>
     </div>
 

@@ -16,6 +16,7 @@ export class PersonDetailsComponent implements OnInit {
   personImageUrl: string | undefined;
   socialLinks: { icon: string; url: string }[] = [];
   knownFor: { id: number; title: string; release_date: string; first_air_date?: string; poster_path: string | null }[] = [];
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   constructor(private peopleService: PeopleService, private route: ActivatedRoute) { }
 

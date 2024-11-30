@@ -11,26 +11,50 @@ import { debounceTime, forkJoin, map, Observable, of, OperatorFunction, switchMa
   standalone: true,
   template: `
 		<div class="modal-header">
-			<h4 class="modal-title">Confirmación de borrado</h4>
+			<h4 class="modal-title">
+        @if(lang === 'es-ES'){
+          Confirmación de borrado
+        }@else{
+          Delete confirmation
+        }
+        </h4>
 			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 		</div>
 		<div class="modal-body">
 
       <div class="alert alert-warning text-center" role="alert">
+        @if(lang === 'es-ES'){
         <p class="mb-0">¿Está seguro de borrar éste listado?</p>
         <p class="mb-0">Ésta decisión no se podrá revertir</p>
+        }@else{
+        <p class="mb-0">Are you sure you want to delete this list?</p>
+        <p class="mb-0">This decision can't be reverted</p>
+        }
       </div>
       
-			<button class="btn btn-danger d-block mx-auto" (click)="deleteList(id)" >Borrar</button>
+			<button class="btn btn-danger d-block mx-auto" (click)="deleteList(id)" >
+        @if(lang=='es-ES'){
+          Borrar
+        }@else{
+          Delete
+        }
+        </button>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')">Cerrar</button>
+			<button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')">
+      @if(lang === 'es-ES'){  
+      Cerrar
+      }@else{
+      Close
+      }
+    </button>
 		</div>
 	`,
 })
 export class NgbdModalContent {
   activeModal = inject(NgbActiveModal);
   listServ = inject(MyListsService);
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   deleteList(id: number) {
     this.listServ.deleteList(id).subscribe(() => {
@@ -57,6 +81,7 @@ export class MyListComponent implements OnInit {
   itemDetailsList: ItemList[] = [];
   query: string = '';
   model: any;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   private modalService = inject(NgbModal);
 

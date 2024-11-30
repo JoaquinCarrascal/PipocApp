@@ -21,7 +21,8 @@ export class MyListsService {
   }
 
   getListItems(idList: number): Observable<ListItemsResponse> {
-    return this.http.get<ListItemsResponse>(`https://api.themoviedb.org/3/list/${idList}?language=en-US&page=1&api_key=${environment.API_KEY}`);
+    let lang = localStorage.getItem('lang') || 'es-ES';
+    return this.http.get<ListItemsResponse>(`https://api.themoviedb.org/3/list/${idList}?language=${lang}&page=1&api_key=${environment.API_KEY}`);
   }
 
   deleteList(idList: number){
@@ -73,8 +74,9 @@ export class MyListsService {
   searchMovieItem(query: string , page?:number): Observable<MovieSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=en-US&page=${page ? `${page}` : '1'}`,{
+    return this.http.get<MovieSearchResponse>(`https://api.themoviedb.org/3/search/movie?query=${queryFormatted}&include_adult=false&language=${lang}&page=${page ? `${page}` : '1'}`,{
 
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,
@@ -87,8 +89,9 @@ export class MyListsService {
   searchTvItem(query: string): Observable<TvSearchResponse> {
     
     const queryFormatted = query.split(' ').join('%20');
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=en-US&page=1`,{
+    return this.http.get<TvSearchResponse>(`https://api.themoviedb.org/3/search/tv?query=${queryFormatted}&include_adult=false&language=${lang}&page=1`,{
 
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,
@@ -99,8 +102,9 @@ export class MyListsService {
   }
 
   checkIfItemExistsInList(idList: number , idItem: number): Observable<AvailabilityStatusResponse>{
+    let lang = localStorage.getItem('lang') || 'es-ES';
 
-    return this.http.get<AvailabilityStatusResponse>(`https://api.themoviedb.org/3/list/${idList}/item_status?language=en-US&movie_id=${idItem}`,{
+    return this.http.get<AvailabilityStatusResponse>(`https://api.themoviedb.org/3/list/${idList}/item_status?language=${lang}&movie_id=${idItem}`,{
 
       headers: {
         'Authorization': `Bearer ${environment.TOKEN}`,

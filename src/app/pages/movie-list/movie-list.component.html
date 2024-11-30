@@ -6,15 +6,50 @@
     <div class="row">
         <div class="holder col-1">
             <form class="col-1 filter-form">
-                <h2>Ordenar</h2>
+                <h2>
+                    @if (lang == 'es-ES') {
+                        Ordenar
+                    }
+                    @else {
+                        Sort
+                    }
+                    </h2>
                 <div class="d-flex mb-4" style="position:relative; left:-6px;">
 
                     <div>
                         <select id="mySelect" name="sort" (change)="onSelectChange($event)">
-                            <option [value]=0>Popularidad descendente</option>
-                            <option [value]=1>Popularidad ascendente</option>
-                            <option [value]=2>Valoración descendente</option>
-                            <option [value]=3>Valoración ascendente</option>
+                            <option [value]=0>
+                                @if(lang == 'es-ES') {
+                                Popularidad descendente
+                                }
+                                @else{
+                                Descending popularity
+                                }
+                        </option>
+                            <option [value]=1>
+                                @if(lang == 'es-ES') {
+                                Popularidad ascendente
+                                }
+                                @else{
+                                Ascending popularity
+                                }
+                        </option>
+                            <option [value]=2>
+                                @if(lang == 'es-ES') {
+                                Valoración descendente
+                                }
+                                @else{
+                                Descending rating
+                                }
+                        </option>
+                            <option [value]=3>
+                                @if(lang == 'es-ES') {
+                                Valoración ascendente
+                                }
+                                @else{
+                                Ascending rating
+                                }
+                        </option>
                         </select>
                     </div>
                     <div class="d-block rounded-circle myCustomButton">
@@ -23,18 +58,42 @@
 
                 </div>
 
-                <h2>Filtros</h2>
-                <label style="font-size: 16pt;">Muestra</label>
+                <h2>
+                    @if (lang == 'es-ES') {
+                        Filtros
+                    }@else {
+                        Filters
+                    }
+                </h2>
+                <label style="font-size: 16pt;">
+                    @if(lang == 'es-ES') {
+                    Muestra
+                    }@else {
+                    Show
+                    }
+                </label>
 
                 <div class="my-3 ms-3" style="position: relative; left:4px;">
                     <label class="cr-wrapper">
                         <input type="checkbox" (click)="swapFree()"/>
                         <div class="cr-input"></div>
-                        <span>Sólamente gratuitas</span>
+                        <span>
+                            @if(lang == 'es-ES') {
+                            Sólamente gratuitas
+                            }@else {
+                            Only free
+                            }    
+                        </span>
                     </label>
                 </div>
 
-                <label style="font-size: 16pt;">Filtro por valoración</label>
+                <label style="font-size: 16pt;">
+                    @if(lang == 'es-ES') {
+                    Filtro por valoración
+                    }@else {
+                    Rating filter
+                    }
+                </label>
 
                 <div class="container mx-auto">
                     <mat-slider min="0" max="100" class="slider" thumbLabel tickInterval="1" [displayWith]="formatLabel"
@@ -45,7 +104,13 @@
                 </div>
                 <div class="range-labels fw-bold"> <span>0</span> <span>100</span> </div>
 
-                <button class="btn w-100 py-2 btn-busq" (click)="loadData()">Filtrar por valoración</button>
+                <button class="btn w-100 py-2 btn-busq" (click)="loadData()">
+                    @if(lang == 'es-ES') {
+                    Filtrar por valoración
+                    }@else {
+                    Filter by rating
+                    }
+                </button>
 
             </form>
         </div>
@@ -54,7 +119,13 @@
 
             <div class="d-flex col-12 align-content-center mx-auto justify-content-center row mb-5">
                 <div class="d-flex align-content-center mx-auto justify-content-center title-flex">
-                    <h3 style="color:white; font-size: 25pt;position:relative; top:3px;" class="">Películas populares</h3>
+                    <h3 style="color:white; font-size: 25pt;position:relative; top:3px;" class="">
+                        @if(lang == 'es-ES') {
+                        Películas populares
+                        }@else {
+                        Popular movies
+                        }
+                    </h3>
                     <div class="d-flex" style="position: relative; top:4px; left:6px;">
                     <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#00ffae"><path d="M160-400q0-115 70-222.33Q300-729.67 422.33-807q18.67-12.33 38.17-.83t19.5 34.5V-708q0 34 23.5 57t57.5 23q17.67 0 33.17-7.5t27.5-22.17q8-9.33 18.83-12.5 10.83-3.16 20.5 3.5 65 45 102 115.67t37 151q0 92.67-47 167.83Q706-157 629.33-117q21-25.33 32.5-56.17 11.5-30.83 11.5-64.83 0-38.67-14.33-72.83-14.33-34.17-41.67-61.5L480-506.67 343.67-372.33q-28.34 27.66-42.67 61.66-14.33 34-14.33 72.67 0 34 11.5 64.83 11.5 30.84 32.5 56.17Q254-157 207-232.17 160-307.33 160-400Zm320-13.33 89.67 87.66q17.66 17.67 27.33 40 9.67 22.34 9.67 47.67 0 51.67-37 88.17T480-113.33q-52.67 0-89.67-36.5t-37-88.17q0-25 9.34-47.5 9.33-22.5 27.66-40.17L480-413.33Z"/></svg>
                     </div>
@@ -66,8 +137,13 @@
                             <div class="iconContainer">
                                 <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
                             </div>
+                        @if(lang == 'es-ES'){
                         <input class="search_input" placeholder="Escribe el nombre aquí..." type="text" (change)="querySearch()"
                         [(ngModel)]="searchValue">
+                        }@else{
+                        <input class="search_input" placeholder="Type the name here..." type="text" (change)="querySearch()"
+                        [(ngModel)]="searchValue">
+                        }
                         </div>
                     </div>
                 </div>
@@ -78,7 +154,13 @@
                 <div class="d-flex justify-content-center align-items-center p-0 mt-3">
                     <div class="text-light d-flex" style="flex-direction: column;">
                         <img src="assets/lost_travolta.gif" class="d-block mx-auto rounded-2" alt="Lost Travolta" width="250px">
-                        <span style="font-size: 15pt;">No encontramos películas que cumplan dichos criterios... <i class="bi bi-emoji-frown"></i></span>
+                        <span style="font-size: 15pt;">
+                            @if(lang == 'es-ES'){
+                            No encontramos películas que cumplan dichos criterios... 
+                            }@else{
+                            We couldn't find any movies that meet the criteria...
+                            }
+                            <i class="bi bi-emoji-frown"></i></span>
                     </div>
                 </div>
                 
@@ -110,7 +192,11 @@
                 }
                 @else{
                     <p class="text-truncate colored-aqua" style="font-size: 13pt; margin-top: -15px;">
+                        @if(lang == 'es-ES'){
                         Fecha desconocida
+                        }@else{
+                        Unknown date
+                        }
                     </p>
                 }
                     

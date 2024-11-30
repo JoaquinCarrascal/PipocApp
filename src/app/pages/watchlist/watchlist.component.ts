@@ -14,6 +14,7 @@ export class WatchlistComponent implements OnInit {
   watchlistSeries: WatchlistSeries[] = [];
   currentPage: number = 1;
   totalPages: number | undefined;
+  lang = localStorage.getItem('lang') || 'es-ES';
 
   constructor(private watchlistService: WatchlistService) { }
 
