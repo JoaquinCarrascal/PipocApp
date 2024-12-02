@@ -17,7 +17,7 @@ popularListTv: TvTopRatedList[] = [];
 popularListTvGenre: TvTopRatedList[] = [];
 swapperTvMovie: number = 0;
 thisYear: number = new Date().getFullYear();
-lang: string = localStorage.getItem('lang') || 'es-ES';
+lang: string = 'es-ES';
 constructor(private movieServ: MovieServService , private pipeDateForm: DateFormaterPipe) { }
   
 
@@ -32,7 +32,11 @@ ngOnInit(): void {
 
   this.swapTvGenre(10759);
 
-  localStorage.setItem('lang' , 'es-ES');
+  if(!localStorage.getItem('lang')) {
+    localStorage.setItem('lang', 'es-ES');
+  }
+
+  this.lang = localStorage.getItem('lang') || 'es-ES';
  
 }
 
